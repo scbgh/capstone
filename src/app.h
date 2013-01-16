@@ -1,22 +1,22 @@
 //
-// window.h
+// app.h
 // Handles the main game window, including the main SDL loop.
 //
 
-#ifndef _WINDOW_H_
-#define _WINDOW_H_
+#ifndef _APP_H_
+#define _APP_H_
 
 #include <SDL.h>
 
 namespace pg {
 
 //
-// class Window
+// class App
 // Abstracts the basic SDL game loop and main window.
 //
-class Window {
+class App {
 public:
-    Window(int width, int height);
+    App(int width, int height);
 
     // Start the SDL game loop
     void Run();
@@ -35,8 +35,8 @@ private:
     void OnMouseUp(SDL_MouseButtonEvent *evt);
 
     // Non-copyable
-    Window(const Window&);
-    Window& operator=(const Window&);
+    App(const App&);
+    App& operator=(const App&);
 };
 
 };

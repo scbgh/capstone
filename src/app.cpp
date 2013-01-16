@@ -2,15 +2,17 @@
 // window.cpp
 //
 
+#include <cstdio>
 #include <SDL.h>
 #include "common.h"
-#include "window.h"
+#include "app.h"
 
 namespace pg {
 
 //
 //
-Window::Window(int width, int height)
+App::App(int width, int height) :
+    has_quit(false)
 {
     // Create the window
     surface = SDL_SetVideoMode(width, height, 32, SDL_HWSURFACE);
@@ -21,7 +23,7 @@ Window::Window(int width, int height)
 
 //
 // Start the SDL main loop
-void Window::Run()
+void App::Run()
 {
     SDL_Event event;
 
@@ -54,31 +56,31 @@ void Window::Run()
 
 //
 //
-void Window::OnKeyDown(SDL_KeyboardEvent *evt)
+void App::OnKeyDown(SDL_KeyboardEvent *evt)
 {
 }
 
 //
 //
-void Window::OnKeyUp(SDL_KeyboardEvent *evt)
+void App::OnKeyUp(SDL_KeyboardEvent *evt)
 {
 }
 
 //
 //
-void Window::OnMouseMove(SDL_MouseMotionEvent *evt)
+void App::OnMouseMove(SDL_MouseMotionEvent *evt)
 {
 }
 
 //
 //
-void Window::OnMouseDown(SDL_MouseButtonEvent *evt)
+void App::OnMouseDown(SDL_MouseButtonEvent *evt)
 {
 }
 
 //
 //
-void Window::OnMouseUp(SDL_MouseButtonEvent *evt)
+void App::OnMouseUp(SDL_MouseButtonEvent *evt)
 {
 }
 
