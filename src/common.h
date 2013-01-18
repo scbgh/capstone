@@ -8,6 +8,34 @@
 
 #include <cstdarg>
 #include <cstdio>
+#include <cmath>
+#include <vector>
+#include <set>
+#include <map>
+#include <string>
+
+using std::vector;
+using std::set;
+using std::map;
+using std::string;
+
+#ifdef _MSC_VER
+#pragma warning(disable: 4996)
+#endif
+
+// Epsilon value for floating point comparisons
+#define EPS 0.001
+
+#ifndef INFINITY
+#define INFINITY HUGE_VAL
+#endif
+
+#ifndef M_PI
+#define M_PI 3.141592653589793238462
+#endif
+
+#define DEG_TO_RAD(x) ((x)/180.0*M_PI)
+#define RAD_TO_DEG(x) ((x)/M_PI*180.0)
 
 //
 // Abort the program with a fatal error
