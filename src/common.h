@@ -11,7 +11,7 @@
 
 //
 // Abort the program with a fatal error
-static void die(const char *format, ...)
+static void Die(const char *format, ...)
 {
     char buffer[1024];
     va_list args;

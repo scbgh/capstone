@@ -17,7 +17,7 @@ App::App(int width, int height) :
     // Create the window
     surface = SDL_SetVideoMode(width, height, 32, SDL_HWSURFACE);
     if (!surface) {
-        die("Could not create SDL surface");
+        Die("Could not create SDL surface");
     }
 }
 

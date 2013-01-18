@@ -11,7 +11,7 @@
 int main(int argc, char *argv[])
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        die("Failed to initialize SDL: %s\n", SDL_GetError());
+        Die("Failed to initialize SDL: %s\n", SDL_GetError());
     }
     atexit(SDL_Quit);
 
