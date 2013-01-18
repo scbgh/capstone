@@ -8,7 +8,11 @@ set(PHYSGAME_SRCS
     main.cpp
     app.cpp
     renderer.cpp
-    math2d.cpp
+    math/color.cpp
+    math/matrix.cpp
+    math/point.cpp
+    math/transform.cpp
+    math/vector.cpp
 )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
