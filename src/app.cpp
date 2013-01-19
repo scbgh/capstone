@@ -12,13 +12,17 @@ namespace pg {
 //
 //
 App::App(int width, int height) :
-    has_quit(false)
+    has_quit(false),
+    renderer(new Renderer())
 {
-    // Create the window
-    surface = SDL_SetVideoMode(width, height, 32, SDL_HWSURFACE);
-    if (!surface) {
-        Die("Could not create SDL surface");
-    }
+    renderer->Init(width, height);
+}
+
+//
+//
+App::~App()
+{
+    delete renderer;
 }
 
 //
@@ -51,6 +55,9 @@ void App::Run()
                     break;
             }
         }
+
+        renderer->Render();
+        SDL_GL_SwapBuffers();
     }
 }
 

@@ -7,6 +7,7 @@
 #define _APP_H_
 
 #include <SDL.h>
+#include "renderer.h"
 
 namespace pg {
 
@@ -17,12 +18,13 @@ namespace pg {
 class App {
 public:
     App(int width, int height);
+    ~App();
 
     // Start the SDL game loop
     void Run();
 private:
-    SDL_Surface *surface; // the main SDL window surface
     bool has_quit; // should we quit the program?
+    Renderer *renderer; // the renderer for the game state
 
     // Paint the window
     void Paint();

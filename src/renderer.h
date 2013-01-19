@@ -6,6 +6,9 @@
 #ifndef _RENDERER_H_
 #define _RENDERER_H_
 
+#include <SDL.h>
+#include "math/math.h"
+
 namespace pg {
 
 //
@@ -16,8 +19,10 @@ class Renderer {
 public:
     Renderer();
 
+    void Init(int width, int height);
+    void Render();
 private:
-
+    SDL_Surface *surface; // the main window SDL surface
 
     // Non-copyable
     Renderer(const Renderer&);
@@ -26,5 +31,5 @@ private:
 
 }
 
-
 #endif
+
