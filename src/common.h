@@ -23,6 +23,15 @@ using std::string;
 #pragma warning(disable: 4996)
 #endif
 
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#else
+#include <windows.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#endif
+
 // Epsilon value for floating point comparisons
 #define EPS 0.001
 

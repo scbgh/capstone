@@ -2,14 +2,6 @@
 //  renderer.cpp
 //
 
-#ifdef __APPLE__
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#else
-#include <GL/gl.h>
-#include <GL/glu.h>
-#endif
-
 #include "renderer.h"
 #include "common.h"
 
