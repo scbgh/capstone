@@ -1,6 +1,7 @@
 project(PHYSGAME)
 
 find_package(SDL REQUIRED)
+find_package(OpenGL REQUIRED)
 include_directories(${SDL_INCLUDE_DIR})
 link_directories(${SDL_LIBRARY_DIR})
 
@@ -17,4 +18,4 @@ set(PHYSGAME_SRCS
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 add_executable(physgame ${PHYSGAME_SRCS})
-target_link_libraries(physgame ${SDL_LIBRARY})
+target_link_libraries(physgame ${SDL_LIBRARY} ${OPENGL_LIBRARIES})
