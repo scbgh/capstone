@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     atexit(SDL_Quit);
 
     // Execute the main game loop
-    pg::App app(1280, 720);
+    pg::App app(argc, argv, 1280, 720);
     app.Run();
 
     return 0;
