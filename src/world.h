@@ -4,8 +4,11 @@
 //
 
 #include <Box2D/Box2D.h>
+#include <string>
 
 namespace pg {
+
+class App;
 
 //
 // class World
@@ -13,8 +16,12 @@ namespace pg {
 //
 class World {
 public:
+    explicit World(App *app);
 
+    void LoadMap(const std::string& map_name);
+    void Dispose();
 private:
+    App *app;
     b2World *phys_world; // box2d world
 
     // Non-copyable
