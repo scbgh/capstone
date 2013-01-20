@@ -19,7 +19,7 @@ class App;
 //
 class Renderer {
 public:
-    Renderer(App *app);
+    explicit Renderer(App *app);
 
     void Init(int width, int height);
     void Render();
