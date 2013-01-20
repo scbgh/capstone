@@ -11,17 +11,20 @@
 
 namespace pg {
 
+class App;
+
 //
 // class Renderer
 // Holds all the rendering state information
 //
 class Renderer {
 public:
-    Renderer();
+    Renderer(App *app);
 
     void Init(int width, int height);
     void Render();
 private:
+	App *app; // the global app
     SDL_Surface *surface; // the main window SDL surface
 
     // Non-copyable

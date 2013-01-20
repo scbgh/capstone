@@ -2,14 +2,16 @@
 //  renderer.cpp
 //
 
-#include "renderer.h"
 #include "common.h"
+#include "renderer.h"
+#include "app.h"
 
 namespace pg {
 
 //
 //
-Renderer::Renderer()
+Renderer::Renderer(App *app) :
+    app(app)
 {
 }
 
