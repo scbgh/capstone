@@ -320,7 +320,8 @@ inline std::string Reader::MatchString(InputStream& inputStream)
             case 'n':      string.push_back('\n');    break;
             case 'r':      string.push_back('\r');    break;
             case 't':      string.push_back('\t');    break;
-            case 'u':      string.push_back('\u');    break; // TODO: what do we do with this?
+            // Simon 1/19/2003: this breaks the compiler
+            //case 'u':      string.push_back('\u');    break; // TODO: what do we do with this?
             default: {
                std::string sMessage = std::string("Unrecognized escape sequence found in string: \\") + c;
                throw ScanException(sMessage, inputStream.GetLocation());
