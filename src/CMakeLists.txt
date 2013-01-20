@@ -16,6 +16,7 @@ set(PHYSGAME_SRCS
     app.cpp
     renderer.cpp
     world.cpp
+    pack.cpp
     math/color.cpp
     math/matrix.cpp
     math/point.cpp
