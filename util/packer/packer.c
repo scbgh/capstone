@@ -22,12 +22,13 @@ int archive_size = 0;
  * - N bytes containing file entry
  */
 
-int archive_directory(FILE *file, const char *path)
+int archive_directory(FILE *file, const char *path, const char *relative)
 {
     DIR *dir;
     struct dirent *ent;
     struct stat st;
-    char buf[256];
+    char fullpath[256] = "";
+    char relpath[256] = "";
     FILE *ent_file;
     int length;
     int result = 0;
@@ -39,15 +40,23 @@ int archive_directory(FILE *file, const char *path)
             if (ent->d_name[0] == '.')
                 continue;
 
-            strcpy(buf, path);
-            strcat(buf, "/");
-            strcat(buf, ent->d_name);
+            strcpy(fullpath, path);
+            strcat(fullpath, "/");
+            strcat(fullpath, ent->d_name);
 
-            stat(buf, &st);
+            strcpy(relpath, "");
+            if (strlen(relative) > 0) {
+                strcpy(relpath, relative);
+                strcat(relpath, "/");
+            }
+            strcat(relpath, ent->d_name);
+            printf("%s\n", relpath);
+
+            stat(fullpath, &st);
 
             if (st.st_mode & S_IFREG) {
                 /* Write this file to the archive */
-                ent_file = fopen(buf, "r");
+                ent_file = fopen(fullpath, "r");
                 fseek(ent_file, 0, SEEK_END);
                 length = ftell(ent_file);
                 fseek(ent_file, 0, SEEK_SET);
@@ -61,14 +70,14 @@ int archive_directory(FILE *file, const char *path)
 
                 blob = malloc(length);
                 fread(blob, 1, length, ent_file);
-                fwrite(buf, 1, 256, file);
+                fwrite(relpath, 1, 256, file);
                 fwrite(&length, 4, 1, file);
                 fwrite(blob, 1, length, file);
                 free(blob);
                 fclose(ent_file);
             } else if (st.st_mode & S_IFDIR) {
                 /* Recurse into this directory */
-                if (archive_directory(file, buf) != 0) {
+                if (archive_directory(file, fullpath, relpath) != 0) {
                     result = 1;
                     goto done;
                 }
@@ -102,7 +111,7 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    archive_directory(file, dir);
+    archive_directory(file, dir, "");
     fclose(file);
 
     return 0;
