@@ -29,7 +29,8 @@ public:
     ~Pack();
 
     PackEntry operator[](const std::string& key);
-    bool contains(const std::string& key);
+    bool contains(const std::string& key) const;
+    int count() const;
 
 private:
     int length_;

@@ -31,9 +31,16 @@ PackEntry Pack::operator[](const std::string& key)
 
 //
 //
-bool Pack::contains(const std::string& key)
+bool Pack::contains(const std::string& key) const
 {
     return entries_.find(key) != entries_.end();
+}
+
+//
+//
+int Pack::count() const
+{
+    return entries_.size();
 }
 
 //
