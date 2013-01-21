@@ -11,8 +11,10 @@
 
 namespace pg {
 
+// includes at bottom of file
 class Renderer;
 class World;
+class Pack;
 
 //
 // class App
@@ -23,13 +25,18 @@ public:
     App(int argc, char *argv[], int width, int height);
     ~App();
 
+    Renderer& renderer() { return *renderer_; }
+    World& world() { return *world_; }
+    Pack& pack() { return *pack_; }
+
     // Start the SDL game loop
     void Run();
 private:
-    bool has_quit; // should we quit the program?
+    bool has_quit_; // should we quit the program?
 
-    Renderer *renderer; // the renderer for the game state
-    World *world; // the current state of the game world
+    Renderer *renderer_; // the renderer for the game state
+    World *world_; // the current state of the game world
+    Pack *pack_; // pack file containing the game resources
 
     // Handle command line args
     void ParseArgs(int argc, char *argv[]);
@@ -50,5 +57,9 @@ private:
 };
 
 };
+
+#include "pack.h"
+#include "renderer.h"
+#include "world.h"
 
 #endif

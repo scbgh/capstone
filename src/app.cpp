@@ -4,8 +4,10 @@
 
 #include <cstdio>
 #include <SDL.h>
-#include "common.h"
 #include "app.h"
+#include "common.h"
+#include "file.h"
+#include "pack.h"
 #include "renderer.h"
 #include "world.h"
 
@@ -14,11 +16,17 @@ namespace pg {
 //
 //
 App::App(int argc, char *argv[], int width, int height) :
-    has_quit(false),
-    renderer(new Renderer(this)),
-    world(new World(this))
+    has_quit_(false),
+    renderer_(new Renderer(this)),
+    world_(new World(this))
 {
-    renderer->Init(width, height);
+    Debug("Initializing App");
+
+    // Load game packfile
+    string pack_filename = AppendPath(GetExecutableDirectory(), "game.dat");
+    pack_ = new Pack(pack_filename);
+
+    renderer_->Init(width, height);
     ParseArgs(argc, argv);
 }
 
@@ -26,8 +34,8 @@ App::App(int argc, char *argv[], int width, int height) :
 //
 App::~App()
 {
-    delete renderer;
-    delete world;
+    delete renderer_;
+    delete world_;
 }
 
 //
@@ -36,12 +44,12 @@ void App::Run()
 {
     SDL_Event event;
 
-    while (!has_quit) {
+    while (!has_quit_) {
         // Process the SDL events
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
                 case SDL_QUIT:
-                    has_quit = true;
+                    has_quit_ = true;
                     break;
                 case SDL_KEYDOWN:
                     OnKeyDown(&event.key);
@@ -61,7 +69,7 @@ void App::Run()
             }
         }
 
-        renderer->Render();
+        renderer_->Render();
         SDL_GL_SwapBuffers();
     }
 }
@@ -102,7 +110,8 @@ void App::ParseArgs(int argc, char *argv[])
 {
     // The first argument is the name of the map to warp to, if any
     if (argc > 1) {
-        // TODO: make this work
+        Debug("Loading map '%s'...\n", argv[1]);
+        world_->LoadMap(argv[1]);
     }
 }
 
