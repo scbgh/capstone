@@ -32,9 +32,9 @@ public:
     bool contains(const std::string& key);
 
 private:
-    int length;
-    char *data;
-    std::map<std::string, PackEntry> entries;
+    int length_;
+    char *data_;
+    std::map<std::string, PackEntry> entries_;
 
     // Load a pack from a file
     void LoadFromFile(const std::string& filename);

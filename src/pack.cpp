@@ -19,21 +19,21 @@ Pack::Pack(const std::string& filename)
 //
 Pack::~Pack()
 {
-    delete data;
+    delete data_;
 }
 
 //
 //
 PackEntry Pack::operator[](const std::string& key)
 {
-    return entries[key];
+    return entries_[key];
 }
 
 //
 //
 bool Pack::contains(const std::string& key)
 {
-    return entries.find(key) != entries.end();
+    return entries_.find(key) != entries_.end();
 }
 
 //
@@ -44,24 +44,24 @@ void Pack::LoadFromFile(const std::string& filename)
 
     std::ifstream file(filename.c_str());
     file.seekg(0, std::ios::end);
-    length = file.tellg();
+    length_ = file.tellg();
     file.seekg(0, std::ios::beg);
 
-    data = new char[length];
-    file.read(data, length);
+    data_ = new char[length_];
+    file.read(data_, length_);
     file.close();
 
-    std::stringstream stream(data);
+    std::stringstream stream(data_);
     
     while (!stream.eof()) {
         PackEntry entry;
 
         stream.read(name, 256);
         stream.read((char *)&entry.length, 4);
-        entry.data = data + stream.tellg();
+        entry.data = data_ + stream.tellg();
         stream.seekg(entry.length, std::ios::cur);
 
-        entries[name] = entry;
+        entries_[name] = entry;
     }
 }
 
