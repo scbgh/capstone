@@ -13,7 +13,9 @@ namespace pg {
 //
 Pack::Pack(const std::string& filename)
 {
+    Debug("Loading pack file '%s'...", filename.c_str());
     LoadFromFile(filename);
+    Debug("Pack file loaded");
 }
 
 //
@@ -28,6 +30,13 @@ Pack::~Pack()
 PackEntry Pack::operator[](const std::string& key)
 {
     return entries_[key];
+}
+
+//
+//
+PackEntry Pack::get(const std::string& key)
+{
+    return operator[](key);
 }
 
 //

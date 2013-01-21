@@ -3,6 +3,9 @@
 // Handles the game data in a packaged archive.
 //
 
+#ifndef _PACK_H_
+#define _PACK_H_
+
 #include <string>
 #include <map>
 
@@ -29,6 +32,7 @@ public:
     ~Pack();
 
     PackEntry operator[](const std::string& key);
+    PackEntry get(const std::string& key);
     bool contains(const std::string& key) const;
     int count() const;
 
@@ -47,3 +51,5 @@ private:
 
 
 }
+
+#endif
