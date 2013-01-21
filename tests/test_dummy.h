@@ -3,9 +3,7 @@
 
 #include "test.h"
 
-using namespace test;
-
-class TestDummyFixture : public Fixture
+class TestDummyFixture : public test::Fixture
 {
     FIXTURE_BEGIN(TestDummyFixture);
     TEST(TestDummyFixture::Dummy1);
