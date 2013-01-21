@@ -7,3 +7,12 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(util)
+
+add_custom_command(
+    OUTPUT ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/game.dat
+    COMMAND packer ARGS ${CMAKE_CURRENT_SOURCE_DIR}/pack ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/game.dat
+    DEPENDS packer
+    VERBATIM
+)
+
+add_custom_target(gamedata ALL DEPENDS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/game.dat)
