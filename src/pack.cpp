@@ -4,6 +4,7 @@
 
 #include <fstream>
 #include <sstream>
+#include "common.h"
 #include "pack.h"
 
 namespace pg {
@@ -49,7 +50,11 @@ void Pack::LoadFromFile(const std::string& filename)
 {
     char name[256];
 
-    std::ifstream file(filename.c_str());
+    std::ifstream file(filename.c_str(), std::ios::binary | std::ios::in);
+    if (file.fail()) {
+        Die("Failed to open pack file '%s'", filename.c_str());
+    }
+
     file.seekg(0, std::ios::end);
     length_ = file.tellg();
     file.seekg(0, std::ios::beg);
@@ -58,9 +63,9 @@ void Pack::LoadFromFile(const std::string& filename)
     file.read(data_, length_);
     file.close();
 
-    std::stringstream stream(data_);
-    
-    while (!stream.eof()) {
+    std::istringstream stream(string(data_, length_));
+
+    while (stream.good() && stream.tellg() < length_) {
         PackEntry entry;
 
         stream.read(name, 256);
