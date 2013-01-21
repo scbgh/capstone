@@ -12,7 +12,8 @@ class TestDummyFixture : public test::Fixture
 
     int val;
 public:
-    virtual void SetUp() {
+    virtual void SetUp()
+    {
         val = 123;
     }
 
