@@ -12,16 +12,17 @@ if(NOT SDL_FOUND)
 endif(NOT SDL_FOUND)
 
 set(PHYSGAME_SRCS
-    main.cpp
     app.cpp
-    renderer.cpp
-    world.cpp
-    pack.cpp
+    file.cpp
+    main.cpp
     math/color.cpp
     math/matrix.cpp
     math/point.cpp
     math/transform.cpp
     math/vector.cpp
+    pack.cpp
+    renderer.cpp
+    world.cpp
 )
 
 if (MSVC)
