@@ -5,7 +5,9 @@
 
 #include <iostream>
 #include "test.h"
+
 #include "test_dummy.h"
+#include "test_pack.h"
 
 // MACRO HACK
 #define RUN_FIXTURE(cls_) \
@@ -21,7 +23,8 @@ int main(int argc, char *argv[])
 	int total = 0;
 	int failure = 0;
 
-	RUN_FIXTURE(TestDummyFixture);
+	//RUN_FIXTURE(TestDummyFixture);
+	RUN_FIXTURE(TestPackFixture);
 
 	std::cout << "====================\n";
 	std::cout << "\nTOTAL TESTS RUN   : " << total << "\n";
