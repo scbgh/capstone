@@ -6,6 +6,7 @@
 #ifndef _TESTS_TEST_H_
 #define _TESTS_TEST_H_
 
+#include <sstream>
 #include <exception>
 #include <functional>
 #include <iostream>
@@ -122,6 +123,24 @@ protected:
     do { \
         if (!(x)) { \
             throw test::TestResult("Assertion failed: " # x, false); \
+        } \
+    } while (false)
+
+#define TEST_ASSERT_EQ(x, y) \
+    do { \
+        if ((x) != (y)) { \
+            std::stringstream ss; \
+            ss << "Assertion failed: " #x " == " #y " (" << (x) << " != " << (y) << ")"; \
+            throw test::TestResult(ss.str(), false); \
+        } \
+    } while (false)
+
+#define TEST_ASSERT_NEQ(x, y) \
+    do { \
+        if ((x) == (y)) { \
+            std::stringstream ss; \
+            ss << "Assertion failed: " #x " != " #y " (" << (x) << " == " << (y) << ")"; \
+            throw test::TestResult(ss.str(), false); \
         } \
     } while (false)
 
