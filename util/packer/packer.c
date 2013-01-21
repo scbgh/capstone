@@ -50,16 +50,18 @@ int archive_directory(FILE *file, const char *path, const char *relative)
                 strcat(relpath, "/");
             }
             strcat(relpath, ent->d_name);
-            printf("%s\n", relpath);
+            printf("%s", relpath);
 
             stat(fullpath, &st);
 
             if (st.st_mode & S_IFREG) {
                 /* Write this file to the archive */
-                ent_file = fopen(fullpath, "r");
+                ent_file = fopen(fullpath, "rb");
                 fseek(ent_file, 0, SEEK_END);
                 length = ftell(ent_file);
                 fseek(ent_file, 0, SEEK_SET);
+
+                printf(" (%d bytes)\n", length);
 
                 archive_size += length;
                 if (archive_size > MAX_FILESIZE) {
@@ -76,6 +78,8 @@ int archive_directory(FILE *file, const char *path, const char *relative)
                 free(blob);
                 fclose(ent_file);
             } else if (st.st_mode & S_IFDIR) {
+                printf("\n");
+
                 /* Recurse into this directory */
                 if (archive_directory(file, fullpath, relpath) != 0) {
                     result = 1;
@@ -105,7 +109,7 @@ int main(int argc, char *argv[])
     dir = argv[1];
     out = argv[2];
 
-    file = fopen(out, "w");
+    file = fopen(out, "wb");
     if (!file) {
         printf("Error opening '%s', aborting\n", out);
         exit(1);
