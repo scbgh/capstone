@@ -5,11 +5,11 @@
 
 using namespace test;
 
-class TestDummyFixture : public Fixture<TestDummyFixture>
+class TestDummyFixture : public Fixture
 {
-    FIXTURE_BEGIN(TestDummyFixture, "Dummy test");
-    TEST("First dummy test", TestDummyFixture::Dummy1);
-    TEST("Second dummy test", TestDummyFixture::Dummy2);
+    FIXTURE_BEGIN(TestDummyFixture);
+    TEST(TestDummyFixture::Dummy1);
+    TEST(TestDummyFixture::Dummy2);
     FIXTURE_END();
 
     int val;

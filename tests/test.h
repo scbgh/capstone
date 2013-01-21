@@ -6,21 +6,21 @@
 #ifndef _TESTS_TEST_H_
 #define _TESTS_TEST_H_
 
-#include <iostream>
 #include <exception>
+#include <functional>
+#include <iostream>
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
 
 namespace test {
 
 // Macro hacks
-#define FIXTURE_BEGIN(cls_, name_) \
+#define FIXTURE_BEGIN(classname) \
     public: \
-    cls_() \
-    { \
-        fixture_name = name_;
-#define TEST(name_, fn_) AddTest(name_, &fn_)
+    classname() : Fixture(#classname) \
+    {
+#define TEST(fn) AddTest(#fn, std::bind(&fn, this))
 #define FIXTURE_END() \
     } \
     private: \
@@ -50,29 +50,38 @@ private:
 // struct Test
 // A single test belonging to a fixture.
 //
-template <typename F>
 struct Test {
     std::string name;
-    void (F::*func)();
+    std::function<void()> func;
 };
 
 //
 // struct TestResults
 // A structure containing the information about the tests run.
+//
 struct TestResults {
-    typedef std::map<std::string, TestResult>::iterator iterator;
     std::map<std::string, TestResult> results;
     int total;
     int failure;
+
+    TestResults() :
+        total(0),
+        failure(0)
+    {
+    }
 };
 
 //
 // class Fixture
 // A test fixure that contains a number of tests to run.
 //
-template <typename F>
 class Fixture {
 public:
+    explicit Fixture(const std::string& name) :
+        fixture_name(name)
+    {
+    }
+
     virtual void SetUp() {}
     virtual void TearDown() {}
 
@@ -81,21 +90,17 @@ public:
     TestResults Run()
     {
         TestResults results;
-        results.total = 0;
-        results.failure = 0;
 
         SetUp();
 
-        typename std::vector<Test<F> >::const_iterator it;
-        for (it = tests.begin(); it != tests.end(); it++) {
+        for (auto& test : tests) {
             try {
                 results.total++;
-                void (F::*func)() = it->func;
-                ((F *)this->*func)();
-                results.results.insert(std::make_pair(it->name, TestResult("OK", true)));
+                test.func();
+                results.results.insert(std::make_pair(test.name, TestResult("OK", true)));
             } catch (TestResult result) {
                 results.failure++;
-                results.results.insert(std::make_pair(it->name, result));
+                results.results.insert(std::make_pair(test.name, result));
             }
         }
 
@@ -104,13 +109,13 @@ public:
         return results;
     }
 protected:
-    void AddTest(const std::string& name, void (F::*func)())
+    void AddTest(const std::string& name, std::function<void()> func)
     {
-        Test<F> t = { name, func };
-        tests.push_back(t);
+        tests.push_back({ name, func });
     }
-    std::string fixture_name;
-    typename std::vector<Test<F> > tests;
+
+    const std::string fixture_name;
+    std::vector<Test> tests;
 };
 
 #define TEST_ASSERT(x) \
@@ -118,7 +123,7 @@ protected:
         if (!(x)) { \
             throw test::TestResult("Assertion failed: " # x, false); \
         } \
-    } while (false) \
+    } while (false)
 
 template <typename F>
 TestResults RunFixture()
@@ -127,11 +132,8 @@ TestResults RunFixture()
     TestResults results = fix.Run();
     std::cout << "Running test fixture: " << fix.name() << "\n";
 
-    TestResults::iterator it;
-    for (it = results.results.begin(); it != results.results.end(); it++) {
-        const std::string& name = it->first;
-        const TestResult& result = it->second;
-        std::cout << "    " << name << "..." << result.message() << "\n";
+    for (auto& result_entry : results.results) {
+        std::cout << "    " << result_entry.first << "..." << result_entry.second.message() << "\n";
     }
     std::cout << "Tests run   : " << results.total << "\n";
     std::cout << "Tests failed: " << results.failure << "\n";
