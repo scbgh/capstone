@@ -15,6 +15,8 @@ namespace pg {
 struct PackEntry {
     int length;
     char *data;
+
+    std::string ToString() { return std::string(data, length); }
 };
 
 //
