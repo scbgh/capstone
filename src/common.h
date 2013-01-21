@@ -14,6 +14,14 @@
 #include <map>
 #include <string>
 
+#if defined(unix) || defined(__unix__) || defined(__unix)
+#define UNIX
+#endif
+
+#if defined(WIN32) || defined(_WIN32)
+#define WIN32
+#endif
+
 using std::vector;
 using std::set;
 using std::map;
@@ -27,9 +35,12 @@ using std::string;
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #else
-#include <windows.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+#endif
+
+#ifdef WIN32
+#include <windows.h>
 #endif
 
 // Epsilon value for floating point comparisons
