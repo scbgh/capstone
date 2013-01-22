@@ -7,6 +7,7 @@
 #include "mapfile.h"
 #include "world.h"
 #include "json/picojson.h"
+#include "math/math.h"
 #include <Box2D/Box2D.h>
 #include <sstream>
 #include <tuple>
@@ -28,6 +29,7 @@ b2Vec2 PointToVec(Point p) { return b2Vec2(p.x, p.y); }
 World::World(App *app) :
     app_(app)
 {
+    dbg_draw_.SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_pairBit);
 }
 
 //
@@ -44,6 +46,7 @@ void World::LoadMap(const string& map_name)
 
     b2Vec2 gravity(0.0f, -10.0f);
     phys_world_ = unique_ptr<b2World>(new b2World(gravity));
+    phys_world_->SetDebugDraw(&dbg_draw_);
 
     // Create a single static body at the origin for the static world geometry
     b2BodyDef static_body_def;
@@ -103,13 +106,19 @@ void World::LoadMap(const string& map_name)
 
                     for (int i = 0; i < 3; i++) {
                         // If this isn't part of a dynamic fixture, we make the vertex coordinates absolute,
-                        // otherwise we make them relative to the body position
+                        // otherwise we make them relative to the body position. We also have to rotate the vertices
+                        // according to the shape's rotation.
+
+                        math::Point p(points[i].x, points[i].y);
+                        math::Transform rot = math::Rotate(math::direction::out, shape->rotation);
+                        p = rot.Apply(p);
+
                         if (!has_fixture) {
-                            points[i].x += shape->position.x;
-                            points[i].y += shape->position.y;
+                            points[i].x = p.x + shape->position.x;
+                            points[i].y = p.y + shape->position.y;
                         } else {
-                            points[i].x += shape->position.x - fix_body->position.x; 
-                            points[i].y += shape->position.y - fix_body->position.y;
+                            points[i].x = p.x + shape->position.x - fix_body->position.x; 
+                            points[i].y = p.y + shape->position.y - fix_body->position.y;
                         }
                         verts[i] = PointToVec(points[i]);
                     }
@@ -167,11 +176,20 @@ void World::Step(float seconds)
     const int pos_iter = 8;
     float accum = 0;
 
+    dbg_draw_.DrawCircle(b2Vec2(), 10, b2Color(1, 0, 0));
+
     // Perform as many time steps as necessary to get to the next state
     while (accum < seconds) {
         phys_world_->Step(time_step, vel_iter, pos_iter);
         accum += time_step;
     }
+}
+
+//
+// Call the Box2D debug renderer
+void World::DrawDebug()
+{
+    phys_world_->DrawDebugData();
 }
 
 }

@@ -6,6 +6,7 @@
 #ifndef _WORLD_H_
 #define _WORLD_H_
 
+#include "Box2D/Render.h"
 #include <Box2D/Box2D.h>
 #include <memory>
 #include <string>
@@ -23,12 +24,14 @@ public:
     void LoadMap(const std::string& map_name);
     void Dispose();
     void Step(float seconds);
+    void DrawDebug();
 
     bool initialized() const { return initialized_; }
 private:
     App *app_;
     std::unique_ptr<b2World> phys_world_; // box2d world
     bool initialized_; // is the world initialized?
+    DebugDraw dbg_draw_; // debug drawer for box2d
 
     // Non-copyable
     World(const World&);
