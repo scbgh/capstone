@@ -49,6 +49,8 @@ using std::make_shared;
 #include <windows.h>
 #endif
 
+#include <SDL.h>
+
 // Epsilon value for floating point comparisons
 #define EPS 0.001
 

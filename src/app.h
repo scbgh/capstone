@@ -6,8 +6,8 @@
 #ifndef _APP_H_
 #define _APP_H_
 
+#include "common.h"
 #include <memory>
-#include <SDL.h>
 #include <string>
 
 namespace pg {
