@@ -3,6 +3,9 @@
 // Manages the state of the game world including the Box2D state
 //
 
+#ifndef _WORLD_H_
+#define _WORLD_H_
+
 #include <Box2D/Box2D.h>
 #include <string>
 
@@ -30,3 +33,5 @@ private:
 };
 
 }
+
+#endif
