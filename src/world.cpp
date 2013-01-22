@@ -78,6 +78,11 @@ void World::LoadMap(const string& map_name)
         def.fixedRotation = body->fixed_rotation;
         def.bullet = body->bullet;
         def.active = body->active;
+        if (body->type == kStatic) {
+            def.type = b2_staticBody;
+        } else if (body->type == kDynamic) {
+            def.type = b2_dynamicBody;
+        }
 
         phys_bodies[body] = phys_world_->CreateBody(&def);
     }
@@ -110,7 +115,7 @@ void World::LoadMap(const string& map_name)
                         // according to the shape's rotation.
 
                         math::Point p(points[i].x, points[i].y);
-                        math::Transform rot = math::Rotate(math::direction::out, shape->rotation);
+                        math::Transform rot = math::Rotate(math::direction::in, RAD_TO_DEG(shape->rotation));
                         p = rot.Apply(p);
 
                         if (!has_fixture) {
@@ -130,7 +135,11 @@ void World::LoadMap(const string& map_name)
             case kCircle: {
                 CircleShape *circle = static_cast<CircleShape *>(shape.get());
                 shared_ptr<b2CircleShape> bcircle = make_shared<b2CircleShape>();
-                bcircle->m_p = PointToVec(circle->position);
+                b2Vec2 offset;
+                if (has_fixture) {
+                    offset = -b2Vec2(fix_body->position.x, fix_body->position.y);
+                }
+                bcircle->m_p = PointToVec(circle->position) + offset;
                 bcircle->m_radius = circle->radius;
                 shapes_to_fix.push_back(bcircle);
 
