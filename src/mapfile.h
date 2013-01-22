@@ -35,6 +35,7 @@ struct Triangle {
 };
 
 enum BodyType { kStatic, kDynamic };
+enum ShapeType { kPolygon, kCircle };
 
 //
 // Base structure for all map entities
@@ -86,6 +87,7 @@ struct Fixture : public Entity {
 struct Shape : public Entity {
     Point position;
     double rotation;
+    virtual ShapeType type() const = 0;
 };
 
 //
@@ -93,13 +95,14 @@ struct Shape : public Entity {
 struct PolygonShape : public Shape {
     std::vector<Triangle> triangles;
     std::vector<Point> points;
-    Point position;
+    virtual ShapeType type() const { return kPolygon; }
 };
 
 //
 // Simple circle shape
 struct CircleShape : public Shape {
     double radius;
+    virtual ShapeType type() const { return kCircle; }
 };
 
 std::shared_ptr<MapFile> LoadMapFromJSON(const std::string& json);
