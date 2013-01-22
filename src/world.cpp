@@ -4,8 +4,7 @@
 
 #include <sstream>
 #include <Box2D/Box2D.h>
-#include "json/reader.h"
-#include "json/elements.h"
+#include "json/picojson.h"
 #include "common.h"
 #include "world.h"
 #include "app.h"
