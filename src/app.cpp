@@ -18,7 +18,8 @@ namespace pg {
 App::App(int argc, char *argv[], int width, int height) :
     has_quit_(false),
     renderer_(unique_ptr<Renderer>(new Renderer(this))),
-    world_(unique_ptr<World>(new World(this)))
+    world_(unique_ptr<World>(new World(this))),
+    last_tick_(SDL_GetTicks())
 {
     Debug("Initializing App");
 
@@ -60,6 +61,14 @@ void App::Run()
                     break;
             }
         }
+
+        // Step the world state forward
+        int tick = SDL_GetTicks();
+        int delta = tick - last_tick_;
+        if (world_->initialized()) {
+            world_->Step(delta / 1000.f);
+        }
+        last_tick_ = tick;
 
         renderer_->Render();
         SDL_GL_SwapBuffers();
