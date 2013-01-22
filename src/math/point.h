@@ -84,6 +84,8 @@ public:
 
   Point(double x, double y, double z) : x(x), y(y), z(z) { }
 
+  Point(double x, double y) : x(x), y(y), z(0.0) { }
+
   Point() : x(0.0), y(0.0), z(0.0) { }
 
   Point(Vector const& vector) : x(vector.x), y(vector.y), z(vector.z) { }
