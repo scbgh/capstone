@@ -14,9 +14,7 @@ namespace pg {
 class App;
 
 //
-// class Renderer
 // Holds all the rendering state information
-//
 class Renderer {
 public:
     explicit Renderer(App *app);

@@ -18,9 +18,7 @@ class World;
 class Pack;
 
 //
-// class App
 // Abstracts the basic SDL game loop and main window.
-//
 class App {
 public:
     App(int argc, char *argv[], int width, int height);

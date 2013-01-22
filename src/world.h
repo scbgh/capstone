@@ -15,9 +15,7 @@ namespace pg {
 class App;
 
 //
-// class World
 // Contains the state of the game world including the physics objects.
-//
 class World {
 public:
     explicit World(App *app);

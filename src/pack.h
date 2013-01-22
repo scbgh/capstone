@@ -13,9 +13,7 @@
 namespace pg {
 
 //
-// struct PackEntry
 // A representation of a single file in a Pack.
-//
 struct PackEntry {
     int length;
     char *data;
@@ -24,9 +22,7 @@ struct PackEntry {
 };
 
 //
-// class Pack
 // A representation of an archive file in memory.
-//
 class Pack {
 public:
     Pack(const std::string& filename);
