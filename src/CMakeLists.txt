@@ -13,6 +13,7 @@ endif(NOT SDL_FOUND)
 
 set(PHYSGAME_SRCS
     app.cpp
+    box2d/Render.cpp
     file.cpp
     main.cpp
     mapfile.cpp
