@@ -23,8 +23,8 @@ public:
     void LoadMap(const std::string& map_name);
     void Dispose();
 private:
-    App *app;
-    std::unique_ptr<b2World> phys_world; // box2d world
+    App *app_;
+    std::unique_ptr<b2World> phys_world_; // box2d world
 
     // Non-copyable
     World(const World&);

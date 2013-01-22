@@ -11,7 +11,7 @@ namespace pg {
 //
 //
 Renderer::Renderer(App *app) :
-    app(app)
+    app_(app)
 {
 }
 
@@ -25,8 +25,8 @@ void Renderer::Init(int width, int height)
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-    surface = SDL_SetVideoMode(width, height, 32, SDL_OPENGL);
-    if (!surface) {
+    surface_ = SDL_SetVideoMode(width, height, 32, SDL_OPENGL);
+    if (!surface_) {
         Die("Could not create SDL surface");
     }
 }

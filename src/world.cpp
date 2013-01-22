@@ -26,7 +26,7 @@ b2Vec2 PointToVec(Point p) { return b2Vec2(p.x, p.y); }
 //
 //
 World::World(App *app) :
-    app(app)
+    app_(app)
 {
 }
 
@@ -37,17 +37,17 @@ void World::LoadMap(const string& map_name)
     Dispose();
 
     string map_path = "maps/" + map_name + ".json";
-    if (!app->pack().contains(map_path)) {
+    if (!app_->pack().contains(map_path)) {
         Die("Could not load map '%s'", map_name.c_str());
     }
-    string json = app->pack()[map_path].ToString();
+    string json = app_->pack()[map_path].ToString();
 
     b2Vec2 gravity(0.0f, -10.0f);
-    phys_world = unique_ptr<b2World>(new b2World(gravity));
+    phys_world_ = unique_ptr<b2World>(new b2World(gravity));
 
     // Create a single static body at the origin for the static world geometry
     b2BodyDef static_body_def;
-    b2Body *static_body = phys_world->CreateBody(&static_body_def);
+    b2Body *static_body = phys_world_->CreateBody(&static_body_def);
 
     // Load the map from disk and turn it into a Box2D world
     shared_ptr<MapFile> map_file = LoadMapFromJSON(json);
@@ -76,7 +76,7 @@ void World::LoadMap(const string& map_name)
         def.bullet = body->bullet;
         def.active = body->active;
 
-        phys_bodies[body] = phys_world->CreateBody(&def);
+        phys_bodies[body] = phys_world_->CreateBody(&def);
     }
 
     // Create shapes and their associated fixtures

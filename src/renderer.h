@@ -22,8 +22,8 @@ public:
     void Init(int width, int height);
     void Render();
 private:
-	App *app; // the global app
-    SDL_Surface *surface; // the main window SDL surface
+	App *app_; // the global app
+    SDL_Surface *surface_; // the main window SDL surface
 
     // Non-copyable
     Renderer(const Renderer&);
