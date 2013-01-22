@@ -6,6 +6,7 @@
 #ifndef _APP_H_
 #define _APP_H_
 
+#include <memory>
 #include <SDL.h>
 #include <string>
 
@@ -23,7 +24,6 @@ class Pack;
 class App {
 public:
     App(int argc, char *argv[], int width, int height);
-    ~App();
 
     Renderer& renderer() { return *renderer_; }
     World& world() { return *world_; }
@@ -34,9 +34,9 @@ public:
 private:
     bool has_quit_; // should we quit the program?
 
-    Renderer *renderer_; // the renderer for the game state
-    World *world_; // the current state of the game world
-    Pack *pack_; // pack file containing the game resources
+    std::unique_ptr<Renderer> renderer_; // the renderer for the game state
+    std::unique_ptr<World> world_; // the current state of the game world
+    std::unique_ptr<Pack> pack_; // pack file containing the game resources
 
     // Handle command line args
     void ParseArgs(int argc, char *argv[]);

@@ -17,25 +17,17 @@ namespace pg {
 //
 App::App(int argc, char *argv[], int width, int height) :
     has_quit_(false),
-    renderer_(new Renderer(this)),
-    world_(new World(this))
+    renderer_(unique_ptr<Renderer>(new Renderer(this))),
+    world_(unique_ptr<World>(new World(this)))
 {
     Debug("Initializing App");
 
     // Load game packfile
     string pack_filename = AppendPath(GetExecutableDirectory(), "game.dat");
-    pack_ = new Pack(pack_filename);
+    pack_ = unique_ptr<Pack>(new Pack(pack_filename));
 
     renderer_->Init(width, height);
     ParseArgs(argc, argv);
-}
-
-//
-//
-App::~App()
-{
-    delete renderer_;
-    delete world_;
 }
 
 //

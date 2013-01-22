@@ -20,13 +20,6 @@ Pack::Pack(const std::string& filename)
 
 //
 //
-Pack::~Pack()
-{
-    delete data_;
-}
-
-//
-//
 PackEntry Pack::operator[](const std::string& key)
 {
     return entries_[key];
@@ -68,18 +61,18 @@ void Pack::LoadFromFile(const std::string& filename)
     length_ = file.tellg();
     file.seekg(0, std::ios::beg);
 
-    data_ = new char[length_];
-    file.read(data_, length_);
+    data_ = unique_ptr<char>(new char[length_]);
+    file.read(data_.get(), length_);
     file.close();
 
-    std::istringstream stream(string(data_, length_));
+    std::istringstream stream(string(data_.get(), length_));
 
     while (stream.good() && stream.tellg() < length_) {
         PackEntry entry;
 
         stream.read(name, 256);
         stream.read((char *)&entry.length, 4);
-        entry.data = data_ + stream.tellg();
+        entry.data = data_.get() + stream.tellg();
         stream.seekg(entry.length, std::ios::cur);
 
         entries_[name] = entry;

@@ -7,6 +7,7 @@
 #define _WORLD_H_
 
 #include <Box2D/Box2D.h>
+#include <memory>
 #include <string>
 
 namespace pg {
@@ -25,7 +26,7 @@ public:
     void Dispose();
 private:
     App *app;
-    b2World *phys_world; // box2d world
+    std::unique_ptr<b2World> phys_world; // box2d world
 
     // Non-copyable
     World(const World&);

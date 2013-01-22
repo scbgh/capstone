@@ -31,9 +31,6 @@ void World::LoadMap(const string& map_name)
 // Destroy the current world state to make way for a new state
 void World::Dispose()
 {
-    if (phys_world) {
-        delete phys_world;
-    }
 }
 
 

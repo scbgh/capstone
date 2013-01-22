@@ -8,6 +8,7 @@
 
 #include <string>
 #include <map>
+#include <memory>
 
 namespace pg {
 
@@ -29,7 +30,6 @@ struct PackEntry {
 class Pack {
 public:
     Pack(const std::string& filename);
-    ~Pack();
 
     PackEntry operator[](const std::string& key);
     PackEntry get(const std::string& key);
@@ -38,7 +38,7 @@ public:
 
 private:
     int length_;
-    char *data_;
+    std::unique_ptr<char> data_;
     std::map<std::string, PackEntry> entries_;
 
     // Load a pack from a file
