@@ -1,12 +1,5 @@
 project(PHYSGAME)
 
-find_package(SDL REQUIRED)
-find_package(OpenGL REQUIRED)
-find_package(Box2D REQUIRED)
-include_directories(${SDL_INCLUDE_DIR})
-include_directories(${BOX2D_INCLUDE_DIR})
-link_directories(${SDL_LIBRARY_DIR})
-
 if(NOT SDL_FOUND)
     message("SDL not found!")
 endif(NOT SDL_FOUND)
