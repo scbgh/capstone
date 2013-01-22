@@ -6,13 +6,14 @@
 #ifndef _COMMON_H_
 #define _COMMON_H_
 
+#include <cmath>
 #include <cstdarg>
 #include <cstdio>
-#include <cmath>
-#include <vector>
-#include <set>
+#include <iostream>
 #include <map>
+#include <set>
 #include <string>
+#include <vector>
 
 #if defined(unix) || defined(__unix__) || defined(__unix)
 #define UNIX
