@@ -148,6 +148,8 @@ void World::LoadMap(const string& map_name)
             target_body->CreateFixture(&def);
         }
     }
+
+    initialized_ = true;
 }
 
 //
@@ -156,5 +158,20 @@ void World::Dispose()
 {
 }
 
+//
+// Step the world state forward by a given number of seconds
+void World::Step(float seconds)
+{
+    const float time_step = 1.f / 60.f;
+    const int vel_iter = 10;
+    const int pos_iter = 8;
+    float accum = 0;
+
+    // Perform as many time steps as necessary to get to the next state
+    while (accum < seconds) {
+        phys_world_->Step(time_step, vel_iter, pos_iter);
+        accum += time_step;
+    }
+}
 
 }

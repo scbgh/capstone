@@ -22,9 +22,13 @@ public:
 
     void LoadMap(const std::string& map_name);
     void Dispose();
+    void Step(float seconds);
+
+    bool initialized() const { return initialized_; }
 private:
     App *app_;
     std::unique_ptr<b2World> phys_world_; // box2d world
+    bool initialized_; // is the world initialized?
 
     // Non-copyable
     World(const World&);
