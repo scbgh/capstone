@@ -11,6 +11,7 @@
 #include <cstdio>
 #include <iostream>
 #include <map>
+#include <memory>
 #include <set>
 #include <string>
 #include <vector>
@@ -27,6 +28,10 @@ using std::vector;
 using std::set;
 using std::map;
 using std::string;
+
+using std::shared_ptr;
+using std::unique_ptr;
+using std::make_shared;
 
 #ifdef _MSC_VER
 #pragma warning(disable: 4996)
