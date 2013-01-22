@@ -62,6 +62,10 @@ void App::Run()
             }
         }
 
+        // Clear the screen
+        glClearColor(0.f, 0.f, 0.f, 1.f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         // Step the world state forward
         int tick = SDL_GetTicks();
         int delta = tick - last_tick_;

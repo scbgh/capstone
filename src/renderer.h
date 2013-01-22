@@ -24,6 +24,9 @@ public:
 private:
 	App *app_; // the global app
     SDL_Surface *surface_; // the main window SDL surface
+    int width_, height_; // the width and height of the main window
+    math::Point view_center_; // the center of the camera
+    float zoom_; // the zoom factor
 
     // Non-copyable
     Renderer(const Renderer&);

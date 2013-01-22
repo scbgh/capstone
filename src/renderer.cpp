@@ -11,7 +11,8 @@ namespace pg {
 //
 //
 Renderer::Renderer(App *app) :
-    app_(app)
+    app_(app),
+    zoom_(1.f)
 {
 }
 
@@ -29,14 +30,29 @@ void Renderer::Init(int width, int height)
     if (!surface_) {
         Die("Could not create SDL surface");
     }
+
+    glViewport(0, 0, width, height);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    width_ = width;
+    height_ = height;
+    float aspect = (float)width_ / (float)height_;
+    gluOrtho2D(-aspect, aspect, -1.f, 1.f);
+
+    zoom_ = 0.05;
 }
 
 //
 // Render the current game state
 void Renderer::Render()
 {
-    glClearColor(0.f, 0.f, 0.f, 1.f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glScalef(zoom_, zoom_, 0.f);
+    glTranslatef(-view_center_.x, -view_center_.y, 0.f);
+
+    app_->world().DrawDebug();
 }
 
 }

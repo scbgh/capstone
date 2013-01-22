@@ -176,8 +176,6 @@ void World::Step(float seconds)
     const int pos_iter = 8;
     float accum = 0;
 
-    dbg_draw_.DrawCircle(b2Vec2(), 10, b2Color(1, 0, 0));
-
     // Perform as many time steps as necessary to get to the next state
     while (accum < seconds) {
         phys_world_->Step(time_step, vel_iter, pos_iter);
