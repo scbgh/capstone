@@ -14,7 +14,7 @@
 #include "math/matrix.h"
 #include "math/transform.h"
 
-namespace pg {;
+namespace pg { namespace math {
 
 static bool quadratic(double a, double b, double c, double *y0, double *y1) {
   double disc = b * b - 4 * a * c;
@@ -57,6 +57,6 @@ static Color grey(double value) {
 
 }
 
-}
+} }
 
 #endif

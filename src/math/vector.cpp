@@ -5,9 +5,9 @@
 #include "common.h"
 #include "math/vector.h"
 
-#include <cmath>
+#include <math.h>
 
-namespace pg {;
+namespace pg { namespace math {
 
 //
 //
@@ -89,4 +89,4 @@ bool IsZero(Vector const& v) {
   return v.x == 0 && v.y == 0 && v.z == 0;
 }
 
-}
+} }

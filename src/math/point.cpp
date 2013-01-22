@@ -5,7 +5,7 @@
 #include "math/point.h"
 #include "math/vector.h"
 
-namespace pg {;
+namespace pg { namespace math {
 
 //
 //
@@ -53,4 +53,4 @@ Point operator/(Point const& p, double k) {
   return u;
 }
 
-}
+} }

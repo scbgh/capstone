@@ -8,7 +8,7 @@
 
 #include "math/vector.h"
 
-namespace pg {;
+namespace pg { namespace math {
 
 //
 // class Point
@@ -96,6 +96,6 @@ Point operator*(Point const& p, double k);
 Point operator*(double k, Point const& p);
 Point operator/(Point const& p, double k);
 
-}
+} }
 
 #endif

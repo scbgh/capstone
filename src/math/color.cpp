@@ -1,7 +1,7 @@
 #include <algorithm>
 #include "math/color.h"
 
-namespace pg {;
+namespace pg { namespace math {
 
 //
 //
@@ -72,4 +72,4 @@ Color Clamp(Color const& a) {
   return b;
 }
 
-}
+} }

@@ -5,7 +5,7 @@
 #include "math/transform.h"
 #include "common.h"
 
-namespace pg {;
+namespace pg { namespace math {
 
 //
 //
@@ -135,4 +135,4 @@ Point Transform::Apply(Point const& p) const {
   return q;
 }
 
-}
+} }

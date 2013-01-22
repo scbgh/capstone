@@ -6,7 +6,7 @@
 #ifndef _MATH_MATRIX_H_
 #define _MATH_MATRIX_H_
 
-namespace pg {;
+namespace pg { namespace math {
 
 //
 // class Matrix44
@@ -44,6 +44,6 @@ Matrix44 Mult(Matrix44 const& l, Matrix44 const& r);
 Matrix44 Transpose(Matrix44 const& m);
 Matrix44 Inverse(Matrix44 const& m);
 
-}
+} }
 
 #endif

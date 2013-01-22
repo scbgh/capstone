@@ -8,7 +8,7 @@
 
 #include <cmath>
 
-namespace pg {;
+namespace pg { namespace math {
 
 //
 // class Vector
@@ -94,6 +94,6 @@ double Norm(Vector const& v);
 Vector Normalized(Vector const& v);
 bool IsZero(Vector const& v);
 
-}
+} }
 
 #endif

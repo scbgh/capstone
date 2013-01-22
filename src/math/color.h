@@ -6,7 +6,7 @@
 #ifndef _MATH_COLOR_H_
 #define _MATH_COLOR_H_
 
-namespace pg {;
+namespace pg { namespace math {
 
 //
 // class Color
@@ -94,4 +94,4 @@ Color operator/(Color const& a, double k);
 Color Clamp(Color const& a);
 #endif
 
-}
+} }

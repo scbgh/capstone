@@ -7,7 +7,7 @@
 #include "math/matrix.h"
 #include "common.h"
 
-namespace pg {;
+namespace pg { namespace math {
 
 //
 //
@@ -126,4 +126,4 @@ Matrix44 Inverse(Matrix44 const& m) {
   return minv;
 }
 
-}
+} }

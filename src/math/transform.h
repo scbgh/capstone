@@ -11,7 +11,7 @@
 #include "math/vector.h"
 #include "math/matrix.h"
 
-namespace pg {;
+namespace pg { namespace math {
 
 //
 // class Transform
@@ -57,7 +57,7 @@ public:
   Transform(Matrix44 const& mat)
       : mat(mat)
   {
-    matinv = pg::Inverse(mat);
+    matinv = pg::math::Inverse(mat);
   }
 
   Transform()
@@ -75,6 +75,6 @@ Transform Scale(double x, double y, double z);
 Transform Rotate(Vector const& v, double t);
 Transform LookAt(Vector const& eye, Vector const& at, Vector const& up);
 
-}
+} }
 
 #endif
