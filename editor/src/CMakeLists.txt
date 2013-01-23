@@ -5,6 +5,8 @@ find_package(Qt4 REQUIRED)
 set(PGEDITOR_SRCS
     main.cpp
     mainwindow.cpp
+    mapscene.cpp
+    propertybrowser.cpp
 )
 
 set (PGEDITOR_MOCS
