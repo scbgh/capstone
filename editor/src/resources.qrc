@@ -1,0 +1,35 @@
+<RCC>
+    <qresource prefix="/icons16">
+        <file alias="new">icons/16x16/document-new.png</file>
+        <file alias="open">icons/16x16/document-open.png</file>
+        <file alias="save-as">icons/16x16/document-save-as.png</file>
+        <file alias="save">icons/16x16/document-save.png</file>
+        <file alias="copy">icons/16x16/edit-copy.png</file>
+        <file alias="cut">icons/16x16/edit-cut.png</file>
+        <file alias="delete">icons/16x16/edit-delete.png</file>
+        <file alias="redo">icons/16x16/edit-redo.png</file>
+        <file alias="undo">icons/16x16/edit-undo.png</file>
+    </qresource>
+    <qresource prefix="/icons24">
+        <file alias="new">icons/24x24/document-new.png</file>
+        <file alias="open">icons/24x24/document-open.png</file>
+        <file alias="save-as">icons/24x24/document-save-as.png</file>
+        <file alias="save">icons/24x24/document-save.png</file>
+        <file alias="copy">icons/24x24/edit-copy.png</file>
+        <file alias="cut">icons/24x24/edit-cut.png</file>
+        <file alias="paste">icons/24x24/edit-paste.png</file>
+        <file alias="redo">icons/24x24/edit-redo.png</file>
+        <file alias="undo">icons/24x24/edit-undo.png</file>
+    </qresource>
+    <qresource prefix="/icons32">
+        <file alias="new">icons/32x32/document-new.png</file>
+        <file alias="open">icons/32x32/document-open.png</file>
+        <file alias="save-as">icons/32x32/document-save-as.png</file>
+        <file alias="save">icons/32x32/document-save.png</file>
+        <file alias="copy">icons/32x32/edit-copy.png</file>
+        <file alias="cut">icons/32x32/edit-cut.png</file>
+        <file alias="paste">icons/32x32/edit-paste.png</file>
+        <file alias="redo">icons/32x32/edit-redo.png</file>
+        <file alias="undo">icons/32x32/edit-undo.png</file>
+    </qresource>
+</RCC>
