@@ -34,7 +34,7 @@ public:
 
 private:
     int length_;
-    std::unique_ptr<char> data_;
+    std::unique_ptr<char[]> data_;
     std::map<std::string, PackEntry> entries_;
 
     // Load a pack from a file

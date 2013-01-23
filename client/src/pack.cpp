@@ -61,7 +61,7 @@ void Pack::LoadFromFile(const std::string& filename)
     length_ = file.tellg();
     file.seekg(0, std::ios::beg);
 
-    data_ = unique_ptr<char>(new char[length_]);
+    data_ = unique_ptr<char[]>(new char[length_]);
     file.read(data_.get(), length_);
     file.close();
 
