@@ -19,7 +19,8 @@ App::App(int argc, char *argv[], int width, int height) :
     has_quit_(false),
     renderer_(unique_ptr<Renderer>(new Renderer(this))),
     world_(unique_ptr<World>(new World(this))),
-    last_tick_(SDL_GetTicks())
+    last_tick_(SDL_GetTicks()),
+    running_(false)
 {
     Debug("Initializing App");
 
@@ -68,9 +69,13 @@ void App::Run()
 
         // Step the world state forward
         int tick = SDL_GetTicks();
-        int delta = tick - last_tick_;
-        if (world_->initialized()) {
-            world_->Step(delta / 1000.f);
+        if (running_) {
+            int delta = tick - last_tick_;
+            if (world_->initialized()) {
+                world_->Step(delta / 1000.f);
+            }
+        } else {
+            running_ = true;
         }
         last_tick_ = tick;
 

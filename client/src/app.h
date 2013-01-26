@@ -37,6 +37,7 @@ private:
     std::unique_ptr<Pack> pack_; // pack file containing the game resources
 
     int last_tick_; // the last recorded tick count
+    bool running_; // is the game running yet?
 
     // Handle command line args
     void ParseArgs(int argc, char *argv[]);
