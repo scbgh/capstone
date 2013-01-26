@@ -7,12 +7,13 @@
 
 #define PATH_SEP "/"
 
-#ifdef __APPLE__
+#if defined __APPLE__
 #include <mach-o/dyld.h>
-#elif UNIX
+#elif defined UNIX
 #include <unistd.h>
-#elif WIN32
+#elif defined WIN32
 #include <windows.h>
+#undef PATH_SEP
 #define PATH_SEP "\\"
 #endif
 
@@ -23,9 +24,12 @@ namespace pg {
 string GetExecutableDirectory()
 {
     char dir[512];
-#ifdef __APPLE__
+#if defined __APPLE__
     uint32_t bufsize = 512;
     _NSGetExecutablePath(dir, &bufsize);
+#elif defined WIN32
+    HMODULE module = GetModuleHandleA(NULL);
+    GetModuleFileNameA(module, dir, 512);
 #else
 #error "GetExecutableDirectory not implemented on this platform"
 #endif
