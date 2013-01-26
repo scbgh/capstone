@@ -185,10 +185,14 @@ void World::Step(float seconds)
     const int pos_iter = 8;
     float accum = 0;
 
-    // Perform as many time steps as necessary to get to the next state
-    while (accum < seconds) {
-        phys_world_->Step(time_step, vel_iter, pos_iter);
-        accum += time_step;
+    if (seconds < time_step) {
+        phys_world_->Step(seconds, vel_iter, pos_iter);
+    } else {
+        // Perform as many time steps as necessary to get to the next state
+        while (accum < seconds) {
+            phys_world_->Step(time_step, vel_iter, pos_iter);
+            accum += time_step;
+        }
     }
 }
 
