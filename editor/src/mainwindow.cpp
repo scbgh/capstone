@@ -17,8 +17,16 @@ MainWindow::MainWindow()
     createStatusBar();
     createDockWindows();
 
-    scene = new MapScene(this);
-    view = new QGraphicsView(scene);
+    view = new QGraphicsView(this);
+    scene = new MapScene(view);
+
+    view->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+    scene->setSceneRect(QRect(0, 0, 40, 23));
+    view->setScene(scene);
+
+    view->setTransformationAnchor(QGraphicsView::NoAnchor);
+    view->scale(32, 32); // One unit is 32x32 pixels at default zoom
+    view->translate(20, 11.5);
 
     toolButtonGroup = new QButtonGroup(this);
     QAbstractButton *selectButton = createToolButton("Select");
