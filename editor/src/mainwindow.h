@@ -27,6 +27,9 @@ public:
 protected:
     virtual void closeEvent(QCloseEvent *event);
 
+private slots:
+    void gridToggled(bool value);
+
 private:
     QIcon loadIcon(const QString& name);
     QAbstractButton *createToolButton(const QString& name);
@@ -41,6 +44,8 @@ private:
     void writeSettings();
 
     QAction *quitAct;
+    QAction *showGridAct;
+    QAction *snapToGridAct;
 
     QGraphicsView *view;
     QMenu *fileMenu;

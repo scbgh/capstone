@@ -67,6 +67,13 @@ void MainWindow::createActions()
     quitAct->setShortcuts(QKeySequence::Quit);
     quitAct->setStatusTip(tr("Quit the application"));
     connect(quitAct, SIGNAL(triggered()), this, SLOT(close()));
+
+    showGridAct = new QAction(tr("Show &Grid"), this);
+    showGridAct->setShortcut(Qt::Key_G);
+    showGridAct->setStatusTip(tr("Show or hide the grid"));
+    showGridAct->setCheckable(true);
+    showGridAct->setChecked(true);
+    connect(showGridAct, SIGNAL(toggled(bool)), this, SLOT(gridToggled(bool)));
 }
 
 //
@@ -79,6 +86,7 @@ void MainWindow::createMenus()
     editMenu = menuBar()->addMenu(tr("&Edit"));
 
     viewMenu = menuBar()->addMenu(tr("&View"));
+    viewMenu->addAction(showGridAct);
 }
 
 //
@@ -143,4 +151,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     writeSettings();
     event->accept();
+}
+
+//
+//
+void MainWindow::gridToggled(bool value)
+{
+    scene->setShowGrid(value);
 }
