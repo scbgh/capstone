@@ -29,6 +29,7 @@ protected:
 
 private slots:
     void gridToggled(bool value);
+    void toolButtonClicked(int id);
 
 private:
     QIcon loadIcon(const QString& name);

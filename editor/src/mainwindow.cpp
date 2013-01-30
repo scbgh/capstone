@@ -170,4 +170,19 @@ void MainWindow::gridToggled(bool value)
     scene_->setShowGrid(value);
 }
 
+//
+//
+void MainWindow::toolButtonClicked(int id)
+{
+    switch (id) {
+        case 0:
+            scene_->setMode(MapScene::kSelectMode);
+            break;
+        case 1:
+            scene_->setMode(MapScene::kPolygonMode);
+            break;
+        case 2:
+            scene_->setMode(MapScene::kCircleMode);
+            break;
+    }
 }
