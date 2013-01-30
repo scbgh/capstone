@@ -21,6 +21,8 @@ class MapScene : public QGraphicsScene {
 
 public:
     MapScene(QGraphicsView *view, QObject *parent = 0);
+    enum Mode { kSelectMode, kPolygonMode, kCircleMode, kFixtureMode };
+
 
     const GameMap& map() const { return *map_; }
     void setMap(GameMap& map_);
@@ -30,6 +32,9 @@ public:
 
     bool showGrid() const { return showGrid_; }
     void setShowGrid(bool showGrid) { showGrid_ = showGrid; update(); }
+
+    Mode mode() const { return mode_; }
+    void setMode(Mode mode);
 
 protected:
     virtual void drawBackground(QPainter *painter, const QRectF& rect);
@@ -48,6 +53,7 @@ private:
     float gridSize_;
     bool showGrid_;
     QGraphicsView *view_;
+    Mode mode_;
 };
 
 #endif
