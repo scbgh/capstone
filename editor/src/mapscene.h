@@ -39,6 +39,8 @@ public:
 protected:
     virtual void drawBackground(QPainter *painter, const QRectF& rect);
     virtual void drawForeground(QPainter *painter, const QRectF& rect);
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
 
 private:
     // Refresh the items in the scene to match the map
@@ -54,6 +56,12 @@ private:
     bool showGrid_;
     QGraphicsView *view_;
     Mode mode_;
+    bool drawing_;
+
+    // Polygon mode
+    QPolygonF curPoly_;
+    PolygonShapeItem *polyItem_;
+
 };
 
 #endif

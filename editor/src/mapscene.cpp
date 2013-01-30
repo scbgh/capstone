@@ -2,18 +2,23 @@
 // mapscene.cpp
 //
 
+#include "mapdata.h"
 #include "mapscene.h"
+#include "sceneitems/polygonshapeitem.h"
 #include <cmath>
 #include <QtAlgorithms>
 #include <stdio.h>
+#include <QtGui>
 
 //
 //
 MapScene::MapScene(QGraphicsView *view, QObject *parent) :
     QGraphicsScene(parent),
     view_(view),
-    gridSize_(0.25),
-    showGrid_(true)
+    gridSize_(0.5),
+    showGrid_(true),
+    drawing_(false),
+    mode_(kSelectMode)
 {
     addRect(0, 0, 1, 1, QPen(Qt::red));
 }
@@ -59,10 +64,64 @@ void MapScene::drawForeground(QPainter *painter, const QRectF& rect)
 
 //
 //
+void MapScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
+{
+    if (drawing_) {
+        if (mode_ == kPolygonMode) {
+            QPolygonF poly = curPoly_;
+            poly << mouseEvent->scenePos();
+            polyItem_->setPolygon(poly);
+        }
+    }
+}
+
+//
+//
+void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
+{
+    if (!drawing_) {
+        if (mode_ == kPolygonMode) {
+            drawing_ = true;
+            curPoly_.clear();
+            curPoly_ << mouseEvent->scenePos();
+            polyItem_ = new PolygonShapeItem(QSharedPointer<PolygonShape>(new PolygonShape));
+            polyItem_->setPen(QColor(255, 128, 128));
+            polyItem_->setBrush(QColor(255, 128, 128, 128));
+            polyItem_->setPolygon(curPoly_);
+            addItem(polyItem_);
+        }
+    } else {
+        if (mode_ == kPolygonMode) {
+            if (mouseEvent->button() == Qt::LeftButton) {
+                curPoly_ << mouseEvent->scenePos();
+                polyItem_->setPolygon(curPoly_);
+            } else if (mouseEvent->button() == Qt::RightButton) {
+                drawing_ = false;
+                polyItem_->setComplete(true);
+                polyItem_ = NULL;
+            }
+        }
+    }
+}
+
+//
+//
 void MapScene::setMap(GameMap& map)
 {
     map_ = QSharedPointer<GameMap>(&map);
     sync();
+}
+
+//
+//
+void MapScene::setMode(Mode mode)
+{
+    mode_ = mode;
+    if (mode == kSelectMode) {
+        view_->setDragMode(QGraphicsView::RubberBandDrag);
+    } else {
+        view_->setDragMode(QGraphicsView::NoDrag);
+    }
 }
 
 //
