@@ -17,32 +17,34 @@ MainWindow::MainWindow()
     createStatusBar();
     createDockWindows();
 
-    view = new QGraphicsView(this);
-    scene = new MapScene(view);
+    view_ = new QGraphicsView(this);
+    scene_ = new MapScene(view_);
 
-    view->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
-    scene->setSceneRect(QRect(0, 0, 40, 23));
-    view->setScene(scene);
+    view_->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+    scene_->setSceneRect(QRect(0, 0, 40, 23));
+    view_->setScene(scene_);
 
-    view->setTransformationAnchor(QGraphicsView::NoAnchor);
-    view->scale(32, 32); // One unit is 32x32 pixels at default zoom
-    view->translate(20, 11.5);
+    view_->setTransformationAnchor(QGraphicsView::NoAnchor);
+    view_->scale(32, 32); // One unit is 32x32 pixels at default zoom
+    view_->translate(20, 11.5);
+    view_->setMouseTracking(true);
 
-    toolButtonGroup = new QButtonGroup(this);
+    toolButtonGroup_ = new QButtonGroup(this);
     QAbstractButton *selectButton = createToolButton("Select");
-    toolButtonGroup->addButton(selectButton, 0);
-    toolButtonGroup->addButton(createToolButton("Draw Polygon"), 1);
-    toolButtonGroup->addButton(createToolButton("Draw Circle"), 2);
+    toolButtonGroup_->addButton(selectButton, 0);
+    toolButtonGroup_->addButton(createToolButton("Draw Polygon"), 1);
+    toolButtonGroup_->addButton(createToolButton("Draw Circle"), 2);
+    connect(toolButtonGroup_, SIGNAL(buttonClicked(int)), this, SLOT(toolButtonClicked(int)));
     selectButton->setChecked(true);
 
-    toolBoxLayout->addStretch();
+    toolBoxLayout_->addStretch();
 
-
-    setCentralWidget(view);
+    setCentralWidget(view_);
     setWindowTitle(tr("PGEditor"));
     setUnifiedTitleAndToolBarOnMac(true);
 
     resize(1280, 720);
+    toolButtonClicked(0); // Select tool
 
     readSettings();
 }
@@ -62,7 +64,7 @@ QIcon MainWindow::loadIcon(const QString& name)
 QAbstractButton *MainWindow::createToolButton(const QString& name)
 {
     QPushButton *button = new QPushButton(name);
-    toolBoxLayout->addWidget(button);
+    toolBoxLayout_->addWidget(button);
     button->setCheckable(true);
     return button;
 }
@@ -71,37 +73,37 @@ QAbstractButton *MainWindow::createToolButton(const QString& name)
 //
 void MainWindow::createActions()
 {
-    quitAct = new QAction(tr("&Quit"), this);
-    quitAct->setShortcuts(QKeySequence::Quit);
-    quitAct->setStatusTip(tr("Quit the application"));
-    connect(quitAct, SIGNAL(triggered()), this, SLOT(close()));
+    quitAct_ = new QAction(tr("&Quit"), this);
+    quitAct_->setShortcuts(QKeySequence::Quit);
+    quitAct_->setStatusTip(tr("Quit the application"));
+    connect(quitAct_, SIGNAL(triggered()), this, SLOT(close()));
 
-    showGridAct = new QAction(tr("Show &Grid"), this);
-    showGridAct->setShortcut(Qt::Key_G);
-    showGridAct->setStatusTip(tr("Show or hide the grid"));
-    showGridAct->setCheckable(true);
-    showGridAct->setChecked(true);
-    connect(showGridAct, SIGNAL(toggled(bool)), this, SLOT(gridToggled(bool)));
+    showGridAct_ = new QAction(tr("Show &Grid"), this);
+    showGridAct_->setShortcut(Qt::Key_G);
+    showGridAct_->setStatusTip(tr("Show or hide the grid"));
+    showGridAct_->setCheckable(true);
+    showGridAct_->setChecked(true);
+    connect(showGridAct_, SIGNAL(toggled(bool)), this, SLOT(gridToggled(bool)));
 }
 
 //
 //
 void MainWindow::createMenus()
 {
-    fileMenu = menuBar()->addMenu(tr("&File"));
-    fileMenu->addAction(quitAct);
+    fileMenu_ = menuBar()->addMenu(tr("&File"));
+    fileMenu_->addAction(quitAct_);
 
-    editMenu = menuBar()->addMenu(tr("&Edit"));
+    editMenu_ = menuBar()->addMenu(tr("&Edit"));
 
-    viewMenu = menuBar()->addMenu(tr("&View"));
-    viewMenu->addAction(showGridAct);
+    viewMenu_ = menuBar()->addMenu(tr("&View"));
+    viewMenu_->addAction(showGridAct_);
 }
 
 //
 //
 void MainWindow::createToolBars()
 {
-    fileToolBar = addToolBar(tr("File"));
+    fileToolBar_ = addToolBar(tr("File"));
 }
 
 //
@@ -115,20 +117,20 @@ void MainWindow::createStatusBar()
 void MainWindow::createDockWindows()
 {
     QDockWidget *propertyDock = new QDockWidget(tr("Properties"), this);
-    propertyBrowser = new PropertyBrowser(propertyDock);
-    propertyDock->setWidget(propertyBrowser);
+    propertyBrowser_ = new PropertyBrowser(propertyDock);
+    propertyDock->setWidget(propertyBrowser_);
     propertyDock->setObjectName("propertyDock");
     addDockWidget(Qt::LeftDockWidgetArea, propertyDock);
-    viewMenu->addAction(propertyDock->toggleViewAction());
+    viewMenu_->addAction(propertyDock->toggleViewAction());
 
     QDockWidget *toolBoxDock = new QDockWidget(tr("Toolbox"), this);
     QWidget *toolBox = new QWidget(toolBoxDock);
-    toolBoxLayout = new QVBoxLayout(toolBox);
-    toolBox->setLayout(toolBoxLayout);
+    toolBoxLayout_ = new QVBoxLayout(toolBox);
+    toolBox->setLayout(toolBoxLayout_);
     toolBoxDock->setWidget(toolBox);
     toolBoxDock->setObjectName("toolBoxDock");
     addDockWidget(Qt::LeftDockWidgetArea, toolBoxDock);
-    viewMenu->addAction(toolBoxDock->toggleViewAction());
+    viewMenu_->addAction(toolBoxDock->toggleViewAction());
 }
 
 //
@@ -165,5 +167,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 //
 void MainWindow::gridToggled(bool value)
 {
-    scene->setShowGrid(value);
+    scene_->setShowGrid(value);
+}
+
 }

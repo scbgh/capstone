@@ -43,19 +43,19 @@ private:
     void readSettings();
     void writeSettings();
 
-    QAction *quitAct;
-    QAction *showGridAct;
-    QAction *snapToGridAct;
+    QAction *quitAct_;
+    QAction *showGridAct_;
+    QAction *snapToGridAct_;
 
-    QGraphicsView *view;
-    QMenu *fileMenu;
-    QMenu *editMenu;
-    QMenu *viewMenu;
-    QToolBar *fileToolBar;
-    QVBoxLayout *toolBoxLayout;
-    QButtonGroup *toolButtonGroup;
-    MapScene *scene;
-    PropertyBrowser *propertyBrowser;
+    QGraphicsView *view_;
+    QMenu *fileMenu_;
+    QMenu *editMenu_;
+    QMenu *viewMenu_;
+    QToolBar *fileToolBar_;
+    QVBoxLayout *toolBoxLayout_;
+    QButtonGroup *toolButtonGroup_;
+    MapScene *scene_;
+    PropertyBrowser *propertyBrowser_;
 };
 
 #endif
