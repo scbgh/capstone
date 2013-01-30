@@ -20,9 +20,9 @@ class MapScene : public QGraphicsScene {
     Q_OBJECT
 
 public:
-    MapScene(QGraphicsView *view, QObject *parent = 0);
     enum Mode { kSelectMode, kPolygonMode, kCircleMode, kFixtureMode };
 
+    explicit MapScene(QGraphicsView *view, QObject *parent = 0);
 
     const GameMap& map() const { return *map_; }
     void setMap(GameMap& map_);
