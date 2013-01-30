@@ -6,9 +6,15 @@
 #ifndef _MAPSCENE_H_
 #define _MAPSCENE_H_
 
-#include "mapdata.h"
-#include <memory>
 #include <QGraphicsScene>
+
+struct Shape;
+struct Body;
+struct Fixture;
+struct Joint;
+struct GameMap;
+class QGraphicsView;
+class PolygonShapeItem;
 
 class MapScene : public QGraphicsScene {
     Q_OBJECT
