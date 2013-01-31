@@ -8,6 +8,7 @@ set(PGEDITOR_SRCS
     mapscene.cpp
     propertybrowser.cpp
     sceneitems/polygonshapeitem.cpp
+    sceneitems/shapeitem.cpp
 )
 
 set (PGEDITOR_MOCS
