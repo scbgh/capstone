@@ -12,13 +12,14 @@
 
 //
 //
-MapScene::MapScene(QGraphicsView *view, QObject *parent) :
+MapScene::MapScene(QGraphicsView *view, QUndoStack *undoStack, QObject *parent) :
     QGraphicsScene(parent),
     view_(view),
     gridSize_(0.5),
     showGrid_(true),
     drawing_(false),
     mode_(kSelectMode)
+    undoStack_(undoStack),
 {
     addRect(0, 0, 1, 1, QPen(Qt::red));
 }

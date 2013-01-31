@@ -14,6 +14,7 @@ struct Fixture;
 struct Joint;
 struct GameMap;
 class QGraphicsView;
+class QUndoStack;
 class PolygonShapeItem;
 
 class MapScene : public QGraphicsScene {
@@ -22,7 +23,7 @@ class MapScene : public QGraphicsScene {
 public:
     enum Mode { kSelectMode, kPolygonMode, kCircleMode, kFixtureMode };
 
-    explicit MapScene(QGraphicsView *view, QObject *parent = 0);
+    explicit MapScene(QGraphicsView *view, QUndoStack *undoStack, QObject *parent = 0);
 
     const GameMap& map() const { return *map_; }
     void setMap(GameMap& map_);
@@ -35,6 +36,8 @@ public:
 
     Mode mode() const { return mode_; }
     void setMode(Mode mode);
+
+    QUndoStack *undoStack() const { return undoStack_; }
 
 protected:
     virtual void drawBackground(QPainter *painter, const QRectF& rect);
@@ -57,6 +60,7 @@ private:
     QGraphicsView *view_;
     Mode mode_;
     bool drawing_;
+    QUndoStack *undoStack_;
 
     // Polygon mode
     QPolygonF curPoly_;

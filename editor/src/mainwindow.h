@@ -17,11 +17,8 @@ class QGraphicsView;
 class QMenu;
 class QToolBar;
 class QVBoxLayout;
-<<<<<<< HEAD
-=======
 class QUndoStack;
 struct GameMap;
->>>>>>> 022ed67... Added pointer to current map to MainWindow and added newMap() function to create a new one
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -53,6 +50,8 @@ private:
     QAction *quitAct_;
     QAction *showGridAct_;
     QAction *snapToGridAct_;
+    QAction *undoAct_;
+    QAction *redoAct_;
 
     QGraphicsView *view_;
     QMenu *fileMenu_;
@@ -61,6 +60,7 @@ private:
     QToolBar *fileToolBar_;
     QVBoxLayout *toolBoxLayout_;
     QButtonGroup *toolButtonGroup_;
+    QUndoStack *undoStack_;
     MapScene *scene_;
     PropertyBrowser *propertyBrowser_;
 

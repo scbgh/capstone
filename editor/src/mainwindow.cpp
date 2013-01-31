@@ -12,6 +12,8 @@
 //
 MainWindow::MainWindow()
 {
+    undoStack_ = new QUndoStack(this);
+
     createActions();
     createMenus();
     createToolBars();
@@ -19,7 +21,7 @@ MainWindow::MainWindow()
     createDockWindows();
 
     view_ = new QGraphicsView(this);
-    scene_ = new MapScene(view_);
+    scene_ = new MapScene(view_, undoStack_);
 
     view_->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
     view_->setScene(scene_);
@@ -85,6 +87,12 @@ void MainWindow::createActions()
     showGridAct_->setCheckable(true);
     showGridAct_->setChecked(true);
     connect(showGridAct_, SIGNAL(toggled(bool)), this, SLOT(gridToggled(bool)));
+
+    undoAct_ = undoStack_->createUndoAction(this, tr("&Undo"));
+    undoAct_->setShortcuts(QKeySequence::Undo);
+
+    redoAct_ = undoStack_->createRedoAction(this, tr("&Redo"));
+    redoAct_->setShortcuts(QKeySequence::Redo);
 }
 
 //
@@ -95,6 +103,8 @@ void MainWindow::createMenus()
     fileMenu_->addAction(quitAct_);
 
     editMenu_ = menuBar()->addMenu(tr("&Edit"));
+    editMenu_->addAction(undoAct_);
+    editMenu_->addAction(redoAct_);
 
     viewMenu_ = menuBar()->addMenu(tr("&View"));
     viewMenu_->addAction(showGridAct_);
