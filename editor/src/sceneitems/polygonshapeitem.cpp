@@ -22,8 +22,16 @@ PolygonShapeItem::PolygonShapeItem(QSharedPointer<PolygonShape> shape, QGraphics
 //
 void PolygonShapeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(brush());
-    painter->setPen(pen());
+    QBrush drawBrush = brush();
+    QPen drawPen = pen();
+
+    if (isSelected()) {
+        drawBrush = QColor(128, 255, 128, 128);
+        drawPen = QColor(128, 255, 128);
+    }
+
+    painter->setBrush(drawBrush);
+    painter->setPen(drawPen);
     if (complete_) {
         painter->drawPolygon(polygon());
     } else {
