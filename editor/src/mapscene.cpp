@@ -29,6 +29,13 @@ MapScene::MapScene(QGraphicsView *view, QUndoStack *undoStack, QObject *parent) 
 
 //
 //
+bool MapScene::itemIsShape(const QGraphicsItem *item) const
+{
+    return item->type() == kPolygonShapeItem;
+}
+
+//
+//
 void MapScene::drawBackground(QPainter *painter, const QRectF& rect)
 {
     painter->fillRect(rect, Qt::black);

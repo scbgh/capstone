@@ -12,7 +12,7 @@ struct PolygonShape;
 
 class PolygonShapeItem : public ShapeItem {  
 public:
-    enum { Type = UserType + 1 };
+    enum { Type = kPolygonShapeItem };
 
     explicit PolygonShapeItem(QSharedPointer<PolygonShape> shape, QGraphicsItem *parent = 0, QGraphicsScene *scene = 0);  
 

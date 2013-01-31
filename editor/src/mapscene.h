@@ -61,6 +61,8 @@ private:
     void addFixture(QSharedPointer<Fixture> fixture);
     void addJoint(QSharedPointer<Joint> joint);
 
+    bool itemIsShape(const QGraphicsItem *item) const;
+
     QSharedPointer<GameMap> map_;
     float gridSize_;
     bool showGrid_;

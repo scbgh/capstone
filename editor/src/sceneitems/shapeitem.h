@@ -11,6 +11,11 @@
 class MapScene;
 struct Shape;
 
+enum ShapeItemTypes {
+    kPolygonShapeItem = QGraphicsPolygonItem::UserType + 1,
+    kCircleShapeItem
+};
+
 class ShapeItem : public QGraphicsPolygonItem {
 public:
     explicit ShapeItem(QSharedPointer<Shape> shape, QGraphicsItem *parent = 0, QGraphicsScene *scene = 0);
@@ -22,6 +27,7 @@ public:
     bool suppressCommands() const { return suppressCommands_; }
     void setSuppressCommands(bool suppressCommands) { suppressCommands_ = suppressCommands; }
 
+    virtual int type() const { return Type; }
 protected:
     virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
     MapScene *mapScene() { return (MapScene *)scene(); }
