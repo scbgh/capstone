@@ -3,6 +3,7 @@ project(PGEDITOR)
 find_package(Qt4 REQUIRED)
 
 set(PGEDITOR_SRCS
+    commands.cpp
     main.cpp
     mainwindow.cpp
     mapscene.cpp
