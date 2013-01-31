@@ -3,14 +3,19 @@
 //
 
 #include <QtGui>
+#include "mapdata.h"
+#include "mapscene.h"
 #include "polygonshapeitem.h"
 
 //
 //
 PolygonShapeItem::PolygonShapeItem(QSharedPointer<PolygonShape> shape, QGraphicsItem *parent, QGraphicsScene *scene) :
-    QGraphicsPolygonItem(parent, scene),
-    shape_(shape)
+    ShapeItem(shape, parent, scene),
+    complete_(false)
 {
+    setFlag(QGraphicsItem::ItemIsMovable, true);
+    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
 
 //
@@ -24,4 +29,27 @@ void PolygonShapeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *
     } else {
         painter->drawPolyline(polygon());
     }
+}
+
+//
+//
+void PolygonShapeItem::sync()
+{
+    QSharedPointer<PolygonShape> poly = qSharedPointerCast<PolygonShape>(shape_);
+    setSuppressCommands(true);
+    setPolygon(poly->polygon);
+    setPos(poly->position);
+    setSuppressCommands(false);
+}
+
+//
+// Commit changes to this Shape item to the underlying data object
+void PolygonShapeItem::commit()
+{
+    QSharedPointer<PolygonShape> poly = qSharedPointerCast<PolygonShape>(shape_);
+    QRectF rect = polygon().boundingRect();
+    QPointF center = mapScene()->snapPoint(rect.center());
+    poly->polygon = polygon();
+    poly->polygon.translate(-center.x(), -center.y());
+    poly->position = center;
 }
