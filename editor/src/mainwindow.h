@@ -31,6 +31,7 @@ protected:
 
 private slots:
     void gridToggled(bool value);
+    void snapToggled(bool value);
     void toolButtonClicked(int id);
     void newMap();
 

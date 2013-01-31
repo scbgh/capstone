@@ -88,6 +88,12 @@ void MainWindow::createActions()
     showGridAct_->setChecked(true);
     connect(showGridAct_, SIGNAL(toggled(bool)), this, SLOT(gridToggled(bool)));
 
+    snapToGridAct_ = new QAction(tr("S&nap to Grid"), this);
+    snapToGridAct_->setStatusTip(tr("Snap points to the grid"));
+    snapToGridAct_->setCheckable(true);
+    snapToGridAct_->setChecked(true);
+    connect(snapToGridAct_, SIGNAL(toggled(bool)), this, SLOT(snapToggled(bool)));
+
     undoAct_ = undoStack_->createUndoAction(this, tr("&Undo"));
     undoAct_->setShortcuts(QKeySequence::Undo);
 
@@ -108,6 +114,8 @@ void MainWindow::createMenus()
 
     viewMenu_ = menuBar()->addMenu(tr("&View"));
     viewMenu_->addAction(showGridAct_);
+    viewMenu_->addAction(snapToGridAct_);
+    viewMenu_->addSeparator();
 }
 
 //
@@ -179,6 +187,13 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::gridToggled(bool value)
 {
     scene_->setShowGrid(value);
+}
+
+//
+//
+void MainWindow::snapToggled(bool value)
+{
+    scene_->setSnapToGrid(value);
 }
 
 //
