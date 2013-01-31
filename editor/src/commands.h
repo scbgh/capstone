@@ -20,7 +20,7 @@ enum CommandType { kMoveShape, kChangePolygonGeometry };
 class CreatePolygonCommand : public QUndoCommand
 {
 public:
-    CreatePolygonCommand(MapScene *scene, QSharedPointer<PolygonShape> shape);
+    CreatePolygonCommand(MapScene *scene, QSharedPointer<PolygonShape> shape, QUndoCommand *parent = 0);
     virtual void undo();
     virtual void redo();
 
@@ -34,11 +34,11 @@ private:
 class MoveShapeCommand : public QUndoCommand
 {
 public:
-    MoveShapeCommand(MapScene *scene, QSharedPointer<Shape> shape, QPointF pos);
+    MoveShapeCommand(MapScene *scene, QSharedPointer<Shape> shape, QPointF pos, QUndoCommand *parent = 0);
     virtual void undo();
     virtual void redo();
     virtual bool mergeWith(const QUndoCommand *other);
-    virtual int id() { return kMoveShape; }
+    virtual int id() const { return kMoveShape; }
 
 private:
     MapScene *scene_;
@@ -51,11 +51,12 @@ private:
 class ChangePolygonGeometryCommand : public QUndoCommand
 {
 public:
-    ChangePolygonGeometryCommand(MapScene *scene, QSharedPointer<PolygonShape> shape, QPolygonF polygon);
+    ChangePolygonGeometryCommand(MapScene *scene, QSharedPointer<PolygonShape> shape, QPolygonF polygon,
+        QUndoCommand *parent = 0);
     virtual void undo();
     virtual void redo();
     virtual bool mergeWith(const QUndoCommand *other);
-    virtual int id() { return kChangePolygonGeometry; }
+    virtual int id() const { return kChangePolygonGeometry; }
 
 private:
     MapScene *scene_;

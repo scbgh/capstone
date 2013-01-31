@@ -8,7 +8,8 @@
 
 //
 //
-CreatePolygonCommand::CreatePolygonCommand(MapScene *scene, QSharedPointer<PolygonShape> shape) :
+CreatePolygonCommand::CreatePolygonCommand(MapScene *scene, QSharedPointer<PolygonShape> shape, QUndoCommand *parent) :
+    QUndoCommand(parent),
     scene_(scene),
     shape_(shape)
 {
@@ -37,7 +38,8 @@ void CreatePolygonCommand::redo()
 
 //
 //
-MoveShapeCommand::MoveShapeCommand(MapScene *scene, QSharedPointer<Shape> shape, QPointF pos) :
+MoveShapeCommand::MoveShapeCommand(MapScene *scene, QSharedPointer<Shape> shape, QPointF pos, QUndoCommand *parent) :
+    QUndoCommand(parent),
     scene_(scene),
     shape_(shape),
     pos_(pos)
@@ -74,7 +76,9 @@ bool MoveShapeCommand::mergeWith(const QUndoCommand *other)
 
 //
 //
-ChangePolygonGeometryCommand::ChangePolygonGeometryCommand(MapScene *scene, QSharedPointer<PolygonShape> shape, QPolygonF polygon) :
+ChangePolygonGeometryCommand::ChangePolygonGeometryCommand(MapScene *scene, QSharedPointer<PolygonShape> shape,
+        QPolygonF polygon, QUndoCommand *parent) :
+    QUndoCommand(parent),
     scene_(scene),
     shape_(shape),
     polygon_(polygon)
