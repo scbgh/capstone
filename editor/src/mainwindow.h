@@ -17,6 +17,11 @@ class QGraphicsView;
 class QMenu;
 class QToolBar;
 class QVBoxLayout;
+<<<<<<< HEAD
+=======
+class QUndoStack;
+struct GameMap;
+>>>>>>> 022ed67... Added pointer to current map to MainWindow and added newMap() function to create a new one
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -30,6 +35,7 @@ protected:
 private slots:
     void gridToggled(bool value);
     void toolButtonClicked(int id);
+    void newMap();
 
 private:
     QIcon loadIcon(const QString& name);
@@ -57,6 +63,8 @@ private:
     QButtonGroup *toolButtonGroup_;
     MapScene *scene_;
     PropertyBrowser *propertyBrowser_;
+
+    QSharedPointer<GameMap> map_;
 };
 
 #endif

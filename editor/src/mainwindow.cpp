@@ -3,6 +3,7 @@
 //
 
 #include "mainwindow.h"
+#include "mapdata.h"
 #include "mapscene.h"
 #include "propertybrowser.h"
 #include <QtGui>
@@ -21,7 +22,6 @@ MainWindow::MainWindow()
     scene_ = new MapScene(view_);
 
     view_->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
-    scene_->setSceneRect(QRect(0, 0, 40, 23));
     view_->setScene(scene_);
 
     view_->setTransformationAnchor(QGraphicsView::NoAnchor);
@@ -47,6 +47,7 @@ MainWindow::MainWindow()
     toolButtonClicked(0); // Select tool
 
     readSettings();
+    newMap();
 }
 
 //
@@ -185,4 +186,14 @@ void MainWindow::toolButtonClicked(int id)
             scene_->setMode(MapScene::kCircleMode);
             break;
     }
+}
+
+//
+//
+void MainWindow::newMap()
+{
+    map_ = QSharedPointer<GameMap>(new GameMap);
+    map_->width = (1280. / 32);
+    map_->height = (720. / 32);
+    scene_->setMap(map_);
 }
