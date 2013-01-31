@@ -2,6 +2,7 @@
 // mapscene.cpp
 //
 
+#include "commands.h"
 #include "mapdata.h"
 #include "mapscene.h"
 #include "sceneitems/polygonshapeitem.h"
@@ -72,9 +73,11 @@ void MapScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
     if (drawing_) {
         if (mode_ == kPolygonMode) {
             QPolygonF poly = curPoly_;
-            poly << mouseEvent->scenePos();
+            poly << snapPoint(mouseEvent->scenePos());
             polyItem_->setPolygon(poly);
         }
+    } else {
+        QGraphicsScene::mouseMoveEvent(mouseEvent);
     }
 }
 
@@ -86,23 +89,48 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
         if (mode_ == kPolygonMode) {
             drawing_ = true;
             curPoly_.clear();
-            curPoly_ << mouseEvent->scenePos();
-            polyItem_ = new PolygonShapeItem(QSharedPointer<PolygonShape>(new PolygonShape));
-            polyItem_->setPen(QColor(255, 128, 128));
-            polyItem_->setBrush(QColor(255, 128, 128, 128));
+            curPoly_ << snapPoint(mouseEvent->scenePos());
+            QSharedPointer<PolygonShape> shape = QSharedPointer<PolygonShape>(new PolygonShape);
+            tempItem_ = polyItem_ = new PolygonShapeItem(shape);
+            shape->shapeItem = polyItem_;
+            polyItem_->setPen(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue()));
+            polyItem_->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
             polyItem_->setPolygon(curPoly_);
             addItem(polyItem_);
+        } else {
+            QGraphicsScene::mousePressEvent(mouseEvent);
         }
     } else {
         if (mode_ == kPolygonMode) {
             if (mouseEvent->button() == Qt::LeftButton) {
-                curPoly_ << mouseEvent->scenePos();
+                curPoly_ << snapPoint(mouseEvent->scenePos());
                 polyItem_->setPolygon(curPoly_);
             } else if (mouseEvent->button() == Qt::RightButton) {
                 drawing_ = false;
+                polyItem_->setPolygon(curPoly_);
                 polyItem_->setComplete(true);
-                polyItem_ = NULL;
+                polyItem_->commit();
+                polyItem_->sync();
+                undoStack_->push(new CreatePolygonCommand(this, qSharedPointerCast<PolygonShape>(polyItem_->underlyingShape())));
+                tempItem_ = polyItem_ = NULL;
             }
+        }
+    }
+
+    update();
+}
+
+//
+//
+void MapScene::keyPressEvent(QKeyEvent *keyEvent)
+{
+    if (keyEvent->key() == Qt::Key_Escape) {
+        if (drawing_) {
+            drawing_ = false;
+            if (tempItem_) {
+                removeItem(tempItem_);
+            }
+            tempItem_ = NULL;
         }
     }
 }
@@ -145,6 +173,7 @@ void MapScene::sync()
 
 //
 //
+QPointF MapScene::snapPoint(const QPointF& point)
 {
     if (!snapToGrid_) {
         return point;
@@ -164,6 +193,22 @@ void MapScene::sync()
 void MapScene::addShape(QSharedPointer<Shape> shape)
 {
 
+    switch (shape->type()) {
+        case kPolygon: {
+            QSharedPointer<PolygonShape> polyShape = qSharedPointerCast<PolygonShape>(shape);
+            PolygonShapeItem *item = new PolygonShapeItem(polyShape);
+            shape->shapeItem = item;
+            item->sync();
+            addItem(item);
+            item->setComplete(true);
+            item->setPen(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue()));
+            item->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
+            break;
+        }
+        case kCircle: {
+            break;
+        }
+    }
 }
 
 //

@@ -45,15 +45,17 @@ public:
     // Snap a point to the grid if snap-to-grid is on
     QPointF snapPoint(const QPointF& point);
 
+    // Refresh the items in the scene to match the map
+    void sync();
+
 protected:
     virtual void drawBackground(QPainter *painter, const QRectF& rect);
     virtual void drawForeground(QPainter *painter, const QRectF& rect);
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
+    virtual void keyPressEvent(QKeyEvent *keyEvent);
 
 private:
-    // Refresh the items in the scene to match the map
-    void sync();
     void addShape(QSharedPointer<Shape> shape);
     void addBody(QSharedPointer<Body> body);
     void addFixture(QSharedPointer<Fixture> fixture);
@@ -66,6 +68,7 @@ private:
     QGraphicsView *view_;
     Mode mode_;
     bool drawing_;
+    QGraphicsItem *tempItem_;
     QUndoStack *undoStack_;
 
     QColor shapeColor_;
