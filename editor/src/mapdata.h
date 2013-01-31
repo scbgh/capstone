@@ -10,6 +10,7 @@
 #ifndef _MAPDATA_H_
 #define _MAPDATA_H_
 
+class ShapeItem;
 struct Entity;
 struct GameMap;
 struct Body;
@@ -77,6 +78,8 @@ struct Fixture : public Entity {
 struct Shape : public Entity {
     QPointF position;
     qreal rotation;
+    ShapeItem *shapeItem;
+
     virtual ShapeType type() const = 0;
 };
 
