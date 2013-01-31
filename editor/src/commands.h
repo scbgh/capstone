@@ -44,6 +44,7 @@ private:
     MapScene *scene_;
     QSharedPointer<Shape> shape_;
     QPointF pos_;
+    QPointF oldPos_;
 };
 
 //
@@ -62,6 +63,7 @@ private:
     MapScene *scene_;
     QSharedPointer<PolygonShape> shape_;
     QPolygonF polygon_;
+    QPolygonF oldPolygon_;
 };
 
 #endif
