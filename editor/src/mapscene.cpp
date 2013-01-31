@@ -107,9 +107,10 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
 //
 //
-void MapScene::setMap(GameMap& map)
+void MapScene::setMap(QSharedPointer<GameMap> map)
 {
-    map_ = QSharedPointer<GameMap>(&map);
+    map_ = map;
+    setSceneRect(QRect(0, 0, map_->width, map_->height));
     sync();
 }
 
@@ -134,32 +135,37 @@ void MapScene::sync()
         return;
     }
 
-    for (const auto& shape : map_->shapes) { addShape(*shape); }
-    for (const auto& body : map_->bodies) { addBody(*body); }
-    for (const auto& fixture : map_->fixtures) { addFixture(*fixture); }
-    for (const auto& joint : map_->joints) { addJoint(*joint); }
+    for (auto& shape : map_->shapes) { addShape(shape); }
+    for (auto& body : map_->bodies) { addBody(body); }
+    for (auto& fixture : map_->fixtures) { addFixture(fixture); }
+    for (auto& joint : map_->joints) { addJoint(joint); }
 }
 
 //
 //
-void MapScene::addShape(const Shape& shape)
+{
+
+//
+//
+void MapScene::addShape(QSharedPointer<Shape> shape)
+{
+
+}
+
+//
+//
+void MapScene::addBody(QSharedPointer<Body> body)
 {
 }
 
 //
 //
-void MapScene::addBody(const Body& body)
+void MapScene::addFixture(QSharedPointer<Fixture> fixture)
 {
 }
 
 //
 //
-void MapScene::addFixture(const Fixture& fixture)
-{
-}
-
-//
-//
-void MapScene::addJoint(const Joint& joint)
+void MapScene::addJoint(QSharedPointer<Joint> joint)
 {
 }

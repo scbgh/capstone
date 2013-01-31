@@ -25,8 +25,8 @@ public:
 
     explicit MapScene(QGraphicsView *view, QUndoStack *undoStack, QObject *parent = 0);
 
-    const GameMap& map() const { return *map_; }
-    void setMap(GameMap& map_);
+    QSharedPointer<GameMap> map() const { return map_; }
+    void setMap(QSharedPointer<GameMap> map_);
 
     float gridSize() const { return gridSize_; }
     void setGridSize(float gridSize) { gridSize_ = gridSize; update(); }
@@ -48,11 +48,10 @@ protected:
 private:
     // Refresh the items in the scene to match the map
     void sync();
-
-    void addShape(const Shape& shape);
-    void addBody(const Body& body);
-    void addFixture(const Fixture& fixture);
-    void addJoint(const Joint& joint);
+    void addShape(QSharedPointer<Shape> shape);
+    void addBody(QSharedPointer<Body> body);
+    void addFixture(QSharedPointer<Fixture> fixture);
+    void addJoint(QSharedPointer<Joint> joint);
 
     QSharedPointer<GameMap> map_;
     float gridSize_;
