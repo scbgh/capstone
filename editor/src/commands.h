@@ -34,17 +34,30 @@ private:
 class MoveShapeCommand : public QUndoCommand
 {
 public:
-    MoveShapeCommand(MapScene *scene, QSharedPointer<Shape> shape, QPointF pos, QUndoCommand *parent = 0);
+    MoveShapeCommand(MapScene *scene, QSharedPointer<Shape> shape, QPointF oldPos, QUndoCommand *parent = 0);
     virtual void undo();
     virtual void redo();
-    virtual bool mergeWith(const QUndoCommand *other);
     virtual int id() const { return kMoveShape; }
 
 private:
     MapScene *scene_;
     QSharedPointer<Shape> shape_;
-    QPointF pos_;
+    QPointF newPos_;
     QPointF oldPos_;
+};
+
+//
+//
+class DeleteShapeCommand : public QUndoCommand
+{
+public:
+    DeleteShapeCommand(MapScene *scene, QSharedPointer<Shape> shape, QUndoCommand *parent = 0);
+    virtual void undo();
+    virtual void redo();
+
+private:
+    MapScene *scene_;
+    QSharedPointer<Shape> shape_;
 };
 
 //
@@ -56,7 +69,6 @@ public:
         QUndoCommand *parent = 0);
     virtual void undo();
     virtual void redo();
-    virtual bool mergeWith(const QUndoCommand *other);
     virtual int id() const { return kChangePolygonGeometry; }
 
 private:

@@ -44,10 +44,8 @@ void PolygonShapeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 void PolygonShapeItem::sync()
 {
     QSharedPointer<PolygonShape> poly = qSharedPointerCast<PolygonShape>(shape_);
-    setSuppressCommands(true);
     setPolygon(poly->polygon);
     setPos(poly->position);
-    setSuppressCommands(false);
 }
 
 //
@@ -55,9 +53,6 @@ void PolygonShapeItem::sync()
 void PolygonShapeItem::commit()
 {
     QSharedPointer<PolygonShape> poly = qSharedPointerCast<PolygonShape>(shape_);
-    QRectF rect = polygon().boundingRect();
-    QPointF center = mapScene()->snapPoint(rect.center());
     poly->polygon = polygon();
-    poly->polygon.translate(-center.x(), -center.y());
-    poly->position = center;
+    poly->position = pos();
 }

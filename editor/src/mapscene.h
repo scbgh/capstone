@@ -53,6 +53,7 @@ protected:
     virtual void drawForeground(QPainter *painter, const QRectF& rect);
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
     virtual void keyPressEvent(QKeyEvent *keyEvent);
 
 private:
@@ -72,6 +73,7 @@ private:
     bool drawing_;
     QGraphicsItem *tempItem_;
     QUndoStack *undoStack_;
+    bool moving_;
 
     QColor shapeColor_;
 

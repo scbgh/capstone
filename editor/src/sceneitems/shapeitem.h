@@ -24,8 +24,8 @@ public:
     virtual void sync();
     virtual void commit();
 
-    bool suppressCommands() const { return suppressCommands_; }
-    void setSuppressCommands(bool suppressCommands) { suppressCommands_ = suppressCommands; }
+    QPointF preMovePoint() const { return preMovePoint_; }
+    void setPreMovePoint(const QPointF& preMovePoint) { preMovePoint_ = preMovePoint; }
 
     virtual int type() const { return Type; }
 protected:
@@ -33,7 +33,7 @@ protected:
     MapScene *mapScene() { return (MapScene *)scene(); }
 
     QSharedPointer<Shape> shape_;
-    bool suppressCommands_;
+    QPointF preMovePoint_;
 };
 
 #endif

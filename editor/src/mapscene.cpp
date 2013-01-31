@@ -104,6 +104,21 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             polyItem_->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
             polyItem_->setPolygon(curPoly_);
             addItem(polyItem_);
+        } else if (mode_ == kSelectMode) {
+            QGraphicsScene::mousePressEvent(mouseEvent);
+
+            if (mouseEvent->button() == Qt::LeftButton) {
+                if (itemAt(mouseEvent->scenePos())) {
+                    qDebug() << "Move started";
+                    moving_ = true;
+                    for (auto item : selectedItems()) {
+                        if (itemIsShape(item)) {
+                            ShapeItem *shapeItem = static_cast<ShapeItem *>(item);
+                            shapeItem->setPreMovePoint(shapeItem->underlyingShape()->position);
+                        }
+                    }
+                }
+            }
         } else {
             QGraphicsScene::mousePressEvent(mouseEvent);
         }
@@ -115,6 +130,12 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             } else if (mouseEvent->button() == Qt::RightButton) {
                 drawing_ = false;
                 polyItem_->setPolygon(curPoly_);
+                QPolygonF poly = curPoly_;
+                QRectF rect = polyItem_->sceneBoundingRect();
+                QPointF center = snapPoint(rect.center());
+                poly.translate(-center.x(), -center.y()); 
+                polyItem_->setPolygon(poly);
+                polyItem_->setPos(center);
                 polyItem_->setComplete(true);
                 polyItem_->commit();
                 polyItem_->sync();
@@ -129,6 +150,31 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
 //
 //
+void MapScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
+{
+    if (mode_ == kSelectMode) {
+        if (moving_) {
+            qDebug() << "Move ended";
+            QUndoCommand *command = new QUndoCommand();
+            command->setText("Move Shapes");
+            for (auto item : selectedItems()) {
+                if (itemIsShape(item)) {
+                    ShapeItem *shapeItem = static_cast<ShapeItem *>(item);
+                    shapeItem->commit();
+                    shapeItem->sync();
+                    new MoveShapeCommand(this, shapeItem->underlyingShape(), shapeItem->preMovePoint(), command);
+                }
+            }
+            undoStack_->push(command);
+            moving_ = false;
+        }
+    }
+
+    QGraphicsScene::mouseReleaseEvent(mouseEvent);
+}
+
+//
+//
 void MapScene::keyPressEvent(QKeyEvent *keyEvent)
 {
     if (keyEvent->key() == Qt::Key_Escape) {
@@ -139,6 +185,16 @@ void MapScene::keyPressEvent(QKeyEvent *keyEvent)
             }
             tempItem_ = NULL;
         }
+    } else if (keyEvent->key() == Qt::Key_Delete || keyEvent->key() == Qt::Key_Backspace) {
+        QUndoCommand *command = new QUndoCommand();
+        command->setText("Delete Shapes");
+        for (auto item : selectedItems()) {
+            if (itemIsShape(item)) {
+                ShapeItem *shapeItem = static_cast<ShapeItem *>(item);
+                new DeleteShapeCommand(this, shapeItem->underlyingShape(), command);
+            }
+        }
+        undoStack_->push(command);
     }
 }
 

@@ -38,12 +38,12 @@ void CreatePolygonCommand::redo()
 
 //
 //
-MoveShapeCommand::MoveShapeCommand(MapScene *scene, QSharedPointer<Shape> shape, QPointF pos, QUndoCommand *parent) :
+MoveShapeCommand::MoveShapeCommand(MapScene *scene, QSharedPointer<Shape> shape, QPointF oldPos, QUndoCommand *parent) :
     QUndoCommand(parent),
     scene_(scene),
     shape_(shape),
-    pos_(pos),
-    oldPos_(shape->position)
+    oldPos_(oldPos),
+    newPos_(shape->position)
 {
     setText("Move Shape");
 }
@@ -60,23 +60,38 @@ void MoveShapeCommand::undo()
 //
 void MoveShapeCommand::redo()
 {
-    shape_->position = pos_;
+    shape_->position = newPos_;
     shape_->shapeItem->sync();
 }
 
 //
 //
-bool MoveShapeCommand::mergeWith(const QUndoCommand *other)
+DeleteShapeCommand::DeleteShapeCommand(MapScene *scene, QSharedPointer<Shape> shape, QUndoCommand *parent) :
+    QUndoCommand(parent),
+    scene_(scene),
+    shape_(shape)
 {
-    if (other->id() != id()) {
-        return false;
+    setText("Delete Shape");
+}
+
+//
+//
+void DeleteShapeCommand::undo()
+{
+    scene_->map()->shapes.append(shape_);
+    if (!scene_->items().contains(shape_->shapeItem)) {
+        scene_->addItem(shape_->shapeItem);
     }
-    const MoveShapeCommand *otherCmd = static_cast<const MoveShapeCommand *>(other);
-    if (otherCmd->shape_ != shape_) {
-        return false;
-    }
-    pos_ = otherCmd->pos_;
-    return true;
+    shape_->shapeItem->sync();
+}
+
+//
+//
+void DeleteShapeCommand::redo()
+{
+    scene_->map()->shapes.pop_back();
+    scene_->removeItem(shape_->shapeItem);
+    shape_->shapeItem->sync();
 }
 
 //
@@ -106,19 +121,4 @@ void ChangePolygonGeometryCommand::redo()
 {
     shape_->polygon = polygon_;
     shape_->shapeItem->sync();
-}
-
-//
-//
-bool ChangePolygonGeometryCommand::mergeWith(const QUndoCommand *other)
-{
-    if (other->id() != id()) {
-        return false;
-    }
-    const ChangePolygonGeometryCommand *otherCmd = static_cast<const ChangePolygonGeometryCommand *>(other);
-    if (otherCmd->shape_ != shape_) {
-        return false;
-    }
-    polygon_ = static_cast<const ChangePolygonGeometryCommand *>(other)->polygon_;
-    return true;
 }

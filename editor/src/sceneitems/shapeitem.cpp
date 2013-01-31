@@ -11,10 +11,8 @@
 //
 ShapeItem::ShapeItem(QSharedPointer<Shape> shape, QGraphicsItem *parent, QGraphicsScene *scene) :
     QGraphicsPolygonItem(parent, scene),
-    shape_(shape),
-    suppressCommands_(false)
+    shape_(shape)
 {
-    setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
@@ -38,10 +36,6 @@ QVariant ShapeItem::itemChange(GraphicsItemChange change, const QVariant& value)
     if (change == ItemPositionChange && mapScene()) {
         QPointF newPos = mapScene()->snapPoint(value.toPointF());
         return newPos;
-    } else if (change == ItemPositionHasChanged && mapScene()) {
-        if (!suppressCommands_) {
-            mapScene()->undoStack()->push(new MoveShapeCommand(mapScene(), shape_, value.toPointF()));
-        }
     }
     return QGraphicsItem::itemChange(change, value);
 }
