@@ -17,9 +17,11 @@ MapScene::MapScene(QGraphicsView *view, QUndoStack *undoStack, QObject *parent) 
     view_(view),
     gridSize_(0.5),
     showGrid_(true),
+    snapToGrid_(true),
     drawing_(false),
-    mode_(kSelectMode)
+    mode_(kSelectMode),
     undoStack_(undoStack),
+    shapeColor_(QColor(255, 128, 128))
 {
     addRect(0, 0, 1, 1, QPen(Qt::red));
 }
@@ -144,6 +146,18 @@ void MapScene::sync()
 //
 //
 {
+    if (!snapToGrid_) {
+        return point;
+    }
+
+    // Round a point to the nearest integer multiple of the grid size
+    QPointF newPoint = point;
+    newPoint /= gridSize_;
+    newPoint.setX(qRound(newPoint.x()));
+    newPoint.setY(qRound(newPoint.y()));
+    newPoint *= gridSize_;
+    return newPoint;
+}
 
 //
 //

@@ -34,10 +34,16 @@ public:
     bool showGrid() const { return showGrid_; }
     void setShowGrid(bool showGrid) { showGrid_ = showGrid; update(); }
 
+    bool snapToGrid() const { return snapToGrid_; }
+    void setSnapToGrid(bool snapToGrid) { snapToGrid_ = snapToGrid; }
+
     Mode mode() const { return mode_; }
     void setMode(Mode mode);
 
     QUndoStack *undoStack() const { return undoStack_; }
+
+    // Snap a point to the grid if snap-to-grid is on
+    QPointF snapPoint(const QPointF& point);
 
 protected:
     virtual void drawBackground(QPainter *painter, const QRectF& rect);
@@ -56,10 +62,13 @@ private:
     QSharedPointer<GameMap> map_;
     float gridSize_;
     bool showGrid_;
+    bool snapToGrid_;
     QGraphicsView *view_;
     Mode mode_;
     bool drawing_;
     QUndoStack *undoStack_;
+
+    QColor shapeColor_;
 
     // Polygon mode
     QPolygonF curPoly_;
