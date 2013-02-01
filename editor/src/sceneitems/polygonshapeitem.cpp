@@ -10,7 +10,8 @@
 //
 //
 PolygonShapeItem::PolygonShapeItem(QSharedPointer<PolygonShape> shape, QGraphicsItem *parent, QGraphicsScene *scene) :
-    ShapeItem(shape, parent, scene),
+    ShapeItem(shape),
+    QGraphicsPolygonItem(parent, scene),
     complete_(false)
 {
     setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -55,4 +56,22 @@ void PolygonShapeItem::commit()
     QSharedPointer<PolygonShape> poly = qSharedPointerCast<PolygonShape>(shape_);
     poly->polygon = polygon();
     poly->position = pos();
+}
+
+//
+//
+QVariant PolygonShapeItem::itemChange(GraphicsItemChange change, const QVariant& value)
+{
+    if (change == ItemPositionChange && mapScene()) {
+        QPointF newPos = mapScene()->snapPoint(value.toPointF());
+        return newPos;
+    }
+    return QGraphicsItem::itemChange(change, value);
+}
+
+//
+//
+QAbstractGraphicsShapeItem *PolygonShapeItem::innerShape() const 
+{
+    return (QAbstractGraphicsShapeItem *)this;
 }

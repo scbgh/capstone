@@ -6,31 +6,34 @@
 #ifndef _SHAPEITEM_H_
 #define _SHAPEITEM_H_
 
-#include <QGraphicsPolygonItem> 
+#include <QtGui>
 
 class MapScene;
+class QAbstractGraphicsShapeItem;
 struct Shape;
 
 enum ShapeItemTypes {
-    kPolygonShapeItem = QGraphicsPolygonItem::UserType + 1,
+    kPolygonShapeItem,
     kCircleShapeItem
 };
 
-class ShapeItem : public QGraphicsPolygonItem {
+class ShapeItem {
 public:
-    explicit ShapeItem(QSharedPointer<Shape> shape, QGraphicsItem *parent = 0, QGraphicsScene *scene = 0);
+    explicit ShapeItem(QSharedPointer<Shape> shape);
+
     QSharedPointer<Shape> underlyingShape() const { return shape_; }
 
-    virtual void sync();
-    virtual void commit();
+    virtual void sync() = 0;
+    virtual void commit() = 0;
 
     QPointF preMovePoint() const { return preMovePoint_; }
     void setPreMovePoint(const QPointF& preMovePoint) { preMovePoint_ = preMovePoint; }
 
-    virtual int type() const { return Type; }
+    virtual int type() const = 0;
+
+    virtual QAbstractGraphicsShapeItem *innerShape() const = 0;
 protected:
-    virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
-    MapScene *mapScene() { return (MapScene *)scene(); }
+    MapScene *mapScene() { return (MapScene *)innerShape()->scene(); }
 
     QSharedPointer<Shape> shape_;
     QPointF preMovePoint_;

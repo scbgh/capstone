@@ -21,7 +21,7 @@ CreatePolygonCommand::CreatePolygonCommand(MapScene *scene, QSharedPointer<Polyg
 void CreatePolygonCommand::undo()
 {
     scene_->map()->shapes.pop_back();
-    scene_->removeItem(shape_->shapeItem);
+    scene_->removeItem(shape_->shapeItem->innerShape());
     shape_->shapeItem->sync();
 }
 
@@ -30,8 +30,8 @@ void CreatePolygonCommand::undo()
 void CreatePolygonCommand::redo()
 {
     scene_->map()->shapes.append(shape_);
-    if (!scene_->items().contains(shape_->shapeItem)) {
-        scene_->addItem(shape_->shapeItem);
+    if (!scene_->items().contains(shape_->shapeItem->innerShape())) {
+        scene_->addItem(shape_->shapeItem->innerShape());
     }
     shape_->shapeItem->sync();
 }
@@ -79,8 +79,8 @@ DeleteShapeCommand::DeleteShapeCommand(MapScene *scene, QSharedPointer<Shape> sh
 void DeleteShapeCommand::undo()
 {
     scene_->map()->shapes.append(shape_);
-    if (!scene_->items().contains(shape_->shapeItem)) {
-        scene_->addItem(shape_->shapeItem);
+    if (!scene_->items().contains(shape_->shapeItem->innerShape())) {
+        scene_->addItem(shape_->shapeItem->innerShape());
     }
     shape_->shapeItem->sync();
 }
@@ -90,7 +90,7 @@ void DeleteShapeCommand::undo()
 void DeleteShapeCommand::redo()
 {
     scene_->map()->shapes.pop_back();
-    scene_->removeItem(shape_->shapeItem);
+    scene_->removeItem(shape_->shapeItem->innerShape());
     shape_->shapeItem->sync();
 }
 

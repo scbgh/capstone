@@ -113,7 +113,7 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                     moving_ = true;
                     for (auto item : selectedItems()) {
                         if (itemIsShape(item)) {
-                            ShapeItem *shapeItem = static_cast<ShapeItem *>(item);
+                            ShapeItem *shapeItem = dynamic_cast<ShapeItem *>(item);
                             shapeItem->setPreMovePoint(shapeItem->underlyingShape()->position);
                         }
                     }
@@ -159,7 +159,7 @@ void MapScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
             command->setText("Move Shapes");
             for (auto item : selectedItems()) {
                 if (itemIsShape(item)) {
-                    ShapeItem *shapeItem = static_cast<ShapeItem *>(item);
+                    ShapeItem *shapeItem = dynamic_cast<ShapeItem *>(item);
                     shapeItem->commit();
                     shapeItem->sync();
                     new MoveShapeCommand(this, shapeItem->underlyingShape(), shapeItem->preMovePoint(), command);
@@ -190,7 +190,7 @@ void MapScene::keyPressEvent(QKeyEvent *keyEvent)
         command->setText("Delete Shapes");
         for (auto item : selectedItems()) {
             if (itemIsShape(item)) {
-                ShapeItem *shapeItem = static_cast<ShapeItem *>(item);
+                ShapeItem *shapeItem = dynamic_cast<ShapeItem *>(item);
                 new DeleteShapeCommand(this, shapeItem->underlyingShape(), command);
             }
         }
