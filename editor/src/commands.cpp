@@ -8,7 +8,7 @@
 
 //
 //
-CreatePolygonCommand::CreatePolygonCommand(MapScene *scene, QSharedPointer<PolygonShape> shape, QUndoCommand *parent) :
+CreateShapeCommand::CreateShapeCommand(MapScene *scene, QSharedPointer<Shape> shape, QUndoCommand *parent) :
     QUndoCommand(parent),
     scene_(scene),
     shape_(shape)
@@ -18,7 +18,7 @@ CreatePolygonCommand::CreatePolygonCommand(MapScene *scene, QSharedPointer<Polyg
 
 //
 //
-void CreatePolygonCommand::undo()
+void CreateShapeCommand::undo()
 {
     scene_->map()->shapes.pop_back();
     scene_->removeItem(shape_->shapeItem->innerShape());
@@ -27,7 +27,7 @@ void CreatePolygonCommand::undo()
 
 //
 //
-void CreatePolygonCommand::redo()
+void CreateShapeCommand::redo()
 {
     scene_->map()->shapes.append(shape_);
     if (!scene_->items().contains(shape_->shapeItem->innerShape())) {

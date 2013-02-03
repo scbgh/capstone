@@ -17,16 +17,16 @@ enum CommandType { kMoveShape, kChangePolygonGeometry };
 
 //
 //
-class CreatePolygonCommand : public QUndoCommand
+class CreateShapeCommand : public QUndoCommand
 {
 public:
-    CreatePolygonCommand(MapScene *scene, QSharedPointer<PolygonShape> shape, QUndoCommand *parent = 0);
+    CreateShapeCommand(MapScene *scene, QSharedPointer<Shape> shape, QUndoCommand *parent = 0);
     virtual void undo();
     virtual void redo();
 
 private:
     MapScene *scene_;
-    QSharedPointer<PolygonShape> shape_;
+    QSharedPointer<Shape> shape_;
 };
 
 //
