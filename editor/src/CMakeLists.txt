@@ -8,6 +8,7 @@ set(PGEDITOR_SRCS
     mainwindow.cpp
     mapscene.cpp
     propertybrowser.cpp
+    sceneitems/circleshapeitem.cpp
     sceneitems/polygonshapeitem.cpp
     sceneitems/shapeitem.cpp
 )
