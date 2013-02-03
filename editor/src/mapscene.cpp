@@ -5,6 +5,7 @@
 #include "commands.h"
 #include "mapdata.h"
 #include "mapscene.h"
+#include "sceneitems/circleshapeitem.h"
 #include "sceneitems/polygonshapeitem.h"
 #include <cmath>
 #include <QtAlgorithms>
@@ -31,7 +32,7 @@ MapScene::MapScene(QGraphicsView *view, QUndoStack *undoStack, QObject *parent) 
 //
 bool MapScene::itemIsShape(const QGraphicsItem *item) const
 {
-    return item->type() == kPolygonShapeItem;
+    return item->type() == kPolygonShapeItem || item->type() == kCircleShapeItem;
 }
 
 //
@@ -82,6 +83,11 @@ void MapScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
             QPolygonF poly = curPoly_;
             poly << snapPoint(mouseEvent->scenePos());
             polyItem_->setPolygon(poly);
+        } else if (mode_ == kCircleMode) {
+            qreal radius = QVector2D(mouseEvent->scenePos() - circleOrigin_).length();
+            QPointF point = snapPoint(QPointF(radius, 0));
+            radius = point.x();
+            circleItem_->setRect(-radius, -radius, 2*radius, 2*radius);
         }
     } else {
         QGraphicsScene::mouseMoveEvent(mouseEvent);
@@ -93,7 +99,7 @@ void MapScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
     if (!drawing_) {
-        if (mode_ == kPolygonMode) {
+        if (mode_ == kPolygonMode && mouseEvent->button() == Qt::LeftButton) {
             drawing_ = true;
             curPoly_.clear();
             curPoly_ << snapPoint(mouseEvent->scenePos());
@@ -104,18 +110,26 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             polyItem_->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
             polyItem_->setPolygon(curPoly_);
             addItem(polyItem_);
-        } else if (mode_ == kSelectMode) {
+        } else if (mode_ == kCircleMode && mouseEvent->button() == Qt::LeftButton) {
+            drawing_ = true;
+            circleOrigin_ = snapPoint(mouseEvent->scenePos());
+            QSharedPointer<CircleShape> shape = QSharedPointer<CircleShape>(new CircleShape);
+            tempItem_ = circleItem_ = new CircleShapeItem(shape);
+            shape->shapeItem = circleItem_;
+            circleItem_->setPen(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue()));
+            circleItem_->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
+            circleItem_->setPos(circleOrigin_);
+            addItem(circleItem_);
+        } else if (mode_ == kSelectMode && mouseEvent->button() == Qt::LeftButton) {
             QGraphicsScene::mousePressEvent(mouseEvent);
 
-            if (mouseEvent->button() == Qt::LeftButton) {
-                if (itemAt(mouseEvent->scenePos())) {
-                    qDebug() << "Move started";
-                    moving_ = true;
-                    for (auto item : selectedItems()) {
-                        if (itemIsShape(item)) {
-                            ShapeItem *shapeItem = dynamic_cast<ShapeItem *>(item);
-                            shapeItem->setPreMovePoint(shapeItem->underlyingShape()->position);
-                        }
+            if (itemAt(mouseEvent->scenePos())) {
+                qDebug() << "Move started";
+                moving_ = true;
+                for (auto item : selectedItems()) {
+                    if (itemIsShape(item)) {
+                        ShapeItem *shapeItem = dynamic_cast<ShapeItem *>(item);
+                        shapeItem->setPreMovePoint(shapeItem->underlyingShape()->position);
                     }
                 }
             }
@@ -139,9 +153,16 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                 polyItem_->setComplete(true);
                 polyItem_->commit();
                 polyItem_->sync();
-                undoStack_->push(new CreatePolygonCommand(this, qSharedPointerCast<PolygonShape>(polyItem_->underlyingShape())));
+                undoStack_->push(new CreateShapeCommand(this, polyItem_->underlyingShape()));
                 tempItem_ = polyItem_ = NULL;
             }
+        } else if (mode_ == kCircleMode) {
+            drawing_ = false;
+            circleItem_->setComplete(true);
+            circleItem_->commit();
+            circleItem_->sync();
+            undoStack_->push(new CreateShapeCommand(this, circleItem_->underlyingShape()));
+            tempItem_ = circleItem_ = NULL;
         }
     }
 

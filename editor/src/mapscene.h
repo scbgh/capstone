@@ -16,6 +16,7 @@ struct GameMap;
 class QGraphicsView;
 class QUndoStack;
 class PolygonShapeItem;
+class CircleShapeItem;
 
 class MapScene : public QGraphicsScene {
     Q_OBJECT
@@ -80,6 +81,10 @@ private:
     // Polygon mode
     QPolygonF curPoly_;
     PolygonShapeItem *polyItem_;
+
+    // Circle mode
+    QPointF circleOrigin_;
+    CircleShapeItem *circleItem_;
 
 };
 
