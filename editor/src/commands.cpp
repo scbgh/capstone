@@ -52,7 +52,9 @@ MoveShapeCommand::MoveShapeCommand(MapScene *scene, QSharedPointer<Shape> shape,
 //
 void MoveShapeCommand::undo()
 {
+    shape_->beginUpdate();
     shape_->position = oldPos_;
+    shape_->endUpdate();
     shape_->shapeItem->sync();
 }
 
@@ -60,7 +62,9 @@ void MoveShapeCommand::undo()
 //
 void MoveShapeCommand::redo()
 {
+    shape_->beginUpdate();
     shape_->position = newPos_;
+    shape_->endUpdate();
     shape_->shapeItem->sync();
 }
 
@@ -111,7 +115,9 @@ ChangePolygonGeometryCommand::ChangePolygonGeometryCommand(MapScene *scene, QSha
 //
 void ChangePolygonGeometryCommand::undo()
 {
+    shape_->beginUpdate();
     shape_->polygon = oldPolygon_;
+    shape_->endUpdate();
     shape_->shapeItem->sync();
 }
 
@@ -119,6 +125,8 @@ void ChangePolygonGeometryCommand::undo()
 //
 void ChangePolygonGeometryCommand::redo()
 {
+    shape_->beginUpdate();
     shape_->polygon = polygon_;
+    shape_->endUpdate();
     shape_->shapeItem->sync();
 }
