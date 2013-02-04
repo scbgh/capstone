@@ -9,7 +9,7 @@
 #include <QMainWindow>
 
 class MapScene;
-class PropertyBrowser;
+class PropertyItemModel;
 class QAbstractButton;
 class QAction;
 class QButtonGroup;
@@ -18,6 +18,7 @@ class QMenu;
 class QToolBar;
 class QVBoxLayout;
 class QUndoStack;
+class QTableView;
 struct GameMap;
 
 class MainWindow : public QMainWindow {
@@ -34,6 +35,7 @@ private slots:
     void snapToggled(bool value);
     void toolButtonClicked(int id);
     void newMap();
+    void selectionChanged();
 
 private:
     QIcon loadIcon(const QString& name);
@@ -63,7 +65,8 @@ private:
     QButtonGroup *toolButtonGroup_;
     QUndoStack *undoStack_;
     MapScene *scene_;
-    PropertyBrowser *propertyBrowser_;
+    QTableView *propertyBrowser_;
+    PropertyItemModel *propertyItemModel_;
 
     QSharedPointer<GameMap> map_;
 };

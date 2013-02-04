@@ -2,10 +2,15 @@
 // mainwindow.cpp
 //
 
+#include "hasproperties.h"
 #include "mainwindow.h"
 #include "mapdata.h"
 #include "mapscene.h"
+#include "propertyitemdelegate.h"
+#include "propertyitemmodel.h"
+#include "sceneitems/shapeitem.h"
 #include <QtGui>
+
 
 //
 //
@@ -21,6 +26,7 @@ MainWindow::MainWindow()
 
     view_ = new QGraphicsView(this);
     scene_ = new MapScene(view_, undoStack_);
+    connect(scene_, SIGNAL(selectionChanged()), this, SLOT(selectionChanged()));
 
     view_->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
     view_->setScene(scene_);
@@ -29,6 +35,11 @@ MainWindow::MainWindow()
     view_->scale(32, 32); // One unit is 32x32 pixels at default zoom
     view_->translate(20, 11.5);
     view_->setMouseTracking(true);
+
+    propertyItemModel_ = new PropertyItemModel();
+    propertyBrowser_->setModel(propertyItemModel_);
+    propertyBrowser_->setItemDelegate(new PropertyItemDelegate);
+    propertyBrowser_->horizontalHeader()->setStretchLastSection(true);
 
     toolButtonGroup_ = new QButtonGroup(this);
     QAbstractButton *selectButton = createToolButton("Select");
@@ -220,4 +231,16 @@ void MainWindow::newMap()
     map_->width = (1280. / 32);
     map_->height = (720. / 32);
     scene_->setMap(map_);
+}
+
+//
+//
+void MainWindow::selectionChanged()
+{
+    if (scene_->selectedItems().isEmpty() || scene_->selectedItems().size() > 1) {
+        propertyItemModel_->setSource(QSharedPointer<HasProperties>());
+    } else {
+        ShapeItem *shapeItem = dynamic_cast<ShapeItem *>(scene_->selectedItems().takeFirst());
+        propertyItemModel_->setSource(shapeItem->underlyingShape());
+    }
 }
