@@ -106,6 +106,7 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             QSharedPointer<PolygonShape> shape = QSharedPointer<PolygonShape>(new PolygonShape);
             tempItem_ = polyItem_ = new PolygonShapeItem(shape);
             shape->shapeItem = polyItem_;
+            connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
             polyItem_->setPen(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue()));
             polyItem_->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
             polyItem_->setPolygon(curPoly_);
@@ -116,6 +117,7 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             QSharedPointer<CircleShape> shape = QSharedPointer<CircleShape>(new CircleShape);
             tempItem_ = circleItem_ = new CircleShapeItem(shape);
             shape->shapeItem = circleItem_;
+            connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
             circleItem_->setPen(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue()));
             circleItem_->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
             circleItem_->setPos(circleOrigin_);
@@ -286,6 +288,7 @@ void MapScene::addShape(QSharedPointer<Shape> shape)
             QSharedPointer<PolygonShape> polyShape = qSharedPointerCast<PolygonShape>(shape);
             PolygonShapeItem *item = new PolygonShapeItem(polyShape);
             shape->shapeItem = item;
+            connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
             item->sync();
             addItem(item);
             item->setComplete(true);
