@@ -294,6 +294,15 @@ void MapScene::addShape(QSharedPointer<Shape> shape)
             break;
         }
         case kCircle: {
+            QSharedPointer<CircleShape> circleShape = qSharedPointerCast<CircleShape>(shape);
+            CircleShapeItem *item = new CircleShapeItem(circleShape);
+            shape->shapeItem = item;
+            connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
+            item->sync();
+            addItem(item);
+            item->setComplete(true);
+            item->setPen(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue()));
+            item->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
             break;
         }
     }
