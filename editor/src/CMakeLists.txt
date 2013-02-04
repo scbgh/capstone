@@ -17,6 +17,7 @@ set (PGEDITOR_MOCS
     hasproperties.h
     mainwindow.h
     mapscene.h
+    sceneitems/shapeitem.h
 )
 
 qt4_wrap_cpp(PGEDITOR_MOCS_SRCS ${PGEDITOR_MOCS})

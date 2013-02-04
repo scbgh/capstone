@@ -17,14 +17,13 @@ enum ShapeItemTypes {
     kCircleShapeItem
 };
 
-class ShapeItem {
+class ShapeItem : public QObject {
+    Q_OBJECT
+
 public:
     explicit ShapeItem(QSharedPointer<Shape> shape);
 
     QSharedPointer<Shape> underlyingShape() const { return shape_; }
-
-    virtual void sync() = 0;
-    virtual void commit() = 0;
 
     QPointF preMovePoint() const { return preMovePoint_; }
     void setPreMovePoint(const QPointF& preMovePoint) { preMovePoint_ = preMovePoint; }
@@ -32,6 +31,10 @@ public:
     virtual int type() const = 0;
 
     virtual QAbstractGraphicsShapeItem *innerShape() const = 0;
+
+public slots:
+    virtual void sync() = 0;
+    virtual void commit() = 0;
 protected:
     MapScene *mapScene() { return (MapScene *)innerShape()->scene(); }
 
