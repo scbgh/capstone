@@ -76,7 +76,7 @@ struct Fixture : public Entity {
 //
 // Base structure for a shape
 struct Shape : public Entity {
-    QPointF position;
+    PROPERTY(Shape, QPointF, position);
     qreal rotation;
     ShapeItem *shapeItem;
 
