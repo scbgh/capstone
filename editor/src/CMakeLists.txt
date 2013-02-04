@@ -8,6 +8,8 @@ set(PGEDITOR_SRCS
     main.cpp
     mainwindow.cpp
     mapscene.cpp
+    propertyitemmodel.cpp
+    propertyitemdelegate.cpp
     sceneitems/circleshapeitem.cpp
     sceneitems/polygonshapeitem.cpp
     sceneitems/shapeitem.cpp
@@ -17,6 +19,8 @@ set (PGEDITOR_MOCS
     hasproperties.h
     mainwindow.h
     mapscene.h
+    propertyitemdelegate.h
+    propertyitemmodel.h
     sceneitems/shapeitem.h
 )
 
