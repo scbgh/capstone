@@ -7,7 +7,6 @@ set(PGEDITOR_SRCS
     main.cpp
     mainwindow.cpp
     mapscene.cpp
-    propertybrowser.cpp
     sceneitems/circleshapeitem.cpp
     sceneitems/polygonshapeitem.cpp
     sceneitems/shapeitem.cpp
@@ -16,7 +15,6 @@ set(PGEDITOR_SRCS
 set (PGEDITOR_MOCS
     mainwindow.h
     mapscene.h
-    propertybrowser.h
 )
 
 qt4_wrap_cpp(PGEDITOR_MOCS_SRCS ${PGEDITOR_MOCS})

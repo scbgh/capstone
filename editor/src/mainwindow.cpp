@@ -5,7 +5,6 @@
 #include "mainwindow.h"
 #include "mapdata.h"
 #include "mapscene.h"
-#include "propertybrowser.h"
 #include <QtGui>
 
 //
@@ -136,7 +135,7 @@ void MainWindow::createStatusBar()
 void MainWindow::createDockWindows()
 {
     QDockWidget *propertyDock = new QDockWidget(tr("Properties"), this);
-    propertyBrowser_ = new PropertyBrowser(propertyDock);
+    propertyBrowser_ = new QTableView(propertyDock);
     propertyDock->setWidget(propertyBrowser_);
     propertyDock->setObjectName("propertyDock");
     addDockWidget(Qt::LeftDockWidgetArea, propertyDock);
