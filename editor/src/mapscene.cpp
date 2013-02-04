@@ -181,12 +181,16 @@ void MapScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
             for (auto item : selectedItems()) {
                 if (itemIsShape(item)) {
                     ShapeItem *shapeItem = dynamic_cast<ShapeItem *>(item);
-                    shapeItem->commit();
-                    shapeItem->sync();
-                    new MoveShapeCommand(this, shapeItem->underlyingShape(), shapeItem->preMovePoint(), command);
+                    if (shapeItem->preMovePoint() != shapeItem->innerShape()->scenePos()) {
+                        shapeItem->commit();
+                        shapeItem->sync();
+                        new MoveShapeCommand(this, shapeItem->underlyingShape(), shapeItem->preMovePoint(), command);
+                    }
                 }
             }
-            undoStack_->push(command);
+            if (command->childCount()) {
+                undoStack_->push(command);
+            }
             moving_ = false;
         }
     }
