@@ -54,8 +54,10 @@ void PolygonShapeItem::sync()
 void PolygonShapeItem::commit()
 {
     QSharedPointer<PolygonShape> poly = qSharedPointerCast<PolygonShape>(shape_);
+    poly->beginUpdate();
     poly->polygon = polygon();
     poly->position = pos();
+    poly->endUpdate();
 }
 
 //

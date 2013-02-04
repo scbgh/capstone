@@ -55,8 +55,10 @@ void CircleShapeItem::sync()
 void CircleShapeItem::commit()
 {
     QSharedPointer<CircleShape> circle = qSharedPointerCast<CircleShape>(shape_);
+    circle->beginUpdate();
     circle->radius = rect().width() / 2;
     circle->position = pos();
+    circle->endUpdate();
 }
 
 //
