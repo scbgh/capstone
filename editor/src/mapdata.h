@@ -29,12 +29,21 @@ Q_DECLARE_METATYPE(JointType);
 //
 // Base structure for all map entities
 struct Entity : public HasProperties {
+    Entity() :
+        id(0)
+    { }
+
     int id;
 };
 
 //
 // Root map file
 struct GameMap : public Entity {
+    GameMap() :
+        width(1280./32.),
+        height(720./32.)
+    { }
+
     PROPERTY(GameMap, int, width);
     PROPERTY(GameMap, int, height);
     QVector<QSharedPointer<Shape>> shapes;
@@ -46,6 +55,13 @@ struct GameMap : public Entity {
 //
 // Fixture between a body and a shape
 struct Fixture : public Entity {
+    Fixture() :
+        friction(0),
+        restitution(0),
+        density(0),
+        isSensor(false)
+    { }
+
     QSharedPointer<Shape> shape;
     QSharedPointer<Body> body;
     PROPERTY(Fixture, qreal, friction);
@@ -57,6 +73,10 @@ struct Fixture : public Entity {
 //
 // Base structure for a shape
 struct Shape : public Entity {
+    Shape() :
+        rotation(0)
+    { }
+
     PROPERTY(Shape, QPointF, position);
     qreal rotation;
     ShapeItem *shapeItem;
@@ -86,6 +106,19 @@ struct Body : public Shape {
 
 public:
     enum BodyType { kStatic, kDynamic };
+
+    Body() :
+        bodyType(kStatic),
+        rotation(0),
+        angularVelocity(0),
+        linearDamping(0),
+        angularDamping(0),
+        fixedRotation(false),
+        bullet(false),
+        awake(true),
+        allowSleep(true),
+        active(true)
+    { }
 
     PROPERTY(Body, BodyType, bodyType);
     PROPERTY(Body, qreal, rotation);
