@@ -3,6 +3,7 @@
 //
 
 #include "commands.h"
+#include "hasproperties.h"
 #include "mapdata.h"
 #include "mapscene.h"
 
@@ -129,4 +130,35 @@ void ChangePolygonGeometryCommand::redo()
     shape_->polygon = polygon_;
     shape_->endUpdate();
     shape_->shapeItem->sync();
+}
+
+//
+//
+ChangePropertyCommand::ChangePropertyCommand(QSharedPointer<HasProperties> target, const QString& name, QVariant value,
+        QUndoCommand *parent) :
+    QUndoCommand(parent),
+    target_(target),
+    name_(name),
+    value_(value),
+    oldValue_(target->getProperty(name))
+{
+    setText(QString("Change Property: %1").arg(name));
+}
+
+//
+//
+void ChangePropertyCommand::undo()
+{
+    target_->beginUpdate();
+    target_->setProperty(name_, oldValue_);
+    target_->endUpdate();
+}
+
+//
+//
+void ChangePropertyCommand::redo()
+{
+    target_->beginUpdate();
+    target_->setProperty(name_, value_);
+    target_->endUpdate();
 }

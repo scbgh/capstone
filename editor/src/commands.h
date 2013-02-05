@@ -9,6 +9,7 @@
 #include "sceneitems/shapeitem.h"
 #include <QUndoCommand>
 
+class HasProperties;
 class MapScene;
 struct Shape;
 struct PolygonShape;
@@ -76,6 +77,23 @@ private:
     QSharedPointer<PolygonShape> shape_;
     QPolygonF polygon_;
     QPolygonF oldPolygon_;
+};
+
+//
+//
+class ChangePropertyCommand : public QUndoCommand
+{
+public:
+    ChangePropertyCommand(QSharedPointer<HasProperties> target, const QString& name, QVariant value, QUndoCommand *parent = 0);
+    virtual void undo();
+    virtual void redo();
+
+private:
+    QSharedPointer<HasProperties> target_;
+    QString name_;
+    QVariant value_;
+    QVariant oldValue_;
+private:
 };
 
 #endif
