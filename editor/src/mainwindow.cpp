@@ -50,9 +50,10 @@ MainWindow::MainWindow()
 
     toolButtonGroup_ = new QButtonGroup(this);
     QAbstractButton *selectButton = createToolButton("Select");
-    toolButtonGroup_->addButton(selectButton, 0);
-    toolButtonGroup_->addButton(createToolButton("Draw Polygon"), 1);
-    toolButtonGroup_->addButton(createToolButton("Draw Circle"), 2);
+    toolButtonGroup_->addButton(selectButton, kSelectButton);
+    toolButtonGroup_->addButton(createToolButton("Draw Polygon"), kPolygonButton);
+    toolButtonGroup_->addButton(createToolButton("Draw Circle"), kCircleButton);
+    toolButtonGroup_->addButton(createToolButton("Place Body"), kBodyButton);
     connect(toolButtonGroup_, SIGNAL(buttonClicked(int)), this, SLOT(toolButtonClicked(int)));
     selectButton->setChecked(true);
 
@@ -218,14 +219,17 @@ void MainWindow::snapToggled(bool value)
 void MainWindow::toolButtonClicked(int id)
 {
     switch (id) {
-        case 0:
+        case kSelectButton:
             scene_->setMode(MapScene::kSelectMode);
             break;
-        case 1:
+        case kPolygonButton:
             scene_->setMode(MapScene::kPolygonMode);
             break;
-        case 2:
+        case kCircleButton:
             scene_->setMode(MapScene::kCircleMode);
+            break;
+        case kBodyButton:
+            scene_->setMode(MapScene::kBodyMode);
             break;
     }
 }

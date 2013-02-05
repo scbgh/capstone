@@ -38,6 +38,8 @@ private slots:
     void selectionChanged();
 
 private:
+    enum { kSelectButton, kCircleButton, kPolygonButton, kBodyButton };
+
     QIcon loadIcon(const QString& name);
     QAbstractButton *createToolButton(const QString& name);
 
