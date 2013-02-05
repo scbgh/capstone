@@ -6,7 +6,6 @@
 #include "mainwindow.h"
 #include "mapdata.h"
 #include "mapscene.h"
-#include "propertyitemdelegate.h"
 #include "propertyitemmodel.h"
 #include "sceneitems/shapeitem.h"
 #include <QtGui>
@@ -38,7 +37,6 @@ MainWindow::MainWindow()
 
     propertyItemModel_ = new PropertyItemModel();
     propertyBrowser_->setModel(propertyItemModel_);
-    propertyBrowser_->setItemDelegate(new PropertyItemDelegate);
     propertyBrowser_->horizontalHeader()->setStretchLastSection(true);
 
     toolButtonGroup_ = new QButtonGroup(this);
