@@ -30,7 +30,6 @@ public:
     QVariant getProperty(const QString& key) const { return property_values[key].queryFunc(); }
     QString getPropertyDisplay(const QString& key) const;
     void setProperty(const QString& key, const QVariant& val) { property_values[key].writeBackFunc(val); }
-    void setPropertyDisplay(const QString& key, const QString& val);
 
     void beginUpdate() { isUpdating_ = true; }
     void endUpdate() { isUpdating_ = false; emit invalidated(); }
