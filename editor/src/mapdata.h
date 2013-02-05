@@ -20,7 +20,7 @@ struct PolygonShape;
 struct CircleShape;
 struct Joint;
 
-enum ShapeType { kPolygon, kCircle };
+enum ShapeType { kPolygon, kCircle, kBody };
 enum JointType { kDistance, kGear, kLine, kMouse, kPrismatic, kPulley, kRevolute };
 
 Q_DECLARE_METATYPE(ShapeType);
@@ -42,31 +42,6 @@ struct GameMap : public Entity {
     QVector<QSharedPointer<Fixture>> fixtures;
     QVector<QSharedPointer<Joint>> joints;
 };
-
-//
-// Physical body
-struct Body : public Entity {
-    Q_OBJECT
-    Q_ENUMS(BodyType)
-
-public:
-    enum BodyType { kStatic, kDynamic };
-
-    PROPERTY(Body, BodyType, type);
-    PROPERTY(Body, QPointF, position);
-    PROPERTY(Body, qreal, rotation);
-    PROPERTY(Body, QPointF, linearVelocity);
-    PROPERTY(Body, qreal, angularVelocity);
-    PROPERTY(Body, qreal, linearDamping);
-    PROPERTY(Body, qreal, angularDamping);
-    PROPERTY(Body, bool, fixedRotation);
-    PROPERTY(Body, bool, bullet);
-    PROPERTY(Body, bool, awake);
-    PROPERTY(Body, bool, allowSleep);
-    PROPERTY(Body, bool, active);
-};
-
-Q_DECLARE_METATYPE(Body::BodyType);
 
 //
 // Fixture between a body and a shape
@@ -102,6 +77,32 @@ struct CircleShape : public Shape {
     PROPERTY(CircleShape, qreal, radius);
     virtual ShapeType type() const { return kCircle; }
 };
+
+//
+// Physical body (subclass of Shape for simplicity)
+struct Body : public Shape {
+    Q_OBJECT
+    Q_ENUMS(BodyType)
+
+public:
+    enum BodyType { kStatic, kDynamic };
+
+    PROPERTY(Body, BodyType, bodyType);
+    PROPERTY(Body, qreal, rotation);
+    PROPERTY(Body, QPointF, linearVelocity);
+    PROPERTY(Body, qreal, angularVelocity);
+    PROPERTY(Body, qreal, linearDamping);
+    PROPERTY(Body, qreal, angularDamping);
+    PROPERTY(Body, bool, fixedRotation);
+    PROPERTY(Body, bool, bullet);
+    PROPERTY(Body, bool, awake);
+    PROPERTY(Body, bool, allowSleep);
+    PROPERTY(Body, bool, active);
+
+    virtual ShapeType type() const { return kBody; }
+};
+
+Q_DECLARE_METATYPE(Body::BodyType);
 
 //
 // Base structure for a joint
