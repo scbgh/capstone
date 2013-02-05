@@ -2,10 +2,20 @@
 // propertyitemmodel.cpp
 //
 
+#include "commands.h"
 #include "propertyitemmodel.h"
 #include "hasproperties.h"
 #include "mapdata.h"
 #include "sceneitems/shapeitem.h"
+#include <QUndoStack>
+
+//
+//
+PropertyItemModel::PropertyItemModel(QUndoStack *undoStack, QObject *parent) :
+    QAbstractListModel(parent),
+    undoStack_(undoStack)
+{
+}
 
 //
 //
@@ -49,8 +59,7 @@ QVariant PropertyItemModel::data(const QModelIndex& index, int role) const
     if (role == Qt::DisplayRole) {
         return source_->getPropertyDisplay(name);
     } else if (role == Qt::EditRole) {
-        PropertyIndex pi = { source_, name };
-        return QVariant::fromValue(pi);
+        return source_->getProperty(name);        
     } else {
         return QVariant();
     }
@@ -58,9 +67,22 @@ QVariant PropertyItemModel::data(const QModelIndex& index, int role) const
 
 //
 //
-bool PropertyItemModel::setData(const QModelIndex& index, const QVariant& value, int rule)
+bool PropertyItemModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-    return false;
+    if (!source_ || !index.isValid() || role != Qt::EditRole) {
+        return false;
+    }
+
+    int row = index.row();
+    if (row >= source_->properties().size()) {
+        return false;
+    }
+    const QString& name = source_->properties()[row];
+
+    undoStack_->push(new ChangePropertyCommand(source_, name, value));
+    emit dataChanged(index, index);
+
+    return true;
 }
 
 //

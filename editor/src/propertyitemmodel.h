@@ -8,23 +8,21 @@
 
 #include <QSharedPointer>
 #include <QAbstractListModel>
+#include <QSet>
 
+class QUndoStack;
 class ShapeItem;
 class HasProperties;
-
-struct PropertyIndex {
-    QSharedPointer<HasProperties> target;
-    QString name;
-};
-Q_DECLARE_METATYPE(PropertyIndex);
 
 class PropertyItemModel : public QAbstractListModel {
     Q_OBJECT
 
 public:
+    PropertyItemModel(QUndoStack *undoStack, QObject *parent = 0);
+
     virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
-    virtual bool setData(const QModelIndex& index, const QVariant& value, int rule = Qt::EditRole);
+    virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
     virtual Qt::ItemFlags flags(const QModelIndex& index) const;
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
@@ -36,6 +34,7 @@ public slots:
 
 private:
     QSharedPointer<HasProperties> source_;
+    QUndoStack *undoStack_;
 };
 
 #endif
