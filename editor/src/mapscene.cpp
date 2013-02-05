@@ -5,6 +5,7 @@
 #include "commands.h"
 #include "mapdata.h"
 #include "mapscene.h"
+#include "sceneitems/bodyshapeitem.h"
 #include "sceneitems/circleshapeitem.h"
 #include "sceneitems/polygonshapeitem.h"
 #include <cmath>
@@ -23,7 +24,8 @@ MapScene::MapScene(QGraphicsView *view, QUndoStack *undoStack, QObject *parent) 
     drawing_(false),
     mode_(kSelectMode),
     undoStack_(undoStack),
-    shapeColor_(QColor(255, 128, 128))
+    shapeColor_(QColor(255, 128, 128)),
+    bodyColor_(QColor(128, 128, 255))
 {
     addRect(0, 0, 1, 1, QPen(Qt::red));
 }
@@ -32,7 +34,7 @@ MapScene::MapScene(QGraphicsView *view, QUndoStack *undoStack, QObject *parent) 
 //
 bool MapScene::itemIsShape(const QGraphicsItem *item) const
 {
-    return item->type() == kPolygonShapeItem || item->type() == kCircleShapeItem;
+    return item->type() == kPolygonShapeItem || item->type() == kCircleShapeItem || item->type() == kBodyShapeItem;
 }
 
 //
@@ -107,7 +109,7 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             tempItem_ = polyItem_ = new PolygonShapeItem(shape);
             shape->shapeItem = polyItem_;
             connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
-            polyItem_->setPen(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue()));
+            polyItem_->setPen(shapeColor_);
             polyItem_->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
             polyItem_->setPolygon(curPoly_);
             addItem(polyItem_);
@@ -118,10 +120,20 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             tempItem_ = circleItem_ = new CircleShapeItem(shape);
             shape->shapeItem = circleItem_;
             connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
-            circleItem_->setPen(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue()));
+            circleItem_->setPen(shapeColor_);
             circleItem_->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
             circleItem_->setPos(circleOrigin_);
             addItem(circleItem_);
+        } else if (mode_ == kBodyMode && mouseEvent->button() == Qt::LeftButton) {
+            QPointF origin = snapPoint(mouseEvent->scenePos());
+            QSharedPointer<Body> body = QSharedPointer<Body>(new Body);
+            BodyShapeItem *bodyItem = new BodyShapeItem(body);
+            body->shapeItem = bodyItem;
+            connect(body.data(), SIGNAL(invalidated()), body->shapeItem, SLOT(sync()));
+            bodyItem->setPen(bodyColor_);
+            bodyItem->setBrush(QColor(bodyColor_.red(), bodyColor_.green(), bodyColor_.blue(), 128));
+            bodyItem->setPos(origin);
+            addItem(bodyItem);
         } else if (mode_ == kSelectMode && mouseEvent->button() == Qt::LeftButton) {
             QGraphicsScene::mousePressEvent(mouseEvent);
 
@@ -282,33 +294,41 @@ QPointF MapScene::snapPoint(const QPointF& point)
 //
 void MapScene::addShape(QSharedPointer<Shape> shape)
 {
+    ShapeItem *item;
 
     switch (shape->type()) {
         case kPolygon: {
             QSharedPointer<PolygonShape> polyShape = qSharedPointerCast<PolygonShape>(shape);
-            PolygonShapeItem *item = new PolygonShapeItem(polyShape);
-            shape->shapeItem = item;
-            connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
-            item->sync();
-            addItem(item);
-            item->setComplete(true);
-            item->setPen(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue()));
-            item->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
+            PolygonShapeItem *innerItem;
+            item = innerItem = new PolygonShapeItem(polyShape);
+            innerItem->setComplete(true);
+            innerItem->setPen(shapeColor_);
+            innerItem->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
             break;
         }
         case kCircle: {
             QSharedPointer<CircleShape> circleShape = qSharedPointerCast<CircleShape>(shape);
-            CircleShapeItem *item = new CircleShapeItem(circleShape);
-            shape->shapeItem = item;
-            connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
-            item->sync();
-            addItem(item);
-            item->setComplete(true);
-            item->setPen(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue()));
-            item->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
+            CircleShapeItem *innerItem;
+            item = innerItem = new CircleShapeItem(circleShape);
+            innerItem->setComplete(true);
+            innerItem->setPen(shapeColor_);
+            innerItem->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
+            break;
+        }
+        case kBody: {
+            QSharedPointer<Body> body = qSharedPointerCast<Body>(shape);
+            BodyShapeItem *innerItem;
+            item = innerItem = new BodyShapeItem(body);
+            innerItem->setPen(bodyColor_);
+            innerItem->setBrush(QColor(bodyColor_.red(), bodyColor_.green(), bodyColor_.blue(), 128));
             break;
         }
     }
+
+    shape->shapeItem = item;
+    item->sync();
+    addItem(item->innerShape());
+    connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
 }
 
 //

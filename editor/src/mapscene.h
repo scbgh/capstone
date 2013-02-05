@@ -22,7 +22,7 @@ class MapScene : public QGraphicsScene {
     Q_OBJECT
 
 public:
-    enum Mode { kSelectMode, kPolygonMode, kCircleMode, kFixtureMode };
+    enum Mode { kSelectMode, kPolygonMode, kCircleMode, kBodyMode, kFixtureMode };
 
     explicit MapScene(QGraphicsView *view, QUndoStack *undoStack, QObject *parent = 0);
 
@@ -77,6 +77,7 @@ private:
     bool moving_;
 
     QColor shapeColor_;
+    QColor bodyColor_;
 
     // Polygon mode
     QPolygonF curPoly_;
