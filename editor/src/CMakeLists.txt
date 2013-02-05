@@ -10,6 +10,7 @@ set(PGEDITOR_SRCS
     mapscene.cpp
     propertyitemmodel.cpp
     editorwidgets/pointeditor.cpp
+    sceneitems/bodyshapeitem.cpp
     sceneitems/circleshapeitem.cpp
     sceneitems/polygonshapeitem.cpp
     sceneitems/shapeitem.cpp

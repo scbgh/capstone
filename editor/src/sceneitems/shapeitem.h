@@ -14,7 +14,8 @@ struct Shape;
 
 enum ShapeItemTypes {
     kPolygonShapeItem,
-    kCircleShapeItem
+    kCircleShapeItem,
+    kBodyShapeItem
 };
 
 class ShapeItem : public QObject {
