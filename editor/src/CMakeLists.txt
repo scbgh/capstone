@@ -9,6 +9,7 @@ set(PGEDITOR_SRCS
     mainwindow.cpp
     mapscene.cpp
     propertyitemmodel.cpp
+    editorwidgets/pointeditor.cpp
     sceneitems/circleshapeitem.cpp
     sceneitems/polygonshapeitem.cpp
     sceneitems/shapeitem.cpp
@@ -18,6 +19,7 @@ set (PGEDITOR_MOCS
     hasproperties.h
     mainwindow.h
     mapscene.h
+    editorwidgets/pointeditor.h
     propertyitemmodel.h
     sceneitems/shapeitem.h
 )
