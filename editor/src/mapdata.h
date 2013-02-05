@@ -20,11 +20,9 @@ struct PolygonShape;
 struct CircleShape;
 struct Joint;
 
-enum BodyType { kStatic, kDynamic };
 enum ShapeType { kPolygon, kCircle };
 enum JointType { kDistance, kGear, kLine, kMouse, kPrismatic, kPulley, kRevolute };
 
-Q_DECLARE_METATYPE(BodyType);
 Q_DECLARE_METATYPE(ShapeType);
 Q_DECLARE_METATYPE(JointType);
 
@@ -48,6 +46,12 @@ struct GameMap : public Entity {
 //
 // Physical body
 struct Body : public Entity {
+    Q_OBJECT
+    Q_ENUMS(BodyType)
+
+public:
+    enum BodyType { kStatic, kDynamic };
+
     PROPERTY(Body, BodyType, type);
     PROPERTY(Body, QPointF, position);
     PROPERTY(Body, qreal, rotation);
@@ -61,6 +65,8 @@ struct Body : public Entity {
     PROPERTY(Body, bool, allowSleep);
     PROPERTY(Body, bool, active);
 };
+
+Q_DECLARE_METATYPE(Body::BodyType);
 
 //
 // Fixture between a body and a shape

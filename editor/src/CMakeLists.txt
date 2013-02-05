@@ -18,6 +18,7 @@ set(PGEDITOR_SRCS
 set (PGEDITOR_MOCS
     hasproperties.h
     mainwindow.h
+    mapdata.h
     mapscene.h
     editorwidgets/pointeditor.h
     propertyitemmodel.h
