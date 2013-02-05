@@ -7,6 +7,7 @@
 #include "mapdata.h"
 #include "mapscene.h"
 #include "propertyitemmodel.h"
+#include "editorwidgets/pointeditor.h"
 #include "sceneitems/shapeitem.h"
 #include <QtGui>
 
@@ -35,9 +36,17 @@ MainWindow::MainWindow()
     view_->translate(20, 11.5);
     view_->setMouseTracking(true);
 
-    propertyItemModel_ = new PropertyItemModel();
+    propertyItemModel_ = new PropertyItemModel(undoStack_);
     propertyBrowser_->setModel(propertyItemModel_);
     propertyBrowser_->horizontalHeader()->setStretchLastSection(true);
+
+    // set up non-standard property editor widgets
+    QItemEditorFactory *factory = new QItemEditorFactory;
+    factory->registerEditor(QVariant::PointF, new QItemEditorCreator<PointEditor>("point"));
+
+    QItemDelegate *delegate = new QItemDelegate;
+    delegate->setItemEditorFactory(factory);
+    propertyBrowser_->setItemDelegate(delegate);
 
     toolButtonGroup_ = new QButtonGroup(this);
     QAbstractButton *selectButton = createToolButton("Select");
