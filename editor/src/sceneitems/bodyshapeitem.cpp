@@ -11,7 +11,7 @@
 //
 BodyShapeItem::BodyShapeItem(QSharedPointer<Body> shape, QGraphicsItem *parent, QGraphicsScene *scene) :
     ShapeItem(shape),
-    QAbstractGraphicsShapeItem(parent, scene)
+    QGraphicsItem(parent, scene)
 {
     setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -41,7 +41,7 @@ void BodyShapeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 //
 void BodyShapeItem::sync()
 {
-    QSharedPointer<Body> body = qSharedPointerCast<Body>(shape_);
+    QSharedPointer<Body> body = qSharedPointerCast<Body>(underlyingShape());
     setPos(body->position);
 }
 
@@ -49,7 +49,7 @@ void BodyShapeItem::sync()
 // Commit changes to this Shape item to the underlying data object
 void BodyShapeItem::commit()
 {
-    QSharedPointer<Body> body = qSharedPointerCast<Body>(shape_);
+    QSharedPointer<Body> body = qSharedPointerCast<Body>(underlyingShape());
     body->beginUpdate();
     body->position = pos();
     body->endUpdate();
@@ -62,15 +62,17 @@ QVariant BodyShapeItem::itemChange(GraphicsItemChange change, const QVariant& va
     if (change == ItemPositionChange && mapScene()) {
         QPointF newPos = mapScene()->snapPoint(value.toPointF());
         return newPos;
+    } else if (change == ItemPositionHasChanged) {
+        syncConnections();
     }
     return QGraphicsItem::itemChange(change, value);
 }
 
 //
 //
-QAbstractGraphicsShapeItem *BodyShapeItem::innerShape() const 
+QGraphicsItem *BodyShapeItem::innerShape() const 
 {
-    return (QAbstractGraphicsShapeItem *)this;
+    return (QGraphicsItem *)this;
 }
 
 //

@@ -10,6 +10,6 @@
 //
 //
 ShapeItem::ShapeItem(QSharedPointer<Shape> shape) :
-    shape_(shape)
+    SceneItem(shape)
 {
 }

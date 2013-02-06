@@ -44,7 +44,7 @@ void PolygonShapeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 //
 void PolygonShapeItem::sync()
 {
-    QSharedPointer<PolygonShape> poly = qSharedPointerCast<PolygonShape>(shape_);
+    QSharedPointer<PolygonShape> poly = qSharedPointerCast<PolygonShape>(underlyingShape());
     setPolygon(poly->polygon);
     setPos(poly->position);
 }
@@ -53,7 +53,7 @@ void PolygonShapeItem::sync()
 // Commit changes to this Shape item to the underlying data object
 void PolygonShapeItem::commit()
 {
-    QSharedPointer<PolygonShape> poly = qSharedPointerCast<PolygonShape>(shape_);
+    QSharedPointer<PolygonShape> poly = qSharedPointerCast<PolygonShape>(underlyingShape());
     poly->beginUpdate();
     poly->polygon = polygon();
     poly->position = pos();
@@ -67,6 +67,8 @@ QVariant PolygonShapeItem::itemChange(GraphicsItemChange change, const QVariant&
     if (change == ItemPositionChange && mapScene()) {
         QPointF newPos = mapScene()->snapPoint(value.toPointF());
         return newPos;
+    } else if (change == ItemPositionHasChanged) {
+        syncConnections();
     }
     return QGraphicsItem::itemChange(change, value);
 }

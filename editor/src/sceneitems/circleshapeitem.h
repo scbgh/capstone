@@ -23,7 +23,7 @@ public:
     virtual void sync();
     virtual void commit();
     virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
-    virtual QAbstractGraphicsShapeItem *innerShape() const { return (QAbstractGraphicsShapeItem *)this; }
+    virtual QGraphicsItem *innerShape() const { return (QGraphicsItem *)this; }
 
     virtual int type() const { return kCircleShapeItem; }
 private:

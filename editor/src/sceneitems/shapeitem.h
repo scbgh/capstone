@@ -19,7 +19,7 @@ class ShapeItem : public QObject, public SceneItem {
 public:
     explicit ShapeItem(QSharedPointer<Shape> shape);
 
-    QSharedPointer<Shape> underlyingShape() const { return shape_; }
+    QSharedPointer<Shape> underlyingShape() const { return qSharedPointerCast<Shape>(entity_); }
 
     QPointF preMovePoint() const { return preMovePoint_; }
     void setPreMovePoint(const QPointF& preMovePoint) { preMovePoint_ = preMovePoint; }
@@ -29,7 +29,6 @@ public slots:
 protected:
     MapScene *mapScene() { return (MapScene *)innerShape()->scene(); }
 
-    QSharedPointer<Shape> shape_;
     QPointF preMovePoint_;
 };
 

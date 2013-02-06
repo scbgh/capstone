@@ -14,6 +14,7 @@ set(PGEDITOR_SRCS
     sceneitems/circleshapeitem.cpp
     sceneitems/connectitem.cpp
     sceneitems/polygonshapeitem.cpp
+    sceneitems/sceneitem.cpp
     sceneitems/shapeitem.cpp
 )
 

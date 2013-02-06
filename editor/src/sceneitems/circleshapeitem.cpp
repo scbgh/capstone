@@ -45,7 +45,7 @@ void CircleShapeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 //
 void CircleShapeItem::sync()
 {
-    QSharedPointer<CircleShape> circle = qSharedPointerCast<CircleShape>(shape_);
+    QSharedPointer<CircleShape> circle = qSharedPointerCast<CircleShape>(underlyingShape());
     setRect(-circle->radius, -circle->radius, 2*circle->radius, 2*circle->radius);
     setPos(circle->position);
 }
@@ -54,7 +54,7 @@ void CircleShapeItem::sync()
 // Commit changes to this Shape item to the underlying data object
 void CircleShapeItem::commit()
 {
-    QSharedPointer<CircleShape> circle = qSharedPointerCast<CircleShape>(shape_);
+    QSharedPointer<CircleShape> circle = qSharedPointerCast<CircleShape>(underlyingShape());
     circle->beginUpdate();
     circle->radius = rect().width() / 2;
     circle->position = pos();
@@ -68,6 +68,8 @@ QVariant CircleShapeItem::itemChange(GraphicsItemChange change, const QVariant& 
     if (change == ItemPositionChange && mapScene()) {
         QPointF newPos = mapScene()->snapPoint(value.toPointF());
         return newPos;
+    } else if (change == ItemPositionHasChanged) {
+        syncConnections();
     }
     return QGraphicsItem::itemChange(change, value);
 }
