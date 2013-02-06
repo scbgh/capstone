@@ -257,8 +257,10 @@ void MapScene::setMode(Mode mode)
     mode_ = mode;
     if (mode == kSelectMode) {
         view_->setDragMode(QGraphicsView::RubberBandDrag);
+        view_->setCursor(Qt::ArrowCursor);
     } else {
         view_->setDragMode(QGraphicsView::NoDrag);
+        view_->setCursor(Qt::CrossCursor);
     }
 }
 
