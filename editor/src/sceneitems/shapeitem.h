@@ -6,19 +6,14 @@
 #ifndef _SHAPEITEM_H_
 #define _SHAPEITEM_H_
 
+#include "sceneitem.h"
 #include <QtGui>
 
 class MapScene;
-class QAbstractGraphicsShapeItem;
+class ConnectItem;
 struct Shape;
 
-enum ShapeItemTypes {
-    kPolygonShapeItem,
-    kCircleShapeItem,
-    kBodyShapeItem
-};
-
-class ShapeItem : public QObject {
+class ShapeItem : public QObject, public SceneItem {
     Q_OBJECT
 
 public:
@@ -28,11 +23,6 @@ public:
 
     QPointF preMovePoint() const { return preMovePoint_; }
     void setPreMovePoint(const QPointF& preMovePoint) { preMovePoint_ = preMovePoint; }
-
-    virtual int type() const = 0;
-
-    virtual QAbstractGraphicsShapeItem *innerShape() const = 0;
-
 public slots:
     virtual void sync() = 0;
     virtual void commit() = 0;
