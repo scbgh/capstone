@@ -15,8 +15,11 @@ struct Joint;
 struct GameMap;
 class QGraphicsView;
 class QUndoStack;
+class ShapeItem;
 class PolygonShapeItem;
 class CircleShapeItem;
+class BodyShapeItem;
+class ConnectItem;
 
 class MapScene : public QGraphicsScene {
     Q_OBJECT
@@ -77,6 +80,7 @@ private:
 
     QColor shapeColor_;
     QColor bodyColor_;
+    QColor fixtureColor_;
 
     // Polygon mode
     QPolygonF curPoly_;
@@ -86,6 +90,12 @@ private:
     QPointF circleOrigin_;
     CircleShapeItem *circleItem_;
 
+    // Fixture mode
+    QPointF endPoint_;
+    BodyShapeItem *firstShape_;
+    ShapeItem *secondShape_;
+    ConnectItem *fixtureConnection_;
+    QSharedPointer<Fixture> fixture_;
 };
 
 #endif

@@ -7,10 +7,11 @@
 #include "mapscene.h"
 #include "sceneitems/bodyshapeitem.h"
 #include "sceneitems/circleshapeitem.h"
+#include "sceneitems/connectitem.h"
 #include "sceneitems/polygonshapeitem.h"
+#include "sceneitems/sceneitem.h"
 #include <cmath>
 #include <QtAlgorithms>
-#include <stdio.h>
 #include <QtGui>
 
 //
@@ -24,8 +25,11 @@ MapScene::MapScene(QGraphicsView *view, QUndoStack *undoStack, QObject *parent) 
     drawing_(false),
     mode_(kSelectMode),
     undoStack_(undoStack),
+    firstShape_(NULL),
+    secondShape_(NULL),
     shapeColor_(QColor(255, 128, 128)),
-    bodyColor_(QColor(128, 128, 255))
+    bodyColor_(QColor(128, 128, 255)),
+    fixtureColor_(QColor(255, 255, 128))
 {
     addRect(0, 0, 1, 1, QPen(Qt::red));
 }
@@ -90,6 +94,19 @@ void MapScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
             QPointF point = snapPoint(QPointF(radius, 0));
             radius = point.x();
             circleItem_->setRect(-radius, -radius, 2*radius, 2*radius);
+        } else if (mode_ == kFixtureMode) {
+            endPoint_ = mouseEvent->scenePos();
+            QGraphicsItem *item = itemAt(endPoint_);
+            if (item && (item->type() == kPolygonShapeItem || item->type() == kCircleShapeItem)) {
+                secondShape_ = dynamic_cast<ShapeItem *>(item);
+                if (!secondShape_->connections().isEmpty()) {
+                    qDebug() << "!";
+                    secondShape_ = NULL;
+                } else {
+                    endPoint_ = secondShape_->innerShape()->pos();
+                }
+            }
+            fixtureConnection_->setLine(QLineF(firstShape_->pos(), endPoint_));
         }
     } else {
         QGraphicsScene::mouseMoveEvent(mouseEvent);
@@ -138,6 +155,20 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             CreateShapeCommand *cmd = new CreateShapeCommand(this, bodyItem->underlyingShape());
             cmd->setText("Create Body");
             undoStack_->push(cmd);
+        } else if (mode_ == kFixtureMode && mouseEvent->button() == Qt::LeftButton) {
+            QGraphicsItem *item = itemAt(mouseEvent->scenePos());
+            if (item && item->type() == kBodyShapeItem) {
+                drawing_ = true;
+                fixture_ = QSharedPointer<Fixture>(new Fixture);
+                drawing_ = true;
+                firstShape_ = dynamic_cast<BodyShapeItem *>(item);
+                tempItem_ = fixtureConnection_ = new ConnectItem(fixture_, firstShape_, NULL);
+                fixtureConnection_->setPen(QColor(255, 0, 0));
+                fixtureConnection_->setLine(QLineF(firstShape_->scenePos(), mouseEvent->scenePos()));
+                fixture_->connectItem = fixtureConnection_;
+                connect(fixture_.data(), SIGNAL(invalidated()), fixture_->connectItem, SLOT(sync()));
+                addItem(fixtureConnection_);
+            }            
         } else if (mode_ == kSelectMode && mouseEvent->button() == Qt::LeftButton) {
             QGraphicsScene::mousePressEvent(mouseEvent);
 
@@ -181,6 +212,20 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             circleItem_->sync();
             undoStack_->push(new CreateShapeCommand(this, circleItem_->underlyingShape()));
             tempItem_ = circleItem_ = NULL;
+        } else if (mode_ == kFixtureMode) {
+            if (secondShape_) {
+                drawing_ = false;
+                fixtureConnection_->setShape1(firstShape_);
+                fixtureConnection_->setShape2(secondShape_);
+                fixture_->body = qSharedPointerCast<Body>(firstShape_->entity());
+                fixture_->shape = qSharedPointerCast<Shape>(secondShape_->entity());
+                fixtureConnection_->setConnectionType(kFixtureConnection);
+                fixtureConnection_->setPen(fixtureColor_);
+                fixtureConnection_->sync();
+                undoStack_->push(new CreateFixtureCommand(this, fixture_));
+                tempItem_ = fixtureConnection_ = NULL;
+                fixture_.clear();
+            }
         }
     }
 
@@ -230,13 +275,29 @@ void MapScene::keyPressEvent(QKeyEvent *keyEvent)
         }
     } else if (keyEvent->key() == Qt::Key_Delete || keyEvent->key() == Qt::Key_Backspace) {
         QUndoCommand *command = new QUndoCommand();
-        command->setText("Delete Shapes");
+        command->setText("Delete");
+        QList<QGraphicsItem *> deletedConnections;
         for (auto item : selectedItems()) {
+            SceneItem *sceneItem = dynamic_cast<SceneItem *>(item);
             if (itemIsShape(item)) {
-                ShapeItem *shapeItem = dynamic_cast<ShapeItem *>(item);
-                new DeleteShapeCommand(this, shapeItem->underlyingShape(), command);
+                new DeleteShapeCommand(this, dynamic_cast<ShapeItem *>(sceneItem)->underlyingShape(), command);
+                for (auto conn : sceneItem->connections()) {
+                    if (!deletedConnections.contains(conn)) {
+                        deletedConnections << conn;
+                    }
+                }
+            } else if (item->type() == kConnectItem && !deletedConnections.contains(item)) {
+                ConnectItem *conn = dynamic_cast<ConnectItem *>(sceneItem);
+                if (conn->connectionType() == kFixtureConnection) {
+                    new DeleteFixtureCommand(this, qSharedPointerCast<Fixture>(conn->entity()), command);
+                }
             }
         }
+        for (auto item : deletedConnections) {
+            ConnectItem *conn = dynamic_cast<ConnectItem *>(item);
+            new DeleteFixtureCommand(this, qSharedPointerCast<Fixture>(conn->entity()), command);
+        }
+
         undoStack_->push(command);
     }
 }

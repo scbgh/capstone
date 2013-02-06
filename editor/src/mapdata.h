@@ -11,6 +11,7 @@
 #define _MAPDATA_H_
 
 class ShapeItem;
+class ConnectItem;
 struct Entity;
 struct GameMap;
 struct Body;
@@ -67,6 +68,8 @@ struct Fixture : public Entity {
     PROPERTY(Fixture, qreal, restitution);
     PROPERTY(Fixture, qreal, density);
     PROPERTY(Fixture, bool, isSensor);
+
+    ConnectItem *connectItem;
 };
 
 //
