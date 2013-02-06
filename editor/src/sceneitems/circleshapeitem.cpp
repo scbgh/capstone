@@ -71,10 +71,3 @@ QVariant CircleShapeItem::itemChange(GraphicsItemChange change, const QVariant& 
     }
     return QGraphicsItem::itemChange(change, value);
 }
-
-//
-//
-QAbstractGraphicsShapeItem *CircleShapeItem::innerShape() const 
-{
-    return (QAbstractGraphicsShapeItem *)this;
-}

@@ -70,10 +70,3 @@ QVariant PolygonShapeItem::itemChange(GraphicsItemChange change, const QVariant&
     }
     return QGraphicsItem::itemChange(change, value);
 }
-
-//
-//
-QAbstractGraphicsShapeItem *PolygonShapeItem::innerShape() const 
-{
-    return (QAbstractGraphicsShapeItem *)this;
-}

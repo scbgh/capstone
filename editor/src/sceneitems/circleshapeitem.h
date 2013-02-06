@@ -8,6 +8,7 @@
 
 #include <QGraphicsEllipseItem>
 #include "shapeitem.h"
+#include "sceneitem.h"
 
 struct CircleShape;
 
@@ -22,7 +23,7 @@ public:
     virtual void sync();
     virtual void commit();
     virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
-    virtual QAbstractGraphicsShapeItem *innerShape() const;
+    virtual QAbstractGraphicsShapeItem *innerShape() const { return (QAbstractGraphicsShapeItem *)this; }
 
     virtual int type() const { return kCircleShapeItem; }
 private:
