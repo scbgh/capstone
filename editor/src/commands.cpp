@@ -39,6 +39,36 @@ void CreateShapeCommand::redo()
 
 //
 //
+CreateFixtureCommand::CreateFixtureCommand(MapScene *scene, QSharedPointer<Fixture> fixture, QUndoCommand *parent) :
+    QUndoCommand(parent),
+    scene_(scene),
+    fixture_(fixture)
+{
+    setText("Create Fixture");
+}
+
+//
+//
+void CreateFixtureCommand::undo()
+{
+    scene_->map()->fixtures.pop_back();
+    scene_->removeItem(fixture_->connectItem->innerShape());
+    fixture_->connectItem->sync();
+}
+
+//
+//
+void CreateFixtureCommand::redo()
+{
+    scene_->map()->fixtures.append(fixture_);
+    if (!scene_->items().contains(fixture_->connectItem->innerShape())) {
+        scene_->addItem(fixture_->connectItem->innerShape());
+    }
+    fixture_->connectItem->sync();
+}
+
+//
+//
 MoveShapeCommand::MoveShapeCommand(MapScene *scene, QSharedPointer<Shape> shape, QPointF oldPos, QUndoCommand *parent) :
     QUndoCommand(parent),
     scene_(scene),
@@ -98,6 +128,43 @@ void DeleteShapeCommand::redo()
     scene_->removeItem(shape_->shapeItem->innerShape());
     shape_->shapeItem->sync();
 }
+
+//
+//
+DeleteFixtureCommand::DeleteFixtureCommand(MapScene *scene, QSharedPointer<Fixture> fixture, QUndoCommand *parent) :
+    QUndoCommand(parent),
+    scene_(scene),
+    shape1_(fixture_->connectItem->shape1()),
+    shape2_(fixture_->connectItem->shape2()),
+    fixture_(fixture)
+{
+    setText("Delete Fixture");
+}
+
+//
+//
+void DeleteFixtureCommand::undo()
+{
+    scene_->map()->fixtures.append(fixture_);
+    if (!scene_->items().contains(fixture_->connectItem->innerShape())) {
+        scene_->addItem(fixture_->connectItem->innerShape());
+        fixture_->connectItem->setShape1(shape1_);
+        fixture_->connectItem->setShape2(shape2_);
+    }
+    fixture_->connectItem->sync();
+}
+
+//
+//
+void DeleteFixtureCommand::redo()
+{
+    scene_->map()->fixtures.remove(scene_->map()->fixtures.indexOf(fixture_));
+    fixture_->connectItem->setShape1(NULL);
+    fixture_->connectItem->setShape2(NULL);
+    scene_->removeItem(fixture_->connectItem->innerShape());
+    fixture_->connectItem->sync();
+}
+
 
 //
 //

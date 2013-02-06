@@ -7,6 +7,7 @@
 #define _ACTIONS_H_
 
 #include "sceneitems/shapeitem.h"
+#include "sceneitems/connectitem.h"
 #include <QUndoCommand>
 
 class HasProperties;
@@ -63,6 +64,22 @@ private:
 
 //
 //
+class DeleteFixtureCommand : public QUndoCommand
+{
+public:
+    DeleteFixtureCommand(MapScene *scene, QSharedPointer<Fixture> fixture, QUndoCommand *parent = 0);
+    virtual void undo();
+    virtual void redo();
+
+private:
+    MapScene *scene_;
+    QSharedPointer<Fixture> fixture_;
+    SceneItem *shape1_;
+    SceneItem *shape2_;
+};
+
+//
+//
 class ChangePolygonGeometryCommand : public QUndoCommand
 {
 public:
@@ -94,6 +111,20 @@ private:
     QVariant value_;
     QVariant oldValue_;
 private:
+};
+
+//
+//
+class CreateFixtureCommand : public QUndoCommand
+{
+public:
+    CreateFixtureCommand(MapScene *scene, QSharedPointer<Fixture> fixture, QUndoCommand *parent = 0);
+    virtual void undo();
+    virtual void redo();
+
+private:
+    MapScene *scene_;
+    QSharedPointer<Fixture> fixture_;
 };
 
 #endif
