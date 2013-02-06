@@ -173,7 +173,6 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             QGraphicsScene::mousePressEvent(mouseEvent);
 
             if (itemAt(mouseEvent->scenePos())) {
-                qDebug() << "Move started";
                 moving_ = true;
                 for (auto item : selectedItems()) {
                     if (itemIsShape(item)) {
@@ -238,7 +237,6 @@ void MapScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
     if (mode_ == kSelectMode) {
         if (moving_) {
-            qDebug() << "Move ended";
             QUndoCommand *command = new QUndoCommand();
             command->setText("Move Shapes");
             for (auto item : selectedItems()) {
