@@ -9,11 +9,14 @@
 QString HasProperties::getPropertyDisplay(const QString& name) const
 {
     QVariant value = getProperty(name);
-    if (value.canConvert<QString>()) {
+    if (value.canConvert<QString>() && value.type() != QVariant::Bool) {
         return value.value<QString>();
     }
 
     switch (value.type()) {
+        case QVariant::Bool:
+            return value.value<bool>() ? "True" : "False";
+            break;
         case QVariant::Point:
         case QVariant::PointF:
             if (value.type() == QVariant::Point || value.type() == QVariant::PointF) {
