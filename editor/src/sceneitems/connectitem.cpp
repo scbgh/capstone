@@ -8,12 +8,16 @@
 
 //
 //
-ConnectItem::ConnectItem(SceneItem *shape1, SceneItem *shape2,
+ConnectItem::ConnectItem(QSharedPointer<Entity> entity, SceneItem *shape1, SceneItem *shape2,
         QGraphicsItem *parent, QGraphicsScene *scene) :
+    SceneItem(entity),
     QGraphicsLineItem(parent, scene),
+    connectionType_(kFixtureConnection),
     shape1_(shape1),
     shape2_(shape2)
 {
+    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
 
 //
@@ -23,6 +27,7 @@ void ConnectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     painter->setPen(pen());
     if (isSelected()) {
         painter->setPen(QColor(0, 255, 0));
+        painter->drawPath(shape());
     }
     painter->drawLine(line());
 }
@@ -71,4 +76,23 @@ void ConnectItem::sync()
         l.setP2(shape2_->innerShape()->pos());
     }
     setLine(l);
+}
+
+//
+//
+QPainterPath ConnectItem::shape() const
+{
+    // Construct a slightly thicker shape than a single line
+    QLineF normal = line().normalVector().unitVector();
+    QLineF dir = line().unitVector();
+    qreal threshold = scene()->views().takeFirst()->mapToScene(QPoint(16, 0)).x();
+    QPointF perp = QPointF(normal.dx(), normal.dy()) * threshold;
+    QPointF par = QPointF(dir.dx(), dir.dy()) * threshold;
+    QPainterPath path;
+    path.moveTo(line().p1() - perp / 2 - par / 2);
+    path.lineTo(line().p1() + perp / 2 - par / 2);
+    path.lineTo(line().p2() + perp / 2 + par / 2);
+    path.lineTo(line().p2() - perp / 2 + par / 2);
+    path.closeSubpath();
+    return path;
 }

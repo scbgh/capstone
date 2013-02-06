@@ -9,12 +9,14 @@
 #include <QGraphicsLineItem>
 #include "sceneitem.h"
 
+enum ConnectionType { kFixtureConnection, kJointConnection };
+
 class ConnectItem : public QObject, public QGraphicsLineItem, public SceneItem {
     Q_OBJECT
 
 public:
-    ConnectItem(SceneItem *shape1, SceneItem *shape2,
-        QGraphicsItem *parent = 0, QGraphicsScene *scene = 0);  
+    ConnectItem(QSharedPointer<Entity> entity, SceneItem *shape1, SceneItem *shape2,
+        QGraphicsItem *parent = 0, QGraphicsScene *scene = 0);
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
     virtual int type() const { return kConnectItem; }
@@ -25,19 +27,26 @@ public:
     SceneItem *shape2() const { return shape2_; }
     void setShape2(SceneItem *shape2);
 
+    ConnectionType connectionType() const { return connectionType_; }
+    void setConnectionType(ConnectionType connectionType) { connectionType_ = connectionType; }
+
+    virtual QPainterPath shape() const;
+
+    virtual QGraphicsItem *innerShape() const { return (QGraphicsItem *)this; };
+
+public slots:
     void sync();
-
-    virtual QAbstractGraphicsShapeItem *innerShape() { return (QAbstractGraphicsShapeItem *)this; };
-
-protected:
-    virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
 
 signals:
     void tryingToDetach(bool isShape1);
 
+protected:
+    virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
+
 private:
     SceneItem *shape1_;
-    SceneItem *shape2_;    
+    SceneItem *shape2_; 
+    ConnectionType connectionType_;   
 };
 
 #endif
