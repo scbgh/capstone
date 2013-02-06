@@ -32,7 +32,7 @@ MainWindow::MainWindow()
     view_->setScene(scene_);
 
     view_->setTransformationAnchor(QGraphicsView::NoAnchor);
-    view_->scale(32, 32); // One unit is 32x32 pixels at default zoom
+    view_->scale(32, -32); // One unit is 32x32 pixels at default zoom
     view_->translate(20, 11.5);
     view_->setMouseTracking(true);
 
