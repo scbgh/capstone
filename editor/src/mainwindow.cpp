@@ -54,6 +54,7 @@ MainWindow::MainWindow()
     toolButtonGroup_->addButton(createToolButton("Draw Polygon"), kPolygonButton);
     toolButtonGroup_->addButton(createToolButton("Draw Circle"), kCircleButton);
     toolButtonGroup_->addButton(createToolButton("Place Body"), kBodyButton);
+    toolButtonGroup_->addButton(createToolButton("Make Fixture"), kFixtureButton);
     connect(toolButtonGroup_, SIGNAL(buttonClicked(int)), this, SLOT(toolButtonClicked(int)));
     selectButton->setChecked(true);
 
@@ -231,6 +232,9 @@ void MainWindow::toolButtonClicked(int id)
         case kBodyButton:
             scene_->setMode(MapScene::kBodyMode);
             break;
+        case kFixtureButton:
+            scene_->setMode(MapScene::kFixtureMode);
+            break;
     }
 }
 
@@ -251,7 +255,7 @@ void MainWindow::selectionChanged()
     if (scene_->selectedItems().isEmpty() || scene_->selectedItems().size() > 1) {
         propertyItemModel_->setSource(QSharedPointer<HasProperties>());
     } else {
-        ShapeItem *shapeItem = dynamic_cast<ShapeItem *>(scene_->selectedItems().takeFirst());
-        propertyItemModel_->setSource(shapeItem->underlyingShape());
+        SceneItem *sceneItem = dynamic_cast<SceneItem *>(scene_->selectedItems().takeFirst());
+        propertyItemModel_->setSource(sceneItem->entity());
     }
 }
