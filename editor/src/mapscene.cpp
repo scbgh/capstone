@@ -133,7 +133,11 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             bodyItem->setPen(bodyColor_);
             bodyItem->setBrush(QColor(bodyColor_.red(), bodyColor_.green(), bodyColor_.blue(), 128));
             bodyItem->setPos(origin);
-            addItem(bodyItem);
+            bodyItem->commit();
+            bodyItem->sync();
+            CreateShapeCommand *cmd = new CreateShapeCommand(this, bodyItem->underlyingShape());
+            cmd->setText("Create Body");
+            undoStack_->push(cmd);
         } else if (mode_ == kSelectMode && mouseEvent->button() == Qt::LeftButton) {
             QGraphicsScene::mousePressEvent(mouseEvent);
 
@@ -268,7 +272,6 @@ void MapScene::sync()
     }
 
     for (auto& shape : map_->shapes) { addShape(shape); }
-    for (auto& body : map_->bodies) { addBody(body); }
     for (auto& fixture : map_->fixtures) { addFixture(fixture); }
     for (auto& joint : map_->joints) { addJoint(joint); }
 }
@@ -329,12 +332,6 @@ void MapScene::addShape(QSharedPointer<Shape> shape)
     item->sync();
     addItem(item->innerShape());
     connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
-}
-
-//
-//
-void MapScene::addBody(QSharedPointer<Body> body)
-{
 }
 
 //

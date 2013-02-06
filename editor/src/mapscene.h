@@ -59,7 +59,6 @@ protected:
 
 private:
     void addShape(QSharedPointer<Shape> shape);
-    void addBody(QSharedPointer<Body> body);
     void addFixture(QSharedPointer<Fixture> fixture);
     void addJoint(QSharedPointer<Joint> joint);
 
