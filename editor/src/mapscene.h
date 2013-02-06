@@ -61,6 +61,14 @@ protected:
     virtual void keyPressEvent(QKeyEvent *keyEvent);
 
 private:
+    void beginPolygon(const QPointF& point);
+    void beginCircle(const QPointF& point);
+    void beginFixture(const QPointF& point, QGraphicsItem *item);
+    void placeBody(const QPointF& point);
+    void endPolygon(const QPointF& point);
+    void endCircle(const QPointF& point);
+    void endFixture(const QPointF& point);
+
     void addShape(QSharedPointer<Shape> shape);
     void addFixture(QSharedPointer<Fixture> fixture);
     void addJoint(QSharedPointer<Joint> joint);

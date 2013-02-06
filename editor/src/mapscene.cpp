@@ -82,6 +82,116 @@ void MapScene::drawForeground(QPainter *painter, const QRectF& rect)
 
 //
 //
+void MapScene::beginPolygon(const QPointF& point)
+{
+    curPoly_.clear();
+    curPoly_ << snapPoint(point);
+    QSharedPointer<PolygonShape> shape = QSharedPointer<PolygonShape>(new PolygonShape);
+    tempItem_ = polyItem_ = new PolygonShapeItem(shape);
+    shape->shapeItem = polyItem_;
+    connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
+    polyItem_->setPen(shapeColor_);
+    polyItem_->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
+    polyItem_->setPolygon(curPoly_);
+    addItem(polyItem_);
+}
+
+//
+//
+void MapScene::beginCircle(const QPointF& point)
+{
+    circleOrigin_ = snapPoint(point);
+    QSharedPointer<CircleShape> shape = QSharedPointer<CircleShape>(new CircleShape);
+    tempItem_ = circleItem_ = new CircleShapeItem(shape);
+    shape->shapeItem = circleItem_;
+    connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
+    circleItem_->setPen(shapeColor_);
+    circleItem_->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
+    circleItem_->setPos(circleOrigin_);
+    addItem(circleItem_);
+}
+
+//
+//
+void MapScene::beginFixture(const QPointF& point, QGraphicsItem *item)
+{
+    fixture_ = QSharedPointer<Fixture>(new Fixture);
+    firstShape_ = dynamic_cast<BodyShapeItem *>(item);
+    tempItem_ = fixtureConnection_ = new ConnectItem(fixture_, firstShape_, NULL);
+    fixtureConnection_->setPen(QColor(255, 0, 0));
+    fixtureConnection_->setLine(QLineF(firstShape_->scenePos(), point));
+    fixture_->connectItem = fixtureConnection_;
+    connect(fixture_.data(), SIGNAL(invalidated()), fixture_->connectItem, SLOT(sync()));
+    addItem(fixtureConnection_);
+}
+
+//
+//
+void MapScene::placeBody(const QPointF& point)
+{
+    QPointF origin = snapPoint(point);
+    QSharedPointer<Body> body = QSharedPointer<Body>(new Body);
+    BodyShapeItem *bodyItem = new BodyShapeItem(body);
+    body->shapeItem = bodyItem;
+    connect(body.data(), SIGNAL(invalidated()), body->shapeItem, SLOT(sync()));
+    bodyItem->setPen(bodyColor_);
+    bodyItem->setBrush(QColor(bodyColor_.red(), bodyColor_.green(), bodyColor_.blue(), 128));
+    bodyItem->setPos(origin);
+    bodyItem->commit();
+    bodyItem->sync();
+    CreateShapeCommand *cmd = new CreateShapeCommand(this, bodyItem->underlyingShape());
+    cmd->setText("Create Body");
+    undoStack_->push(cmd);
+}
+
+//
+//
+void MapScene::endPolygon(const QPointF& point)
+{
+    polyItem_->setPolygon(curPoly_);
+    QPolygonF poly = curPoly_;
+    QRectF rect = polyItem_->sceneBoundingRect();
+    QPointF center = snapPoint(rect.center());
+    poly.translate(-center.x(), -center.y()); 
+    polyItem_->setPolygon(poly);
+    polyItem_->setPos(center);
+    polyItem_->setComplete(true);
+    polyItem_->commit();
+    polyItem_->sync();
+    undoStack_->push(new CreateShapeCommand(this, polyItem_->underlyingShape()));
+    tempItem_ = polyItem_ = NULL;
+}
+
+//
+//
+void MapScene::endCircle(const QPointF& point)
+{
+    circleItem_->setComplete(true);
+    circleItem_->commit();
+    circleItem_->sync();
+    undoStack_->push(new CreateShapeCommand(this, circleItem_->underlyingShape()));
+    tempItem_ = circleItem_ = NULL;
+}
+//
+//
+
+void MapScene::endFixture(const QPointF& point)
+{
+    fixtureConnection_->setShape1(firstShape_);
+    fixtureConnection_->setShape2(secondShape_);
+    fixture_->body = qSharedPointerCast<Body>(firstShape_->entity());
+    fixture_->shape = qSharedPointerCast<Shape>(secondShape_->entity());
+    fixtureConnection_->setConnectionType(kFixtureConnection);
+    fixtureConnection_->setPen(fixtureColor_);
+    fixtureConnection_->sync();
+    undoStack_->push(new CreateFixtureCommand(this, fixture_));
+    tempItem_ = fixtureConnection_ = NULL;
+    fixture_.clear();
+}
+
+
+//
+//
 void MapScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
     if (drawing_) {
@@ -120,58 +230,22 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
     if (!drawing_) {
         if (mode_ == kPolygonMode && mouseEvent->button() == Qt::LeftButton) {
             drawing_ = true;
-            curPoly_.clear();
-            curPoly_ << snapPoint(mouseEvent->scenePos());
-            QSharedPointer<PolygonShape> shape = QSharedPointer<PolygonShape>(new PolygonShape);
-            tempItem_ = polyItem_ = new PolygonShapeItem(shape);
-            shape->shapeItem = polyItem_;
-            connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
-            polyItem_->setPen(shapeColor_);
-            polyItem_->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
-            polyItem_->setPolygon(curPoly_);
-            addItem(polyItem_);
+            beginPolygon(mouseEvent->scenePos());
         } else if (mode_ == kCircleMode && mouseEvent->button() == Qt::LeftButton) {
             drawing_ = true;
-            circleOrigin_ = snapPoint(mouseEvent->scenePos());
-            QSharedPointer<CircleShape> shape = QSharedPointer<CircleShape>(new CircleShape);
-            tempItem_ = circleItem_ = new CircleShapeItem(shape);
-            shape->shapeItem = circleItem_;
-            connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
-            circleItem_->setPen(shapeColor_);
-            circleItem_->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
-            circleItem_->setPos(circleOrigin_);
-            addItem(circleItem_);
+            beginCircle(mouseEvent->scenePos());
         } else if (mode_ == kBodyMode && mouseEvent->button() == Qt::LeftButton) {
-            QPointF origin = snapPoint(mouseEvent->scenePos());
-            QSharedPointer<Body> body = QSharedPointer<Body>(new Body);
-            BodyShapeItem *bodyItem = new BodyShapeItem(body);
-            body->shapeItem = bodyItem;
-            connect(body.data(), SIGNAL(invalidated()), body->shapeItem, SLOT(sync()));
-            bodyItem->setPen(bodyColor_);
-            bodyItem->setBrush(QColor(bodyColor_.red(), bodyColor_.green(), bodyColor_.blue(), 128));
-            bodyItem->setPos(origin);
-            bodyItem->commit();
-            bodyItem->sync();
-            CreateShapeCommand *cmd = new CreateShapeCommand(this, bodyItem->underlyingShape());
-            cmd->setText("Create Body");
-            undoStack_->push(cmd);
+            placeBody(mouseEvent->scenePos());
         } else if (mode_ == kFixtureMode && mouseEvent->button() == Qt::LeftButton) {
             QGraphicsItem *item = itemAt(mouseEvent->scenePos());
             if (item && item->type() == kBodyShapeItem) {
                 drawing_ = true;
-                fixture_ = QSharedPointer<Fixture>(new Fixture);
-                drawing_ = true;
-                firstShape_ = dynamic_cast<BodyShapeItem *>(item);
-                tempItem_ = fixtureConnection_ = new ConnectItem(fixture_, firstShape_, NULL);
-                fixtureConnection_->setPen(QColor(255, 0, 0));
-                fixtureConnection_->setLine(QLineF(firstShape_->scenePos(), mouseEvent->scenePos()));
-                fixture_->connectItem = fixtureConnection_;
-                connect(fixture_.data(), SIGNAL(invalidated()), fixture_->connectItem, SLOT(sync()));
-                addItem(fixtureConnection_);
+                beginFixture(mouseEvent->scenePos(), item);                
             }            
         } else if (mode_ == kSelectMode && mouseEvent->button() == Qt::LeftButton) {
             QGraphicsScene::mousePressEvent(mouseEvent);
 
+            // Begin moving action
             if (itemAt(mouseEvent->scenePos())) {
                 moving_ = true;
                 for (auto item : selectedItems()) {
@@ -191,39 +265,15 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                 polyItem_->setPolygon(curPoly_);
             } else if (mouseEvent->button() == Qt::RightButton) {
                 drawing_ = false;
-                polyItem_->setPolygon(curPoly_);
-                QPolygonF poly = curPoly_;
-                QRectF rect = polyItem_->sceneBoundingRect();
-                QPointF center = snapPoint(rect.center());
-                poly.translate(-center.x(), -center.y()); 
-                polyItem_->setPolygon(poly);
-                polyItem_->setPos(center);
-                polyItem_->setComplete(true);
-                polyItem_->commit();
-                polyItem_->sync();
-                undoStack_->push(new CreateShapeCommand(this, polyItem_->underlyingShape()));
-                tempItem_ = polyItem_ = NULL;
+                endPolygon(mouseEvent->scenePos());
             }
         } else if (mode_ == kCircleMode) {
             drawing_ = false;
-            circleItem_->setComplete(true);
-            circleItem_->commit();
-            circleItem_->sync();
-            undoStack_->push(new CreateShapeCommand(this, circleItem_->underlyingShape()));
-            tempItem_ = circleItem_ = NULL;
+            endCircle(mouseEvent->scenePos());
         } else if (mode_ == kFixtureMode) {
             if (secondShape_) {
                 drawing_ = false;
-                fixtureConnection_->setShape1(firstShape_);
-                fixtureConnection_->setShape2(secondShape_);
-                fixture_->body = qSharedPointerCast<Body>(firstShape_->entity());
-                fixture_->shape = qSharedPointerCast<Shape>(secondShape_->entity());
-                fixtureConnection_->setConnectionType(kFixtureConnection);
-                fixtureConnection_->setPen(fixtureColor_);
-                fixtureConnection_->sync();
-                undoStack_->push(new CreateFixtureCommand(this, fixture_));
-                tempItem_ = fixtureConnection_ = NULL;
-                fixture_.clear();
+                endFixture(mouseEvent->scenePos());
             }
         }
     }
