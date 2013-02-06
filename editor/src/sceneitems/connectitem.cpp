@@ -40,7 +40,9 @@ void ConnectItem::setShape1(SceneItem *shape1)
         shape1_->removeConnection(this);
     }
     shape1_ = shape1;
-    shape1_->addConnection(this);
+    if (shape1_) {
+        shape1_->addConnection(this);
+    }
 }
 
 //
@@ -51,7 +53,9 @@ void ConnectItem::setShape2(SceneItem *shape2)
         shape2_->removeConnection(this);
     }
     shape2_ = shape2;
-    shape2_->addConnection(this);
+    if (shape2_) {
+        shape2_->addConnection(this);
+    }
 }
 
 //
