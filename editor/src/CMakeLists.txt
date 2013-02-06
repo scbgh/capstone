@@ -12,6 +12,7 @@ set(PGEDITOR_SRCS
     editorwidgets/pointeditor.cpp
     sceneitems/bodyshapeitem.cpp
     sceneitems/circleshapeitem.cpp
+    sceneitems/connectitem.cpp
     sceneitems/polygonshapeitem.cpp
     sceneitems/shapeitem.cpp
 )
@@ -24,6 +25,7 @@ set (PGEDITOR_MOCS
     editorwidgets/pointeditor.h
     propertyitemmodel.h
     sceneitems/shapeitem.h
+    sceneitems/connectitem.h
 )
 
 qt4_wrap_cpp(PGEDITOR_MOCS_SRCS ${PGEDITOR_MOCS})
