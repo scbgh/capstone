@@ -14,7 +14,7 @@ CreateShapeCommand::CreateShapeCommand(MapScene *scene, QSharedPointer<Shape> sh
     scene_(scene),
     shape_(shape)
 {
-    setText("Create Polygon");
+    setText("Create Shape");
 }
 
 //
@@ -94,7 +94,7 @@ void DeleteShapeCommand::undo()
 //
 void DeleteShapeCommand::redo()
 {
-    scene_->map()->shapes.pop_back();
+    scene_->map()->shapes.remove(scene_->map()->shapes.indexOf(shape_));
     scene_->removeItem(shape_->shapeItem->innerShape());
     shape_->shapeItem->sync();
 }
