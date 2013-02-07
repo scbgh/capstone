@@ -89,7 +89,7 @@ QPainterPath ConnectItem::shape() const
     // Construct a slightly thicker shape than a single line
     QLineF normal = line().normalVector().unitVector();
     QLineF dir = line().unitVector();
-    qreal threshold = scene()->views().takeFirst()->mapToScene(QPoint(16, 0)).x();
+    qreal threshold = scene()->views().takeFirst()->mapToScene(QRect(0, 0, 16, 16)).boundingRect().width();
     QPointF perp = QPointF(normal.dx(), normal.dy()) * threshold;
     QPointF par = QPointF(dir.dx(), dir.dy()) * threshold;
     QPainterPath path;
