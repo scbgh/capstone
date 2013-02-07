@@ -7,6 +7,7 @@ set(PGEDITOR_SRCS
     hasproperties.cpp
     main.cpp
     mainwindow.cpp
+    mapfile.cpp
     mapscene.cpp
     propertyitemmodel.cpp
     editorwidgets/comboeditor.cpp
