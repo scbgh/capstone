@@ -41,6 +41,7 @@ private slots:
     bool saveMap();
     bool saveMapAs();
     bool openMap();
+    bool quit();
     void selectionChanged();
 
 private:

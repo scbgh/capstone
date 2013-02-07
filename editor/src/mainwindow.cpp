@@ -367,6 +367,17 @@ bool MainWindow::saveMapAs()
 
 //
 //
+bool MainWindow::quit()
+{
+    if (!askSaveIfDirty()) {
+        return false;
+    }
+    close();
+    return true;
+}
+
+//
+//
 void MainWindow::selectionChanged()
 {
     if (scene_->selectedItems().isEmpty() || scene_->selectedItems().size() > 1) {
