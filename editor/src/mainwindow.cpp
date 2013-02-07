@@ -304,7 +304,7 @@ bool MainWindow::askSaveIfDirty()
 void MainWindow::writeMap(const QString& filename)
 {
     QFile file(filename);
-    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text | QIODevice::Truncate)) {
         errMsg_->showMessage(QString("Failed to save file '%1'").arg(filename));
         return;
     }
