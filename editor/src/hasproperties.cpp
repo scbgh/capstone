@@ -2,6 +2,7 @@
 // hasproperties.cpp
 //
 
+#include "mapdata.h"
 #include "hasproperties.h"
 #include "util.h"
 
@@ -13,6 +14,15 @@ QString HasProperties::getPropertyDisplay(const QString& name) const
     if (value.canConvert<QString>() && value.type() != QVariant::Bool) {
         return value.value<QString>();
     }
+
+    #define CHECK_USERTYPE(p, e) \
+        if (value.userType() == variantUserType<p::e>()) { \
+            return enumToString<p, p::e>(value.value<p::e>()); \
+        }
+
+    CHECK_USERTYPE(Body, BodyType);
+
+    #undef CHECK_USERTYPE
 
     switch (value.type()) {
         case QVariant::Bool:
