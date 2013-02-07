@@ -8,4 +8,5 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 endif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../thirdparty)
 add_subdirectory(src)

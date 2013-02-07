@@ -17,6 +17,7 @@ include_directories(${BOX2D_INCLUDE_DIR})
 link_directories(${SDL_LIBRARY_DIR})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../thirdparty)
 add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(util)
