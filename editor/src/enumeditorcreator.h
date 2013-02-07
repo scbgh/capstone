@@ -6,6 +6,7 @@
 #ifndef _ENUMEDITORCREATOR_H_
 #define _ENUMEDITORCREATOR_H_
 
+#include "util.h"
 #include "editorwidgets/comboeditor.h"
 #include <typeinfo>
 #include <QItemEditorCreatorBase>

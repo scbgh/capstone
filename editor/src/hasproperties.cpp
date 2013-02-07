@@ -3,6 +3,7 @@
 //
 
 #include "hasproperties.h"
+#include "util.h"
 
 //
 //
