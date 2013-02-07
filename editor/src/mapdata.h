@@ -103,6 +103,7 @@ struct CircleShape : public Shape {
 //
 // Physical body (subclass of Shape for simplicity)
 struct Body : public Shape {
+private:
     Q_OBJECT
     Q_ENUMS(BodyType)
 
