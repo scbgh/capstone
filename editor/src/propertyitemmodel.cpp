@@ -104,18 +104,7 @@ QVariant PropertyItemModel::headerData(int section, Qt::Orientation orientation,
     }
 
     if (role == Qt::DisplayRole) {
-        if (orientation == Qt::Horizontal) {
-            switch (section) {
-                case 0:
-                    return QVariant("Name");
-                    break;
-                case 1:
-                    return QVariant("Value");
-                    break;
-                default:
-                    return QVariant();
-            }
-        } else if (orientation == Qt::Vertical) {
+        if (orientation == Qt::Vertical) {
             if (section < source_->properties().size()) {
                 return QVariant(source_->properties()[section]);
             } else {
