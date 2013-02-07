@@ -45,8 +45,8 @@ struct GameMap : public Entity {
         height(720./32.)
     { }
 
-    PROPERTY(GameMap, int, width);
-    PROPERTY(GameMap, int, height);
+    PROPERTY(GameMap, qreal, width);
+    PROPERTY(GameMap, qreal, height);
     QVector<QSharedPointer<Shape>> shapes;
     QVector<QSharedPointer<Fixture>> fixtures;
     QVector<QSharedPointer<Joint>> joints;
@@ -111,7 +111,7 @@ public:
     enum BodyType { kStatic, kDynamic };
 
     Body() :
-        bodyType(kStatic),
+        bodyType(kDynamic),
         rotation(0),
         angularVelocity(0),
         linearDamping(0),
