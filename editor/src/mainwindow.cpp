@@ -3,6 +3,7 @@
 //
 
 #include "hasproperties.h"
+#include "enumeditorcreator.h"
 #include "mainwindow.h"
 #include "mapdata.h"
 #include "mapscene.h"
@@ -43,6 +44,7 @@ MainWindow::MainWindow()
     // set up non-standard property editor widgets
     QItemEditorFactory *factory = new QItemEditorFactory;
     factory->registerEditor(QVariant::PointF, new QItemEditorCreator<PointEditor>("point"));
+    factory->registerEditor(QVariant::nameToType("Body::BodyType"), new EnumEditorCreator<Body, Body::BodyType>);
 
     QItemDelegate *delegate = new QItemDelegate;
     delegate->setItemEditorFactory(factory);
