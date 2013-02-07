@@ -6,6 +6,7 @@
 #include "enumeditorcreator.h"
 #include "mainwindow.h"
 #include "mapdata.h"
+#include "mapfile.h"
 #include "mapscene.h"
 #include "propertyitemmodel.h"
 #include "editorwidgets/pointeditor.h"
@@ -18,6 +19,7 @@
 MainWindow::MainWindow()
 {
     undoStack_ = new QUndoStack(this);
+    errMsg_ = new QErrorMessage(this);
 
     createActions();
     createMenus();
@@ -97,10 +99,30 @@ QAbstractButton *MainWindow::createToolButton(const QString& name)
 //
 void MainWindow::createActions()
 {
+    newAct_ = new QAction(loadIcon("new"), tr("&New"), this);
+    newAct_->setShortcuts(QKeySequence::New);
+    newAct_->setStatusTip(tr("Start a new map"));
+    connect(newAct_, SIGNAL(triggered()), this, SLOT(newMap()));
+
+    openAct_ = new QAction(loadIcon("open"), tr("&Open"), this);
+    openAct_->setShortcuts(QKeySequence::Open);
+    openAct_->setStatusTip(tr("Read a map from disk"));
+    connect(openAct_, SIGNAL(triggered()), this, SLOT(openMap()));
+
+    saveAct_ = new QAction(loadIcon("save"), tr("&Save"), this);
+    saveAct_->setShortcuts(QKeySequence::Save);
+    saveAct_->setStatusTip(tr("Save this map"));
+    connect(saveAct_, SIGNAL(triggered()), this, SLOT(saveMap()));
+
+    saveAsAct_ = new QAction(tr("Save &As..."), this);
+    saveAsAct_->setShortcuts(QKeySequence::SaveAs);
+    saveAsAct_->setStatusTip(tr("Save a copy of this map"));
+    connect(saveAsAct_, SIGNAL(triggered()), this, SLOT(saveMapAs()));
+
     quitAct_ = new QAction(tr("&Quit"), this);
     quitAct_->setShortcuts(QKeySequence::Quit);
-    quitAct_->setStatusTip(tr("Quit the application"));
-    connect(quitAct_, SIGNAL(triggered()), this, SLOT(close()));
+    quitAct_->setStatusTip(tr("Quit the program"));
+    connect(quitAct_, SIGNAL(triggered()), this, SLOT(quit()));
 
     showGridAct_ = new QAction(tr("Show &Grid"), this);
     showGridAct_->setShortcut(Qt::Key_G);
@@ -127,6 +149,11 @@ void MainWindow::createActions()
 void MainWindow::createMenus()
 {
     fileMenu_ = menuBar()->addMenu(tr("&File"));
+    fileMenu_->addAction(newAct_);
+    fileMenu_->addAction(openAct_);
+    fileMenu_->addAction(saveAct_);
+    fileMenu_->addAction(saveAsAct_);
+    fileMenu_->addSeparator();
     fileMenu_->addAction(quitAct_);
 
     editMenu_ = menuBar()->addMenu(tr("&Edit"));
@@ -144,6 +171,9 @@ void MainWindow::createMenus()
 void MainWindow::createToolBars()
 {
     fileToolBar_ = addToolBar(tr("File"));
+    fileToolBar_->addAction(newAct_);
+    fileToolBar_->addAction(openAct_);
+    fileToolBar_->addAction(saveAct_);
 }
 
 //
@@ -242,12 +272,97 @@ void MainWindow::toolButtonClicked(int id)
 
 //
 //
-void MainWindow::newMap()
+bool MainWindow::askSaveIfDirty()
 {
+    if (!undoStack_->isClean()) {
+        QMessageBox msgBox;
+        msgBox.setText("The map has been modified.");
+        msgBox.setInformativeText("Do you want to save your changes?");
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        int ret = msgBox.exec();
+
+        switch (ret) {
+            case QMessageBox::Save:
+                if (!saveMap()) {
+                    return false;
+                }
+                break;
+            case QMessageBox::Cancel:
+                return false;
+                break;
+            default:
+                break;
+        }
+    }
+
+    return true;
+}
+
+//
+//
+void MainWindow::writeMap(const QString& filename)
+{
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+        errMsg_->showMessage(QString("Failed to save file '%1'").arg(filename));
+        return;
+    }
+
+    QTextStream writer(&file);
+    writer << mapToJson(map_);
+}
+
+//
+//
+bool MainWindow::newMap()
+{
+    if (!askSaveIfDirty()) {
+        return false;
+    }
+
     map_ = QSharedPointer<GameMap>(new GameMap);
     map_->width = (1280. / 32);
     map_->height = (720. / 32);
     scene_->setMap(map_);
+
+    return true;
+}
+
+//
+//
+bool MainWindow::openMap()
+{
+    askSaveIfDirty();
+    // TODO...
+    return true;
+}
+
+//
+//
+bool MainWindow::saveMap()
+{
+    if (mapFilename_.isEmpty()) {
+        return saveMapAs();
+    } else {
+        writeMap(mapFilename_);
+        undoStack_->setClean();
+        return true;
+    }
+}
+
+//
+//
+bool MainWindow::saveMapAs()
+{
+    QString filename = QFileDialog::getSaveFileName(this, tr("Open Map"), "untitled.json", tr("JSON Files (*.json)"));
+    if (!filename.isEmpty()) {
+        mapFilename_ = filename;
+        writeMap(filename);
+        undoStack_->setClean();
+        return true;
+    }
+    return false;
 }
 
 //

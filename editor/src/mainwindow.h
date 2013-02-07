@@ -19,6 +19,7 @@ class QToolBar;
 class QVBoxLayout;
 class QUndoStack;
 class QTableView;
+class QErrorMessage;
 struct GameMap;
 
 class MainWindow : public QMainWindow {
@@ -29,12 +30,17 @@ public:
 
 protected:
     virtual void closeEvent(QCloseEvent *event);
+    bool askSaveIfDirty();
+    void writeMap(const QString& filename);
 
 private slots:
     void gridToggled(bool value);
     void snapToggled(bool value);
     void toolButtonClicked(int id);
-    void newMap();
+    bool newMap();
+    bool saveMap();
+    bool saveMapAs();
+    bool openMap();
     void selectionChanged();
 
 private:
@@ -52,6 +58,10 @@ private:
     void readSettings();
     void writeSettings();
 
+    QAction *newAct_;
+    QAction *saveAct_;
+    QAction *saveAsAct_;
+    QAction *openAct_;
     QAction *quitAct_;
     QAction *showGridAct_;
     QAction *snapToGridAct_;
@@ -69,6 +79,8 @@ private:
     MapScene *scene_;
     QTableView *propertyBrowser_;
     PropertyItemModel *propertyItemModel_;
+    QString mapFilename_;
+    QErrorMessage *errMsg_;
 
     QSharedPointer<GameMap> map_;
 };
