@@ -45,6 +45,7 @@ j::value shapeToValue(QSharedPointer<Shape> shape)
 
     j::object subObject;    
     j::object shapeObject = {
+        { "id", j::value((double)shape->id) },
         { "position", pointToValue(shape->position) },
         { "rotation", j::value(shape->rotation) },
     };
@@ -115,7 +116,7 @@ QString mapToJson(QSharedPointer<GameMap> map)
 
     j::array fixtures;
     for (auto fixture : map->fixtures) {
-        shapes.push_back(fixtureToValue(fixture));
+        fixtures.push_back(fixtureToValue(fixture));
     }
 
     j::object rootObject = {
