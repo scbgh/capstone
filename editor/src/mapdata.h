@@ -112,7 +112,6 @@ public:
 
     Body() :
         bodyType(kDynamic),
-        rotation(0),
         angularVelocity(0),
         linearDamping(0),
         angularDamping(0),
@@ -124,7 +123,6 @@ public:
     { }
 
     PROPERTY(Body, BodyType, bodyType);
-    PROPERTY(Body, qreal, rotation);
     PROPERTY(Body, QPointF, linearVelocity);
     PROPERTY(Body, qreal, angularVelocity);
     PROPERTY(Body, qreal, linearDamping);
