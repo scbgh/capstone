@@ -102,34 +102,31 @@ void World::LoadMap(const string& map_name)
         switch (shape->type()) {
             case kPolygon: {
                 PolygonShape *poly = static_cast<PolygonShape *>(shape.get());
+                shared_ptr<b2PolygonShape> bpoly = make_shared<b2PolygonShape>();
+                b2Vec2 *verts = new b2Vec2[poly->points.size()];
 
-                // Construct a shape for each triangle
-                for (const auto& tri : poly->triangles) {
-                    shared_ptr<b2PolygonShape> bpoly = make_shared<b2PolygonShape>();
-                    b2Vec2 verts[3];
-                    Point points[3] = { tri.p[0], tri.p[1], tri.p[2] };
+                int i = 0;
+                for (const auto& pt : poly->points) {
+                    math::Point p = { pt.x, pt.y };
+                    math::Transform rot = math::Rotate(math::direction::in, RAD_TO_DEG(shape->rotation));
+                    Point point;
+                    p = rot.Apply(p);
 
-                    for (int i = 0; i < 3; i++) {
-                        // If this isn't part of a dynamic fixture, we make the vertex coordinates absolute,
-                        // otherwise we make them relative to the body position. We also have to rotate the vertices
-                        // according to the shape's rotation.
-
-                        math::Point p(points[i].x, points[i].y);
-                        math::Transform rot = math::Rotate(math::direction::in, RAD_TO_DEG(shape->rotation));
-                        p = rot.Apply(p);
-
-                        if (!has_fixture) {
-                            points[i].x = p.x + shape->position.x;
-                            points[i].y = p.y + shape->position.y;
-                        } else {
-                            points[i].x = p.x + shape->position.x - fix_body->position.x; 
-                            points[i].y = p.y + shape->position.y - fix_body->position.y;
-                        }
-                        verts[i] = PointToVec(points[i]);
+                    if (!has_fixture) {
+                        point.x = p.x + shape->position.x;
+                        point.y = p.y + shape->position.y;
+                    } else {
+                        point.x = p.x + shape->position.x - fix_body->position.x; 
+                        point.y = p.y + shape->position.y - fix_body->position.y;
                     }
-                    bpoly->Set(verts, 3);
-                    shapes_to_fix.push_back(bpoly);
+                    verts[i] = PointToVec(point);
+                    i++;
                 }
+
+                bpoly->Set(verts, poly->points.size());
+                shapes_to_fix.push_back(bpoly);
+                delete [] verts;
+
                 break;
             }
             case kCircle: {

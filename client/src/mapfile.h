@@ -40,13 +40,12 @@ enum ShapeType { kPolygon, kCircle };
 //
 // Base structure for all map entities
 struct Entity {
-    std::string uuid;
+    int id;
 };
 
 //
 // Root map file
 struct MapFile : public Entity {
-    int pixels_per_unit;
     int width;
     int height;
     std::vector<std::shared_ptr<Shape>> shapes;
@@ -93,7 +92,6 @@ struct Shape : public Entity {
 //
 // Polygon shape made up of many triangles
 struct PolygonShape : public Shape {
-    std::vector<Triangle> triangles;
     std::vector<Point> points;
     virtual ShapeType type() const { return kPolygon; }
 };
