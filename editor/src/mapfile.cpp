@@ -79,6 +79,7 @@ j::value shapeToValue(QSharedPointer<Shape> shape)
                 { "bullet", j::value(body->bullet) },
                 { "awake", j::value(body->awake) },
                 { "allowSleep", j::value(body->allowSleep) },
+                { "active", j::value(body->active) },
                 { "type", j::value("body") }
             };
             break;
@@ -94,6 +95,7 @@ j::value shapeToValue(QSharedPointer<Shape> shape)
 j::value fixtureToValue(QSharedPointer<Fixture> fixture)
 {
     j::object shapeObject = {
+        { "id", j::value((double)fixture->id) },
         { "shape", j::value((double)fixture->shape->id) },
         { "body", j::value((double)fixture->body->id) },
         { "friction", j::value(fixture->friction) },
