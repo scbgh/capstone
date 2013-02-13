@@ -18,7 +18,7 @@ namespace {
 
 //
 // Convert a world Point into a Box2D Vector
-b2Vec2 PointToVec(Point p) { return b2Vec2(p.x, p.y); }
+b2Vec2 PointToVec(math::Point p) { return b2Vec2(p.x, p.y); }
 
 }
 
@@ -109,17 +109,16 @@ void World::LoadMap(const string& map_name)
                 for (const auto& pt : poly->points) {
                     math::Point p = { pt.x, pt.y };
                     math::Transform rot = math::Rotate(RAD_TO_DEG(shape->rotation));
-                    Point point;
                     p = rot.Apply(p);
 
                     if (!has_fixture) {
-                        point.x = p.x + shape->position.x;
-                        point.y = p.y + shape->position.y;
+                        p.x += shape->position.x;
+                        p.y += shape->position.y;
                     } else {
-                        point.x = p.x + shape->position.x - fix_body->position.x; 
-                        point.y = p.y + shape->position.y - fix_body->position.y;
+                        p.x += shape->position.x - fix_body->position.x; 
+                        p.y += shape->position.y - fix_body->position.y;
                     }
-                    verts[i] = PointToVec(point);
+                    verts[i] = PointToVec(p);
                     i++;
                 }
 

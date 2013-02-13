@@ -10,6 +10,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "math/math.h"
 
 namespace pg {
 
@@ -20,13 +21,6 @@ struct Fixture;
 struct Shape;
 struct PolygonShape;
 struct CircleShape;
-
-//
-//
-struct Point {
-    double x;
-    double y;
-};
 
 enum BodyType { kStatic, kDynamic };
 enum ShapeType { kPolygon, kCircle };
@@ -51,9 +45,9 @@ struct MapFile : public Entity {
 // Physical body
 struct Body : public Entity {
     BodyType type;
-    Point position;
+    math::Point position;
     double rotation;
-    Point linear_velocity;
+    math::Point linear_velocity;
     double angular_velocity;
     double linear_damping;
     double angular_damping;
@@ -78,7 +72,7 @@ struct Fixture : public Entity {
 //
 // Base structure for a shape
 struct Shape : public Entity {
-    Point position;
+    math::Point position;
     double rotation;
     virtual ShapeType type() const = 0;
 };
@@ -86,7 +80,7 @@ struct Shape : public Entity {
 //
 // Polygon shape made up of many triangles
 struct PolygonShape : public Shape {
-    std::vector<Point> points;
+    std::vector<math::Point> points;
     virtual ShapeType type() const { return kPolygon; }
 };
 

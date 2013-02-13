@@ -5,6 +5,7 @@
 #include "common.h"
 #include "mapfile.h"
 #include "json/picojson.h"
+#include "math/math.h"
 
 namespace pg {
 
@@ -12,7 +13,7 @@ namespace {
 
 //
 // Convert a two-element JSON-value array (STL vector) into a Point
-Point PointFromArray(const vector<picojson::value>& elems)
+math::Point PointFromArray(const vector<picojson::value>& elems)
 {
     return { elems[0].get<double>(), elems[1].get<double>() };
 }
