@@ -8,6 +8,7 @@
 
 #include "test_dummy.h"
 #include "test_pack.h"
+#include "test_polygon.h"
 
 // MACRO HACK
 #define RUN_FIXTURE(cls_) \
@@ -25,6 +26,7 @@ int main(int argc, char *argv[])
 
 	//RUN_FIXTURE(TestDummyFixture);
 	RUN_FIXTURE(TestPackFixture);
+	RUN_FIXTURE(TestPolygonFixture);
 
 	std::cout << "====================\n";
 	std::cout << "\nTOTAL TESTS RUN   : " << total << "\n";

@@ -3,8 +3,15 @@ project(PHYSGAME_TESTS)
 
 set(PHYSGAME_TESTS_SRCS
     test_physgame.cpp
-    ../src/pack.cpp
     ../src/file.cpp
+    ../src/mapfile.cpp
+    ../src/math/color.cpp
+    ../src/math/matrix.cpp
+    ../src/math/point.cpp
+    ../src/math/polygon.cpp
+    ../src/math/transform.cpp
+    ../src/math/vector.cpp
+    ../src/pack.cpp
 )
 
 add_executable(physgame_tests ${PHYSGAME_TESTS_SRCS})

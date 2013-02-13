@@ -11,6 +11,7 @@
 #include "math/color.h"
 #include "math/vector.h"
 #include "math/point.h"
+#include "math/polygon.h"
 #include "math/matrix.h"
 #include "math/transform.h"
 

@@ -13,6 +13,7 @@ set(PHYSGAME_SRCS
     math/color.cpp
     math/matrix.cpp
     math/point.cpp
+    math/polygon.cpp
     math/transform.cpp
     math/vector.cpp
     pack.cpp
