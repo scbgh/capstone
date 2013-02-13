@@ -48,9 +48,9 @@ struct Entity {
 struct MapFile : public Entity {
     int width;
     int height;
-    std::vector<std::shared_ptr<Shape>> shapes;
-    std::vector<std::shared_ptr<Body>> bodies;
-    std::vector<std::shared_ptr<Fixture>> fixtures;
+    std::vector<std::unique_ptr<Shape>> shapes;
+    std::vector<std::unique_ptr<Body>> bodies;
+    std::vector<std::unique_ptr<Fixture>> fixtures;
 };
 
 //
@@ -73,8 +73,8 @@ struct Body : public Entity {
 //
 // Fixture between a body and a shape
 struct Fixture : public Entity {
-    std::shared_ptr<Shape> shape;
-    std::shared_ptr<Body> body;
+    Shape *shape;
+    Body *body;
     double friction;
     double restitution;
     double density;
@@ -103,7 +103,7 @@ struct CircleShape : public Shape {
     virtual ShapeType type() const { return kCircle; }
 };
 
-std::shared_ptr<MapFile> LoadMapFromJSON(const std::string& json);
+MapFile *LoadMapFromJSON(const std::string& json);
 
 }
 

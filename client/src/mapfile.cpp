@@ -23,7 +23,7 @@ Point PointFromArray(const vector<picojson::value>& elems)
 
 //
 // Load an entire map structure from a JSON representation
-shared_ptr<MapFile> LoadMapFromJSON(const string& json)
+MapFile *LoadMapFromJSON(const string& json)
 {
     // Load the root object of the JSON map representation
     picojson::value root_value;
@@ -33,12 +33,12 @@ shared_ptr<MapFile> LoadMapFromJSON(const string& json)
         Die("Failed to parse JSON: %s", error.c_str());
     }
 
-    map<int, shared_ptr<Shape>> shapes;
-    map<int, shared_ptr<Body>> bodies;
+    map<int, Shape *> shapes;
+    map<int, Body *> bodies;
 
     auto root_object = root_value.get<picojson::object>();
 
-    shared_ptr<MapFile> map_file = make_shared<MapFile>();
+    MapFile *map_file = new MapFile;
     map_file->width = root_object["width"].get<double>();
     map_file->height = root_object["height"].get<double>();
 
@@ -47,9 +47,9 @@ shared_ptr<MapFile> LoadMapFromJSON(const string& json)
         auto shape_object = shape_value.get<picojson::object>();
 
         string type = shape_object["type"].get<string>();
-        shared_ptr<Shape> shape;
+        Shape *shape;
         if (type == "polygon") {
-            shared_ptr<PolygonShape> poly = make_shared<PolygonShape>();
+            PolygonShape *poly = new PolygonShape;
             shape = poly;
 
             // Read the points
@@ -57,7 +57,7 @@ shared_ptr<MapFile> LoadMapFromJSON(const string& json)
                 poly->points.push_back(PointFromArray(point_value.get<picojson::array>()));
             }
         } else if (type == "circle") {
-            shared_ptr<CircleShape> circle = make_shared<CircleShape>();
+            CircleShape *circle = new CircleShape;
             shape = circle;
             circle->radius = shape_object["radius"].get<double>();
         } else if (type == "body") {
@@ -71,7 +71,7 @@ shared_ptr<MapFile> LoadMapFromJSON(const string& json)
         shape->position = PointFromArray(shape_object["position"].get<picojson::array>());
 
         shapes[shape->id] = shape;
-        map_file->shapes.push_back(shape);
+        map_file->shapes.push_back(unique_ptr<Shape>(shape));
     }
 
     // Second shapes pass to load bodies
@@ -80,7 +80,7 @@ shared_ptr<MapFile> LoadMapFromJSON(const string& json)
 
         string type = shape_object["type"].get<string>();
         if (type == "body") {
-            shared_ptr<Body> body = make_shared<Body>();
+            Body *body = new Body;
             body->id = shape_object["id"].get<double>();
             body->rotation = shape_object["rotation"].get<double>();
             body->position = PointFromArray(shape_object["position"].get<picojson::array>());
@@ -101,7 +101,7 @@ shared_ptr<MapFile> LoadMapFromJSON(const string& json)
             }
 
             bodies[body->id] = body;
-            map_file->bodies.push_back(body);
+            map_file->bodies.push_back(unique_ptr<Body>(body));
         }
     }    
 
@@ -109,7 +109,7 @@ shared_ptr<MapFile> LoadMapFromJSON(const string& json)
     for (const auto& fixture_value : root_object["fixtures"].get<picojson::array>()) {
         auto fixture_object = fixture_value.get<picojson::object>();
 
-        shared_ptr<Fixture> fixture = make_shared<Fixture>();
+        Fixture *fixture = new Fixture;
         fixture->id = fixture_object["id"].get<double>();
         fixture->friction = fixture_object["friction"].get<double>();
         fixture->restitution = fixture_object["restitution"].get<double>();
@@ -121,7 +121,7 @@ shared_ptr<MapFile> LoadMapFromJSON(const string& json)
         fixture->shape = shapes[shape_id];
         fixture->body = bodies[body_id];
 
-        map_file->fixtures.push_back(fixture);
+        map_file->fixtures.push_back(unique_ptr<Fixture>(fixture));
     }
 
     return map_file;

@@ -53,16 +53,16 @@ void World::LoadMap(const string& map_name)
     b2Body *static_body = phys_world_->CreateBody(&static_body_def);
 
     // Load the map from disk and turn it into a Box2D world
-    shared_ptr<MapFile> map_file = LoadMapFromJSON(json);
+    unique_ptr<MapFile> map_file = unique_ptr<MapFile>(LoadMapFromJSON(json));
 
     // Map from shapes to their associated fixture
-    map<shared_ptr<Shape>, shared_ptr<Fixture>> fixtures;
+    map<Shape *, Fixture *> fixtures;
     for (const auto& fixture : map_file->fixtures) {
-        fixtures[fixture->shape] = fixture;
+        fixtures[fixture->shape] = fixture.get();
     }
 
     // Maps from map bodies to their associated Box2D bodies
-    map<shared_ptr<Body>, b2Body *> phys_bodies;
+    map<Body *, b2Body *> phys_bodies;
 
     // Create bodies in the world
     for (const auto& body : map_file->bodies) {
@@ -84,25 +84,25 @@ void World::LoadMap(const string& map_name)
             def.type = b2_dynamicBody;
         }
 
-        phys_bodies[body] = phys_world_->CreateBody(&def);
+        phys_bodies[body.get()] = phys_world_->CreateBody(&def);
     }
 
     // Create shapes and their associated fixtures
     for (const auto& shape : map_file->shapes) {
-        bool has_fixture = (fixtures.find(shape) != fixtures.end());
-        shared_ptr<Fixture> fixture;
-        shared_ptr<Body> fix_body;
-        vector<shared_ptr<b2Shape>> shapes_to_fix;
+        bool has_fixture = (fixtures.find(shape.get()) != fixtures.end());
+        Fixture *fixture;
+        Body *fix_body;
+        vector<unique_ptr<b2Shape>> shapes_to_fix;
 
         if (has_fixture) {
-            fixture = fixtures[shape];
+            fixture = fixtures[shape.get()];
             fix_body = fixture->body;
         }     
 
         switch (shape->type()) {
             case kPolygon: {
                 PolygonShape *poly = static_cast<PolygonShape *>(shape.get());
-                shared_ptr<b2PolygonShape> bpoly = make_shared<b2PolygonShape>();
+                unique_ptr<b2PolygonShape> bpoly = unique_ptr<b2PolygonShape>(new b2PolygonShape);
                 b2Vec2 *verts = new b2Vec2[poly->points.size()];
 
                 int i = 0;
@@ -124,21 +124,21 @@ void World::LoadMap(const string& map_name)
                 }
 
                 bpoly->Set(verts, poly->points.size());
-                shapes_to_fix.push_back(bpoly);
+                shapes_to_fix.push_back(std::move(bpoly));
                 delete [] verts;
 
                 break;
             }
             case kCircle: {
                 CircleShape *circle = static_cast<CircleShape *>(shape.get());
-                shared_ptr<b2CircleShape> bcircle = make_shared<b2CircleShape>();
+                unique_ptr<b2CircleShape> bcircle = unique_ptr<b2CircleShape>(new b2CircleShape);
                 b2Vec2 offset;
                 if (has_fixture) {
                     offset = -b2Vec2(fix_body->position.x, fix_body->position.y);
                 }
                 bcircle->m_p = PointToVec(circle->position) + offset;
                 bcircle->m_radius = circle->radius;
-                shapes_to_fix.push_back(bcircle);
+                shapes_to_fix.push_back(std::move(bcircle));
 
                 break;
             }
