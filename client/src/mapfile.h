@@ -80,7 +80,7 @@ struct Shape : public Entity {
 //
 // Polygon shape made up of many triangles
 struct PolygonShape : public Shape {
-    std::vector<math::Point> points;
+    math::Polygon polygon;
     virtual ShapeType type() const { return kPolygon; }
 };
 

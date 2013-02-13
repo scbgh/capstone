@@ -103,10 +103,10 @@ void World::LoadMap(const string& map_name)
             case kPolygon: {
                 PolygonShape *poly = static_cast<PolygonShape *>(shape.get());
                 unique_ptr<b2PolygonShape> bpoly = unique_ptr<b2PolygonShape>(new b2PolygonShape);
-                b2Vec2 *verts = new b2Vec2[poly->points.size()];
+                b2Vec2 *verts = new b2Vec2[poly->polygon.points.size()];
 
                 int i = 0;
-                for (const auto& pt : poly->points) {
+                for (const auto& pt : poly->polygon.points) {
                     math::Point p = { pt.x, pt.y };
                     math::Transform rot = math::Rotate(RAD_TO_DEG(shape->rotation));
                     p = rot.Apply(p);
@@ -122,7 +122,7 @@ void World::LoadMap(const string& map_name)
                     i++;
                 }
 
-                bpoly->Set(verts, poly->points.size());
+                bpoly->Set(verts, poly->polygon.points.size());
                 shapes_to_fix.push_back(std::move(bpoly));
                 delete [] verts;
 

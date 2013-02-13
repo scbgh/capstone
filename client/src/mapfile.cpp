@@ -55,8 +55,10 @@ MapFile *LoadMapFromJSON(const string& json)
 
             // Read the points
             for (const auto& point_value : shape_object["polygon"].get<picojson::array>()) {
-                poly->points.push_back(PointFromArray(point_value.get<picojson::array>()));
+                poly->polygon.points.push_back(PointFromArray(point_value.get<picojson::array>()));
             }
+
+            poly->polygon.SetWindingDirection(math::kCCW);
         } else if (type == "circle") {
             CircleShape *circle = new CircleShape;
             shape = circle;
