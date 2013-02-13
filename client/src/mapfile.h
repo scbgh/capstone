@@ -28,12 +28,6 @@ struct Point {
     double y;
 };
 
-//
-//
-struct Triangle {
-    Point p[3];
-};
-
 enum BodyType { kStatic, kDynamic };
 enum ShapeType { kPolygon, kCircle };
 

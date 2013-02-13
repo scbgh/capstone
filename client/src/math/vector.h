@@ -8,94 +8,78 @@
 
 #include <cmath>
 
-namespace pg { namespace math {
+namespace pg {
+namespace math {
 
 //
 // class Vector
 // Represents a single vector in a vector space.
-//
 class Vector {
 public:
-  double x, y, z;
+    double x, y;
 
-  Vector operator-() const {
-    Vector negated = Vector(-x, -y, -z);
-    return negated;
-  }
-
-  Vector& operator+=(Vector const& other) {
-    x += other.x;
-    y += other.y;
-    z += other.z;
-    return *this;
-  }
-
-  Vector& operator-=(Vector const& other) {
-    *this += -other;
-    return *this;
-  }
-
-  Vector& operator*=(double other) {
-    x *= other;
-    y *= other;
-    z *= other;
-    return *this;
- }
-
-  Vector& operator/=(double other) {
-    *this *= 1.0/other;
-    return *this;
-  }
-
-  bool operator==(Vector const& other) {
-    return x == other.x && y == other.y && z == other.z;
-  }
-  
-  bool operator!=(Vector const& other) {
-    return !(*this == other);
-  }
-
-  double& operator[](int i) {
-    switch (i%3) {
-    case 0:
-      return x;
-    case 1:
-      return y;
-    default:
-      return z;
+    Vector operator-() const {
+        Vector negated = Vector(-x, -y);
+        return negated;
     }
-  }
 
-  double const& operator[](int i) const {
-    switch (i%3) {
-    case 0:
-      return x;
-    case 1:
-      return y;
-    default:
-      return z;
+    Vector& operator+=(const Vector& other) {
+        x += other.x;
+        y += other.y;
+        return *this;
     }
-  }
 
-  Vector(double x, double y) : x(x), y(y), z(0.0) { }
+    Vector& operator-=(const Vector& other) {
+        *this += -other;
+        return *this;
+    }
 
-  Vector(double x, double y, double z) : x(x), y(y), z(z) { }
+    Vector& operator*=(double other) {
+        x *= other;
+        y *= other;
+        return *this;
+    }
 
-  Vector() : x(0.0), y(0.0), z(0.0) { }
+    Vector& operator/=(double other) {
+        *this *= 1.0/other;
+        return *this;
+    }
+
+    bool operator==(const Vector& other) {
+        return x == other.x && y == other.y;
+    }
+
+    bool operator!=(const Vector& other) {
+        return !(*this == other);
+    }
+
+    double& operator[](int i) {
+        if (i & 1) return y;
+        return x;
+    }
+
+    const double& operator[](int i) const {
+        if (i & 1) return y;
+        return x;
+    }
+
+    Vector(double x, double y) : x(x), y(y) { }
+
+    Vector() : x(0.0), y(0.0) { }
 };
 
-Vector operator+(Vector const& v, Vector const& w);
-Vector operator-(Vector const& v, Vector const& w);
-Vector operator*(Vector const& v, double k);
-Vector operator*(double k, Vector const& v);
-Vector operator/(Vector const& v, double k);
-double Dot(Vector const& v, Vector const& w);
-Vector Cross(Vector const& v, Vector const& w);
-double NormSquared(Vector const& v);
-double Norm(Vector const& v);
-Vector Normalized(Vector const& v);
-bool IsZero(Vector const& v);
+Vector operator+(const Vector& v, const Vector& w);
+Vector operator-(const Vector& v, const Vector& w);
+Vector operator*(const Vector& v, double k);
+Vector operator*(double k, const Vector& v);
+Vector operator/(const Vector& v, double k);
+double Dot(const Vector& v, const Vector& w);
+double NormSquared(const Vector& v);
+double Norm(const Vector& v);
+Vector Normalized(const Vector& v);
+bool IsZero(const Vector& v);
 
-} }
+}
+}
 
 #endif

@@ -1,6 +1,6 @@
 //
 // point.h
-// Math support for 3D points
+// Math support for 2D points
 //
 
 #ifndef _MATH_POINT_H_
@@ -8,96 +8,81 @@
 
 #include "math/vector.h"
 
-namespace pg { namespace math {
+namespace pg {
+namespace math {
 
 //
 // class Point
 // Represents a single point in affine space. Points can be subtracted
 // but not added together and are affected by translation transformations.
-//
 class Point {
 public:
-  double x, y, z;
+    double x, y;
 
-  Point operator-() const {
-    Point negated = Point(-x, -y, -z);
-    return negated;
-  }
-
-  Point& operator+=(Vector const& other) {
-    x += other.x;
-    y += other.y;
-    z += other.z;
-    return *this;
-  }
-
-  Point& operator-=(Vector const& other) {
-    *this += -other;
-    return *this;
-  }
-
-  Point& operator*=(double other) {
-    x *= other;
-    y *= other;
-    z *= other;
-    return *this;
-  }
-
-  Point& operator/=(double other) {
-    *this *= 1.0/other;
-    return *this;
-  }
-
-  bool operator==(Point const& other) {
-    return x == other.x && y == other.y && z == other.z;
-  }
-  
-  bool operator!=(Point const& other) {
-    return !(*this == other);
-  }
-
-  double& operator[](int i) {
-    switch (i%3) {
-    case 0:
-      return x;
-    case 1:
-      return y;
-    default:
-      return z;
+    Point operator-() const {
+        Point negated = Point(-x, -y);
+        return negated;
     }
-  }
 
-  double const& operator[](int i) const {
-    switch (i%3) {
-    case 0:
-      return x;
-    case 1:
-      return y;
-    default:
-      return z;
+    Point& operator+=(const Vector& other) {
+        x += other.x;
+        y += other.y;
+        return *this;
     }
-  }
 
-  operator Vector() {
-    return Vector(x, y, z);
-  }
+    Point& operator-=(const Vector& other) {
+        *this += -other;
+        return *this;
+    }
 
-  Point(double x, double y, double z) : x(x), y(y), z(z) { }
+    Point& operator*=(double other) {
+        x *= other;
+        y *= other;
+        return *this;
+    }
 
-  Point(double x, double y) : x(x), y(y), z(0.0) { }
+    Point& operator/=(double other) {
+        *this *= 1.0/other;
+        return *this;
+    }
 
-  Point() : x(0.0), y(0.0), z(0.0) { }
+    bool operator==(const Point& other) {
+        return x == other.x && y == other.y;
+    }
 
-  Point(Vector const& vector) : x(vector.x), y(vector.y), z(vector.z) { }
+    bool operator!=(const Point& other) {
+        return !(*this == other);
+    }
+
+    double& operator[](int i) {
+        if (i & 1) return y;
+        return x;
+    }
+
+    const double& operator[](int i) const {
+        if (i & 1) return y;
+        return x;
+    }
+
+    operator Vector() {
+        return Vector(x, y);
+    }
+
+    Point(double x, double y) : x(x), y(y) { }
+
+    Point() : x(0.0), y(0.0) { }
+
+    Point(const Vector& vector) : x(vector.x), y(vector.y) { }
 };
 
-Point operator+(Point const& p, Vector const& v);
-Point operator-(Point const& p, Vector const& v);
-Vector operator-(Point const& p, Point const& q);
-Point operator*(Point const& p, double k);
-Point operator*(double k, Point const& p);
-Point operator/(Point const& p, double k);
+Point operator+(const Point& p, const Vector& v);
+Point operator-(const Point& p, const Vector& v);
+Vector operator-(const Point& p, const Point& q);
+Point operator*(const Point& p, double k);
+Point operator*(double k, const Point& p);
+Point operator/(const Point& p, double k);
 
-} }
+}
+}
 
 #endif

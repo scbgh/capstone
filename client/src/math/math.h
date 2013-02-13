@@ -14,36 +14,37 @@
 #include "math/matrix.h"
 #include "math/transform.h"
 
-namespace pg { namespace math {
+namespace pg {
+namespace math {
 
 static bool quadratic(double a, double b, double c, double *y0, double *y1) {
-  double disc = b * b - 4 * a * c;
-  if (disc <= 0.0) return false;
-  double sqrt_disc = sqrt(disc);
-  double sgn = b < 0 ? -1 : 1;
-  double d = -0.5 * (b + sgn * sqrt_disc);
-  *y0 = d / a;
-  *y1 = c / d;
-  if (*y0 > *y1) std::swap(*y0, *y1);
-  return true;
+    double disc = b * b - 4 * a * c;
+    if (disc <= 0.0) return false;
+    double sqrt_disc = sqrt(disc);
+    double sgn = b < 0 ? -1 : 1;
+    double d = -0.5 * (b + sgn * sqrt_disc);
+    *y0 = d / a;
+    *y1 = c / d;
+    if (*y0 > *y1) std::swap(*y0, *y1);
+    return true;
 }
 
 static double clamp(double a, double min, double max) {
-  return a < min ? min : (a > max ? max : a);
+    return a < min ? min : (a > max ? max : a);
 }
 
-namespace direction {;
+namespace direction {
+;
 
-static const Vector right(1.0, 0.0, 0.0);
-static const Vector up(0.0, 1.0, 0.0);
-static const Vector in(0.0, 0.0, 1.0);
+static const Vector right(1.0, 0.0);
+static const Vector up(0.0, 1.0);
 static const Vector left = -right;
 static const Vector down = -up;
-static const Vector out = -in;
 
 }
 
-namespace color {;
+namespace color {
+;
 
 static const Color red(1.0, 0.0, 0.0);
 static const Color green(0.0, 1.0, 0.0);
@@ -52,11 +53,12 @@ static const Color black(0.0, 0.0, 0.0);
 static const Color white(1.0, 1.0, 1.0);
 
 static Color grey(double value) {
-  return Color(value, value, value);
+    return Color(value, value, value);
 }
 
 }
 
-} }
+}
+}
 
 #endif

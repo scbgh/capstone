@@ -5,52 +5,60 @@
 #include "math/point.h"
 #include "math/vector.h"
 
-namespace pg { namespace math {
+namespace pg {
+namespace math {
 
 //
 //
-Point operator+(Point const& p, Vector const& v) {
-  Point u = p;
-  u += v;
-  return u;
+Point operator+(const Point& p, const Vector& v)
+{
+    Point u = p;
+    u += v;
+    return u;
 }
 
 //
 //
-Point operator-(Point const& p, Vector const& v) {
-  Point u = p;
-  u -= v;
-  return u;
+Point operator-(const Point& p, const Vector& v)
+{
+    Point u = p;
+    u -= v;
+    return u;
 }
 
 //
 //
-Vector operator-(Point const& p, Point const& q) {
-  return Vector(p.x - q.x, p.y - q.y, p.z - q.z);
+Vector operator-(const Point& p, const Point& q)
+{
+    return Vector(p.x - q.x, p.y - q.y);
 }
 
 //
 //
-Point operator*(Point const& p, double k) {
-  Point u = p;
-  u *= k;
-  return u;
+Point operator*(const Point& p, double k)
+{
+    Point u = p;
+    u *= k;
+    return u;
 }
 
 //
 //
-Point operator*(double k, Point const& p) {
-  Point u = p;
-  u *= k;
-  return u;
+Point operator*(double k, const Point& p)
+{
+    Point u = p;
+    u *= k;
+    return u;
 }
 
 //
 //
-Point operator/(Point const& p, double k) {
-  Point u = p;
-  u /= k;
-  return u;
+Point operator/(const Point& p, double k)
+{
+    Point u = p;
+    u /= k;
+    return u;
 }
 
-} }
+}
+}

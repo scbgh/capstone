@@ -108,7 +108,7 @@ void World::LoadMap(const string& map_name)
                 int i = 0;
                 for (const auto& pt : poly->points) {
                     math::Point p = { pt.x, pt.y };
-                    math::Transform rot = math::Rotate(math::direction::in, RAD_TO_DEG(shape->rotation));
+                    math::Transform rot = math::Rotate(RAD_TO_DEG(shape->rotation));
                     Point point;
                     p = rot.Apply(p);
 

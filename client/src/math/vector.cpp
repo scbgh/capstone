@@ -7,86 +7,88 @@
 
 #include <math.h>
 
-namespace pg { namespace math {
+namespace pg {
+namespace math {
 
 //
 //
-Vector operator+(Vector const& v, Vector const& w) {
-  Vector u = v;
-  u += w;
-  return u;
+Vector operator+(const Vector& v, const Vector& w)
+{
+    Vector u = v;
+    u += w;
+    return u;
 }
 
 //
 //
-Vector operator-(Vector const& v, Vector const& w) {
-  Vector u = v;
-  u -= w;
-  return u;
+Vector operator-(const Vector& v, const Vector& w)
+{
+    Vector u = v;
+    u -= w;
+    return u;
 }
 
 //
 //
-Vector operator*(Vector const& v, double k) {
-  Vector u = v;
-  u *= k;
-  return u;
+Vector operator*(const Vector& v, double k)
+{
+    Vector u = v;
+    u *= k;
+    return u;
 }
 
 //
 //
-Vector operator*(double k, Vector const& v) {
-  Vector u = v;
-  u *= k;
-  return u;
+Vector operator*(double k, const Vector& v) 
+{
+    Vector u = v;
+    u *= k;
+    return u;
 }
 
 //
 //
-Vector operator/(Vector const& v, double k) {
-  Vector u = v;
-  u /= k;
-  return u;
+Vector operator/(const Vector& v, double k)
+{
+    Vector u = v;
+    u /= k;
+    return u;
 }
 
 //
 //
-double Dot(Vector const& v, Vector const& w) {
-  return v.x * w.x + v.y * w.y + v.z * w.z;
+double Dot(const Vector& v, const Vector& w)
+{
+    return v.x * w.x + v.y * w.y;
 }
 
 //
 //
-Vector Cross(Vector const& v, Vector const& w) {
-  Vector cross = Vector(
-    v.y * w.z - v.z * w.y,
-    v.z * w.x - v.x * w.z,
-    v.x * w.y - v.y * w.x);
-  return cross;
+double NormSquared(const Vector& v)
+{
+    return Dot(v, v);
 }
 
 //
 //
-double NormSquared(Vector const& v) {
-  return Dot(v, v);
+double Norm(const Vector& v)
+{
+    return sqrt(NormSquared(v));
 }
 
 //
 //
-double Norm(Vector const& v) {
-  return sqrt(NormSquared(v));
+Vector Normalized(const Vector& v)
+{
+    return v / Norm(v);
 }
 
 //
 //
-Vector Normalized(Vector const& v) { 
-  return v / Norm(v);
+bool IsZero(const Vector& v)
+{
+    return v.x == 0 && v.y == 0;
 }
 
-//
-//
-bool IsZero(Vector const& v) {
-  return v.x == 0 && v.y == 0 && v.z == 0;
 }
-
-} }
+}

@@ -11,7 +11,8 @@
 #include "math/vector.h"
 #include "math/matrix.h"
 
-namespace pg { namespace math {
+namespace pg {
+namespace math {
 
 //
 // class Transform
@@ -20,61 +21,61 @@ namespace pg { namespace math {
 // ways.
 class Transform {
 public:
-  Matrix44 const& Matrix() const {
-    return mat;
-  }
+    const Matrix33& Matrix() const {
+        return mat;
+    }
 
-  Matrix44 const& InverseMatrix() const {
-    return matinv;
-  }
+    const Matrix33& InverseMatrix() const {
+        return matinv;
+    }
 
-  Transform Inverse() const {
-    return Transform(matinv, mat);
-  }
+    Transform Inverse() const {
+        return Transform(matinv, mat);
+    }
 
-  Transform& operator*=(Transform const& t) {
-    mat = Mult(mat, t.mat);
-    matinv = Mult(t.matinv, matinv);
-    return *this;
-  }
+    Transform& operator*=(const Transform& t) {
+        mat = Mult(mat, t.mat);
+        matinv = Mult(t.matinv, matinv);
+        return *this;
+    }
 
-  bool operator==(Transform const& other) const {
-    return mat == other.mat && matinv == other.matinv;
-  }
-  
-  bool operator!=(Transform const& other) const {
-    return !(*this == other);
-  }
+    bool operator==(const Transform& other) const {
+        return mat == other.mat && matinv == other.matinv;
+    }
 
-  Vector Apply(Vector const& v) const;
-  Point Apply(Point const& p) const;
+    bool operator!=(const Transform& other) const {
+        return !(*this == other);
+    }
 
-  Transform(Matrix44 const& mat, Matrix44 const& matinv)
-      : mat(mat),
-        matinv(matinv)
-  { }
+    Vector Apply(const Vector& v) const;
+    Point Apply(const Point& p) const;
 
-  Transform(Matrix44 const& mat)
-      : mat(mat)
-  {
-    matinv = pg::math::Inverse(mat);
-  }
+    Transform(const Matrix33& mat, const Matrix33& matinv)
+        : mat(mat),
+          matinv(matinv)
+    { }
 
-  Transform()
-      : mat(Matrix44()), matinv(Matrix44())
-  { }
+    Transform(const Matrix33& mat)
+        : mat(mat)
+    {
+        matinv = pg::math::Inverse(mat);
+    }
+
+    Transform()
+        : mat(Matrix33()), matinv(Matrix33())
+    { }
 
 private:
-  Matrix44 mat, matinv;
+    Matrix33 mat, matinv;
 };
 
 
-Transform operator*(Transform const& s, Transform const& t);
-Transform Translate(Vector const& v);
+Transform operator*(const Transform& s, const Transform& t);
+Transform Translate(const Vector& v);
 Transform Scale(double x, double y, double z);
-Transform Rotate(Vector const& v, double t);
-Transform LookAt(Vector const& eye, Vector const& at, Vector const& up);
+Transform Rotate(double t);
 
-} }
+}
+}
 
 #endif
