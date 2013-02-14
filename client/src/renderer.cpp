@@ -12,7 +12,8 @@ namespace pg {
 //
 Renderer::Renderer(App *app) :
     app_(app),
-    zoom_(1.f)
+    view_upper_left_(0.0, 22.0),
+    view_lower_right_(40.0, 0.0)
 {
 }
 
@@ -33,14 +34,8 @@ void Renderer::Init(int width, int height)
 
     glViewport(0, 0, width, height);
 
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
     width_ = width;
     height_ = height;
-    float aspect = (float)width_ / (float)height_;
-    gluOrtho2D(-aspect, aspect, -1.f, 1.f);
-
-    zoom_ = 0.05;
 }
 
 //
@@ -49,8 +44,12 @@ void Renderer::Render()
 {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glScalef(zoom_, zoom_, 0.f);
-    glTranslatef(-view_center_.x, -view_center_.y, 0.f);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+
+    float aspect = (float)width_ / (float)height_;
+    gluOrtho2D(view_upper_left_.x, view_lower_right_.x,
+        view_lower_right_.y, view_upper_left_.y);
 
     app_->world().DrawDebug();
 }
