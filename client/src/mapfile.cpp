@@ -47,8 +47,9 @@ MapFile *LoadMapFromJSON(const string& json)
     for (const auto& shape_value : root_object["shapes"].get<picojson::array>()) {
         auto shape_object = shape_value.get<picojson::object>();
 
-        string type = shape_object["type"].get<string>();
+
         Shape *shape;
+        string type = shape_object["type"].get<string>();
         if (type == "polygon") {
             PolygonShape *poly = new PolygonShape;
             shape = poly;
@@ -58,7 +59,9 @@ MapFile *LoadMapFromJSON(const string& json)
                 poly->polygon.points.push_back(PointFromArray(point_value.get<picojson::array>()));
             }
 
+            // Triangulate and partition the polygon
             poly->polygon.SetWindingDirection(math::kCCW);
+            poly->subpolygons = math::Triangulate(poly->polygon);
         } else if (type == "circle") {
             CircleShape *circle = new CircleShape;
             shape = circle;
@@ -72,7 +75,6 @@ MapFile *LoadMapFromJSON(const string& json)
         shape->id = shape_object["id"].get<double>();
         shape->rotation = shape_object["rotation"].get<double>();
         shape->position = PointFromArray(shape_object["position"].get<picojson::array>());
-
         shapes[shape->id] = shape;
         map_file->shapes.push_back(unique_ptr<Shape>(shape));
     }

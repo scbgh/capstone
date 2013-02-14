@@ -92,39 +92,61 @@ void World::LoadMap(const string& map_name)
         bool has_fixture = (fixtures.find(shape.get()) != fixtures.end());
         Fixture *fixture;
         Body *fix_body;
-        vector<unique_ptr<b2Shape>> shapes_to_fix;
 
         if (has_fixture) {
             fixture = fixtures[shape.get()];
             fix_body = fixture->body;
-        }     
+        }
+
+        // Lambda to create the fixture for a shape
+        auto fix_shape = [=](b2Shape *sh) mutable {
+            b2FixtureDef def;
+            b2Body *target_body;
+
+            if (has_fixture) {
+                def.friction = fixture->friction;
+                def.restitution = fixture->restitution;
+                def.density = fixture->density;
+                def.isSensor = fixture->is_sensor;
+                b2Body *body = phys_bodies[fixture->body];
+                target_body = body;
+            } else {
+                target_body = static_body;
+            }
+
+            def.shape = sh;
+            target_body->CreateFixture(&def);
+        };
 
         switch (shape->type()) {
             case kPolygon: {
                 PolygonShape *poly = static_cast<PolygonShape *>(shape.get());
-                unique_ptr<b2PolygonShape> bpoly = unique_ptr<b2PolygonShape>(new b2PolygonShape);
-                b2Vec2 *verts = new b2Vec2[poly->polygon.points.size()];
 
-                int i = 0;
-                for (const auto& pt : poly->polygon.points) {
-                    math::Point p = { pt.x, pt.y };
-                    math::Transform rot = math::Rotate(RAD_TO_DEG(shape->rotation));
-                    p = rot.Apply(p);
+                for (const auto& subpoly : poly->subpolygons) {
+                    unique_ptr<b2PolygonShape> bpoly = unique_ptr<b2PolygonShape>(new b2PolygonShape);
+                    b2Vec2 *verts = new b2Vec2[poly->polygon.points.size()];
+                    int i = 0;
 
-                    if (!has_fixture) {
-                        p.x += shape->position.x;
-                        p.y += shape->position.y;
-                    } else {
-                        p.x += shape->position.x - fix_body->position.x; 
-                        p.y += shape->position.y - fix_body->position.y;
+                    for (const auto& pt : subpoly.points) {
+                        math::Point p = { pt.x, pt.y };
+                        math::Transform rot = math::Rotate(RAD_TO_DEG(shape->rotation));
+                        p = rot.Apply(p);
+
+                        if (!has_fixture) {
+                            p.x += shape->position.x;
+                            p.y += shape->position.y;
+                        } else {
+                            p.x += shape->position.x - fix_body->position.x; 
+                            p.y += shape->position.y - fix_body->position.y;
+                        }
+                        verts[i] = PointToVec(p);
+                        i++;
                     }
-                    verts[i] = PointToVec(p);
-                    i++;
-                }
 
-                bpoly->Set(verts, poly->polygon.points.size());
-                shapes_to_fix.push_back(std::move(bpoly));
-                delete [] verts;
+                    bpoly->Set(verts, subpoly.points.size());
+                    fix_shape(bpoly.get());
+                    delete [] verts;
+                }
 
                 break;
             }
@@ -137,29 +159,10 @@ void World::LoadMap(const string& map_name)
                 }
                 bcircle->m_p = PointToVec(circle->position) + offset;
                 bcircle->m_radius = circle->radius;
-                shapes_to_fix.push_back(std::move(bcircle));
+                fix_shape(bcircle.get());
 
                 break;
             }
-        }
-
-        // Create fixtures for this shape
-        b2FixtureDef def;
-        b2Body *target_body;
-        if (has_fixture) {
-            def.friction = fixture->friction;
-            def.restitution = fixture->restitution;
-            def.density = fixture->density;
-            def.isSensor = fixture->is_sensor;
-            b2Body *body = phys_bodies[fixture->body];
-            target_body = body;
-        } else {
-            target_body = static_body;
-        }
-
-        for (const auto& fix_shape : shapes_to_fix) {
-            def.shape = fix_shape.get();
-            target_body->CreateFixture(&def);
         }
     }
 

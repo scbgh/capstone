@@ -10,6 +10,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <list>
 #include "math/math.h"
 
 namespace pg {
@@ -81,6 +82,7 @@ struct Shape : public Entity {
 // Polygon shape made up of many triangles
 struct PolygonShape : public Shape {
     math::Polygon polygon;
+    std::list<math::Polygon> subpolygons;
     virtual ShapeType type() const { return kPolygon; }
 };
 
