@@ -10,6 +10,7 @@
 #include <cstdarg>
 #include <cstdio>
 #include <iostream>
+#include <list>
 #include <map>
 #include <memory>
 #include <set>
@@ -24,6 +25,7 @@
 #define WIN32
 #endif
 
+using std::list;
 using std::vector;
 using std::set;
 using std::map;
