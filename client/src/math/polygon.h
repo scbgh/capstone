@@ -6,6 +6,7 @@
 #ifndef _POLYGON_H_
 #define _POLYGON_H_
 
+#include <list>
 #include <vector>
 #include "math/point.h"
 
@@ -45,20 +46,10 @@ public:
 
     Polygon() { }
     Polygon(const Polygon& other) : points(other.points) { }
-    Polygon(const std::vector<Point>& other) : points(other) { }
+    explicit Polygon(const std::vector<Point>& other) : points(other) { }
 };
 
-//
-// struct Diagonal
-// Represents a diagonal between two indexed points in a polygon
-struct Diagonal {
-    int p1;
-    int p2;
-};
-
-std::vector<Diagonal> Triangulate(const Polygon& poly);
-std::vector<Diagonal> ConvexDecompose(const Polygon& poly);
-std::vector<Polygon> Partition(const Polygon& poly, const std::vector<Diagonal>& diags);
+std::list<Polygon> Triangulate(const Polygon& poly);
 
 }
 }

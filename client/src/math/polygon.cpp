@@ -83,18 +83,17 @@ bool IsEar(const Polygon& poly, int u, int v, int w, int n, int *verts)
 
 //
 // http://www.flipcode.com/archives/Efficient_Polygon_Triangulation.shtml
-vector<Diagonal> Triangulate(const Polygon& poly)
+list<Polygon> Triangulate(const Polygon& poly)
 {
     int n = poly.points.size();
     int *verts = new int[n];
-    vector<Diagonal> diags;
+    list<Polygon> polys;
 
     for (int i = 0; i < n; i++) {
         verts[i] = i;
     }
 
     int remaining = n;
-    int m = 0;
     int v = remaining - 1;
     int count = 2*remaining;
 
@@ -103,6 +102,7 @@ vector<Diagonal> Triangulate(const Polygon& poly)
             Debug("Failed to triangulate polygon");
             return {};
         }
+        count--;
 
         int u, w;
         u = v;
@@ -117,39 +117,23 @@ vector<Diagonal> Triangulate(const Polygon& poly)
             a = verts[u];
             b = verts[v];
             c = verts[w];
-            diags.push_back({ a, c });
 
-            m++;
+            Polygon tri;
+            tri.points.push_back(poly[a]);
+            tri.points.push_back(poly[b]);
+            tri.points.push_back(poly[c]);
+            polys.push_back(tri);
 
             for (int s = v, t = v + 1; t < remaining; s++, t++) {
                 verts[s] = verts[t];
-                remaining--;
             }
+            remaining--;
 
             count = 2 * remaining;
         }
     }
 
     delete [] verts;
-    return diags;
-}
-
-//
-//
-vector<Polygon> Partition(const Polygon& poly, const vector<Diagonals>& diags)
-{
-    vector<Polygon> polys;
-    int *verts = new int[n];
-
-    for (int i = 0; i < n; i++) {
-        verts[i] = i;
-    }
-
-    for (auto& diag : diags) {
-
-    }
-
-    free verts;
     return polys;
 }
 
