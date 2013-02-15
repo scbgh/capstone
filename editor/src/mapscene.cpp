@@ -449,6 +449,16 @@ void MapScene::addShape(QSharedPointer<Shape> shape)
 //
 void MapScene::addFixture(QSharedPointer<Fixture> fixture)
 {
+    ConnectItem *fixConn = new ConnectItem(fixture, 0, 0);
+    fixConn->setShape1(fixture->body->shapeItem);
+    fixConn->setShape2(fixture->shape->shapeItem);
+    fixConn->setConnectionType(kFixtureConnection);
+    fixConn->setPen(fixtureColor_);
+
+    fixture->connectItem = fixConn;
+    fixConn->sync();
+    addItem(fixConn->innerShape());
+    connect(fixture.data(), SIGNAL(invalidated()), fixture->connectItem, SLOT(sync()));
 }
 
 //
