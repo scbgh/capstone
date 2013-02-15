@@ -188,7 +188,7 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
         shape->rotation = shape_object["rotation"].get<double>();
         shape->position = pointFromArray(shape_object["position"].get<picojson::array>());
         shapes[shape->id] = shape;
-        game_map->shapes << shape;
+        game_map->shapes.append(shape);
     }
 
     // Second shapes pass to load bodies
@@ -218,7 +218,7 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
             }
 
             bodies[body->id] = body;
-            game_map->shapes << body;
+            game_map->shapes.append(body);
         }
     }    
 
@@ -238,7 +238,7 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
         fixture->shape = shapes[shape_id];
         fixture->body = bodies[body_id];
 
-        game_map->fixtures << fixture;
+        game_map->fixtures.append(fixture);
     }
 
     return game_map;

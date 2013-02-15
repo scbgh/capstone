@@ -315,6 +315,25 @@ void MainWindow::writeMap(const QString& filename)
 
 //
 //
+void MainWindow::readMap(const QString& filename)
+{
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        errMsg_->showMessage(QString("Failed to open file '%1'").arg(filename));
+        return;
+    }
+
+    QTextStream reader(&file);
+    QString json;
+    reader >> json;
+
+    map_ = jsonToMap(json);
+    scene_->setMap(map_);
+    scene_->sync();
+}
+
+//
+//
 bool MainWindow::newMap()
 {
     if (!askSaveIfDirty()) {
@@ -333,9 +352,18 @@ bool MainWindow::newMap()
 //
 bool MainWindow::openMap()
 {
-    askSaveIfDirty();
-    // TODO...
-    return true;
+    if (!askSaveIfDirty()) {
+        return false;
+    } else {
+        QString filename = QFileDialog::getOpenFileName(this, tr("Open Map"), ".", tr("JSON Files (*.json)"));
+        if (!filename.isEmpty()) {
+            mapFilename_ = filename;
+            readMap(filename);
+            undoStack_->clear();
+            return true;
+        }
+        return false;
+    }
 }
 
 //
@@ -355,7 +383,7 @@ bool MainWindow::saveMap()
 //
 bool MainWindow::saveMapAs()
 {
-    QString filename = QFileDialog::getSaveFileName(this, tr("Open Map"), "untitled.json", tr("JSON Files (*.json)"));
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save Map"), "untitled.json", tr("JSON Files (*.json)"));
     if (!filename.isEmpty()) {
         mapFilename_ = filename;
         writeMap(filename);

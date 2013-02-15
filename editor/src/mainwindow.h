@@ -31,6 +31,7 @@ public:
 protected:
     virtual void closeEvent(QCloseEvent *event);
     bool askSaveIfDirty();
+    void readMap(const QString& filename);
     void writeMap(const QString& filename);
 
 private slots:
