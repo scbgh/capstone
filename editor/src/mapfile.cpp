@@ -18,6 +18,13 @@ int freshId()
 }
 
 //
+// Convert a two-element JSON-value array (STL vector) into a Point
+QPointF pointFromArray(const std::vector<picojson::value>& elems)
+{
+    return { elems[0].get<double>(), elems[1].get<double>() };
+}
+
+//
 //
 j::value pointToValue(QPointF point)
 {
@@ -135,5 +142,104 @@ QString mapToJson(QSharedPointer<GameMap> map)
 //
 QSharedPointer<GameMap> jsonToMap(const QString& json)
 {
-    return QSharedPointer<GameMap>();
+        // Load the root object of the JSON map representation
+    picojson::value root_value;
+    std::string error;
+    std::string stdJson = json.toStdString();
+    picojson::parse(root_value, stdJson.begin(), stdJson.end(), &error);
+    if (!error.empty()) {
+        qFatal("Failed to parse JSON: %s", error.c_str());
+    }
+
+    QMap<int, QSharedPointer<Shape>> shapes;
+    QMap<int, QSharedPointer<Body>> bodies;
+
+    auto root_object = root_value.get<picojson::object>();
+
+    QSharedPointer<GameMap> game_map = QSharedPointer<GameMap>(new GameMap);
+    game_map->width = root_object["width"].get<double>();
+    game_map->height = root_object["height"].get<double>();
+
+    // Do two passes from the shape array -- first to load the geometric shapes, then to load the bodies
+    for (const auto& shape_value : root_object["shapes"].get<picojson::array>()) {
+        auto shape_object = shape_value.get<picojson::object>();
+
+        QSharedPointer<Shape> shape;
+        std::string type = shape_object["type"].get<std::string>();
+        if (type == "polygon") {
+            QSharedPointer<PolygonShape> poly = QSharedPointer<PolygonShape>(new PolygonShape);
+            shape = qSharedPointerCast<Shape>(poly);
+
+            // Read the points
+            for (const auto& point_value : shape_object["polygon"].get<picojson::array>()) {
+                poly->polygon << pointFromArray(point_value.get<picojson::array>());
+            }
+        } else if (type == "circle") {
+            QSharedPointer<CircleShape> circle = QSharedPointer<CircleShape>(new CircleShape);
+            shape = qSharedPointerCast<Shape>(circle);
+            circle->radius = shape_object["radius"].get<double>();
+        } else if (type == "body") {
+            continue;
+        } else {
+            qFatal("Unknown shape type '%s' while loading map", type.c_str());
+        }
+
+        shape->id = shape_object["id"].get<double>();
+        shape->rotation = shape_object["rotation"].get<double>();
+        shape->position = pointFromArray(shape_object["position"].get<picojson::array>());
+        shapes[shape->id] = shape;
+        game_map->shapes << shape;
+    }
+
+    // Second shapes pass to load bodies
+    for (const auto& body_value : root_object["shapes"].get<picojson::array>()) {
+        auto shape_object = body_value.get<picojson::object>();
+
+        std::string type = shape_object["type"].get<std::string>();
+        if (type == "body") {
+            QSharedPointer<Body> body = QSharedPointer<Body>(new Body);
+            body->id = shape_object["id"].get<double>();
+            body->rotation = shape_object["rotation"].get<double>();
+            body->position = pointFromArray(shape_object["position"].get<picojson::array>());
+            body->linearVelocity = pointFromArray(shape_object["linearVelocity"].get<picojson::array>());
+            body->angularVelocity = shape_object["angularVelocity"].get<double>();
+            body->linearDamping = shape_object["linearDamping"].get<double>();
+            body->angularDamping = shape_object["angularDamping"].get<double>();
+            body->fixedRotation = shape_object["fixedRotation"].get<bool>();
+            body->awake = shape_object["awake"].get<bool>();
+            body->allowSleep = shape_object["allowSleep"].get<bool>();
+            body->active = shape_object["active"].get<bool>();
+            bool isDynamic = shape_object["isDynamic"].get<bool>();
+
+            if (!isDynamic) {
+                body->bodyType = Body::kStatic;
+            } else {
+                body->bodyType = Body::kDynamic;
+            }
+
+            bodies[body->id] = body;
+            game_map->shapes << body;
+        }
+    }    
+
+    // Load the fixtures
+    for (const auto& fixture_value : root_object["fixtures"].get<picojson::array>()) {
+        auto fixture_object = fixture_value.get<picojson::object>();
+
+        QSharedPointer<Fixture> fixture = QSharedPointer<Fixture>(new Fixture);
+        fixture->id = fixture_object["id"].get<double>();
+        fixture->friction = fixture_object["friction"].get<double>();
+        fixture->restitution = fixture_object["restitution"].get<double>();
+        fixture->density = fixture_object["density"].get<double>();
+        fixture->isSensor = fixture_object["isSensor"].get<bool>();
+
+        int shape_id = fixture_object["shape"].get<double>();
+        int body_id = fixture_object["body"].get<double>();
+        fixture->shape = shapes[shape_id];
+        fixture->body = bodies[body_id];
+
+        game_map->fixtures << fixture;
+    }
+
+    return game_map;
 }
