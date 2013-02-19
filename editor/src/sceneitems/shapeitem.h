@@ -9,7 +9,6 @@
 #include "sceneitem.h"
 #include <QtGui>
 
-class MapScene;
 class ConnectItem;
 struct Shape;
 
@@ -27,8 +26,6 @@ public slots:
     virtual void sync() = 0;
     virtual void commit() = 0;
 protected:
-    MapScene *mapScene() { return (MapScene *)innerShape()->scene(); }
-
     QPointF preMovePoint_;
 };
 

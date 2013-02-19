@@ -13,6 +13,7 @@
 
 class ConnectItem;
 class QGraphicsItem;
+class MapScene;
 
 enum SceneItemTypes {
     kPolygonShapeItem = QGraphicsItem::UserType + 1,
@@ -46,6 +47,8 @@ public:
     void syncConnections();
 
 protected:
+    MapScene *mapScene() { return (MapScene *)innerShape()->scene(); }
+
     QVector<ConnectItem *> connections_;
     QSharedPointer<Entity> entity_;
 };
