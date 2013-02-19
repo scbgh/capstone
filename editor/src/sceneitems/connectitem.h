@@ -9,6 +9,8 @@
 #include <QGraphicsLineItem>
 #include "sceneitem.h"
 
+class VertexItem;
+
 enum ConnectionType { kFixtureConnection, kJointConnection };
 
 class ConnectItem : public QObject, public QGraphicsLineItem, public SceneItem {
@@ -30,8 +32,10 @@ public:
     ConnectionType connectionType() const { return connectionType_; }
     void setConnectionType(ConnectionType connectionType) { connectionType_ = connectionType; }
 
-    virtual QPainterPath shape() const;
+    void addVertexItem(VertexItem *vertexItem);
 
+    virtual QPainterPath shape() const;
+    virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
     virtual QGraphicsItem *innerShape() const { return (QGraphicsItem *)this; };
 
 public slots:
@@ -46,7 +50,8 @@ protected:
 private:
     SceneItem *shape1_;
     SceneItem *shape2_; 
-    ConnectionType connectionType_;   
+    ConnectionType connectionType_;
+    QVector<VertexItem *> vertices_;
 };
 
 #endif

@@ -5,6 +5,7 @@
 #include <QtGui>
 #include "connectitem.h"
 #include "sceneitems.h"
+#include "vertexitem.h"
 
 //
 //
@@ -60,6 +61,14 @@ void ConnectItem::setShape2(SceneItem *shape2)
 
 //
 //
+void ConnectItem::addVertexItem(VertexItem *vertexItem)
+{
+    childItems().append(vertexItem);
+    vertices_.append(vertexItem);
+}
+
+//
+//
 void ConnectItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
     QVector2D dist1 = QVector2D(line().p1() - event->scenePos());
@@ -80,6 +89,10 @@ void ConnectItem::sync()
         l.setP2(shape2_->innerShape()->pos());
     }
     setLine(l);
+
+    for (auto& vert : vertices_) {
+        vert->sync();
+    }
 }
 
 //
@@ -99,4 +112,17 @@ QPainterPath ConnectItem::shape() const
     path.lineTo(line().p2() - perp / 2 + par / 2);
     path.closeSubpath();
     return path;
+}
+
+//
+//
+QVariant ConnectItem::itemChange(GraphicsItemChange change, const QVariant& value)
+{
+    // Hide children if not selected
+    if (change == ItemSelectedHasChanged) {
+        for (auto& child : childItems()) {
+            child->setVisible(isSelected());
+        }
+    }
+    return QGraphicsItem::itemChange(change, value);
 }
