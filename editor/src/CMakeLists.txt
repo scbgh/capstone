@@ -18,6 +18,7 @@ set(PGEDITOR_SRCS
     sceneitems/polygonshapeitem.cpp
     sceneitems/sceneitem.cpp
     sceneitems/shapeitem.cpp
+    sceneitems/vertexitem.cpp
 )
 
 set (PGEDITOR_MOCS
