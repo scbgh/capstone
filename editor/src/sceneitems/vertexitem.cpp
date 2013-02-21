@@ -8,14 +8,18 @@
 //
 //
 VertexItem::VertexItem(std::function<QPointF()> syncFunc, std::function<void(QPointF)> commitFunc,
-        QGraphicsItem *parent, QGraphicsScene *scene) :
+        QSharedPointer<Entity> parentEntity, QGraphicsItem *parent, QGraphicsScene *scene) :
     QGraphicsEllipseItem(parent, scene),
     syncFunc_(syncFunc),
-    commitFunc_(commitFunc)
+    commitFunc_(commitFunc),
+    parentEntity_(parentEntity)
 {
     setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+
+    setRect(QRectF(-0.25, -0.25, 0.25, 0.25));
+    setZValue(10000);
 }
 
 //
@@ -25,6 +29,9 @@ void VertexItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     QPen drawPen = pen();
 
     if (isSelected()) {
+        drawBrush = QColor(128, 255, 128, 128);
+        drawPen = QColor(128, 255, 128);
+    } else {
         drawBrush = QColor(255, 255, 255, 128);
         drawPen = QColor(255, 255, 255);
     }
@@ -55,7 +62,7 @@ QVariant VertexItem::itemChange(GraphicsItemChange change, const QVariant& value
     MapScene *mapScene = (MapScene *)scene();
     if (change == ItemPositionChange && mapScene) {
         QPointF newPos = mapScene->snapPoint(value.toPointF());
-        return newPos;
+        //return newPos;
     } else if (change == ItemPositionHasChanged) {
         commit();
     }

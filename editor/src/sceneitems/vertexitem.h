@@ -10,19 +10,24 @@
 #include <functional>
 #include <QGraphicsEllipseItem>
 
+class Entity;
+
 class VertexItem : public QGraphicsEllipseItem {
 public:
     explicit VertexItem(std::function<QPointF()> syncFunc, std::function<void(QPointF)> commitFunc,
-        QGraphicsItem *parent = 0, QGraphicsScene *scene = 0);
+        QSharedPointer<Entity> parentEntity, QGraphicsItem *parent = 0, QGraphicsScene *scene = 0);
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
     void sync();
     void commit();
     virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
 
+    QSharedPointer<Entity> parentEntity() const { return parentEntity_; }
+
 private:
     std::function<QPointF()> syncFunc_;
     std::function<void(QPointF)> commitFunc_;
+    QSharedPointer<Entity> parentEntity_;
 };
 
 #endif
