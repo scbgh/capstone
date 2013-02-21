@@ -25,8 +25,13 @@ ConnectItem::ConnectItem(QSharedPointer<Entity> entity, SceneItem *shape1, Scene
 //
 void ConnectItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    bool selected = isSelected();
+    for (auto vert : childItems()) {
+        selected |= vert->isSelected();
+    }
+
     painter->setPen(pen());
-    if (isSelected()) {
+    if (selected) {
         painter->setPen(QColor(0, 255, 0));
         painter->drawPath(shape());
     }
@@ -65,6 +70,7 @@ void ConnectItem::addVertexItem(VertexItem *vertexItem)
 {
     childItems().append(vertexItem);
     vertices_.append(vertexItem);
+    vertexItem->setParentItem(this);
 }
 
 //
@@ -112,17 +118,4 @@ QPainterPath ConnectItem::shape() const
     path.lineTo(line().p2() - perp / 2 + par / 2);
     path.closeSubpath();
     return path;
-}
-
-//
-//
-QVariant ConnectItem::itemChange(GraphicsItemChange change, const QVariant& value)
-{
-    // Hide children if not selected
-    if (change == ItemSelectedHasChanged) {
-        for (auto& child : childItems()) {
-            child->setVisible(isSelected());
-        }
-    }
-    return QGraphicsItem::itemChange(change, value);
 }

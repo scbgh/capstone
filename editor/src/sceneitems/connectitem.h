@@ -35,7 +35,6 @@ public:
     void addVertexItem(VertexItem *vertexItem);
 
     virtual QPainterPath shape() const;
-    virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
     virtual QGraphicsItem *innerShape() const { return (QGraphicsItem *)this; };
 
 public slots:
