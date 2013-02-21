@@ -11,6 +11,7 @@
 #include "propertyitemmodel.h"
 #include "editorwidgets/pointeditor.h"
 #include "sceneitems/shapeitem.h"
+#include "sceneitems/vertexitem.h"
 #include <QtGui>
 
 
@@ -55,14 +56,24 @@ MainWindow::MainWindow()
     toolButtonGroup_ = new QButtonGroup(this);
     QAbstractButton *selectButton = createToolButton("Select");
     toolButtonGroup_->addButton(selectButton, kSelectButton);
-    toolButtonGroup_->addButton(createToolButton("Draw Polygon"), kPolygonButton);
-    toolButtonGroup_->addButton(createToolButton("Draw Circle"), kCircleButton);
-    toolButtonGroup_->addButton(createToolButton("Place Body"), kBodyButton);
-    toolButtonGroup_->addButton(createToolButton("Make Fixture"), kFixtureButton);
+    toolButtonGroup_->addButton(createToolButton("Polygon Shape"), kPolygonButton);
+    toolButtonGroup_->addButton(createToolButton("Circle Shape"), kCircleButton);
+    toolButtonGroup_->addButton(createToolButton("Physics Body"), kBodyButton);
+    toolButtonGroup_->addButton(createToolButton("Body to Shape Fixture"), kFixtureButton);
+    toolButtonGroup_->addButton(createToolButton("Distance Joint"), kDistanceJointButton);
+    //toolButtonGroup_->addButton(createToolButton("Friction Joint"), kFrictionJointButton);
+    //toolButtonGroup_->addButton(createToolButton("Gear Joint"), kGearJointButton);
+    //toolButtonGroup_->addButton(createToolButton("Prismatic Joint"), kPrismaticJointButton);
+    //toolButtonGroup_->addButton(createToolButton("Pulley Joint"), kPulleyJointButton);
+    //toolButtonGroup_->addButton(createToolButton("Revolute Joint"), kRevoluteJointButton);
+    //toolButtonGroup_->addButton(createToolButton("Rope Joint"), kRopeJointButton);
+    //toolButtonGroup_->addButton(createToolButton("Weld Joint"), kWeldJointButton);
+    //toolButtonGroup_->addButton(createToolButton("Wheel Joint"), kWheelJointButton);
     connect(toolButtonGroup_, SIGNAL(buttonClicked(int)), this, SLOT(toolButtonClicked(int)));
     selectButton->setChecked(true);
 
     toolBoxLayout_->addStretch();
+    toolBoxLayout_->setSpacing(0);
 
     setCentralWidget(view_);
     setWindowTitle(tr("PGEditor"));
@@ -267,6 +278,42 @@ void MainWindow::toolButtonClicked(int id)
         case kFixtureButton:
             scene_->setMode(MapScene::kFixtureMode);
             break;
+        case kDistanceJointButton:
+            scene_->setMode(MapScene::kJointMode);
+            scene_->setJointMode(MapScene::kDistanceJoint);
+            break;
+        case kFrictionJointButton:
+            scene_->setMode(MapScene::kJointMode);
+            scene_->setJointMode(MapScene::kFrictionJoint);
+            break;
+        case kGearJointButton:
+            scene_->setMode(MapScene::kJointMode);
+            scene_->setJointMode(MapScene::kGearJoint);
+            break;
+        case kPrismaticJointButton:
+            scene_->setMode(MapScene::kJointMode);
+            scene_->setJointMode(MapScene::kPrismaticJoint);
+            break;
+        case kPulleyJointButton:
+            scene_->setMode(MapScene::kJointMode);
+            scene_->setJointMode(MapScene::kPulleyJoint);
+            break;
+        case kRevoluteJointButton:
+            scene_->setMode(MapScene::kJointMode);
+            scene_->setJointMode(MapScene::kRevoluteJoint);
+            break;
+        case kRopeJointButton:
+            scene_->setMode(MapScene::kJointMode);
+            scene_->setJointMode(MapScene::kRopeJoint);
+            break;
+        case kWeldJointButton:
+            scene_->setMode(MapScene::kJointMode);
+            scene_->setJointMode(MapScene::kWeldJoint);
+            break;
+        case kWheelJointButton:
+            scene_->setMode(MapScene::kJointMode);
+            scene_->setJointMode(MapScene::kWheelJoint);
+            break;
     }
 }
 
@@ -412,6 +459,11 @@ void MainWindow::selectionChanged()
         propertyItemModel_->setSource(QSharedPointer<HasProperties>());
     } else {
         SceneItem *sceneItem = dynamic_cast<SceneItem *>(scene_->selectedItems().takeFirst());
-        propertyItemModel_->setSource(sceneItem->entity());
+        VertexItem *vertexItem = dynamic_cast<VertexItem *>(sceneItem);
+        if (vertexItem) {
+            propertyItemModel_->setSource(vertexItem->parentEntity());
+        } else if (sceneItem) {
+            propertyItemModel_->setSource(sceneItem->entity());
+        }
     }
 }

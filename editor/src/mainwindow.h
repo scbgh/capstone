@@ -46,7 +46,9 @@ private slots:
     void selectionChanged();
 
 private:
-    enum { kSelectButton, kCircleButton, kPolygonButton, kBodyButton, kFixtureButton };
+    enum { kSelectButton, kCircleButton, kPolygonButton, kBodyButton, kFixtureButton,
+        kDistanceJointButton, kFrictionJointButton, kGearJointButton, kPrismaticJointButton, kPulleyJointButton,
+        kRevoluteJointButton, kRopeJointButton, kWeldJointButton, kWheelJointButton };
 
     QIcon loadIcon(const QString& name);
     QAbstractButton *createToolButton(const QString& name);
