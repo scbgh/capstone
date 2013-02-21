@@ -22,7 +22,7 @@ struct CircleShape;
 struct Joint;
 
 enum ShapeType { kPolygon, kCircle, kBody };
-enum JointType { kDistance, kGear, kLine, kMouse, kPrismatic, kPulley, kRevolute };
+enum JointType { kDistance, kGear, kLine, kPrismatic, kPulley, kRevolute, kRope, kWeld, kWheel };
 
 Q_DECLARE_METATYPE(ShapeType);
 Q_DECLARE_METATYPE(JointType);
@@ -141,10 +141,32 @@ Q_DECLARE_METATYPE(Body::BodyType);
 //
 // Base structure for a joint
 struct Joint : public Entity {
-    QSharedPointer<Body> body1;
-    QSharedPointer<Body> body2;
+    Joint() :
+        collideConnected(false)
+    { }
+
+    QSharedPointer<Body> bodyA;
+    QSharedPointer<Body> bodyB;
     PROPERTY(Joint, bool, collideConnected);
+
+    ConnectItem *connectItem;
     virtual JointType type() const = 0;
+};
+
+//
+//
+struct DistanceJoint : public Joint {
+    DistanceJoint() :
+        frequencyHz(0.0),
+        dampingRatio(0.0)
+    { }
+
+    PROPERTY(DistanceJoint, QPointF, anchorA);
+    PROPERTY(DistanceJoint, QPointF, anchorB);
+    PROPERTY(DistanceJoint, qreal, frequencyHz);
+    PROPERTY(DistanceJoint, qreal, dampingRatio);
+
+    virtual JointType type() const { return kDistance; }
 };
 
 #endif
