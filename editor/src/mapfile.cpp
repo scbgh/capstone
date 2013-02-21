@@ -116,6 +116,39 @@ j::value fixtureToValue(QSharedPointer<Fixture> fixture)
 
 //
 //
+j::value jointToValue(QSharedPointer<Joint> joint)
+{
+    j::object subObject;
+    j::object jointObject = {
+        { "id", j::value((double)joint->id) },
+        { "bodyA", j::value((double)joint->bodyA->id) },
+        { "bodyB", j::value((double)joint->bodyB->id) }
+    };
+
+    switch (joint->type()) {
+        case kDistance: {
+            QSharedPointer<DistanceJoint> realJoint = qSharedPointerCast<DistanceJoint>(joint);
+            subObject = {
+                { "type", j::value("distance") },
+                { "localAnchorA", pointToValue(realJoint->anchorA - realJoint->bodyA->position - QPointF(0.25, -0.25)) },
+                { "localAnchorB", pointToValue(realJoint->anchorB - realJoint->bodyB->position - QPointF(0.25, -0.25)) },
+                { "length", j::value(QVector2D(realJoint->anchorA - realJoint->anchorB).length()) },
+                { "frequencyHz", j::value(realJoint->frequencyHz) }, 
+                { "dampingRatio", j::value(realJoint->dampingRatio) }
+            };
+            break;
+        }
+        default:
+            qFatal("Unknown joint type");
+            break;
+    }
+    jointObject.insert(begin(subObject), end(subObject));
+
+    return j::value(jointObject);
+}
+
+//
+//
 QString mapToJson(QSharedPointer<GameMap> map)
 {
     j::array shapes;
@@ -128,11 +161,17 @@ QString mapToJson(QSharedPointer<GameMap> map)
         fixtures.push_back(fixtureToValue(fixture));
     }
 
+    j::array joints;
+    for (auto joint : map->joints) {
+        joints.push_back(jointToValue(joint));
+    }
+
     j::object rootObject = {
         { "width", j::value(map->width) },
         { "height", j::value(map->height) },
         { "shapes", j::value(shapes) },
-        { "fixtures", j::value(fixtures) }
+        { "fixtures", j::value(fixtures) },
+        { "joints", j::value(joints) }
     };
 
     return QString::fromStdString(j::value(rootObject).serialize());
@@ -239,6 +278,34 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
         fixture->body = bodies[body_id];
 
         game_map->fixtures.append(fixture);
+    }
+
+    // Load joints
+    for (const auto& joint_value : root_object["joints"].get<picojson::array>()) {
+        auto joint_object = joint_value.get<picojson::object>();
+
+        QSharedPointer<Joint> joint;
+        int body_a_id = joint_object["bodyA"].get<double>();
+        int body_b_id = joint_object["bodyB"].get<double>();
+        QSharedPointer<Body> bodyA = bodies[body_a_id];
+        QSharedPointer<Body> bodyB = bodies[body_b_id];
+        std::string type = joint_object["type"].get<std::string>();
+        if (type == "distance") {
+            DistanceJoint *distance_joint = new DistanceJoint;
+            joint = QSharedPointer<Joint>(distance_joint);
+            distance_joint->anchorA = pointFromArray(joint_object["localAnchorA"].get<picojson::array>())
+                + QPointF(0.25, -0.25);
+            distance_joint->anchorB = pointFromArray(joint_object["localAnchorB"].get<picojson::array>())
+                + QPointF(0.25, -0.25);
+            distance_joint->frequencyHz = joint_object["frequencyHz"].get<double>();
+            distance_joint->dampingRatio = joint_object["dampingRatio"].get<double>();
+        }
+
+        joint->bodyA = bodyA;
+        joint->bodyB = bodyB;
+        joint->id = joint_object["id"].get<double>();
+
+        game_map->joints.append(joint);
     }
 
     return game_map;
