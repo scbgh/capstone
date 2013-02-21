@@ -69,6 +69,36 @@ void CreateFixtureCommand::redo()
 
 //
 //
+CreateJointCommand::CreateJointCommand(MapScene *scene, QSharedPointer<Joint> joint, QUndoCommand *parent) :
+    QUndoCommand(parent),
+    scene_(scene),
+    joint_(joint)
+{
+    setText("Create Joint");
+}
+
+//
+//
+void CreateJointCommand::undo()
+{
+    scene_->map()->joints.pop_back();
+    scene_->removeItem(joint_->connectItem->innerShape());
+    joint_->connectItem->sync();
+}
+
+//
+//
+void CreateJointCommand::redo()
+{
+    scene_->map()->joints.append(joint_);
+    if (!scene_->items().contains(joint_->connectItem->innerShape())) {
+        scene_->addItem(joint_->connectItem->innerShape());
+    }
+    joint_->connectItem->sync();
+}
+
+//
+//
 MoveShapeCommand::MoveShapeCommand(MapScene *scene, QSharedPointer<Shape> shape, QPointF oldPos, QUndoCommand *parent) :
     QUndoCommand(parent),
     scene_(scene),
@@ -165,6 +195,41 @@ void DeleteFixtureCommand::redo()
     fixture_->connectItem->sync();
 }
 
+//
+//
+DeleteJointCommand::DeleteJointCommand(MapScene *scene, QSharedPointer<Joint> joint, QUndoCommand *parent) :
+    QUndoCommand(parent),
+    scene_(scene),
+    shape1_(joint_->connectItem->shape1()),
+    shape2_(joint_->connectItem->shape2()),
+    joint_(joint)
+{
+    setText("Delete Joint");
+}
+
+//
+//
+void DeleteJointCommand::undo()
+{
+    scene_->map()->joints.append(joint_);
+    if (!scene_->items().contains(joint_->connectItem->innerShape())) {
+        scene_->addItem(joint_->connectItem->innerShape());
+        joint_->connectItem->setShape1(shape1_);
+        joint_->connectItem->setShape2(shape2_);
+    }
+    joint_->connectItem->sync();
+}
+
+//
+//
+void DeleteJointCommand::redo()
+{
+    scene_->map()->joints.remove(scene_->map()->joints.indexOf(joint_));
+    joint_->connectItem->setShape1(NULL);
+    joint_->connectItem->setShape2(NULL);
+    scene_->removeItem(joint_->connectItem->innerShape());
+    joint_->connectItem->sync();
+}
 
 //
 //

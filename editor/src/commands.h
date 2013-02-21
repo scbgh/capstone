@@ -80,6 +80,22 @@ private:
 
 //
 //
+class DeleteJointCommand : public QUndoCommand
+{
+public:
+    DeleteJointCommand(MapScene *scene, QSharedPointer<Joint> fixture, QUndoCommand *parent = 0);
+    virtual void undo();
+    virtual void redo();
+
+private:
+    MapScene *scene_;
+    QSharedPointer<Joint> joint_;
+    SceneItem *shape1_;
+    SceneItem *shape2_;
+};
+
+//
+//
 class ChangePolygonGeometryCommand : public QUndoCommand
 {
 public:
@@ -125,6 +141,20 @@ public:
 private:
     MapScene *scene_;
     QSharedPointer<Fixture> fixture_;
+};
+
+//
+//
+class CreateJointCommand : public QUndoCommand
+{
+public:
+    CreateJointCommand(MapScene *scene, QSharedPointer<Joint> joint, QUndoCommand *parent = 0);
+    virtual void undo();
+    virtual void redo();
+
+private:
+    MapScene *scene_;
+    QSharedPointer<Joint> joint_;
 };
 
 #endif
