@@ -25,7 +25,9 @@ class MapScene : public QGraphicsScene {
     Q_OBJECT
 
 public:
-    enum Mode { kSelectMode, kPolygonMode, kCircleMode, kBodyMode, kFixtureMode };
+    enum Mode { kSelectMode, kPolygonMode, kCircleMode, kBodyMode, kFixtureMode, kJointMode };
+    enum JointMode { kDistanceJoint, kFrictionJoint, kGearJoint, kPrismaticJoint, kPulleyJoint, kRevoluteJoint,
+        kRopeJoint, kWeldJoint, kWheelJoint };
 
     explicit MapScene(QGraphicsView *view, QUndoStack *undoStack, QObject *parent = 0);
 
@@ -43,6 +45,9 @@ public:
 
     Mode mode() const { return mode_; }
     void setMode(Mode mode);
+
+    JointMode jointMode() const { return jointMode_; }
+    void setJointMode(JointMode jointMode) { jointMode_ = jointMode; }
 
     QUndoStack *undoStack() const { return undoStack_; }
 
@@ -64,10 +69,13 @@ private:
     void beginPolygon(const QPointF& point);
     void beginCircle(const QPointF& point);
     void beginFixture(const QPointF& point, QGraphicsItem *item);
+    void beginJoint(const QPointF& point, QGraphicsItem *item);
     void placeBody(const QPointF& point);
     void endPolygon(const QPointF& point);
     void endCircle(const QPointF& point);
     void endFixture(const QPointF& point);
+    void endJoint(const QPointF& point);
+    void makeVerticesForJoint(ConnectItem *item, QSharedPointer<Joint> joint);
 
     void addShape(QSharedPointer<Shape> shape);
     void addFixture(QSharedPointer<Fixture> fixture);
@@ -81,6 +89,7 @@ private:
     bool snapToGrid_;
     QGraphicsView *view_;
     Mode mode_;
+    JointMode jointMode_;
     bool drawing_;
     QGraphicsItem *tempItem_;
     QUndoStack *undoStack_;
@@ -89,6 +98,7 @@ private:
     QColor shapeColor_;
     QColor bodyColor_;
     QColor fixtureColor_;
+    QColor jointColor_;
 
     // Polygon mode
     QPolygonF curPoly_;
@@ -98,12 +108,14 @@ private:
     QPointF circleOrigin_;
     CircleShapeItem *circleItem_;
 
-    // Fixture mode
+    // Fixture/joint mode
     QPointF endPoint_;
     BodyShapeItem *firstShape_;
     ShapeItem *secondShape_;
     ConnectItem *fixtureConnection_;
+    ConnectItem *jointConnection_;
     QSharedPointer<Fixture> fixture_;
+    QSharedPointer<Joint> joint_;
 };
 
 #endif

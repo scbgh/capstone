@@ -10,6 +10,7 @@
 #include "sceneitems/connectitem.h"
 #include "sceneitems/polygonshapeitem.h"
 #include "sceneitems/sceneitem.h"
+#include "sceneitems/vertexitem.h"
 #include <cmath>
 #include <QtAlgorithms>
 #include <QtGui>
@@ -29,6 +30,7 @@ MapScene::MapScene(QGraphicsView *view, QUndoStack *undoStack, QObject *parent) 
     secondShape_(NULL),
     shapeColor_(QColor(255, 128, 128)),
     bodyColor_(QColor(128, 128, 255)),
+    jointColor_(QColor(0, 0, 255)),
     fixtureColor_(QColor(255, 255, 128))
 {
     addRect(0, 0, 1, 1, QPen(Qt::red));
@@ -127,6 +129,27 @@ void MapScene::beginFixture(const QPointF& point, QGraphicsItem *item)
 
 //
 //
+void MapScene::beginJoint(const QPointF& point, QGraphicsItem *item)
+{
+    switch (jointMode_) {
+        case kDistanceJoint:
+            joint_ = QSharedPointer<Joint>((Joint *)new DistanceJoint);
+            break;
+        default:
+            qFatal("Bad joint mode");
+            break;
+    }
+    firstShape_ = dynamic_cast<BodyShapeItem *>(item);
+    tempItem_ = jointConnection_ = new ConnectItem(joint_, firstShape_, NULL);
+    jointConnection_->setPen(QColor(255, 0, 0));
+    jointConnection_->setLine(QLineF(firstShape_->scenePos(), point));
+    joint_->connectItem = jointConnection_;
+    connect(joint_.data(), SIGNAL(invalidated()), joint_->connectItem, SLOT(sync()));
+    addItem(jointConnection_);
+}
+
+//
+//
 void MapScene::placeBody(const QPointF& point)
 {
     QPointF origin = snapPoint(point);
@@ -172,9 +195,9 @@ void MapScene::endCircle(const QPointF& point)
     undoStack_->push(new CreateShapeCommand(this, circleItem_->underlyingShape()));
     tempItem_ = circleItem_ = NULL;
 }
-//
-//
 
+//
+//
 void MapScene::endFixture(const QPointF& point)
 {
     fixtureConnection_->setShape1(firstShape_);
@@ -189,6 +212,53 @@ void MapScene::endFixture(const QPointF& point)
     fixture_.clear();
 }
 
+//
+//
+void MapScene::endJoint(const QPointF& point)
+{
+    jointConnection_->setShape1(firstShape_);
+    jointConnection_->setShape2(secondShape_);
+    joint_->bodyA = qSharedPointerCast<Body>(firstShape_->entity());
+    joint_->bodyB = qSharedPointerCast<Body>(secondShape_->entity());
+    makeVerticesForJoint(jointConnection_, joint_);
+    jointConnection_->setConnectionType(kJointConnection);
+    jointConnection_->setPen(jointColor_);
+    jointConnection_->sync();
+    undoStack_->push(new CreateJointCommand(this, joint_));
+    tempItem_ = jointConnection_ = NULL;
+    joint_.clear();
+}
+
+//
+//
+void MapScene::makeVerticesForJoint(ConnectItem *item, QSharedPointer<Joint> joint)
+{
+#define MAKE_VERTEX(cls, name, val) \
+    do { \
+        cls *ptr = (cls *)joint.data(); \
+        VertexItem *v = new VertexItem( \
+            [ptr]() { return ptr->name; }, \
+            [ptr](QPointF pt) { ptr->beginUpdate(); ptr->name = pt; ptr->endUpdate(); }, \
+            joint_ \
+        ); \
+        item->addVertexItem(v); \
+        qSharedPointerDynamicCast<cls>(joint)->beginUpdate(); \
+        qSharedPointerDynamicCast<cls>(joint)->name = val; \
+        qSharedPointerDynamicCast<cls>(joint)->endUpdate(); \
+    } while (0)
+
+    switch (joint->type()) {
+        case kDistance: {
+            MAKE_VERTEX(DistanceJoint, anchorA, joint->bodyA->position);
+            MAKE_VERTEX(DistanceJoint, anchorB, joint->bodyB->position);
+            break;
+        }
+        default:
+            break;
+    }
+
+#undef MAKE_VERTEX
+}
 
 //
 //
@@ -210,13 +280,20 @@ void MapScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
             if (item && (item->type() == kPolygonShapeItem || item->type() == kCircleShapeItem)) {
                 secondShape_ = dynamic_cast<ShapeItem *>(item);
                 if (!secondShape_->connections().isEmpty()) {
-                    qDebug() << "!";
                     secondShape_ = NULL;
                 } else {
                     endPoint_ = secondShape_->innerShape()->pos();
                 }
             }
             fixtureConnection_->setLine(QLineF(firstShape_->pos(), endPoint_));
+        } else if (mode_ == kJointMode) {
+            endPoint_ = mouseEvent->scenePos();
+            QGraphicsItem *item = itemAt(endPoint_);
+            if (item && item->type() == kBodyShapeItem) {
+                secondShape_ = dynamic_cast<ShapeItem *>(item);
+                endPoint_ = secondShape_->innerShape()->pos();
+            }
+            jointConnection_->setLine(QLineF(firstShape_->pos(), endPoint_));
         }
     } else {
         QGraphicsScene::mouseMoveEvent(mouseEvent);
@@ -241,7 +318,13 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             if (item && item->type() == kBodyShapeItem) {
                 drawing_ = true;
                 beginFixture(mouseEvent->scenePos(), item);                
-            }            
+            }
+        } else if (mode_ == kJointMode && mouseEvent->button() == Qt::LeftButton) {
+            QGraphicsItem *item = itemAt(mouseEvent->scenePos());
+            if (item && item->type() == kBodyShapeItem) {
+                drawing_ = true;
+                beginJoint(mouseEvent->scenePos(), item);                
+            }
         } else if (mode_ == kSelectMode && mouseEvent->button() == Qt::LeftButton) {
             QGraphicsScene::mousePressEvent(mouseEvent);
 
@@ -274,6 +357,11 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             if (secondShape_) {
                 drawing_ = false;
                 endFixture(mouseEvent->scenePos());
+            }
+        } else if (mode_ == kJointMode) {
+            if (secondShape_) {
+                drawing_ = false;
+                endJoint(mouseEvent->scenePos());
             }
         }
     }
@@ -338,6 +426,8 @@ void MapScene::keyPressEvent(QKeyEvent *keyEvent)
                 ConnectItem *conn = dynamic_cast<ConnectItem *>(sceneItem);
                 if (conn->connectionType() == kFixtureConnection) {
                     new DeleteFixtureCommand(this, qSharedPointerCast<Fixture>(conn->entity()), command);
+                } else if (conn->connectionType() == kJointConnection) {
+                    new DeleteJointCommand(this, qSharedPointerCast<Joint>(conn->entity()), command);
                 }
             }
         }
@@ -465,4 +555,14 @@ void MapScene::addFixture(QSharedPointer<Fixture> fixture)
 //
 void MapScene::addJoint(QSharedPointer<Joint> joint)
 {
+    ConnectItem *jointConn = new ConnectItem(joint, 0, 0);
+    jointConn->setShape1(joint->bodyA->shapeItem);
+    jointConn->setShape2(joint->bodyB->shapeItem);
+    jointConn->setConnectionType(kJointConnection);
+    jointConn->setPen(jointColor_);
+    joint->connectItem = jointConn;
+    makeVerticesForJoint(jointConn, joint);
+    jointConn->sync();
+    addItem(jointConn->innerShape());
+    connect(joint.data(), SIGNAL(invalidated()), joint->connectItem, SLOT(sync()));
 }
