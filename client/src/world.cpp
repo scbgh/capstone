@@ -166,6 +166,32 @@ void World::LoadMap(const string& map_name)
         }
     }
 
+    // Create joints
+    for (const auto& joint : map_file->joints) {
+        b2JointDef *def;
+        switch (joint->type()) {
+            case kDistance: {
+                DistanceJoint *distance_joint = (DistanceJoint *)joint.get();
+                b2DistanceJointDef *inner_def = new b2DistanceJointDef;
+                def = inner_def;
+                inner_def->localAnchorA = PointToVec(distance_joint->local_anchor_a);
+                inner_def->localAnchorB = PointToVec(distance_joint->local_anchor_b);
+                inner_def->length = distance_joint->length;
+                inner_def->frequencyHz = distance_joint->frequency_hz;
+                inner_def->dampingRatio = distance_joint->damping_ratio;
+                break;
+            }
+            default:
+                Die("Invalid joint type");
+                break;
+        }
+        def->bodyA = phys_bodies[joint->body_a];
+        def->bodyB = phys_bodies[joint->body_b];
+        def->collideConnected = joint->collide_connected;
+        phys_world_->CreateJoint(def);
+        delete def;
+    }
+
     initialized_ = true;
 }
 

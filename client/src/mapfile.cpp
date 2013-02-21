@@ -129,6 +129,30 @@ MapFile *LoadMapFromJSON(const string& json)
         map_file->fixtures.push_back(unique_ptr<Fixture>(fixture));
     }
 
+    // Load joints
+    for (const auto& joint_value : root_object["joints"].get<picojson::array>()) {
+        auto joint_object = joint_value.get<picojson::object>();
+
+        Joint *joint;
+        string type = joint_object["type"].get<string>();
+        if (type == "distance") {
+            DistanceJoint *distance_joint = new DistanceJoint;
+            joint = distance_joint;
+            distance_joint->local_anchor_a = PointFromArray(joint_object["localAnchorA"].get<picojson::array>());
+            distance_joint->local_anchor_b = PointFromArray(joint_object["localAnchorB"].get<picojson::array>());
+            distance_joint->length = joint_object["length"].get<double>();
+            distance_joint->frequency_hz = joint_object["frequencyHz"].get<double>();
+            distance_joint->damping_ratio = joint_object["dampingRatio"].get<double>();
+        }
+        int body_a_id = joint_object["bodyA"].get<double>();
+        int body_b_id = joint_object["bodyB"].get<double>();
+        joint->body_a = bodies[body_a_id];
+        joint->body_b = bodies[body_b_id];
+        joint->id = joint_object["id"].get<double>();
+
+        map_file->joints.push_back(unique_ptr<Joint>(joint));
+    }
+
     return map_file;
 }
 

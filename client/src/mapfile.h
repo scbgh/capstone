@@ -20,11 +20,13 @@ struct MapFile;
 struct Body;
 struct Fixture;
 struct Shape;
+struct Joint;
 struct PolygonShape;
 struct CircleShape;
 
 enum BodyType { kStatic, kDynamic };
 enum ShapeType { kPolygon, kCircle };
+enum JointType { kDistance, kGear, kLine, kPrismatic, kPulley, kRevolute, kRope, kWeld, kWheel };
 
 //
 // Base structure for all map entities
@@ -40,6 +42,7 @@ struct MapFile : public Entity {
     std::vector<std::unique_ptr<Shape>> shapes;
     std::vector<std::unique_ptr<Body>> bodies;
     std::vector<std::unique_ptr<Fixture>> fixtures;
+    std::vector<std::unique_ptr<Joint>> joints;
 };
 
 //
@@ -91,6 +94,26 @@ struct PolygonShape : public Shape {
 struct CircleShape : public Shape {
     double radius;
     virtual ShapeType type() const { return kCircle; }
+};
+
+//
+// Base structure for a joint
+struct Joint : public Entity {
+    Body *body_a;
+    Body *body_b;
+    bool collide_connected;
+    virtual JointType type() const = 0;
+};
+
+//
+//
+struct DistanceJoint : public Joint {
+    math::Point local_anchor_a;
+    math::Point local_anchor_b;
+    double length;
+    double frequency_hz;
+    double damping_ratio;
+    virtual JointType type() const { return kDistance; }
 };
 
 MapFile *LoadMapFromJSON(const std::string& json);
