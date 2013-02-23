@@ -122,6 +122,7 @@ void MapScene::beginFixture(const QPointF& point, QGraphicsItem *item)
     tempItem_ = fixtureConnection_ = new ConnectItem(fixture_, firstShape_, NULL);
     fixtureConnection_->setPen(QColor(255, 0, 0));
     fixtureConnection_->setLine(QLineF(firstShape_->scenePos(), point));
+    fixtureConnection_->setZValue(-1);
     fixture_->connectItem = fixtureConnection_;
     connect(fixture_.data(), SIGNAL(invalidated()), fixture_->connectItem, SLOT(sync()));
     addItem(fixtureConnection_);
@@ -135,6 +136,9 @@ void MapScene::beginJoint(const QPointF& point, QGraphicsItem *item)
         case kDistanceJoint:
             joint_ = QSharedPointer<Joint>((Joint *)new DistanceJoint);
             break;
+        case kRevoluteJoint:
+            joint_ = QSharedPointer<Joint>((Joint *)new RevoluteJoint);
+            break;
         default:
             qFatal("Bad joint mode");
             break;
@@ -143,6 +147,7 @@ void MapScene::beginJoint(const QPointF& point, QGraphicsItem *item)
     tempItem_ = jointConnection_ = new ConnectItem(joint_, firstShape_, NULL);
     jointConnection_->setPen(QColor(255, 0, 0));
     jointConnection_->setLine(QLineF(firstShape_->scenePos(), point));
+    jointConnection_->setZValue(-1);
     joint_->connectItem = jointConnection_;
     connect(joint_.data(), SIGNAL(invalidated()), joint_->connectItem, SLOT(sync()));
     addItem(jointConnection_);
@@ -206,6 +211,7 @@ void MapScene::endFixture(const QPointF& point)
     fixture_->shape = qSharedPointerCast<Shape>(secondShape_->entity());
     fixtureConnection_->setConnectionType(kFixtureConnection);
     fixtureConnection_->setPen(fixtureColor_);
+    fixtureConnection_->setZValue(10000);
     fixtureConnection_->sync();
     undoStack_->push(new CreateFixtureCommand(this, fixture_));
     tempItem_ = fixtureConnection_ = NULL;
@@ -220,9 +226,10 @@ void MapScene::endJoint(const QPointF& point)
     jointConnection_->setShape2(secondShape_);
     joint_->bodyA = qSharedPointerCast<Body>(firstShape_->entity());
     joint_->bodyB = qSharedPointerCast<Body>(secondShape_->entity());
-    makeVerticesForJoint(jointConnection_, joint_);
+    makeVerticesForJoint(jointConnection_, joint_, true);
     jointConnection_->setConnectionType(kJointConnection);
     jointConnection_->setPen(jointColor_);
+    jointConnection_->setZValue(10000);
     jointConnection_->sync();
     undoStack_->push(new CreateJointCommand(this, joint_));
     tempItem_ = jointConnection_ = NULL;
@@ -231,7 +238,7 @@ void MapScene::endJoint(const QPointF& point)
 
 //
 //
-void MapScene::makeVerticesForJoint(ConnectItem *item, QSharedPointer<Joint> joint)
+void MapScene::makeVerticesForJoint(ConnectItem *item, QSharedPointer<Joint> joint, bool init)
 {
 #define MAKE_VERTEX(cls, name, val) \
     do { \
@@ -242,16 +249,22 @@ void MapScene::makeVerticesForJoint(ConnectItem *item, QSharedPointer<Joint> joi
             joint_ \
         ); \
         item->addVertexItem(v); \
-        qSharedPointerDynamicCast<cls>(joint)->beginUpdate(); \
-        qSharedPointerDynamicCast<cls>(joint)->name = val; \
-        qSharedPointerDynamicCast<cls>(joint)->endUpdate(); \
+        ptr->beginUpdate(); \
+        if (init) { \
+            ptr->name = ptr->val; \
+        } \
+        ptr->endUpdate(); \
     } while (0)
 
     switch (joint->type()) {
         case kDistance: {
-            MAKE_VERTEX(DistanceJoint, anchorA, joint->bodyA->position);
-            MAKE_VERTEX(DistanceJoint, anchorB, joint->bodyB->position);
+            MAKE_VERTEX(DistanceJoint, anchorA, bodyA->position);
+            MAKE_VERTEX(DistanceJoint, anchorB, bodyB->position);
             break;
+        }
+        case kRevolute: {
+            MAKE_VERTEX(RevoluteJoint, anchor, bodyA->position);
+            break;            
         }
         default:
             break;
@@ -276,7 +289,7 @@ void MapScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
             circleItem_->setRect(-radius, -radius, 2*radius, 2*radius);
         } else if (mode_ == kFixtureMode) {
             endPoint_ = mouseEvent->scenePos();
-            QGraphicsItem *item = itemAt(endPoint_);
+            QGraphicsItem *item = itemAt(mouseEvent->scenePos());
             if (item && (item->type() == kPolygonShapeItem || item->type() == kCircleShapeItem)) {
                 secondShape_ = dynamic_cast<ShapeItem *>(item);
                 if (!secondShape_->connections().isEmpty()) {
@@ -284,14 +297,18 @@ void MapScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
                 } else {
                     endPoint_ = secondShape_->innerShape()->pos();
                 }
+            } else {
+                secondShape_ = NULL;
             }
             fixtureConnection_->setLine(QLineF(firstShape_->pos(), endPoint_));
         } else if (mode_ == kJointMode) {
             endPoint_ = mouseEvent->scenePos();
-            QGraphicsItem *item = itemAt(endPoint_);
+            QGraphicsItem *item = itemAt(mouseEvent->scenePos());
             if (item && item->type() == kBodyShapeItem) {
                 secondShape_ = dynamic_cast<ShapeItem *>(item);
                 endPoint_ = secondShape_->innerShape()->pos();
+            } else {
+                secondShape_ = NULL;
             }
             jointConnection_->setLine(QLineF(firstShape_->pos(), endPoint_));
         }
@@ -561,7 +578,7 @@ void MapScene::addJoint(QSharedPointer<Joint> joint)
     jointConn->setConnectionType(kJointConnection);
     jointConn->setPen(jointColor_);
     joint->connectItem = jointConn;
-    makeVerticesForJoint(jointConn, joint);
+    makeVerticesForJoint(jointConn, joint, false);
     jointConn->sync();
     addItem(jointConn->innerShape());
     connect(joint.data(), SIGNAL(invalidated()), joint->connectItem, SLOT(sync()));

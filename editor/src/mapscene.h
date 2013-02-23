@@ -75,7 +75,7 @@ private:
     void endCircle(const QPointF& point);
     void endFixture(const QPointF& point);
     void endJoint(const QPointF& point);
-    void makeVerticesForJoint(ConnectItem *item, QSharedPointer<Joint> joint);
+    void makeVerticesForJoint(ConnectItem *item, QSharedPointer<Joint> joint, bool init);
 
     void addShape(QSharedPointer<Shape> shape);
     void addFixture(QSharedPointer<Fixture> fixture);
