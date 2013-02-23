@@ -4,6 +4,7 @@
 //
 
 #include "hasproperties.h"
+#include <math.h>
 #include <QtCore>
 #include <QtGui>
 
@@ -42,7 +43,8 @@ struct Entity : public HasProperties {
 struct GameMap : public Entity {
     GameMap() :
         width(1280./32.),
-        height(720./32.)
+        height(720./32.),
+        Entity()
     { }
 
     PROPERTY(GameMap, qreal, width);
@@ -59,7 +61,8 @@ struct Fixture : public Entity {
         friction(0),
         restitution(0),
         density(0),
-        isSensor(false)
+        isSensor(false),
+        Entity()
     { }
 
     QSharedPointer<Shape> shape;
@@ -76,7 +79,8 @@ struct Fixture : public Entity {
 // Base structure for a shape
 struct Shape : public Entity {
     Shape() :
-        rotation(0)
+        rotation(0),
+        Entity()
     { }
 
     PROPERTY(Shape, QPointF, position);
@@ -119,7 +123,8 @@ public:
         bullet(false),
         awake(true),
         allowSleep(true),
-        active(true)
+        active(true),
+        Shape()
     { }
 
     PROPERTY(Body, BodyType, bodyType);
@@ -142,7 +147,8 @@ Q_DECLARE_METATYPE(Body::BodyType);
 // Base structure for a joint
 struct Joint : public Entity {
     Joint() :
-        collideConnected(false)
+        collideConnected(false),
+        Entity()
     { }
 
     QSharedPointer<Body> bodyA;
@@ -157,8 +163,9 @@ struct Joint : public Entity {
 //
 struct DistanceJoint : public Joint {
     DistanceJoint() :
-        frequencyHz(0.0),
-        dampingRatio(0.0)
+        frequencyHz(30.0),
+        dampingRatio(1.0),
+        Joint()
     { }
 
     PROPERTY(DistanceJoint, QPointF, anchorA);
@@ -168,5 +175,31 @@ struct DistanceJoint : public Joint {
 
     virtual JointType type() const { return kDistance; }
 };
+
+//
+//
+struct RevoluteJoint : public Joint {
+    RevoluteJoint() :
+        enableMotor(false),
+        enableLimit(false),
+        lowerAngle(0.0),
+        upperAngle(2*M_PI),
+        maxMotorTorque(20.0),
+        motorSpeed(50.0),
+        Joint()
+    { }
+
+    PROPERTY(RevoluteJoint, QPointF, anchor);
+    PROPERTY(RevoluteJoint, bool, enableMotor);
+    PROPERTY(RevoluteJoint, bool, enableLimit);
+    PROPERTY(RevoluteJoint, qreal, referenceAngle);
+    PROPERTY(RevoluteJoint, qreal, lowerAngle);
+    PROPERTY(RevoluteJoint, qreal, upperAngle);
+    PROPERTY(RevoluteJoint, qreal, maxMotorTorque);
+    PROPERTY(RevoluteJoint, qreal, motorSpeed);
+
+    virtual JointType type() const { return kRevolute; }
+};
+
 
 #endif
