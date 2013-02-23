@@ -65,7 +65,7 @@ MainWindow::MainWindow()
     //toolButtonGroup_->addButton(createToolButton("Gear Joint"), kGearJointButton);
     //toolButtonGroup_->addButton(createToolButton("Prismatic Joint"), kPrismaticJointButton);
     //toolButtonGroup_->addButton(createToolButton("Pulley Joint"), kPulleyJointButton);
-    //toolButtonGroup_->addButton(createToolButton("Revolute Joint"), kRevoluteJointButton);
+    toolButtonGroup_->addButton(createToolButton("Revolute Joint"), kRevoluteJointButton);
     //toolButtonGroup_->addButton(createToolButton("Rope Joint"), kRopeJointButton);
     //toolButtonGroup_->addButton(createToolButton("Weld Joint"), kWeldJointButton);
     //toolButtonGroup_->addButton(createToolButton("Wheel Joint"), kWheelJointButton);
