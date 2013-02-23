@@ -46,9 +46,7 @@ j::value polygonToValue(QPolygonF polygon)
 //
 j::value shapeToValue(QSharedPointer<Shape> shape)
 {
-    if (shape->id == 0) {
-        shape->id = freshId();
-    }
+    shape->id = freshId();
 
     j::object subObject;    
     j::object shapeObject = {
@@ -101,6 +99,7 @@ j::value shapeToValue(QSharedPointer<Shape> shape)
 //
 j::value fixtureToValue(QSharedPointer<Fixture> fixture)
 {
+    fixture->id = freshId();
     j::object shapeObject = {
         { "id", j::value((double)fixture->id) },
         { "shape", j::value((double)fixture->shape->id) },
@@ -118,11 +117,14 @@ j::value fixtureToValue(QSharedPointer<Fixture> fixture)
 //
 j::value jointToValue(QSharedPointer<Joint> joint)
 {
+    joint->id = freshId();
+
     j::object subObject;
     j::object jointObject = {
         { "id", j::value((double)joint->id) },
         { "bodyA", j::value((double)joint->bodyA->id) },
-        { "bodyB", j::value((double)joint->bodyB->id) }
+        { "bodyB", j::value((double)joint->bodyB->id) },
+        { "collideConnected", j::value(joint->collideConnected) }
     };
 
     switch (joint->type()) {
@@ -130,11 +132,25 @@ j::value jointToValue(QSharedPointer<Joint> joint)
             QSharedPointer<DistanceJoint> realJoint = qSharedPointerCast<DistanceJoint>(joint);
             subObject = {
                 { "type", j::value("distance") },
-                { "localAnchorA", pointToValue(realJoint->anchorA - realJoint->bodyA->position - QPointF(0.25, -0.25)) },
-                { "localAnchorB", pointToValue(realJoint->anchorB - realJoint->bodyB->position - QPointF(0.25, -0.25)) },
-                { "length", j::value(QVector2D(realJoint->anchorA - realJoint->anchorB).length()) },
+                { "anchorA", pointToValue(realJoint->anchorA) },
+                { "anchorB", pointToValue(realJoint->anchorB) },
                 { "frequencyHz", j::value(realJoint->frequencyHz) }, 
                 { "dampingRatio", j::value(realJoint->dampingRatio) }
+            };
+            break;
+        }
+        case kRevolute: {
+            QSharedPointer<RevoluteJoint> realJoint = qSharedPointerCast<RevoluteJoint>(joint);
+            subObject = {
+                { "type", j::value("revolute") },
+                { "anchor", pointToValue(realJoint->anchor) },
+                { "enableMotor", j::value(realJoint->enableMotor) },
+                { "enableLimit", j::value(realJoint->enableLimit) },
+                { "maxMotorTorque", j::value(realJoint->maxMotorTorque) },
+                { "motorSpeed", j::value(realJoint->motorSpeed) },
+                { "referenceAngle", j::value(realJoint->referenceAngle) },
+                { "lowerAngle", j::value(realJoint->lowerAngle) },
+                { "upperAngle", j::value(realJoint->upperAngle) }
             };
             break;
         }
@@ -293,16 +309,26 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
         if (type == "distance") {
             DistanceJoint *distance_joint = new DistanceJoint;
             joint = QSharedPointer<Joint>(distance_joint);
-            distance_joint->anchorA = pointFromArray(joint_object["localAnchorA"].get<picojson::array>())
-                + QPointF(0.25, -0.25);
-            distance_joint->anchorB = pointFromArray(joint_object["localAnchorB"].get<picojson::array>())
-                + QPointF(0.25, -0.25);
+            distance_joint->anchorA = pointFromArray(joint_object["anchorA"].get<picojson::array>());
+            distance_joint->anchorB = pointFromArray(joint_object["anchorB"].get<picojson::array>());
             distance_joint->frequencyHz = joint_object["frequencyHz"].get<double>();
             distance_joint->dampingRatio = joint_object["dampingRatio"].get<double>();
+        } else if (type == "revolute") {
+            RevoluteJoint *revolute_joint = new RevoluteJoint;
+            joint = QSharedPointer<Joint>(revolute_joint);
+            revolute_joint->anchor = pointFromArray(joint_object["anchor"].get<picojson::array>());
+            revolute_joint->enableMotor = joint_object["enableMotor"].get<bool>();
+            revolute_joint->enableLimit = joint_object["enableLimit"].get<bool>();
+            revolute_joint->lowerAngle = joint_object["lowerAngle"].get<double>();
+            revolute_joint->referenceAngle = joint_object["referenceAngle"].get<double>();
+            revolute_joint->upperAngle = joint_object["upperAngle"].get<double>();
+            revolute_joint->maxMotorTorque = joint_object["maxMotorTorque"].get<double>();
+            revolute_joint->motorSpeed = joint_object["motorSpeed"].get<double>();
         }
 
         joint->bodyA = bodyA;
         joint->bodyB = bodyB;
+        joint->collideConnected = joint_object["collideConnected"].get<bool>();
         joint->id = joint_object["id"].get<double>();
 
         game_map->joints.append(joint);
