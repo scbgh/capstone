@@ -138,16 +138,27 @@ MapFile *LoadMapFromJSON(const string& json)
         if (type == "distance") {
             DistanceJoint *distance_joint = new DistanceJoint;
             joint = distance_joint;
-            distance_joint->local_anchor_a = PointFromArray(joint_object["localAnchorA"].get<picojson::array>());
-            distance_joint->local_anchor_b = PointFromArray(joint_object["localAnchorB"].get<picojson::array>());
-            distance_joint->length = joint_object["length"].get<double>();
+            distance_joint->anchor_a = PointFromArray(joint_object["anchorA"].get<picojson::array>());
+            distance_joint->anchor_b = PointFromArray(joint_object["anchorB"].get<picojson::array>());
             distance_joint->frequency_hz = joint_object["frequencyHz"].get<double>();
             distance_joint->damping_ratio = joint_object["dampingRatio"].get<double>();
+        } else if (type == "revolute") {
+            RevoluteJoint *revolute_joint = new RevoluteJoint;
+            joint = revolute_joint;
+            revolute_joint->anchor = PointFromArray(joint_object["anchor"].get<picojson::array>());
+            revolute_joint->enable_motor = joint_object["enableMotor"].get<bool>();
+            revolute_joint->enable_limit = joint_object["enableLimit"].get<bool>();
+            revolute_joint->lower_angle = joint_object["lowerAngle"].get<double>();
+            revolute_joint->reference_angle = joint_object["referenceAngle"].get<double>();
+            revolute_joint->upper_angle = joint_object["upperAngle"].get<double>();
+            revolute_joint->max_motor_torque = joint_object["maxMotorTorque"].get<double>();
+            revolute_joint->motor_speed = joint_object["motorSpeed"].get<double>();
         }
         int body_a_id = joint_object["bodyA"].get<double>();
         int body_b_id = joint_object["bodyB"].get<double>();
         joint->body_a = bodies[body_a_id];
         joint->body_b = bodies[body_b_id];
+        joint->collide_connected = joint_object["collideConnected"].get<bool>();
         joint->id = joint_object["id"].get<double>();
 
         map_file->joints.push_back(unique_ptr<Joint>(joint));

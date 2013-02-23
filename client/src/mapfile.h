@@ -108,12 +108,25 @@ struct Joint : public Entity {
 //
 //
 struct DistanceJoint : public Joint {
-    math::Point local_anchor_a;
-    math::Point local_anchor_b;
-    double length;
+    math::Point anchor_a;
+    math::Point anchor_b;
     double frequency_hz;
     double damping_ratio;
     virtual JointType type() const { return kDistance; }
+};
+
+//
+//
+struct RevoluteJoint : public Joint {
+    math::Point anchor;
+    bool enable_motor;
+    bool enable_limit;
+    bool max_motor_torque;
+    double motor_speed;
+    double lower_angle;
+    double upper_angle;
+    double reference_angle;
+    virtual JointType type() const { return kRevolute; }
 };
 
 MapFile *LoadMapFromJSON(const std::string& json);
