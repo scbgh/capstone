@@ -18,7 +18,7 @@ VertexItem::VertexItem(std::function<QPointF()> syncFunc, std::function<void(QPo
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 
-    setRect(QRectF(-0.25, -0.25, 0.25, 0.25));
+    setRect(QRectF(-0.125, -0.125, 0.25, 0.25));
     setZValue(10000);
 }
 
@@ -45,7 +45,9 @@ void VertexItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 //
 void VertexItem::sync()
 {
-    setPos(syncFunc_());
+    //setPos(mapToParent(syncFunc_() - QPointF(0.25, -0.25)));
+    QPointF pos = syncFunc_();
+    setPos(pos);
 }
 
 //
