@@ -174,19 +174,31 @@ void World::LoadMap(const string& map_name)
                 DistanceJoint *distance_joint = (DistanceJoint *)joint.get();
                 b2DistanceJointDef *inner_def = new b2DistanceJointDef;
                 def = inner_def;
-                inner_def->localAnchorA = PointToVec(distance_joint->local_anchor_a);
-                inner_def->localAnchorB = PointToVec(distance_joint->local_anchor_b);
-                inner_def->length = distance_joint->length;
+                inner_def->Initialize(phys_bodies[joint->body_a], phys_bodies[joint->body_b], 
+                    PointToVec(distance_joint->anchor_a), PointToVec(distance_joint->anchor_b));
                 inner_def->frequencyHz = distance_joint->frequency_hz;
                 inner_def->dampingRatio = distance_joint->damping_ratio;
+                break;
+            }
+            case kRevolute: {
+                RevoluteJoint *revolute_joint = (RevoluteJoint *)joint.get();
+                b2RevoluteJointDef *inner_def = new b2RevoluteJointDef;
+                def = inner_def;
+                inner_def->Initialize(phys_bodies[joint->body_a], phys_bodies[joint->body_b],
+                    PointToVec(revolute_joint->anchor));
+                inner_def->enableMotor = revolute_joint->enable_motor;
+                inner_def->maxMotorTorque = revolute_joint->max_motor_torque;
+                inner_def->motorSpeed = revolute_joint->motor_speed;
+                inner_def->upperAngle = revolute_joint->upper_angle;
+                inner_def->lowerAngle = revolute_joint->lower_angle;
+                inner_def->referenceAngle = revolute_joint->reference_angle;
+                inner_def->enableLimit = revolute_joint->enable_limit;
                 break;
             }
             default:
                 Die("Invalid joint type");
                 break;
         }
-        def->bodyA = phys_bodies[joint->body_a];
-        def->bodyB = phys_bodies[joint->body_b];
         def->collideConnected = joint->collide_connected;
         phys_world_->CreateJoint(def);
         delete def;
