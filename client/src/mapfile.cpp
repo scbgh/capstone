@@ -42,6 +42,8 @@ MapFile *LoadMapFromJSON(const string& json)
     MapFile *map_file = new MapFile;
     map_file->width = root_object["width"].get<double>();
     map_file->height = root_object["height"].get<double>();
+    map_file->back_image = root_object["backImage"].get<std::string>();
+    map_file->fore_image = root_object["foreImage"].get<std::string>();
 
     // Do two passes from the shape array -- first to load the geometric shapes, then to load the bodies
     for (const auto& shape_value : root_object["shapes"].get<picojson::array>()) {

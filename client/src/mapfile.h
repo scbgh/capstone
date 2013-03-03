@@ -39,6 +39,8 @@ struct Entity {
 struct MapFile : public Entity {
     int width;
     int height;
+    std::string back_image;
+    std::string fore_image;
     std::vector<std::unique_ptr<Shape>> shapes;
     std::vector<std::unique_ptr<Body>> bodies;
     std::vector<std::unique_ptr<Fixture>> fixtures;
