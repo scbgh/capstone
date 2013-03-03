@@ -47,8 +47,10 @@ struct GameMap : public Entity {
         Entity()
     { }
 
-    PROPERTY(GameMap, qreal, width);
-    PROPERTY(GameMap, qreal, height);
+    PROPERTY(GameMap, QString, backImage);
+    PROPERTY(GameMap, QString, foreImage);
+    qreal width;
+    qreal height;
     QVector<QSharedPointer<Shape>> shapes;
     QVector<QSharedPointer<Fixture>> fixtures;
     QVector<QSharedPointer<Joint>> joints;

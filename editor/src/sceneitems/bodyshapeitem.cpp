@@ -33,8 +33,7 @@ void BodyShapeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     painter->setBrush(drawBrush);
     painter->setPen(drawPen);
     painter->setFont(QFont("Helvetica"));
-    painter->drawRect(boundingRect());
-    painter->drawEllipse(boundingRect().adjusted(0.25, 0.25, -0.25, -0.25));
+    painter->drawEllipse(boundingRect());
 }
 
 //
@@ -79,5 +78,5 @@ QGraphicsItem *BodyShapeItem::innerShape() const
 //
 QRectF BodyShapeItem::boundingRect() const
 {
-    return QRectF(-0.5, -0.5, 1.0, 1.0);
+    return QRectF(-0.25, -0.25, 0.5, 0.5);
 }

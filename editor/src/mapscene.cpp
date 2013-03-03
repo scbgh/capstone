@@ -20,7 +20,7 @@
 MapScene::MapScene(QGraphicsView *view, QUndoStack *undoStack, QObject *parent) :
     QGraphicsScene(parent),
     view_(view),
-    gridSize_(0.5),
+    gridSize_(0.25),
     showGrid_(true),
     snapToGrid_(true),
     drawing_(false),
@@ -48,37 +48,55 @@ bool MapScene::itemIsShape(const QGraphicsItem *item) const
 void MapScene::drawBackground(QPainter *painter, const QRectF& rect)
 {
     painter->fillRect(rect, Qt::black);
+    painter->save();
+    painter->setTransform(QTransform::fromTranslate(0, -sceneRect().height()) * QTransform::fromScale(1, -1), true);
+    if (backImage_) {
+        painter->drawImage(sceneRect(), *backImage_); 
+    }
+    if (foreImage_) {
+        painter->drawImage(sceneRect(), *foreImage_);
+    }
+    painter->restore();
+}
+
+//
+//
+void MapScene::drawGrid(float spacing, QColor color, const QRectF& rect, QPainter *painter)
+{
+    qreal left = qMax(rect.left() - (fmod(rect.left(), spacing)), 0.);
+    qreal top = qMax(rect.top() - (fmod(rect.top(), spacing)), 0.);
+    qreal right = qMin(rect.right(), sceneRect().right());
+    qreal bottom = qMin(rect.bottom(), sceneRect().bottom());
+
+    // Don't render the grid if it's too dense
+    if (rect.width() / spacing > 1024) {
+        return;
+    }
+
+    QVarLengthArray<QLineF, 1024> linesX;
+    for (qreal x = left; x <= right; x += spacing)
+        linesX.append(QLineF(x, top, x, bottom));
+
+    QVarLengthArray<QLineF, 1024> linesY;
+    for (qreal y = top; y <= bottom; y += spacing)
+        linesY.append(QLineF(left, y, right, y));
+
+    painter->setPen(color);
+    painter->drawLines(linesX.data(), linesX.size());
+    painter->drawLines(linesY.data(), linesY.size());
 }
 
 //
 //
 void MapScene::drawForeground(QPainter *painter, const QRectF& rect)
 {
+
     // Draw the grid
     painter->setWorldMatrixEnabled(true);
 
-    qreal left = qMax(rect.left() - (fmod(rect.left(), gridSize_)), 0.);
-    qreal top = qMax(rect.top() - (fmod(rect.top(), gridSize_)), 0.);
-    qreal right = qMin(rect.right(), sceneRect().right());
-    qreal bottom = qMin(rect.bottom(), sceneRect().bottom());
-
-    // Don't render the grid if it's too dense
-    if (rect.width() / gridSize_ > 1024) {
-        return;
-    }
-
-    QVarLengthArray<QLineF, 1024> linesX;
-    for (qreal x = left; x <= right; x += gridSize_)
-        linesX.append(QLineF(x, top, x, bottom));
-
-    QVarLengthArray<QLineF, 1024> linesY;
-    for (qreal y = top; y <= bottom; y += gridSize_)
-        linesY.append(QLineF(left, y, right, y));
-
     if (showGrid_) {
-        painter->setPen(QColor(255, 255, 255, 64)); // TODO: customizable colour?
-        painter->drawLines(linesX.data(), linesX.size());
-        painter->drawLines(linesY.data(), linesY.size());
+        drawGrid(0.25, QColor(255, 255, 255, 32), rect, painter);
+        drawGrid(1.0, QColor(255, 255, 255, 64), rect, painter);
     }
 }
 
@@ -93,6 +111,7 @@ void MapScene::beginPolygon(const QPointF& point)
     shape->shapeItem = polyItem_;
     connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
     polyItem_->setPen(shapeColor_);
+    polyItem_->pen().setWidth(3.0);
     polyItem_->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
     polyItem_->setPolygon(curPoly_);
     addItem(polyItem_);
@@ -108,6 +127,7 @@ void MapScene::beginCircle(const QPointF& point)
     shape->shapeItem = circleItem_;
     connect(shape.data(), SIGNAL(invalidated()), shape->shapeItem, SLOT(sync()));
     circleItem_->setPen(shapeColor_);
+    circleItem_->pen().setWidth(3.0);
     circleItem_->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
     circleItem_->setPos(circleOrigin_);
     addItem(circleItem_);
@@ -121,6 +141,7 @@ void MapScene::beginFixture(const QPointF& point, QGraphicsItem *item)
     firstShape_ = dynamic_cast<BodyShapeItem *>(item);
     tempItem_ = fixtureConnection_ = new ConnectItem(fixture_, firstShape_, NULL);
     fixtureConnection_->setPen(QColor(255, 0, 0));
+    fixtureConnection_->pen().setWidth(3.0);
     fixtureConnection_->setLine(QLineF(firstShape_->scenePos(), point));
     fixtureConnection_->setZValue(-1);
     fixture_->connectItem = fixtureConnection_;
@@ -146,6 +167,7 @@ void MapScene::beginJoint(const QPointF& point, QGraphicsItem *item)
     firstShape_ = dynamic_cast<BodyShapeItem *>(item);
     tempItem_ = jointConnection_ = new ConnectItem(joint_, firstShape_, NULL);
     jointConnection_->setPen(QColor(255, 0, 0));
+    jointConnection_->pen().setWidth(3.0);
     jointConnection_->setLine(QLineF(firstShape_->scenePos(), point));
     jointConnection_->setZValue(-1);
     joint_->connectItem = jointConnection_;
@@ -211,6 +233,7 @@ void MapScene::endFixture(const QPointF& point)
     fixture_->shape = qSharedPointerCast<Shape>(secondShape_->entity());
     fixtureConnection_->setConnectionType(kFixtureConnection);
     fixtureConnection_->setPen(fixtureColor_);
+    fixtureConnection_->pen().setWidth(3.0);
     fixtureConnection_->setZValue(10000);
     fixtureConnection_->sync();
     undoStack_->push(new CreateFixtureCommand(this, fixture_));
@@ -229,6 +252,7 @@ void MapScene::endJoint(const QPointF& point)
     makeVerticesForJoint(jointConnection_, joint_, true);
     jointConnection_->setConnectionType(kJointConnection);
     jointConnection_->setPen(jointColor_);
+    jointConnection_->pen().setWidth(3.0);
     jointConnection_->setZValue(10000);
     jointConnection_->sync();
     undoStack_->push(new CreateJointCommand(this, joint_));
@@ -439,7 +463,12 @@ void MapScene::keyPressEvent(QKeyEvent *keyEvent)
                         deletedConnections << conn;
                     }
                 }
-            } else if (item->type() == kConnectItem && !deletedConnections.contains(item)) {
+            }
+        }
+
+        for (auto item : selectedItems()) {
+            SceneItem *sceneItem = dynamic_cast<SceneItem *>(item);
+            if (item->type() == kConnectItem && !deletedConnections.contains(item)) {
                 ConnectItem *conn = dynamic_cast<ConnectItem *>(sceneItem);
                 if (conn->connectionType() == kFixtureConnection) {
                     new DeleteFixtureCommand(this, qSharedPointerCast<Fixture>(conn->entity()), command);
@@ -448,9 +477,14 @@ void MapScene::keyPressEvent(QKeyEvent *keyEvent)
                 }
             }
         }
+
         for (auto item : deletedConnections) {
             ConnectItem *conn = dynamic_cast<ConnectItem *>(item);
-            new DeleteFixtureCommand(this, qSharedPointerCast<Fixture>(conn->entity()), command);
+            if (conn->connectionType() == kFixtureConnection) {
+                new DeleteFixtureCommand(this, qSharedPointerCast<Fixture>(conn->entity()), command);
+            } else if (conn->connectionType() == kJointConnection) {
+                new DeleteJointCommand(this, qSharedPointerCast<Joint>(conn->entity()), command);
+            }
         }
 
         undoStack_->push(command);
@@ -463,6 +497,7 @@ void MapScene::setMap(QSharedPointer<GameMap> map)
 {
     map_ = map;
     setSceneRect(QRect(0, 0, map_->width, map_->height));
+    connect(map_.data(), SIGNAL(invalidated()), this, SLOT(mapInvalidated())); 
     sync();
 }
 
@@ -482,6 +517,19 @@ void MapScene::setMode(Mode mode)
 
 //
 //
+void MapScene::mapInvalidated()
+{
+    QSettings settings;
+    QString resourceDir = settings.value("resources/resourceDirectory").toString();
+    QDir dir(resourceDir);
+
+    backImage_.reset(new QImage(dir.absoluteFilePath(map_->backImage)));
+    foreImage_.reset(new QImage(dir.absoluteFilePath(map_->foreImage)));
+    invalidate();
+}
+
+//
+//
 void MapScene::sync()
 {
     clear();
@@ -492,6 +540,8 @@ void MapScene::sync()
     for (auto& shape : map_->shapes) { addShape(shape); }
     for (auto& fixture : map_->fixtures) { addFixture(fixture); }
     for (auto& joint : map_->joints) { addJoint(joint); }
+
+    mapInvalidated();
 }
 
 //
@@ -524,6 +574,7 @@ void MapScene::addShape(QSharedPointer<Shape> shape)
             item = innerItem = new PolygonShapeItem(polyShape);
             innerItem->setComplete(true);
             innerItem->setPen(shapeColor_);
+            innerItem->pen().setWidth(3.0);
             innerItem->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
             break;
         }
@@ -533,6 +584,7 @@ void MapScene::addShape(QSharedPointer<Shape> shape)
             item = innerItem = new CircleShapeItem(circleShape);
             innerItem->setComplete(true);
             innerItem->setPen(shapeColor_);
+            innerItem->pen().setWidth(3.0);
             innerItem->setBrush(QColor(shapeColor_.red(), shapeColor_.green(), shapeColor_.blue(), 128));
             break;
         }
@@ -541,6 +593,7 @@ void MapScene::addShape(QSharedPointer<Shape> shape)
             BodyShapeItem *innerItem;
             item = innerItem = new BodyShapeItem(body);
             innerItem->setPen(bodyColor_);
+            innerItem->pen().setWidth(3.0);
             innerItem->setBrush(QColor(bodyColor_.red(), bodyColor_.green(), bodyColor_.blue(), 128));
             break;
         }
@@ -561,6 +614,7 @@ void MapScene::addFixture(QSharedPointer<Fixture> fixture)
     fixConn->setShape2(fixture->shape->shapeItem);
     fixConn->setConnectionType(kFixtureConnection);
     fixConn->setPen(fixtureColor_);
+    fixConn->pen().setWidth(3.0);
 
     fixture->connectItem = fixConn;
     fixConn->sync();
@@ -577,6 +631,7 @@ void MapScene::addJoint(QSharedPointer<Joint> joint)
     jointConn->setShape2(joint->bodyB->shapeItem);
     jointConn->setConnectionType(kJointConnection);
     jointConn->setPen(jointColor_);
+    jointConn->pen().setWidth(3.0);
     joint->connectItem = jointConn;
     makeVerticesForJoint(jointConn, joint, false);
     jointConn->sync();

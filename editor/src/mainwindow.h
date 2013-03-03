@@ -38,12 +38,14 @@ private slots:
     void gridToggled(bool value);
     void snapToggled(bool value);
     void toolButtonClicked(int id);
+    void setResourceDirectory();
     bool newMap();
     bool saveMap();
     bool saveMapAs();
     bool openMap();
     bool quit();
     void selectionChanged();
+    void selectMap();
 
 private:
     enum { kSelectButton, kCircleButton, kPolygonButton, kBodyButton, kFixtureButton,
@@ -71,6 +73,8 @@ private:
     QAction *snapToGridAct_;
     QAction *undoAct_;
     QAction *redoAct_;
+    QAction *resourceDirAct_;
+    QAction *selectMapAct_;
 
     QGraphicsView *view_;
     QMenu *fileMenu_;

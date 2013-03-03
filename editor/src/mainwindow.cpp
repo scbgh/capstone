@@ -153,6 +153,14 @@ void MainWindow::createActions()
 
     redoAct_ = undoStack_->createRedoAction(this, tr("&Redo"));
     redoAct_->setShortcuts(QKeySequence::Redo);
+
+    resourceDirAct_ = new QAction(tr("Select &Resource Directory"), this);
+    resourceDirAct_->setStatusTip(tr("Choose directory containing resources"));
+    connect(resourceDirAct_, SIGNAL(triggered()), this, SLOT(setResourceDirectory()));
+
+    selectMapAct_ = new QAction(tr("Select Map &Object"), this);
+    selectMapAct_->setStatusTip(tr("Select the map object so its properties can be modified"));
+    connect(selectMapAct_, SIGNAL(triggered()), this, SLOT(selectMap()));
 }
 
 //
@@ -165,11 +173,15 @@ void MainWindow::createMenus()
     fileMenu_->addAction(saveAct_);
     fileMenu_->addAction(saveAsAct_);
     fileMenu_->addSeparator();
+    fileMenu_->addAction(resourceDirAct_);
+    fileMenu_->addSeparator();
     fileMenu_->addAction(quitAct_);
 
     editMenu_ = menuBar()->addMenu(tr("&Edit"));
     editMenu_->addAction(undoAct_);
     editMenu_->addAction(redoAct_);
+    editMenu_->addSeparator();
+    editMenu_->addAction(selectMapAct_);
 
     viewMenu_ = menuBar()->addMenu(tr("&View"));
     viewMenu_->addAction(showGridAct_);
@@ -256,6 +268,30 @@ void MainWindow::gridToggled(bool value)
 void MainWindow::snapToggled(bool value)
 {
     scene_->setSnapToGrid(value);
+}
+
+//
+//
+void MainWindow::setResourceDirectory()
+{
+    QSettings settings;
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+            settings.value("resources/resourceDirectory").toString(),
+            QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    if (!dir.isEmpty()) {
+        settings.beginGroup("resources");
+        settings.setValue("resourceDirectory", dir);
+        settings.endGroup();
+    }
+}
+
+//
+//
+void MainWindow::selectMap()
+{
+    if (map_) {
+        propertyItemModel_->setSource(map_);
+    }
 }
 
 //

@@ -65,6 +65,9 @@ protected:
     virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
     virtual void keyPressEvent(QKeyEvent *keyEvent);
 
+private slots:
+    void mapInvalidated();
+
 private:
     void beginPolygon(const QPointF& point);
     void beginCircle(const QPointF& point);
@@ -76,6 +79,8 @@ private:
     void endFixture(const QPointF& point);
     void endJoint(const QPointF& point);
     void makeVerticesForJoint(ConnectItem *item, QSharedPointer<Joint> joint, bool init);
+
+    void drawGrid(float spacing, QColor color, const QRectF& rect, QPainter *painter);
 
     void addShape(QSharedPointer<Shape> shape);
     void addFixture(QSharedPointer<Fixture> fixture);
@@ -94,6 +99,8 @@ private:
     QGraphicsItem *tempItem_;
     QUndoStack *undoStack_;
     bool moving_;
+    QScopedPointer<QImage> foreImage_;
+    QScopedPointer<QImage> backImage_;
 
     QColor shapeColor_;
     QColor bodyColor_;

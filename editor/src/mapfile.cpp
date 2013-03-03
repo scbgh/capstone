@@ -185,6 +185,8 @@ QString mapToJson(QSharedPointer<GameMap> map)
     j::object rootObject = {
         { "width", j::value(map->width) },
         { "height", j::value(map->height) },
+        { "backImage", j::value(map->backImage.toStdString()) },
+        { "foreImage", j::value(map->foreImage.toStdString()) },
         { "shapes", j::value(shapes) },
         { "fixtures", j::value(fixtures) },
         { "joints", j::value(joints) }
@@ -214,6 +216,8 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
     QSharedPointer<GameMap> game_map = QSharedPointer<GameMap>(new GameMap);
     game_map->width = root_object["width"].get<double>();
     game_map->height = root_object["height"].get<double>();
+    game_map->backImage = QString::fromStdString(root_object["backImage"].get<std::string>());
+    game_map->foreImage = QString::fromStdString(root_object["foreImage"].get<std::string>());
 
     // Do two passes from the shape array -- first to load the geometric shapes, then to load the bodies
     for (const auto& shape_value : root_object["shapes"].get<picojson::array>()) {

@@ -27,7 +27,7 @@ void CircleShapeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     QPen drawPen = pen();
 
     if (isSelected()) {
-        drawBrush = QColor(128, 255, 128, 128);
+        drawBrush = QColor(128, 255, 128, 220);
         drawPen = QColor(128, 255, 128);
     }
 
