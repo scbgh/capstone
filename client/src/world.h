@@ -7,6 +7,7 @@
 #define _WORLD_H_
 
 #include "Box2D/Render.h"
+#include "sprite.h"
 #include <Box2D/Box2D.h>
 #include <memory>
 #include <string>
@@ -27,11 +28,16 @@ public:
     void DrawDebug();
 
     bool initialized() const { return initialized_; }
+    Sprite *back_sprite() { return back_sprite_.get(); }
+    Sprite *fore_sprite() { return fore_sprite_.get(); }
 private:
     App *app_;
     std::unique_ptr<b2World> phys_world_; // box2d world
     bool initialized_; // is the world initialized?
     DebugDraw dbg_draw_; // debug drawer for box2d
+
+    std::unique_ptr<Sprite> back_sprite_;
+    std::unique_ptr<Sprite> fore_sprite_;
 
     // Non-copyable
     World(const World&);

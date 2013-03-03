@@ -37,12 +37,13 @@ World::World(App *app) :
 void World::LoadMap(const string& map_name)
 {
     Dispose();
-
+    
+    Pack& pack = app_->pack();
     string map_path = "maps/" + map_name + ".json";
-    if (!app_->pack().contains(map_path)) {
+    if (!pack.contains(map_path)) {
         Die("Could not load map '%s'", map_name.c_str());
     }
-    string json = app_->pack()[map_path].ToString();
+    string json = pack[map_path].ToString();
 
     b2Vec2 gravity(0.0f, -10.0f);
     phys_world_ = unique_ptr<b2World>(new b2World(gravity));
@@ -202,6 +203,21 @@ void World::LoadMap(const string& map_name)
         def->collideConnected = joint->collide_connected;
         phys_world_->CreateJoint(def);
         delete def;
+    }
+
+    // Load the sprites for the background and foreground images
+    if (pack.contains(map_file->back_image)) {
+        PackEntry entry = pack[map_file->back_image];
+        back_sprite_ = unique_ptr<Sprite>(new Sprite(entry.data, entry.length));
+    } else {
+        Debug("Failed to load back image: %s", map_file->back_image.c_str());
+    }
+
+    if (pack.contains(map_file->fore_image)) {
+        PackEntry entry = pack[map_file->fore_image];
+        fore_sprite_ = unique_ptr<Sprite>(new Sprite(entry.data, entry.length));
+    } else {
+        Debug("Failed to load fore image: %s", map_file->fore_image.c_str());
     }
 
     initialized_ = true;
