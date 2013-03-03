@@ -10,6 +10,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 endif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 
 find_package(SDL REQUIRED)
+find_package(SDL_image REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(Box2D REQUIRED)
 find_package(Lua51 REQUIRED)
