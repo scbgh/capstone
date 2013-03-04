@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include <list>
+#include "sprite.h"
 #include "math/math.h"
 
 namespace pg {
@@ -62,6 +63,9 @@ struct Body : public Entity {
     bool awake;
     bool allow_sleep;
     bool active;
+    std::string image;
+    math::Point image_offset;
+    std::unique_ptr<Sprite> image_sprite;
 };
 
 //
@@ -80,6 +84,8 @@ struct Fixture : public Entity {
 struct Shape : public Entity {
     math::Point position;
     double rotation;
+
+    virtual math::Box bbox() const = 0;
     virtual ShapeType type() const = 0;
 };
 
@@ -88,6 +94,15 @@ struct Shape : public Entity {
 struct PolygonShape : public Shape {
     math::Polygon polygon;
     std::list<math::Polygon> subpolygons;
+
+    virtual math::Box bbox() const
+    {
+        math::Box aabb;
+        for (math::Point p : polygon.points) {
+            aabb = math::AddPoint(aabb, p + math::Vector(position.x, position.y)); 
+        }
+        return aabb;
+    }
     virtual ShapeType type() const { return kPolygon; }
 };
 
@@ -96,6 +111,13 @@ struct PolygonShape : public Shape {
 struct CircleShape : public Shape {
     double radius;
     virtual ShapeType type() const { return kCircle; }
+    virtual math::Box bbox() const
+    {
+        math::Box aabb;
+        aabb = math::AddPoint(aabb, { position.x - radius, position.y - radius });
+        aabb = math::AddPoint(aabb, { position.x + radius, position.y + radius });
+        return aabb;
+    }
 };
 
 //

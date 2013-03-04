@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include "mapfile.h"
+#include "sprite.h"
 #include "json/picojson.h"
 #include "math/math.h"
 
@@ -99,6 +100,8 @@ MapFile *LoadMapFromJSON(const string& json)
             body->awake = shape_object["awake"].get<bool>();
             body->allow_sleep = shape_object["allowSleep"].get<bool>();
             body->active = shape_object["active"].get<bool>();
+            body->image = shape_object["image"].get<string>();
+            body->image_offset = PointFromArray(shape_object["imageOffset"].get<picojson::array>());
             bool isDynamic = shape_object["isDynamic"].get<bool>();
 
             if (!isDynamic) {

@@ -85,6 +85,12 @@ void World::LoadMap(const string& map_name)
             def.type = b2_dynamicBody;
         }
 
+        // Load the sprite for the body if applicable
+        if (pack.contains(body->image)) {
+            PackEntry entry = pack[body->image];
+            body->image_sprite = unique_ptr<Sprite>(new Sprite(entry.data, entry.length));
+        }
+        def.userData = body.get();
         phys_bodies[body.get()] = phys_world_->CreateBody(&def);
     }
 
@@ -100,7 +106,7 @@ void World::LoadMap(const string& map_name)
         }
 
         // Lambda to create the fixture for a shape
-        auto fix_shape = [=](b2Shape *sh) mutable {
+        auto fix_shape = [&](b2Shape *sh) mutable {
             b2FixtureDef def;
             b2Body *target_body;
 
@@ -221,6 +227,7 @@ void World::LoadMap(const string& map_name)
     }
 
     initialized_ = true;
+    map_ = std::move(map_file);
 }
 
 //
