@@ -8,12 +8,16 @@
 
 #include <QtCore>
 
+//
+//
 template <typename T>
 QVariant::Type variantUserType()
 {
     return (QVariant::Type)QVariant::fromValue(T()).userType();
 }
 
+//
+//
 template <typename Parent, typename Enum>
 QMetaEnum enumToMetaEnum()
 {
@@ -24,10 +28,21 @@ QMetaEnum enumToMetaEnum()
     return meta.enumerator(idx);
 }
 
+//
+//
 template <typename Parent, typename Enum>
 QString enumToString(Enum val)
 {
     return QString(enumToMetaEnum<Parent, Enum>().valueToKey(val));
+}
+
+//
+//
+static QString resourceFileName(const QString& baseName)
+{
+    QSettings settings;
+    QDir dir(settings.value("resources/resourceDirectory").toString());
+    return dir.absoluteFilePath(baseName);
 }
 
 #endif

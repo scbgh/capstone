@@ -5,6 +5,7 @@
 #include "commands.h"
 #include "mapdata.h"
 #include "mapscene.h"
+#include "util.h"
 #include "sceneitems/bodyshapeitem.h"
 #include "sceneitems/circleshapeitem.h"
 #include "sceneitems/connectitem.h"
@@ -519,12 +520,8 @@ void MapScene::setMode(Mode mode)
 //
 void MapScene::mapInvalidated()
 {
-    QSettings settings;
-    QString resourceDir = settings.value("resources/resourceDirectory").toString();
-    QDir dir(resourceDir);
-
-    backImage_.reset(new QImage(dir.absoluteFilePath(map_->backImage)));
-    foreImage_.reset(new QImage(dir.absoluteFilePath(map_->foreImage)));
+    backImage_.reset(new QImage(resourceFileName(map_->backImage)));
+    foreImage_.reset(new QImage(resourceFileName(map_->foreImage)));
     invalidate();
 }
 
