@@ -20,7 +20,8 @@ App::App(int argc, char *argv[], int width, int height) :
     renderer_(unique_ptr<Renderer>(new Renderer(this))),
     world_(unique_ptr<World>(new World(this))),
     last_tick_(SDL_GetTicks()),
-    running_(false)
+    running_(false),
+    should_render_debug_(false)
 {
     Debug("Initializing App");
 
@@ -88,6 +89,13 @@ void App::Run()
 //
 void App::OnKeyDown(SDL_KeyboardEvent *evt)
 {
+    switch (evt->keysym.sym) {
+        case SDLK_d:
+            should_render_debug_ = !should_render_debug_;
+            break;
+        default:
+            break;
+    }
 }
 
 //

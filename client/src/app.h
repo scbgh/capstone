@@ -29,6 +29,8 @@ public:
 
     // Start the SDL game loop
     void Run();
+
+    bool ShouldRenderDebug() const { return should_render_debug_; }
 private:
     bool has_quit_; // should we quit the program?
 
@@ -38,6 +40,7 @@ private:
 
     int last_tick_; // the last recorded tick count
     bool running_; // is the game running yet?
+    bool should_render_debug_; // should render debug?
 
     // Handle command line args
     void ParseArgs(int argc, char *argv[]);
