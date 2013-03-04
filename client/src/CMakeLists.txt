@@ -10,6 +10,7 @@ set(PHYSGAME_SRCS
     file.cpp
     main.cpp
     mapfile.cpp
+    math/box.cpp
     math/color.cpp
     math/matrix.cpp
     math/point.cpp

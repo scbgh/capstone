@@ -5,6 +5,7 @@ set(PHYSGAME_TESTS_SRCS
     test_physgame.cpp
     ../src/file.cpp
     ../src/mapfile.cpp
+    ../src/math/box.cpp
     ../src/math/color.cpp
     ../src/math/matrix.cpp
     ../src/math/point.cpp
