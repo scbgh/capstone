@@ -13,9 +13,10 @@ set(PHYSGAME_TESTS_SRCS
     ../src/math/transform.cpp
     ../src/math/vector.cpp
     ../src/pack.cpp
+    ../src/sprite.cpp
 )
 
 add_executable(physgame_tests ${PHYSGAME_TESTS_SRCS})
-target_link_libraries(physgame_tests ${SDL_LIBRARY} ${OPENGL_LIBRARIES} ${BOX2D_LIBRARY})
+target_link_libraries(physgame_tests ${SDL_LIBRARY} ${SDL_IMAGE_LIBRARIES} ${OPENGL_LIBRARIES} ${BOX2D_LIBRARY})
 
 file(COPY test_archive DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
