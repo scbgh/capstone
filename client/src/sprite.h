@@ -14,6 +14,9 @@ class Sprite {
 public:
     Sprite(void *data, int size);
     ~Sprite();
+    
+    Sprite(const Sprite&) = delete;
+    Sprite& operator=(const Sprite&) = delete;
 
     void Render(double w, double h) const;
 private:
