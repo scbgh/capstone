@@ -12,6 +12,7 @@
 #include "shapeitem.h"
 
 struct Body;
+class VertexItem;
 
 class BodyShapeItem : public QGraphicsItem, public ShapeItem {  
 public:
@@ -35,6 +36,9 @@ public:
 private:
     QBrush brush_;
     QPen pen_;
+    VertexItem *vertex_;
+    QString imageName_;
+    QImage image_;
 };
 
 #endif

@@ -22,12 +22,16 @@ public:
     void commit();
     virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
 
+    bool shouldSnap() const { return shouldSnap_; }
+    void setShouldSnap(bool val) { shouldSnap_ = val; }
+
     QSharedPointer<Entity> parentEntity() const { return parentEntity_; }
 
 private:
     std::function<QPointF()> syncFunc_;
     std::function<void(QPointF)> commitFunc_;
     QSharedPointer<Entity> parentEntity_;
+    bool shouldSnap_;
 };
 
 #endif

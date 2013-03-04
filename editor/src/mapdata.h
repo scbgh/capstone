@@ -139,7 +139,9 @@ public:
     PROPERTY(Body, bool, awake);
     PROPERTY(Body, bool, allowSleep);
     PROPERTY(Body, bool, active);
-
+    PROPERTY(Body, QString, image);
+    PROPERTY(Body, QPointF, imageOffset);
+    
     virtual ShapeType type() const { return kBody; }
 };
 

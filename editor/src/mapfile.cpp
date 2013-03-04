@@ -85,7 +85,9 @@ j::value shapeToValue(QSharedPointer<Shape> shape)
                 { "awake", j::value(body->awake) },
                 { "allowSleep", j::value(body->allowSleep) },
                 { "active", j::value(body->active) },
-                { "type", j::value("body") }
+                { "type", j::value("body") },
+                { "image", j::value(body->image.toStdString()) },
+                { "imageOffset", pointToValue(body->imageOffset) }
             };
             break;
         }
@@ -268,6 +270,8 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
             body->awake = shape_object["awake"].get<bool>();
             body->allowSleep = shape_object["allowSleep"].get<bool>();
             body->active = shape_object["active"].get<bool>();
+            body->image = QString::fromStdString(shape_object["image"].get<std::string>());
+            body->imageOffset = pointFromArray(shape_object["imageOffset"].get<picojson::array>());
             bool isDynamic = shape_object["isDynamic"].get<bool>();
 
             if (!isDynamic) {

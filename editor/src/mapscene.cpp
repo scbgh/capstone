@@ -273,6 +273,7 @@ void MapScene::makeVerticesForJoint(ConnectItem *item, QSharedPointer<Joint> joi
             [ptr](QPointF pt) { ptr->beginUpdate(); ptr->name = pt; ptr->endUpdate(); }, \
             joint_ \
         ); \
+        v->setShouldSnap(true); \
         item->addVertexItem(v); \
         ptr->beginUpdate(); \
         if (init) { \
