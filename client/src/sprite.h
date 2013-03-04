@@ -19,12 +19,14 @@ public:
     Sprite& operator=(const Sprite&) = delete;
 
     void Render(double w, double h) const;
+
+    int width() const { return width_; }
+    int height() const { return height_; }
 private:
     int valid_;
     GLuint texture_;
-    GLfloat texcoord_[4];
-
-    GLuint LoadTexture(SDL_Surface *surface);
+    double width_;
+    double height_;
 };
 
 }

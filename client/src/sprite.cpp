@@ -20,9 +20,13 @@ Sprite::Sprite(void *data, int size) :
         glGenTextures(1, &texture_);
         glBindTexture(GL_TEXTURE_2D, texture_);
 
+        width_ = surface->w;
+        height_ = surface->h;
         glTexImage2D(GL_TEXTURE_2D, 0, 4, surface->w, surface->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, surface->pixels);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
         SDL_FreeSurface(surface);
         valid_ = 1;
