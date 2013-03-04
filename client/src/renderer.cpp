@@ -5,6 +5,8 @@
 #include "common.h"
 #include "renderer.h"
 #include "app.h"
+#include "mapfile.h"
+#include "math.h"
 
 namespace pg {
 
@@ -54,10 +56,32 @@ void Renderer::Render()
     gluOrtho2D(view_upper_left_.x, view_lower_right_.x,
         view_lower_right_.y, view_upper_left_.y);
 
+    // Draw the map image
     World& world = app_->world();
     world.back_sprite()->Render(40, 22);
+
+    // Draw the sprites for each fixture
+    for (b2Body *phys_body = world.phys_world()->GetBodyList(); phys_body != NULL; phys_body = phys_body->GetNext()) {
+        Body *body = (Body *)phys_body->GetUserData();
+        if (!body || !body->image_sprite) continue;
+
+        double w = body->image_sprite->width() / 32.0;
+        double h = body->image_sprite->height() / 32.0;
+        b2Vec2 pos = phys_body->GetPosition();
+        glPushMatrix();
+        glTranslated(pos.x, pos.y, 0);
+        glRotated(RAD_TO_DEG(phys_body->GetAngle()), 0, 0, 1);
+        glTranslated(body->image_offset.x, body->image_offset.y, 0);
+        glTranslated(-w / 2, -h / 2, 0);
+        body->image_sprite->Render(w, h);
+        glPopMatrix();
+    }
+
     world.fore_sprite()->Render(40, 22);
-    world.DrawDebug();
+
+    if (app_->ShouldRenderDebug()) {
+        world.DrawDebug();
+    }
 }
 
 }
