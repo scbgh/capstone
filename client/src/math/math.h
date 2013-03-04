@@ -8,6 +8,7 @@
 
 #include <algorithm>
 
+#include "math/box.h"
 #include "math/color.h"
 #include "math/vector.h"
 #include "math/point.h"
