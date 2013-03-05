@@ -10,6 +10,7 @@
 #include "mapfile.h"
 #include "sprite.h"
 #include "script.h"
+#include "scriptstate.h"
 #include <Box2D/Box2D.h>
 #include <memory>
 #include <string>
@@ -35,6 +36,7 @@ public:
     b2World *phys_world() { return phys_world_.get(); }
 private:
     App *app_;
+    std::unique_ptr<ScriptState> script_state_;
     std::unique_ptr<MapFile> map_;
     std::unique_ptr<b2World> phys_world_; // box2d world
     std::unique_ptr<Script> script_; // lua script

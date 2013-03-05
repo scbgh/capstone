@@ -20,18 +20,26 @@ set(PHYSGAME_SRCS
     pack.cpp
     renderer.cpp
     script.cpp
+    scriptstate.cpp
     sprite.cpp
     world.cpp
     ${THIRDPARTY_DIR}/LuaBox2D/LuaBox2D.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/lua_scriptstate.cpp
 )
 
-if (MSVC)
-    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} /MD")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MD")
-    set(CMAKE_C_FLAGS_DEBUG_INIT "${CMAKE_C_FLAGS_DEBUG_INIT} /MD")
-    set(CMAKE_CXX_FLAGS_DEBUG_INIT "${CMAKE_CXX_FLAGS_DEBUG_INIT} /MD")
-endif (MSVC)
+add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lua_scriptstate.cpp
+    COMMAND tolua++ ARGS
+        -H ${CMAKE_CURRENT_BINARY_DIR}/lua_scriptstate.h
+        -o ${CMAKE_CURRENT_BINARY_DIR}/lua_scriptstate.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/luabindings/scriptstate.pkg
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/luabindings/scriptstate.pkg
+            ${CMAKE_CURRENT_SOURCE_DIR}/scriptstate.h
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Generating tolua binding"
+)
 
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${THIRDPARTY_DIR}/LuaBox2D)
 

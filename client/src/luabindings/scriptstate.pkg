@@ -1,0 +1,2 @@
+$cfile "scriptstate.h"
+$using namespace pg;

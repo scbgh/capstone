@@ -233,7 +233,9 @@ void World::LoadMap(const string& map_name)
     map_ = std::move(map_file);
 
     // Load the lua script
+    script_state_.reset(new ScriptState(phys_world_.get(), app_));
     script_.reset(new Script(src));
+    script_->Call<void>("init", script_state_.get());
 }
 
 //
