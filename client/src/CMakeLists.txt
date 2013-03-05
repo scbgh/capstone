@@ -19,6 +19,7 @@ set(PHYSGAME_SRCS
     math/vector.cpp
     pack.cpp
     renderer.cpp
+    script.cpp
     sprite.cpp
     world.cpp
     ${THIRDPARTY_DIR}/LuaBox2D/LuaBox2D.cpp
@@ -36,3 +37,4 @@ include_directories(${THIRDPARTY_DIR}/LuaBox2D)
 
 add_executable(physgame ${PHYSGAME_SRCS})
 target_link_libraries(physgame ${SDL_LIBRARY} ${SDL_IMAGE_LIBRARIES} ${TOLUA++_LIBRARY} ${LUA_LIBRARIES} ${OPENGL_LIBRARIES} ${BOX2D_LIBRARY})
+

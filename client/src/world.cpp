@@ -6,6 +6,7 @@
 #include "common.h"
 #include "mapfile.h"
 #include "world.h"
+#include "script.h"
 #include "json/picojson.h"
 #include "math/math.h"
 #include <Box2D/Box2D.h>
@@ -40,10 +41,12 @@ void World::LoadMap(const string& map_name)
     
     Pack& pack = app_->pack();
     string map_path = "maps/" + map_name + ".json";
+    string script_path = "scripts/" + map_name + ".lua";
     if (!pack.contains(map_path)) {
         Die("Could not load map '%s'", map_name.c_str());
     }
     string json = pack[map_path].ToString();
+    string src = pack[script_path].ToString();
 
     b2Vec2 gravity(0.0f, -10.0f);
     phys_world_ = unique_ptr<b2World>(new b2World(gravity));
@@ -228,6 +231,9 @@ void World::LoadMap(const string& map_name)
 
     initialized_ = true;
     map_ = std::move(map_file);
+
+    // Load the lua script
+    script_.reset(new Script(src));
 }
 
 //

@@ -9,6 +9,7 @@
 #include "Box2D/Render.h"
 #include "mapfile.h"
 #include "sprite.h"
+#include "script.h"
 #include <Box2D/Box2D.h>
 #include <memory>
 #include <string>
@@ -36,6 +37,7 @@ private:
     App *app_;
     std::unique_ptr<MapFile> map_;
     std::unique_ptr<b2World> phys_world_; // box2d world
+    std::unique_ptr<Script> script_; // lua script
     bool initialized_; // is the world initialized?
     DebugDraw dbg_draw_; // debug drawer for box2d
 
