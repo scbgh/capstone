@@ -16,7 +16,10 @@ Script::Script(const string& source) :
     luaL_openlibs(lua_);
     tolua_LuaBox2D_open(lua_);
     tolua_scriptstate_open(lua_);
-    luaL_dostring(lua_, source.c_str());
+    if (luaL_dostring(lua_, source.c_str())) {
+        Debug("Lua error: %s\n", lua_tostring(lua_, -1));
+        lua_remove(lua_, -1);
+    }
 }
 
 //
