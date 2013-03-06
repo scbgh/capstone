@@ -33,6 +33,7 @@ enum JointType { kDistance, kGear, kLine, kPrismatic, kPulley, kRevolute, kRope,
 // Base structure for all map entities
 struct Entity {
     int id;
+    std::string tag;
 };
 
 //

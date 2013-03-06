@@ -67,6 +67,7 @@ void World::LoadMap(const string& map_name)
 
     // Maps from map bodies to their associated Box2D bodies
     map<Body *, b2Body *> phys_bodies;
+    tagged_bodies_.clear();
 
     // Create bodies in the world
     for (const auto& body : map_file->bodies) {
@@ -95,6 +96,10 @@ void World::LoadMap(const string& map_name)
         }
         def.userData = body.get();
         phys_bodies[body.get()] = phys_world_->CreateBody(&def);
+
+        if (body->tag != "") {
+            tagged_bodies_[body->tag] = phys_bodies[body.get()];
+        }
     }
 
     // Create shapes and their associated fixtures
@@ -111,13 +116,16 @@ void World::LoadMap(const string& map_name)
         // Lambda to create the fixture for a shape
         auto fix_shape = [&](b2Shape *sh) mutable {
             b2FixtureDef def;
+            b2Fixture *fix;
             b2Body *target_body;
+            string tag;
 
             if (has_fixture) {
                 def.friction = fixture->friction;
                 def.restitution = fixture->restitution;
                 def.density = fixture->density;
                 def.isSensor = fixture->is_sensor;
+                tag = fixture->tag;
                 b2Body *body = phys_bodies[fixture->body];
                 target_body = body;
             } else {
@@ -125,7 +133,10 @@ void World::LoadMap(const string& map_name)
             }
 
             def.shape = sh;
-            target_body->CreateFixture(&def);
+            fix = target_body->CreateFixture(&def);
+            if (tag != "") {
+                tagged_fixtures_[tag] = fix;
+            }
         };
 
         switch (shape->type()) {
@@ -178,6 +189,7 @@ void World::LoadMap(const string& map_name)
 
     // Create joints
     for (const auto& joint : map_file->joints) {
+        b2Joint *j;
         b2JointDef *def;
         switch (joint->type()) {
             case kDistance: {
@@ -210,7 +222,10 @@ void World::LoadMap(const string& map_name)
                 break;
         }
         def->collideConnected = joint->collide_connected;
-        phys_world_->CreateJoint(def);
+        j = phys_world_->CreateJoint(def);
+        if (joint->tag != "") {
+            tagged_joints_[joint->tag] = j;
+        }
         delete def;
     }
 
@@ -262,6 +277,36 @@ void World::Step(float seconds)
             accum += time_step;
         }
     }
+}
+
+//
+//
+b2Joint *World::joint(const std::string& tag)
+{
+    if (tagged_joints_.find(tag) != tagged_joints_.end()) {
+        return tagged_joints_[tag];
+    }
+    return NULL;
+}
+
+//
+//
+b2Body *World::body(const std::string& tag)
+{
+    if (tagged_bodies_.find(tag) != tagged_bodies_.end()) {
+        return tagged_bodies_[tag];
+    }
+    return NULL;
+}
+
+//
+//
+b2Fixture *World::fixture(const std::string& tag)
+{
+    if (tagged_fixtures_.find(tag) != tagged_fixtures_.end()) {
+        return tagged_fixtures_[tag];
+    }
+    return NULL;
 }
 
 //

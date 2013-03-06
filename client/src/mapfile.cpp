@@ -78,6 +78,7 @@ MapFile *LoadMapFromJSON(const string& json)
         shape->id = shape_object["id"].get<double>();
         shape->rotation = shape_object["rotation"].get<double>();
         shape->position = PointFromArray(shape_object["position"].get<picojson::array>());
+        shape->tag = shape_object["tag"].get<string>();
         shapes[shape->id] = shape;
         map_file->shapes.push_back(unique_ptr<Shape>(shape));
     }
@@ -101,6 +102,7 @@ MapFile *LoadMapFromJSON(const string& json)
             body->allow_sleep = shape_object["allowSleep"].get<bool>();
             body->active = shape_object["active"].get<bool>();
             body->image = shape_object["image"].get<string>();
+            body->tag = shape_object["tag"].get<string>();
             body->image_offset = PointFromArray(shape_object["imageOffset"].get<picojson::array>());
             bool isDynamic = shape_object["isDynamic"].get<bool>();
 
@@ -125,6 +127,7 @@ MapFile *LoadMapFromJSON(const string& json)
         fixture->restitution = fixture_object["restitution"].get<double>();
         fixture->density = fixture_object["density"].get<double>();
         fixture->is_sensor = fixture_object["isSensor"].get<bool>();
+        fixture->tag = fixture_object["tag"].get<string>();
 
         int shape_id = fixture_object["shape"].get<double>();
         int body_id = fixture_object["body"].get<double>();
@@ -164,6 +167,7 @@ MapFile *LoadMapFromJSON(const string& json)
         joint->body_a = bodies[body_a_id];
         joint->body_b = bodies[body_b_id];
         joint->collide_connected = joint_object["collideConnected"].get<bool>();
+        joint->tag = joint_object["tag"].get<string>();
         joint->id = joint_object["id"].get<double>();
 
         map_file->joints.push_back(unique_ptr<Joint>(joint));
