@@ -96,12 +96,16 @@ void App::OnKeyDown(SDL_KeyboardEvent *evt)
         default:
             break;
     }
+    world_->script()->Call<void>("key_down", world_->script_state(),
+        std::string(SDL_GetKeyName(evt->keysym.sym)));
 }
 
 //
 //
 void App::OnKeyUp(SDL_KeyboardEvent *evt)
 {
+    world_->script()->Call<void>("key_up", world_->script_state(),
+        std::string(SDL_GetKeyName(evt->keysym.sym)));
 }
 
 //
