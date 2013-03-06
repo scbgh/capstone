@@ -6,7 +6,12 @@
 #ifndef _SCRIPTSTATE_H_
 #define _SCRIPTSTATE_H_
 
+#include <string>
+
 class b2World;
+class b2Joint;
+class b2Body;
+class b2Fixture;
 
 namespace pg {
 
@@ -18,7 +23,9 @@ public:
 
 //tolua_begin
     b2World *world() const { return world_; }
-    int test() { return 5; }
+    b2Joint *joint(const std::string& tag);
+    b2Body *body(const std::string& tag);
+    b2Fixture *fixture(const std::string& tag);
 //tolua_end
 private:
     b2World *world_;
