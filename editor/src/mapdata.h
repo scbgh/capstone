@@ -36,6 +36,7 @@ struct Entity : public HasProperties {
     { }
 
     int id;
+    PROPERTY(Entity, QString, tag);
 };
 
 //

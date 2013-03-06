@@ -53,6 +53,7 @@ j::value shapeToValue(QSharedPointer<Shape> shape)
         { "id", j::value((double)shape->id) },
         { "position", pointToValue(shape->position) },
         { "rotation", j::value(shape->rotation) },
+        { "tag", j::value(shape->tag.toStdString()) }
     };
 
     switch (shape->type()) {
@@ -109,7 +110,8 @@ j::value fixtureToValue(QSharedPointer<Fixture> fixture)
         { "friction", j::value(fixture->friction) },
         { "restitution", j::value(fixture->restitution) },
         { "density", j::value(fixture->density) },
-        { "isSensor", j::value(fixture->isSensor) }
+        { "isSensor", j::value(fixture->isSensor) },
+        { "tag", j::value(fixture->tag.toStdString()) }
     };
 
     return j::value(shapeObject);
@@ -126,7 +128,8 @@ j::value jointToValue(QSharedPointer<Joint> joint)
         { "id", j::value((double)joint->id) },
         { "bodyA", j::value((double)joint->bodyA->id) },
         { "bodyB", j::value((double)joint->bodyB->id) },
-        { "collideConnected", j::value(joint->collideConnected) }
+        { "collideConnected", j::value(joint->collideConnected) },
+        { "tag", j::value(joint->tag.toStdString()) }
     };
 
     switch (joint->type()) {
@@ -248,6 +251,8 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
         shape->id = shape_object["id"].get<double>();
         shape->rotation = shape_object["rotation"].get<double>();
         shape->position = pointFromArray(shape_object["position"].get<picojson::array>());
+        if (shape_object["tag"].is<std::string>())
+            shape->tag = QString::fromStdString(shape_object["tag"].get<std::string>());
         shapes[shape->id] = shape;
         game_map->shapes.append(shape);
     }
@@ -272,6 +277,8 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
             body->active = shape_object["active"].get<bool>();
             body->image = QString::fromStdString(shape_object["image"].get<std::string>());
             body->imageOffset = pointFromArray(shape_object["imageOffset"].get<picojson::array>());
+            if (shape_object["tag"].is<std::string>())
+                body->tag = QString::fromStdString(shape_object["tag"].get<std::string>());
             bool isDynamic = shape_object["isDynamic"].get<bool>();
 
             if (!isDynamic) {
@@ -295,6 +302,8 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
         fixture->restitution = fixture_object["restitution"].get<double>();
         fixture->density = fixture_object["density"].get<double>();
         fixture->isSensor = fixture_object["isSensor"].get<bool>();
+        if (fixture_object["tag"].is<std::string>())
+            fixture->tag = QString::fromStdString(fixture_object["tag"].get<std::string>());
 
         int shape_id = fixture_object["shape"].get<double>();
         int body_id = fixture_object["body"].get<double>();
@@ -338,6 +347,8 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
         joint->bodyB = bodyB;
         joint->collideConnected = joint_object["collideConnected"].get<bool>();
         joint->id = joint_object["id"].get<double>();
+        if (joint_object["tag"].is<std::string>())
+            joint->tag = QString::fromStdString(joint_object["tag"].get<std::string>());
 
         game_map->joints.append(joint);
     }
