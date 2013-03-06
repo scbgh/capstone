@@ -52,13 +52,17 @@ void Renderer::Render()
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
+    glColor4d(1.0, 1.0, 1.0, 1.0);
+
     float aspect = (float)width_ / (float)height_;
     gluOrtho2D(view_upper_left_.x, view_lower_right_.x,
         view_lower_right_.y, view_upper_left_.y);
 
     // Draw the map image
     World& world = app_->world();
-    world.back_sprite()->Render(40, 22);
+    if (world.back_sprite()) {
+        world.back_sprite()->Render(40, 22);
+    }
 
     // Draw the sprites for each fixture
     for (b2Body *phys_body = world.phys_world()->GetBodyList(); phys_body != NULL; phys_body = phys_body->GetNext()) {
@@ -77,7 +81,9 @@ void Renderer::Render()
         glPopMatrix();
     }
 
-    world.fore_sprite()->Render(40, 22);
+    if (world.fore_sprite()) {
+        world.fore_sprite()->Render(40, 22);
+    }
 
     if (app_->ShouldRenderDebug()) {
         world.DrawDebug();
