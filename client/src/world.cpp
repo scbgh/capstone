@@ -9,6 +9,7 @@
 #include "script.h"
 #include "json/picojson.h"
 #include "math/math.h"
+#include "characters/greeny.h"
 #include <Box2D/Box2D.h>
 #include <sstream>
 #include <tuple>
@@ -247,6 +248,14 @@ void World::LoadMap(const string& map_name)
     initialized_ = true;
     map_ = std::move(map_file);
 
+    // Create characters
+    if (tagged_bodies_.find("greeny_start") != tagged_bodies_.end()) {
+        Greeny *greeny = new Greeny(app_);
+        b2Vec2 pos = tagged_bodies_["greeny_start"]->GetPosition();
+        greeny->SetPosition(pos.x, pos.y);
+        characters_["greeny"] = std::unique_ptr<Character>(std::move(greeny));
+    }
+
     // Load the lua script
     script_state_.reset(new ScriptState(phys_world_.get(), app_));
     script_.reset(new Script(src));
@@ -276,6 +285,10 @@ void World::Step(float seconds)
             phys_world_->Step(time_step, vel_iter, pos_iter);
             accum += time_step;
         }
+    }
+
+    for (auto& it : characters_) {
+        it.second->Step(seconds);
     }
 }
 
@@ -314,6 +327,37 @@ b2Fixture *World::fixture(const std::string& tag)
 void World::DrawDebug()
 {
     phys_world_->DrawDebugData();
+}
+
+//
+//
+void World::DrawCharacters()
+{
+    for (auto& it : characters_) {
+        it.second->Render();
+    }
+}
+
+//
+//
+void World::OnKeyDown(SDL_KeyboardEvent *evt)
+{
+    script_->Call<void>("key_down", script_state_.get(),
+        std::string(SDL_GetKeyName(evt->keysym.sym)));
+    for (auto& it : characters_) {
+        it.second->OnKeyDown(evt);
+    }
+}
+
+//
+//
+void World::OnKeyUp(SDL_KeyboardEvent *evt)
+{
+    script_->Call<void>("key_up", script_state_.get(),
+        std::string(SDL_GetKeyName(evt->keysym.sym)));
+    for (auto& it : characters_) {
+        it.second->OnKeyUp(evt);
+    }
 }
 
 }

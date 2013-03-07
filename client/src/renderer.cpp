@@ -88,6 +88,7 @@ void Renderer::Render()
     if (app_->ShouldRenderDebug()) {
         world.DrawDebug();
     }
+    world.DrawCharacters();
 }
 
 }

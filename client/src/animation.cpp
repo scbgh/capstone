@@ -45,7 +45,7 @@ void Animation::LoadAnimation(const string& animation_name)
     if (!pack.contains(sprite)) {
         Die("Could not load animation sprite '%s'", sprite.c_str());
     }
-    sprite_sheet_.reset(new Sprite(pack[sprite.c_str()].data, pack[sprite.c_str()].length));
+    sprite_sheet_.reset(new Sprite(pack[sprite].data, pack[sprite].length));
 
     for (auto& state_value : root_object["states"].get<picojson::array>()) {
         auto state_object = state_value.get<picojson::object>();
@@ -58,8 +58,6 @@ void Animation::LoadAnimation(const string& animation_name)
             AnimationFrame f;
             f.index = (int)frame_object["index"].get<double>();
             f.duration = frame_object["duration"].get<double>();
-            f.flip_h = frame_object["flip_h"].is<bool>() ? frame_object["flip_h"].get<bool>() : false;
-            f.flip_v = frame_object["flip_v"].is<bool>() ? frame_object["flip_v"].get<bool>() : false;
             state.frames.push_back(f);
         }
 
@@ -83,23 +81,31 @@ void Animation::Step(double time)
 
 //
 //
-void Animation::Render(double w, double h) const
+void Animation::Render(double w, double h, bool flip_h, bool flip_v) const
 {
     if (!sprite_sheet_) return;
 
     int num_cells_x = sprite_sheet_->width() / cell_width_;
     AnimationFrame cur_frame = cur_state.frames[frame_];
-    double sx = cur_frame.index % num_cells_x;
-    double sy = cur_frame.index / num_cells_x;
-    double sw = cell_width_ / sprite_sheet_->width();
-    double sh = cell_height_ / sprite_sheet_->height();
+    double sw = (double)cell_width_ / sprite_sheet_->width();
+    double sh = (double)cell_height_ / sprite_sheet_->height();
+    double sx = (cur_frame.index % num_cells_x) * sw;
+    double sy = (cur_frame.index / num_cells_x) * sh;
+    if (flip_h) {
+        sx += sw;
+        sw = -sw;
+    }
+    if (flip_v) {
+        sy += sh;
+        sh = -sh;
+    }
     sprite_sheet_->Render(sx, sy, sw, sh, w, h);
 }
 
 //
 //
 void Animation::SetState(const std::string& name)
-{
+    {
     cur_state = states_[name];
     time_ = 0;
     frame_ = 0;

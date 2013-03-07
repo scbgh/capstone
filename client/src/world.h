@@ -7,6 +7,7 @@
 #define _WORLD_H_
 
 #include "Box2D/Render.h"
+#include "character.h"
 #include "mapfile.h"
 #include "sprite.h"
 #include "script.h"
@@ -29,6 +30,7 @@ public:
     void Dispose();
     void Step(float seconds);
     void DrawDebug();
+    void DrawCharacters();
 
     bool initialized() const { return initialized_; }
     Sprite *back_sprite() { return back_sprite_.get(); }
@@ -42,6 +44,9 @@ public:
     ScriptState *script_state() { return script_state_.get(); }
     Script *script() { return script_.get(); }
 
+    void OnKeyDown(SDL_KeyboardEvent *evt);
+    void OnKeyUp(SDL_KeyboardEvent *evt);
+ 
     World(const World&) = delete;
     World& operator=(const World&) = delete;
 private:
@@ -56,6 +61,8 @@ private:
     std::map<std::string, b2Fixture *> tagged_fixtures_;
     std::map<std::string, b2Joint *> tagged_joints_;
     std::map<std::string, b2Body *> tagged_bodies_;
+
+    std::map<std::string, std::unique_ptr<Character>> characters_;
 
     std::unique_ptr<Sprite> back_sprite_;
     std::unique_ptr<Sprite> fore_sprite_;

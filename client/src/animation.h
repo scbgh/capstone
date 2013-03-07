@@ -40,7 +40,7 @@ public:
 
     void LoadAnimation(const std::string& animation_name);
     void Step(double time);
-    void Render(double w, double h) const;
+    void Render(double w, double h, bool flip_h, bool flip_v) const;
     void SetState(const std::string& name);
 
     Animation(const Animation&) = delete;

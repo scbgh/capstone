@@ -12,24 +12,23 @@
         },
 
         {
-            "name": "walk_right",
+            "name": "walk",
             "repeat": true,
             "frames": [
-                { "index": 1, "duration": 0.2 },
-                { "index": 2, "duration": 0.2 },
-                { "index": 3, "duration": 0.2 },
-                { "index": 4, "duration": 0.2 }
+                { "index": 1, "duration": 0.1 },
+                { "index": 2, "duration": 0.1 },
+                { "index": 3, "duration": 0.1 },
+                { "index": 4, "duration": 0.1 }
             ]
         },
 
         {
-            "name": "walk_left",
-            "repeat": true,
+            "name": "jump",
+            "repeat": false,
             "frames": [
-                { "index": 1, "duration": 0.2, "flip_h": true },
-                { "index": 2, "duration": 0.2, "flip_h": true },
-                { "index": 3, "duration": 0.2, "flip_h": true },
-                { "index": 4, "duration": 0.2, "flip_h": true }
+                { "index": 5, "duration": 0.2 },
+                { "index": 6, "duration": 0.2 },
+                { "index": 7, "duration": 0.2 }
             ]
         }
     ]

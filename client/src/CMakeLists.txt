@@ -8,6 +8,8 @@ set(PHYSGAME_SRCS
     animation.cpp
     app.cpp
     box2d/Render.cpp
+    character.cpp
+    characters/greeny.cpp
     file.cpp
     main.cpp
     mapfile.cpp

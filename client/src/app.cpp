@@ -29,10 +29,6 @@ App::App(int argc, char *argv[], int width, int height) :
     // Load game packfile
     string pack_filename = AppendPath(GetExecutableDirectory(), "game.dat");
     pack_ = unique_ptr<Pack>(new Pack(pack_filename));
-
-    walk_.reset(new Animation(this));
-    walk_->LoadAnimation("walk");
-
     renderer_->Init(width, height);
     ParseArgs(argc, argv);
 }
@@ -100,16 +96,14 @@ void App::OnKeyDown(SDL_KeyboardEvent *evt)
         default:
             break;
     }
-    world_->script()->Call<void>("key_down", world_->script_state(),
-        std::string(SDL_GetKeyName(evt->keysym.sym)));
+    world_->OnKeyDown(evt);
 }
 
 //
 //
 void App::OnKeyUp(SDL_KeyboardEvent *evt)
 {
-    world_->script()->Call<void>("key_up", world_->script_state(),
-        std::string(SDL_GetKeyName(evt->keysym.sym)));
+    world_->OnKeyUp(evt);
 }
 
 //

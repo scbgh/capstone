@@ -5,10 +5,10 @@ end
 function key_down(s, key)
     joint = tolua.cast(s:joint("wheeljoint"), "b2RevoluteJoint")
     car = tolua.cast(s:body("carbody"), "b2Body")
-    if key == "left" then
+    if key == "z" then
         joint:SetMotorSpeed(-150)
         joint:EnableMotor(true)
-    elseif key == "right" then
+    elseif key == "x" then
         joint:SetMotorSpeed(150)
         joint:EnableMotor(true)
     end
