@@ -57,5 +57,22 @@ void Sprite::Render(double w, double h) const
     glDisable(GL_TEXTURE_2D);
 }
 
+//
+//
+void Sprite::Render(double sx, double sy, double sw, double sh, double w, double h) const
+{
+    if (!valid_) return;
+
+    glBindTexture(GL_TEXTURE_2D, texture_);
+    glEnable(GL_TEXTURE_2D);
+    glBegin(GL_QUADS);
+        glTexCoord2f(sx, sy+sh); glVertex2f(0, 0);
+        glTexCoord2f(sx+sw, sy+sh); glVertex2f(w, 0);
+        glTexCoord2f(sx+sw, sy); glVertex2f(w, h);
+        glTexCoord2f(sx, sy); glVertex2f(0, h);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+}
+
 }
 

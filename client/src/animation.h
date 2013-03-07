@@ -14,6 +14,8 @@
 
 namespace pg {
 
+class App;
+
 //
 //
 struct AnimationFrame {

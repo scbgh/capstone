@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <SDL.h>
 #include "app.h"
+#include "animation.h"
 #include "common.h"
 #include "file.h"
 #include "pack.h"
@@ -28,6 +29,9 @@ App::App(int argc, char *argv[], int width, int height) :
     // Load game packfile
     string pack_filename = AppendPath(GetExecutableDirectory(), "game.dat");
     pack_ = unique_ptr<Pack>(new Pack(pack_filename));
+
+    walk_.reset(new Animation(this));
+    walk_->LoadAnimation("walk");
 
     renderer_->Init(width, height);
     ParseArgs(argc, argv);

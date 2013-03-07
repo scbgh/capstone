@@ -7,6 +7,7 @@
 #define _SPRITE_H_
 
 #include <string>
+#include "common.h"
 
 namespace pg {
 
@@ -19,6 +20,7 @@ public:
     Sprite& operator=(const Sprite&) = delete;
 
     void Render(double w, double h) const;
+    void Render(double sx, double sy, double sw, double sh, double w, double h) const;
 
     int width() const { return width_; }
     int height() const { return height_; }

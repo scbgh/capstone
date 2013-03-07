@@ -6,6 +6,7 @@
 #ifndef _APP_H_
 #define _APP_H_
 
+#include "animation.h"
 #include "common.h"
 #include <memory>
 #include <string>
@@ -37,6 +38,8 @@ private:
     std::unique_ptr<Renderer> renderer_; // the renderer for the game state
     std::unique_ptr<World> world_; // the current state of the game world
     std::unique_ptr<Pack> pack_; // pack file containing the game resources
+
+    std::unique_ptr<Animation> walk_;
 
     int last_tick_; // the last recorded tick count
     bool running_; // is the game running yet?

@@ -41,6 +41,9 @@ public:
 
     ScriptState *script_state() { return script_state_.get(); }
     Script *script() { return script_.get(); }
+
+    World(const World&) = delete;
+    World& operator=(const World&) = delete;
 private:
     App *app_;
     std::unique_ptr<ScriptState> script_state_;
@@ -56,10 +59,6 @@ private:
 
     std::unique_ptr<Sprite> back_sprite_;
     std::unique_ptr<Sprite> fore_sprite_;
-
-    // Non-copyable
-    World(const World&);
-    World& operator=(const World&);
 };
 
 }

@@ -42,6 +42,9 @@ void Animation::LoadAnimation(const string& animation_name)
     cell_height_ = (int)root_object["cell_height"].get<double>();
     string sprite = root_object["sprite"].get<string>();
     
+    if (!pack.contains(sprite)) {
+        Die("Could not load animation sprite '%s'", sprite.c_str());
+    }
     sprite_sheet_.reset(new Sprite(pack[sprite.c_str()].data, pack[sprite.c_str()].length));
 
     for (auto& state_value : root_object["states"].get<picojson::array>()) {
