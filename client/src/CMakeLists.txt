@@ -5,6 +5,7 @@ if(NOT SDL_FOUND)
 endif(NOT SDL_FOUND)
 
 set(PHYSGAME_SRCS
+    animation.cpp
     app.cpp
     box2d/Render.cpp
     file.cpp
