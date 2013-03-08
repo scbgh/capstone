@@ -2,11 +2,12 @@
 //  renderer.cpp
 //
 
-#include "common.h"
-#include "renderer.h"
 #include "app.h"
+#include "common.h"
 #include "mapfile.h"
 #include "math.h"
+#include "renderer.h"
+#include "world.h"
 
 namespace pg {
 
@@ -66,7 +67,9 @@ void Renderer::Render()
 
     // Draw the sprites for each fixture
     for (b2Body *phys_body = world.phys_world()->GetBodyList(); phys_body != NULL; phys_body = phys_body->GetNext()) {
-        Body *body = (Body *)phys_body->GetUserData();
+        BodyData *body_data = (BodyData *)phys_body->GetUserData();
+        if (!body_data || body_data->type != kWorldBody) continue;
+        Body *body = body_data->data.world_body;
         if (!body || !body->image_sprite) continue;
 
         double w = body->image_sprite->width() / 32.0;
