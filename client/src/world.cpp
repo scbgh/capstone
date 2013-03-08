@@ -3,13 +3,14 @@
 //
 
 #include "app.h"
-#include "common.h"
-#include "mapfile.h"
-#include "world.h"
-#include "script.h"
-#include "json/picojson.h"
-#include "math/math.h"
 #include "characters/greeny.h"
+#include "common.h"
+#include "json/picojson.h"
+#include "mapfile.h"
+#include "math/math.h"
+#include "pack.h"
+#include "script.h"
+#include "world.h"
 #include <Box2D/Box2D.h>
 #include <sstream>
 #include <tuple>
@@ -33,6 +34,11 @@ World::World(App *app) :
 {
     dbg_draw_.SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_pairBit);
 }
+
+//
+//
+World::~World()
+{ }
 
 //
 // Reinitialize the world with a given map name
@@ -95,7 +101,11 @@ void World::LoadMap(const string& map_name)
             PackEntry entry = pack[body->image];
             body->image_sprite = unique_ptr<Sprite>(new Sprite(entry.data, entry.length));
         }
-        def.userData = body.get();
+        BodyData *data = new BodyData;
+        data->type = kWorldBody;
+        data->data.world_body = body.get();
+        body->data.reset(data);
+        def.userData = data;
         phys_bodies[body.get()] = phys_world_->CreateBody(&def);
 
         if (body->tag != "") {

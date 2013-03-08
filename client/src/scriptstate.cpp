@@ -4,6 +4,7 @@
 
 #include "app.h"
 #include "scriptstate.h"
+#include "world.h"
 
 namespace pg {
 

@@ -13,7 +13,6 @@
 
 namespace pg {
 
-// includes at bottom of file
 class Renderer;
 class World;
 class Pack;
@@ -23,6 +22,7 @@ class Pack;
 class App {
 public:
     App(int argc, char *argv[], int width, int height);
+    ~App();
 
     Renderer& renderer() { return *renderer_; }
     World& world() { return *world_; }
@@ -61,10 +61,6 @@ private:
     App& operator=(const App&);
 };
 
-};
-
-#include "pack.h"
-#include "renderer.h"
-#include "world.h"
+}
 
 #endif

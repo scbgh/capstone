@@ -7,11 +7,7 @@
 #define _WORLD_H_
 
 #include "Box2D/Render.h"
-#include "character.h"
 #include "mapfile.h"
-#include "sprite.h"
-#include "script.h"
-#include "scriptstate.h"
 #include <Box2D/Box2D.h>
 #include <memory>
 #include <string>
@@ -19,12 +15,31 @@
 namespace pg {
 
 class App;
+class Sprite;
+class Script;
+class ScriptState;
+class Character;
+
+enum BodyDataType {
+    kWorldBody, kCharacterBody
+};
+
+//
+// User data for physical bodies
+struct BodyData {
+    BodyDataType type;
+    union {
+        Body *world_body;
+        Character *character_body;
+    } data;
+};
 
 //
 // Contains the state of the game world including the physics objects.
 class World {
 public:
     explicit World(App *app);
+    ~World();
 
     void LoadMap(const std::string& map_name);
     void Dispose();

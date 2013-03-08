@@ -11,6 +11,9 @@
 #include "pack.h"
 #include "renderer.h"
 #include "world.h"
+#include "script.h"
+#include "scriptstate.h"
+#include "character.h"
 
 namespace pg {
 
@@ -32,6 +35,11 @@ App::App(int argc, char *argv[], int width, int height) :
     renderer_->Init(width, height);
     ParseArgs(argc, argv);
 }
+
+//
+//
+App::~App()
+{ }
 
 //
 // Start the SDL main loop

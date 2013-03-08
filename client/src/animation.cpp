@@ -2,11 +2,11 @@
  * animation.cpp
  */
 
-#include "app.h"
-#include "pack.h"
-#include "common.h"
 #include "animation.h"
+#include "app.h"
+#include "common.h"
 #include "json/picojson.h"
+#include "pack.h"
 #include <cmath>
 #include <sstream>
 
