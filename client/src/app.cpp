@@ -2,18 +2,18 @@
 // window.cpp
 //
 
-#include <cstdio>
-#include <SDL.h>
-#include "app.h"
 #include "animation.h"
+#include "app.h"
+#include "character.h"
 #include "common.h"
 #include "file.h"
 #include "pack.h"
 #include "renderer.h"
-#include "world.h"
 #include "script.h"
 #include "scriptstate.h"
-#include "character.h"
+#include "world.h"
+#include <SDL.h>
+#include <cstdio>
 
 namespace pg {
 
