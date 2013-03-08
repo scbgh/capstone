@@ -13,12 +13,6 @@ namespace pg {
 class Greeny : public Character {
 public:
     Greeny(App *app);
-    
-    virtual void Step(double time);
-    virtual void OnKeyDown(SDL_KeyboardEvent *evt);
-    virtual void OnKeyUp(SDL_KeyboardEvent *evt);
-private:
-    double x_movement_;
 };
 
 }

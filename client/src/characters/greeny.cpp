@@ -5,19 +5,19 @@
 #include "app.h"
 #include "common.h"
 #include "greeny.h"
+#include "world.h"
 
 namespace pg {
 
 //
 //
 Greeny::Greeny(App *app) :
-    Character(app),
-    x_movement_(0)
+    Character(app)
 {
     b2World *phys_world = app->world().phys_world();
 
     b2CircleShape *shape = new b2CircleShape;
-    shape->m_radius = 0.5;
+    shape->m_radius = 0.45;
 
     b2BodyDef body_def;
     body_def.fixedRotation = true;
@@ -37,46 +37,6 @@ Greeny::Greeny(App *app) :
     animation_.reset(new Animation(app));
     animation_->LoadAnimation("walk");
     animation_->SetState("stand");
-}
-
-//
-//
-void Greeny::OnKeyDown(SDL_KeyboardEvent *evt)
-{
-    Character::OnKeyDown(evt);
-    
-    switch (evt->keysym.sym) {
-        case SDLK_LEFT:
-            x_movement_ = -15;
-            animation_->SetState("walk");
-            break;
-        case SDLK_RIGHT:
-            x_movement_ = 15;
-            animation_->SetState("walk");
-            break;
-        default:
-            break;
-    }
-
-}
-
-//
-//
-void Greeny::OnKeyUp(SDL_KeyboardEvent *evt)
-{
-    Character::OnKeyUp(evt);
-    x_movement_ = 0;
-    animation_->SetState("stand");
-}
-
-//
-//
-void Greeny::Step(double time)
-{
-    Character::Step(time);
-    if (x_movement_ != 0) {
-        body_->ApplyLinearImpulse(b2Vec2(x_movement_, 0), body_->GetWorldCenter());
-    }
 }
 
 }
