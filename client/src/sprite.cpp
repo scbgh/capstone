@@ -2,9 +2,9 @@
 // sprite.cpp
 //
 
-#include <SDL_image.h>
 #include "common.h"
 #include "sprite.h"
+#include <SDL_image.h>
 
 namespace pg {
 

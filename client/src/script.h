@@ -17,7 +17,7 @@ extern "C" {
 #include <tolua++.h>
 #include "common.h"
 #include "scriptstate.h"
-#include "LuaBox2D.h"
+#include "LuaBox2D/LuaBox2D.h"
 #include "lua_scriptstate.h"
 
 namespace pg {
