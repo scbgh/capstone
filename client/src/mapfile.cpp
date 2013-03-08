@@ -7,6 +7,7 @@
 #include "sprite.h"
 #include "json/picojson.h"
 #include "math/math.h"
+#include "world.h"
 
 namespace pg {
 
@@ -20,6 +21,11 @@ math::Point PointFromArray(const vector<picojson::value>& elems)
 }
 
 }
+
+//
+//
+Body::~Body()
+{ }
 
 ///////////
 

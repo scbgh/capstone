@@ -24,6 +24,7 @@ struct Shape;
 struct Joint;
 struct PolygonShape;
 struct CircleShape;
+struct BodyData;
 
 enum BodyType { kStatic, kDynamic };
 enum ShapeType { kPolygon, kCircle };
@@ -67,6 +68,9 @@ struct Body : public Entity {
     std::string image;
     math::Point image_offset;
     std::unique_ptr<Sprite> image_sprite;
+    std::unique_ptr<BodyData> data;
+
+    ~Body();
 };
 
 //
