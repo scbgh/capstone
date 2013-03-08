@@ -3,6 +3,7 @@
  */
 
 #include "app.h"
+#include "pack.h"
 #include "common.h"
 #include "animation.h"
 #include "json/picojson.h"
@@ -73,9 +74,9 @@ void Animation::Step(double time)
     frame_ = 0;
 
     double stepped;
-    while (stepped + cur_state.frames[frame_].duration < time_) {
-        stepped += cur_state.frames[frame_].duration;
-        frame_ = (frame_ + 1) % cur_state.frames.size();
+    while (stepped + cur_state_.frames[frame_].duration < time_) {
+        stepped += cur_state_.frames[frame_].duration;
+        frame_ = (frame_ + 1) % cur_state_.frames.size();
     }
 }
 
@@ -86,7 +87,7 @@ void Animation::Render(double w, double h, bool flip_h, bool flip_v) const
     if (!sprite_sheet_) return;
 
     int num_cells_x = sprite_sheet_->width() / cell_width_;
-    AnimationFrame cur_frame = cur_state.frames[frame_];
+    AnimationFrame cur_frame = cur_state_.frames[frame_];
     double sw = (double)cell_width_ / sprite_sheet_->width();
     double sh = (double)cell_height_ / sprite_sheet_->height();
     double sx = (cur_frame.index % num_cells_x) * sw;
@@ -105,12 +106,15 @@ void Animation::Render(double w, double h, bool flip_h, bool flip_v) const
 //
 //
 void Animation::SetState(const std::string& name)
-    {
-    cur_state = states_[name];
+{
+    if (cur_state_name_ == name) return;
+
+    cur_state_name_ = name;
+    cur_state_ = states_[name];
     time_ = 0;
     frame_ = 0;
     state_duration_ = 0;
-    for (auto& frame : cur_state.frames) {
+    for (auto& frame : cur_state_.frames) {
         state_duration_ += frame.duration;
     }
 }

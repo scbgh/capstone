@@ -47,6 +47,7 @@ public:
     Animation& operator=(const Animation&) = delete;
 private:
     App *app_;
+    std::string cur_state_name_;
     std::unique_ptr<Sprite> sprite_sheet_;
     std::map<std::string, AnimationState> states_;
     int cell_width_;
@@ -54,7 +55,7 @@ private:
     double time_;
     double state_duration_;
     int frame_;
-    AnimationState cur_state;
+    AnimationState cur_state_;
 };
 
 }
