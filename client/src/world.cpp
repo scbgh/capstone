@@ -25,6 +25,38 @@ b2Vec2 PointToVec(math::Point p) { return b2Vec2(p.x, p.y); }
 
 }
 
+//
+//
+void ContactListener::BeginContact(b2Contact *contact)
+{
+    BodyData *a, *b;
+    a = (BodyData *)contact->GetFixtureA()->GetBody()->GetUserData();
+    b = (BodyData *)contact->GetFixtureB()->GetBody()->GetUserData();
+
+    if (contact->GetFixtureA()->GetUserData() == (void *)kBottomFixture) {
+        a->data.character_body->BeginFootContact();
+    }
+    if (contact->GetFixtureB()->GetUserData() == (void *)kBottomFixture) {
+        b->data.character_body->BeginFootContact();
+    }
+}
+
+//
+//
+void ContactListener::EndContact(b2Contact *contact)
+{
+    BodyData *a, *b;
+    a = (BodyData *)contact->GetFixtureA()->GetBody()->GetUserData();
+    b = (BodyData *)contact->GetFixtureB()->GetBody()->GetUserData();
+
+    if (contact->GetFixtureA()->GetUserData() == (void *)kBottomFixture) {
+        a->data.character_body->EndFootContact();
+    }
+    if (contact->GetFixtureB()->GetUserData() == (void *)kBottomFixture) {
+        b->data.character_body->EndFootContact();
+    }
+}
+
 ///////////
 
 //
@@ -58,6 +90,7 @@ void World::LoadMap(const string& map_name)
     b2Vec2 gravity(0.0f, -10.0f);
     phys_world_ = unique_ptr<b2World>(new b2World(gravity));
     phys_world_->SetDebugDraw(&dbg_draw_);
+    phys_world_->SetContactListener(&contact_listener_);
 
     // Create a single static body at the origin for the static world geometry
     b2BodyDef static_body_def;

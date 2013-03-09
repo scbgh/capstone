@@ -24,6 +24,10 @@ enum BodyDataType {
     kWorldBody, kCharacterBody
 };
 
+enum FixtureType {
+    kBottomFixture = 1
+};
+
 //
 // User data for physical bodies
 struct BodyData {
@@ -32,6 +36,13 @@ struct BodyData {
         Body *world_body;
         Character *character_body;
     } data;
+};
+
+//
+//
+class ContactListener : public b2ContactListener {
+    void BeginContact(b2Contact *contact);
+    void EndContact(b2Contact *contact);
 };
 
 //
@@ -72,6 +83,7 @@ private:
     std::unique_ptr<Script> script_; // lua script
     bool initialized_; // is the world initialized?
     DebugDraw dbg_draw_; // debug drawer for box2d
+    ContactListener contact_listener_;
 
     std::map<std::string, b2Fixture *> tagged_fixtures_;
     std::map<std::string, b2Joint *> tagged_joints_;
