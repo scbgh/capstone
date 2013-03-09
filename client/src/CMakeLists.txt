@@ -10,6 +10,7 @@ set(PHYSGAME_SRCS
     box2d/Render.cpp
     character.cpp
     characters/greeny.cpp
+    characters/heavy.cpp
     file.cpp
     main.cpp
     mapfile.cpp

@@ -3,7 +3,7 @@
 //
 
 #include "app.h"
-#include "characters/greeny.h"
+#include "characters/heavy.h"
 #include "common.h"
 #include "json/picojson.h"
 #include "mapfile.h"
@@ -292,11 +292,11 @@ void World::LoadMap(const string& map_name)
     map_ = std::move(map_file);
 
     // Create characters
-    if (tagged_bodies_.find("greeny_start") != tagged_bodies_.end()) {
-        Greeny *greeny = new Greeny(app_);
-        b2Vec2 pos = tagged_bodies_["greeny_start"]->GetPosition();
-        greeny->SetPosition(pos.x, pos.y);
-        characters_["greeny"] = std::unique_ptr<Character>(std::move(greeny));
+    if (tagged_bodies_.find("heavy_start") != tagged_bodies_.end()) {
+        HeavyCharacter *heavy = new HeavyCharacter(app_);
+        b2Vec2 pos = tagged_bodies_["heavy_start"]->GetPosition();
+        heavy->SetPosition(pos.x, pos.y);
+        characters_["heavy"] = std::unique_ptr<Character>(std::move(heavy));
     }
 
     // Load the lua script
