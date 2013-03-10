@@ -17,6 +17,7 @@ HeavyCharacter::HeavyCharacter(App *app) :
     b2World *phys_world = app->world().phys_world();
     BodyData *data = new BodyData;
     data->type = kCharacterBody;
+    data->cause_shake = true;
     data->data.character_body = this;
 
     b2CircleShape *shape = new b2CircleShape;

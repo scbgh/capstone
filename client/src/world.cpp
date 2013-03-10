@@ -27,6 +27,12 @@ b2Vec2 PointToVec(math::Point p) { return b2Vec2(p.x, p.y); }
 
 //
 //
+ContactListener::ContactListener(World *world) :
+    world_(world)
+{ }
+
+//
+//
 void ContactListener::BeginContact(b2Contact *contact)
 {
     BodyData *a, *b;
@@ -57,12 +63,48 @@ void ContactListener::EndContact(b2Contact *contact)
     }
 }
 
+//
+//
+void ContactListener::PostSolve(b2Contact *contact, const b2ContactImpulse *impulse)
+{
+    b2Body *ba = contact->GetFixtureA()->GetBody();
+    b2Body *bb = contact->GetFixtureB()->GetBody();
+    BodyData *a, *b;
+    a = (BodyData *)ba->GetUserData();
+    b = (BodyData *)bb->GetUserData();
+
+    b2WorldManifold manifold;
+    contact->GetWorldManifold(&manifold);
+    int max_index = 0;
+    double max_force = 0;
+    
+    for (int i = 0; i < contact->GetManifold()->pointCount; i++) {
+        if (impulse->normalImpulses[i] > max_force) {
+            max_force = impulse->normalImpulses[i];
+            max_index = i;
+        }
+    }
+
+    b2Vec2 vel1 = ba->GetLinearVelocity();
+    b2Vec2 vel2 = bb->GetLinearVelocity();
+    b2Vec2 impact_velocity = vel1 - vel2;
+    if (max_force > 2.0 && impact_velocity.Length() > 0.0 && ((a && a->cause_shake) || (b && b->cause_shake))) { 
+        // disable screen shake for now
+        //world_->ShakeScreen(max_force / 5000, 0.5, 0.5, math::Vector(impact_velocity.x, impact_velocity.y));
+    }
+}
+
 ///////////
 
 //
 //
 World::World(App *app) :
-    app_(app)
+    app_(app),
+    shake_magnitude_(0),
+    shake_(0),
+    shake_length_(0),
+    shake_direction_(1, 1),
+    contact_listener_(this)
 {
     dbg_draw_.SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_pairBit);
 }
@@ -136,6 +178,7 @@ void World::LoadMap(const string& map_name)
         }
         BodyData *data = new BodyData;
         data->type = kWorldBody;
+        data->cause_shake = false;
         data->data.world_body = body.get();
         body->data.reset(data);
         def.userData = data;
@@ -173,6 +216,7 @@ void World::LoadMap(const string& map_name)
                 b2Body *body = phys_bodies[fixture->body];
                 target_body = body;
             } else {
+                def.friction = 0.5;
                 target_body = static_body;
             }
 
@@ -333,6 +377,31 @@ void World::Step(float seconds)
     for (auto& it : characters_) {
         it.second->Step(seconds);
     }
+
+    shake_ -= seconds;
+    if (shake_ < 0.0) shake_ = 0.0;
+}
+
+//
+//
+void World::ShakeScreen(double magnitude, double frequency, double length, math::Vector dir)
+{
+    shake_ = length;
+    shake_magnitude_ = magnitude;
+    shake_frequency_ = frequency;
+    shake_length_ = length;
+    shake_direction_ = dir;
+}
+
+//
+//
+math::Vector World::ShakeMagnitude() const
+{
+    double sx = shake_length_ - shake_;
+    double amt;
+    if (sx == 0.0) return math::Vector(0, 0);
+    amt = shake_magnitude_ * sin(M_PI * 4 * sx * shake_frequency_) / (M_PI * 4 * sx * shake_frequency_);
+    return Normalized(shake_direction_) * amt;
 }
 
 //

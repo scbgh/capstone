@@ -55,6 +55,11 @@ void Renderer::Render()
 
     glColor4d(1.0, 1.0, 1.0, 1.0);
 
+    // Compute screen shake
+    glPushMatrix();
+    math::Vector vec = app_->world().ShakeMagnitude();
+    glTranslated(vec.x, vec.y, 0);
+
     float aspect = (float)width_ / (float)height_;
     gluOrtho2D(view_upper_left_.x, view_lower_right_.x,
         view_lower_right_.y, view_upper_left_.y);
@@ -92,6 +97,8 @@ void Renderer::Render()
         world.DrawDebug();
     }
     world.DrawCharacters();
+
+    glPopMatrix();
 }
 
 }

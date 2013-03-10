@@ -64,7 +64,9 @@ void Character::Render() const
 {
     b2Vec2 pos = body_->GetPosition();
     glPushMatrix();
-    glTranslated(pos.x + image_offset_.x, pos.y + image_offset_.y, 0);
+    glTranslated(pos.x, pos.y, 0);
+    glRotated(RAD_TO_DEG(body_->GetAngle()), 0, 0, 1);
+    glTranslated(image_offset_.x, image_offset_.y, 0);
     animation_->Render(image_size_.x, image_size_.y, (direction_ == kLeft), false);
     glPopMatrix();
 }

@@ -19,6 +19,7 @@ class Sprite;
 class Script;
 class ScriptState;
 class Character;
+class World;
 
 enum BodyDataType {
     kWorldBody, kCharacterBody
@@ -32,6 +33,7 @@ enum FixtureType {
 // User data for physical bodies
 struct BodyData {
     BodyDataType type;
+    bool cause_shake;
     union {
         Body *world_body;
         Character *character_body;
@@ -41,8 +43,14 @@ struct BodyData {
 //
 //
 class ContactListener : public b2ContactListener {
-    void BeginContact(b2Contact *contact);
-    void EndContact(b2Contact *contact);
+public:
+    ContactListener(World *world);
+
+    virtual void BeginContact(b2Contact *contact);
+    virtual void EndContact(b2Contact *contact);
+    virtual void PostSolve(b2Contact *contact, const b2ContactImpulse *impulse);
+private:
+    World *world_;
 };
 
 //
@@ -57,6 +65,8 @@ public:
     void Step(float seconds);
     void DrawDebug();
     void DrawCharacters();
+    void ShakeScreen(double magnitude, double frequency, double length, math::Vector dir);
+    math::Vector ShakeMagnitude() const;
 
     bool initialized() const { return initialized_; }
     Sprite *back_sprite() { return back_sprite_.get(); }
@@ -84,6 +94,14 @@ private:
     bool initialized_; // is the world initialized?
     DebugDraw dbg_draw_; // debug drawer for box2d
     ContactListener contact_listener_;
+    double time_;;
+
+    // screen shake
+    double shake_;
+    double shake_magnitude_;
+    double shake_frequency_;
+    double shake_length_;
+    math::Vector shake_direction_;
 
     std::map<std::string, b2Fixture *> tagged_fixtures_;
     std::map<std::string, b2Joint *> tagged_joints_;
