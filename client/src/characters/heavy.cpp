@@ -34,6 +34,7 @@ HeavyCharacter::HeavyCharacter(App *app) :
     fixture_def.friction = 1;
     fixture_def.density = 20;
     fixture_def.shape = shape;
+    fixture_def.userData = (void *)kCharacterFixture;
     body_->CreateFixture(&fixture_def);
 
     shape->m_radius = 0.4;

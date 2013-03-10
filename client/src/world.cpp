@@ -40,10 +40,23 @@ void ContactListener::BeginContact(b2Contact *contact)
     b = (BodyData *)contact->GetFixtureB()->GetBody()->GetUserData();
 
     if (contact->GetFixtureA()->GetUserData() == (void *)kBottomFixture) {
-        a->data.character_body->BeginFootContact();
+        if (!contact->GetFixtureB()->IsSensor()) {
+            a->data.character_body->BeginFootContact();
+        }
+    } else if (contact->GetFixtureA()->GetUserData() == (void *)kCharacterFixture) {
+        if (contact->GetFixtureB()->GetUserData() == (void *)kGoalFixture) {
+            a->data.character_body->BeginGoalContact();
+        }
     }
+
     if (contact->GetFixtureB()->GetUserData() == (void *)kBottomFixture) {
-        b->data.character_body->BeginFootContact();
+        if (!contact->GetFixtureA()->IsSensor()) {
+            b->data.character_body->BeginFootContact();
+        }
+    } else if (contact->GetFixtureB()->GetUserData() == (void *)kCharacterFixture) {
+        if (contact->GetFixtureA()->GetUserData() == (void *)kGoalFixture) {
+            b->data.character_body->BeginGoalContact();
+        }
     }
 }
 
@@ -56,11 +69,25 @@ void ContactListener::EndContact(b2Contact *contact)
     b = (BodyData *)contact->GetFixtureB()->GetBody()->GetUserData();
 
     if (contact->GetFixtureA()->GetUserData() == (void *)kBottomFixture) {
-        a->data.character_body->EndFootContact();
+        if (!contact->GetFixtureB()->IsSensor()) {
+            a->data.character_body->EndFootContact();
+        }
+    } else if (contact->GetFixtureA()->GetUserData() == (void *)kCharacterFixture) {
+        if (contact->GetFixtureB()->GetUserData() == (void *)kGoalFixture) {
+            a->data.character_body->EndGoalContact();
+        }
     }
+
     if (contact->GetFixtureB()->GetUserData() == (void *)kBottomFixture) {
-        b->data.character_body->EndFootContact();
+        if (!contact->GetFixtureA()->IsSensor()) {
+            b->data.character_body->EndFootContact();
+        }
+    } else if (contact->GetFixtureB()->GetUserData() == (void *)kCharacterFixture) {
+        if (contact->GetFixtureA()->GetUserData() == (void *)kGoalFixture) {
+            b->data.character_body->EndGoalContact();
+        }
     }
+
 }
 
 //
@@ -104,7 +131,9 @@ World::World(App *app) :
     shake_(0),
     shake_length_(0),
     shake_direction_(1, 1),
-    contact_listener_(this)
+    contact_listener_(this),
+    time_(0),
+    goal_fixture_(NULL)
 {
     dbg_draw_.SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_pairBit);
 }
@@ -343,6 +372,20 @@ void World::LoadMap(const string& map_name)
         characters_["heavy"] = std::unique_ptr<Character>(std::move(heavy));
     }
 
+    // Create goal
+    if (tagged_bodies_.find("goal") != tagged_bodies_.end()) {
+        b2CircleShape goal_shape;
+        goal_shape.m_radius = 0.5;
+        b2BodyDef goal_body_def;
+        b2Body *goal_body = phys_world_->CreateBody(&goal_body_def);
+        goal_body->SetTransform(tagged_bodies_["goal"]->GetPosition(), 0);
+        b2FixtureDef goal_fixture_def;
+        goal_fixture_def.shape = &goal_shape;
+        goal_fixture_def.isSensor = true;
+        goal_fixture_def.userData = (void *)kGoalFixture;
+        goal_fixture_ = goal_body->CreateFixture(&goal_fixture_def);
+    }
+
     // Load the lua script
     script_state_.reset(new ScriptState(phys_world_.get(), app_));
     script_.reset(new Script(src));
@@ -378,8 +421,11 @@ void World::Step(float seconds)
         it.second->Step(seconds);
     }
 
+    time_ += seconds;
     shake_ -= seconds;
     if (shake_ < 0.0) shake_ = 0.0;
+
+    printf("%d\n", characters_["heavy"]->at_goal());
 }
 
 //

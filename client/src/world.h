@@ -26,7 +26,9 @@ enum BodyDataType {
 };
 
 enum FixtureType {
-    kBottomFixture = 1
+    kBottomFixture = 1,
+    kCharacterFixture,
+    kGoalFixture
 };
 
 //
@@ -72,6 +74,8 @@ public:
     Sprite *back_sprite() { return back_sprite_.get(); }
     Sprite *fore_sprite() { return fore_sprite_.get(); }
     b2World *phys_world() { return phys_world_.get(); }
+    double time() const { return time_; }
+    b2Fixture *goal_fixture() const { return goal_fixture_; }
     
     b2Joint *joint(const std::string& tag);
     b2Body *body(const std::string& tag);
@@ -94,7 +98,7 @@ private:
     bool initialized_; // is the world initialized?
     DebugDraw dbg_draw_; // debug drawer for box2d
     ContactListener contact_listener_;
-    double time_;;
+    double time_;
 
     // screen shake
     double shake_;
@@ -106,6 +110,7 @@ private:
     std::map<std::string, b2Fixture *> tagged_fixtures_;
     std::map<std::string, b2Joint *> tagged_joints_;
     std::map<std::string, b2Body *> tagged_bodies_;
+    b2Fixture *goal_fixture_;
 
     std::map<std::string, std::unique_ptr<Character>> characters_;
 

@@ -6,7 +6,9 @@
 #include "common.h"
 #include "mapfile.h"
 #include "math.h"
+#include "pack.h"
 #include "renderer.h"
+#include "sprite.h"
 #include "world.h"
 
 namespace pg {
@@ -42,6 +44,12 @@ void Renderer::Init(int width, int height)
 
     width_ = width;
     height_ = height;
+
+    Pack& pack = app_->pack();
+    if (pack.contains("graphics/goal.png")) {
+        PackEntry entry = pack["graphics/goal.png"];
+        goal_sprite_.reset(new Sprite(entry.data, entry.length));
+    }
 }
 
 //
@@ -86,6 +94,18 @@ void Renderer::Render()
         glTranslated(body->image_offset.x, body->image_offset.y, 0);
         glTranslated(-w / 2, -h / 2, 0);
         body->image_sprite->Render(w, h);
+        glPopMatrix();
+    }
+
+    // Draw the goal
+    b2Fixture *goal_fixture = world.goal_fixture();
+    if (goal_fixture && goal_sprite_) {
+        b2Vec2 pos = goal_fixture->GetBody()->GetPosition();
+        glPushMatrix();
+        glTranslated(pos.x, pos.y, 0);
+        glRotated(fmod(world.time(), 5) / 5 * 360, 0, 0, 1);
+        glTranslated(-0.5, -0.5, 0);
+        goal_sprite_->Render(1, 1);
         glPopMatrix();
     }
 

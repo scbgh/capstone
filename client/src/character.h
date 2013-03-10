@@ -31,6 +31,10 @@ public:
 
     void BeginFootContact();
     void EndFootContact();
+    void BeginGoalContact() { at_goal_ = true; }
+    void EndGoalContact() { at_goal_ = false; }
+    
+    bool at_goal() const { return at_goal_; }
 
     Character(const Character&) = delete;
     Character& operator=(const Character&) = delete;
@@ -50,6 +54,7 @@ protected:
     int state_;
     CharacterDirection direction_;
     bool grounded_;
+    bool at_goal_;
 };
 
 }
