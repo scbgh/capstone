@@ -4,6 +4,9 @@
 
 #include "app.h"
 #include "characters/heavy.h"
+#include "characters/jump.h"
+#include "characters/ranger.h"
+#include "characters/strong.h"
 #include "common.h"
 #include "json/picojson.h"
 #include "mapfile.h"
@@ -133,7 +136,8 @@ World::World(App *app) :
     shake_direction_(1, 1),
     contact_listener_(this),
     time_(0),
-    goal_fixture_(NULL)
+    goal_fixture_(NULL),
+    active_character_("heavy")
 {
     dbg_draw_.SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_pairBit);
 }
@@ -365,12 +369,18 @@ void World::LoadMap(const string& map_name)
     map_ = std::move(map_file);
 
     // Create characters
-    if (tagged_bodies_.find("heavy_start") != tagged_bodies_.end()) {
-        HeavyCharacter *heavy = new HeavyCharacter(app_);
-        b2Vec2 pos = tagged_bodies_["heavy_start"]->GetPosition();
-        heavy->SetPosition(pos.x, pos.y);
-        characters_["heavy"] = std::unique_ptr<Character>(std::move(heavy));
+#define CREATE_CHARACTER(name, cls) \
+    if (tagged_bodies_.find(name "_start") != tagged_bodies_.end()) { \
+        cls *obj = new cls(app_); \
+        b2Vec2 pos = tagged_bodies_[name "_start"]->GetPosition(); \
+        obj->SetPosition(pos.x, pos.y); \
+        characters_[name] = std::unique_ptr<Character>(std::move(obj)); \
     }
+    CREATE_CHARACTER("heavy", HeavyCharacter);
+    CREATE_CHARACTER("strong", StrongCharacter);
+    CREATE_CHARACTER("jump", JumpCharacter);
+    CREATE_CHARACTER("ranger", RangerCharacter);
+#undef CREATE_CHARACTER
 
     // Create goal
     if (tagged_bodies_.find("goal") != tagged_bodies_.end()) {
@@ -424,8 +434,6 @@ void World::Step(float seconds)
     time_ += seconds;
     shake_ -= seconds;
     if (shake_ < 0.0) shake_ = 0.0;
-
-    printf("%d\n", characters_["heavy"]->at_goal());
 }
 
 //
@@ -502,8 +510,23 @@ void World::OnKeyDown(SDL_KeyboardEvent *evt)
 {
     script_->Call<void>("key_down", script_state_.get(),
         std::string(SDL_GetKeyName(evt->keysym.sym)));
-    for (auto& it : characters_) {
-        it.second->OnKeyDown(evt);
+    characters_[active_character_]->OnKeyDown(evt);
+
+    switch (evt->keysym.sym) {
+        case SDLK_1:
+            active_character_ = "heavy";
+            break;
+        case SDLK_2:
+            active_character_ = "jump";
+            break;
+        case SDLK_3:
+            active_character_ = "strong";
+            break;
+        case SDLK_4:
+            active_character_ = "ranger";
+            break;
+        default:
+            break;
     }
 }
 
@@ -513,6 +536,8 @@ void World::OnKeyUp(SDL_KeyboardEvent *evt)
 {
     script_->Call<void>("key_up", script_state_.get(),
         std::string(SDL_GetKeyName(evt->keysym.sym)));
+    //characters_[active_character_]->OnKeyUp(evt);
+    // HACK to prevent characters from not getting key up events
     for (auto& it : characters_) {
         it.second->OnKeyUp(evt);
     }

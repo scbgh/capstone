@@ -11,6 +11,9 @@ set(PHYSGAME_SRCS
     character.cpp
     characters/greeny.cpp
     characters/heavy.cpp
+    characters/jump.cpp
+    characters/ranger.cpp
+    characters/strong.cpp
     file.cpp
     main.cpp
     mapfile.cpp

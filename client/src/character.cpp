@@ -99,11 +99,9 @@ void Character::OnKeyUp(SDL_KeyboardEvent *evt)
     switch (evt->keysym.sym) {
         case SDLK_LEFT:
             state_ &= ~kMoveLeft;
-            direction_ = kLeft;
             break;
         case SDLK_RIGHT:
             state_ &= ~kMoveRight;
-            direction_ = kRight;
             break;
         case SDLK_SPACE:
             state_ &= ~kJump;

@@ -99,6 +99,7 @@ private:
     DebugDraw dbg_draw_; // debug drawer for box2d
     ContactListener contact_listener_;
     double time_;
+    std::string active_character_;
 
     // screen shake
     double shake_;

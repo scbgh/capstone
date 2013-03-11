@@ -70,10 +70,18 @@ void Animation::LoadAnimation(const string& animation_name)
 //
 void Animation::Step(double time)
 {
-    time_ += fmod(time, state_duration_);
+    if (time_ == -1) return;
+
+    if (time_ + time > state_duration_ && !cur_state_.repeat) {
+        time_ = -1;
+        frame_ = cur_state_.frames.size() - 1;
+        return;
+    }
+
+    time_ = fmod(time_ + time, state_duration_);
     frame_ = 0;
 
-    double stepped;
+    double stepped = 0;
     while (stepped + cur_state_.frames[frame_].duration < time_) {
         stepped += cur_state_.frames[frame_].duration;
         frame_ = (frame_ + 1) % cur_state_.frames.size();
