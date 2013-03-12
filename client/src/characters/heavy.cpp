@@ -12,7 +12,8 @@ namespace pg {
 //
 //
 HeavyCharacter::HeavyCharacter(App *app) :
-    Character(app)
+    Character(app),
+    rolling_(false)
 {
     b2World *phys_world = app->world().phys_world();
     BodyData *data = new BodyData;
@@ -53,6 +54,53 @@ HeavyCharacter::HeavyCharacter(App *app) :
     animation_->SetState("stand");
 
     delete shape;
+}
+
+//
+//
+void HeavyCharacter::OnKeyDown(SDL_KeyboardEvent *evt)
+{
+    if (!rolling_) {
+        Character::OnKeyDown(evt);
+    }
+
+    switch (evt->keysym.sym) {
+        case SDLK_a:
+            if (grounded_) {
+                rolling_ = true;
+                body_->SetFixedRotation(false);
+            }
+        default:
+            break;
+    }
+}
+
+//
+//
+void HeavyCharacter::OnKeyUp(SDL_KeyboardEvent *evt)
+{
+    Character::OnKeyUp(evt);
+
+    switch (evt->keysym.sym) {
+        case SDLK_a:
+            rolling_ = false;
+            body_->SetFixedRotation(true);
+            body_->SetAngularVelocity(0);
+            body_->SetTransform(body_->GetPosition(), 0);
+            break;
+        default:
+            break;
+    }
+}
+
+//
+//
+void HeavyCharacter::Step(double time)
+{
+    Character::Step(time);
+    if (rolling_) {
+        animation_->SetState("stand");
+    }
 }
 
 }

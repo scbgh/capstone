@@ -13,6 +13,11 @@ namespace pg {
 class HeavyCharacter : public Character {
 public:
     HeavyCharacter(App *app);
+    virtual void OnKeyDown(SDL_KeyboardEvent *evt);
+    virtual void OnKeyUp(SDL_KeyboardEvent *evt);
+    virtual void Step(double time);
+private:
+    bool rolling_;
 };
 
 }
