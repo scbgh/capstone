@@ -6,6 +6,7 @@
 #include "common.h"
 #include "ranger.h"
 #include "world.h"
+#include "mapfile.h"
 
 namespace pg {
 
@@ -54,6 +55,72 @@ RangerCharacter::RangerCharacter(App *app) :
 
     delete shape;
 }
+
+//
+//
+void RangerCharacter::OnKeyDown(SDL_KeyboardEvent *evt)
+{
+    switch (evt->keysym.sym) {
+        case SDLK_LEFT:
+            state_ |= kMoveLeft;
+            break;
+        case SDLK_RIGHT:
+            state_ |= kMoveRight;
+            break;
+        case SDLK_SPACE:
+            if (grounded_) {
+                state_ |= kJump;
+                body_->ApplyLinearImpulse(b2Vec2(0, jump_speed_), body_->GetWorldCenter());
+            }
+        case SDLK_a:
+            if (grounded_) {
+                launch_ = true;
+                launch_angle_ = 0;
+            }
+        default:
+            break;
+    }
+}
+
+//
+//
+void RangerCharacter::OnKeyUp(SDL_KeyboardEvent *evt)
+{
+    switch (evt->keysym.sym) {
+        case SDLK_LEFT:
+            state_ &= ~kMoveLeft;
+            break;
+        case SDLK_RIGHT:
+            state_ &= ~kMoveRight;
+            break;
+        case SDLK_SPACE:
+            state_ &= ~kJump;
+            break;
+        case SDLK_a:
+            if (launch_) {
+                b2BodyDef body_def;
+                body_def.type = b2_dynamicBody;
+                b2CircleShape circle;
+                circle.m_radius = 0.125;
+                b2FixtureDef fixture_def;
+                fixture_def.shape = &circle;
+                b2Body *body = app_->world().phys_world()->CreateBody(&body_def);
+                b2Fixture *fixture = body->CreateFixture(&fixture_def);
+                Body *world_body = new Body;
+                BodyData *data = new BodyData;
+                data->cause_shake = false;
+                data->type = kCharacterBody;
+                data->data.world_body = world_body;
+                body->SetUserData((void *)data);
+                app_->world().map()->bodies.push_back(std::unique_ptr<Body>(world_body));
+            }
+            break;
+        default:
+            break;
+    }
+
+}
+
 
 }
 
