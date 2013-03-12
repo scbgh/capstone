@@ -36,6 +36,7 @@ enum FixtureType {
 struct BodyData {
     BodyDataType type;
     bool cause_shake;
+    bool collide_player;
     union {
         Body *world_body;
         Character *character_body;
@@ -50,6 +51,7 @@ public:
 
     virtual void BeginContact(b2Contact *contact);
     virtual void EndContact(b2Contact *contact);
+    virtual void PreSolve(b2Contact *contact, const b2Manifold *oldManifold);
     virtual void PostSolve(b2Contact *contact, const b2ContactImpulse *impulse);
 private:
     World *world_;

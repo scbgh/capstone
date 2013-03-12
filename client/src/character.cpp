@@ -18,6 +18,7 @@ Character::Character(App *app) :
 {
     BodyData *data = new BodyData;
     data->type = kCharacterBody;
+    data->collide_player = false;
     data->data.character_body = this;
     state_ = kIdle;
 }

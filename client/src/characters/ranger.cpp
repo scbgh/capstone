@@ -126,6 +126,7 @@ void RangerCharacter::OnKeyUp(SDL_KeyboardEvent *evt)
                 world_body->image_sprite = unique_ptr<Sprite>(new Sprite(entry.data, entry.length));
                 BodyData *data = new BodyData;
                 data->cause_shake = false;
+                data->collide_player = false;
                 data->type = kWorldBody;
                 data->data.world_body = world_body;
                 body->SetUserData((void *)data);

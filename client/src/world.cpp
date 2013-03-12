@@ -95,6 +95,21 @@ void ContactListener::EndContact(b2Contact *contact)
 
 //
 //
+void ContactListener::PreSolve(b2Contact *contact, const b2Manifold *oldManifold)
+{
+    b2Body *ba = contact->GetFixtureA()->GetBody();
+    b2Body *bb = contact->GetFixtureB()->GetBody();
+    BodyData *a, *b;
+    a = (BodyData *)ba->GetUserData();
+    b = (BodyData *)bb->GetUserData();
+
+    if (a && b && ((a->type == kCharacterBody && !b->collide_player) || (b->type == kCharacterBody && !a->collide_player))) {
+        contact->SetEnabled(false);
+    }
+}
+
+//
+//
 void ContactListener::PostSolve(b2Contact *contact, const b2ContactImpulse *impulse)
 {
     b2Body *ba = contact->GetFixtureA()->GetBody();
@@ -212,6 +227,7 @@ void World::LoadMap(const string& map_name)
         BodyData *data = new BodyData;
         data->type = kWorldBody;
         data->cause_shake = false;
+        data->collide_player = true;
         data->data.world_body = body.get();
         body->data.reset(data);
         def.userData = data;
