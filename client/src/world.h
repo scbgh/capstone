@@ -76,7 +76,7 @@ public:
     b2World *phys_world() { return phys_world_.get(); }
     double time() const { return time_; }
     b2Fixture *goal_fixture() const { return goal_fixture_; }
-    MapFile *map() { return map_.get(); }
+    MapFile *map_file() { return map_.get(); }
     
     b2Joint *joint(const std::string& tag);
     b2Body *body(const std::string& tag);

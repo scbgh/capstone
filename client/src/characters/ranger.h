@@ -16,8 +16,14 @@ public:
     
     virtual void OnKeyDown(SDL_KeyboardEvent *evt);
     virtual void OnKeyUp(SDL_KeyboardEvent *evt);
+    virtual void Step(double time);
+    virtual void Render() const;
 private:
-    float launch_angle_;
+    double launch_angle_;
+    double launch_force_;
+    double launch_time_;
+    double time_;
+
     bool launch_;
 };
 

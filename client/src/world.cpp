@@ -539,7 +539,7 @@ void World::OnKeyUp(SDL_KeyboardEvent *evt)
     //characters_[active_character_]->OnKeyUp(evt);
     // HACK to prevent characters from not getting key up events
     for (auto& it : characters_) {
-        &it.second->OnKeyUp(evt);
+        it.second->OnKeyUp(evt);
     }
 }
 
