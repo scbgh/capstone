@@ -30,7 +30,7 @@ Body::~Body()
 ///////////
 
 //
-// Load an entire map structure from a JSON representation
+//
 MapFile *LoadMapFromJSON(const string& json)
 {
     // Load the root object of the JSON map representation

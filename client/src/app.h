@@ -18,19 +18,28 @@ class World;
 class Pack;
 
 //
-// Abstracts the basic SDL game loop and main window.
+//! Contains the main SDL game loop.
 class App {
 public:
+    //! Create and initialize a new App
+    //! \param argc The number of command line arguments to pass in
+    //! \param argv The command line arguments from the main function
+    //! \param width The width of the game window
+    //! \param height The height of the game window
     App(int argc, char *argv[], int width, int height);
     ~App();
 
+    //! The renderer that holds the current SDL window
     Renderer& renderer() { return *renderer_; }
+    //! The current world state
     World& world() { return *world_; }
+    //! The pack file as loaded from disk
     Pack& pack() { return *pack_; }
 
-    // Start the SDL game loop
+    //! Start the SDL game loop and show the window
     void Run();
 
+    //! If true, extra lines will be drawn displaying the Box2D bodies
     bool ShouldRenderDebug() const { return should_render_debug_; }
 private:
     bool has_quit_; // should we quit the program?

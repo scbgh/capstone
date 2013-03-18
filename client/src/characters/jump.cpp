@@ -20,8 +20,8 @@ JumpCharacter::JumpCharacter(App *app) :
     data->cause_shake = true;
     data->data.character_body = this;
 
-    b2CircleShape *shape = new b2CircleShape;
-    shape->m_radius = 0.45;
+    b2PolygonShape *shape = new b2PolygonShape;
+    shape->SetAsBox(0.3, 0.4);
 
     b2BodyDef body_def;
     body_def.fixedRotation = true;
@@ -32,14 +32,14 @@ JumpCharacter::JumpCharacter(App *app) :
     b2FixtureDef fixture_def;
     b2Fixture *fixture;
     fixture_def.friction = 1;
-    fixture_def.density = 6;
+    fixture_def.density = 12;
     fixture_def.shape = shape;
     fixture_def.userData = (void *)kCharacterFixture;
     body_->CreateFixture(&fixture_def);
 
-    shape->m_radius = 0.4;
-    shape->m_p = b2Vec2(0.0, -0.1);
+    shape->SetAsBox(0.25, 0.4, b2Vec2(0.0, -0.1), 0);
     fixture_def.isSensor = true;
+    fixture_def.density = 0;
     fixture_def.userData = (void *)kBottomFixture;
     body_->CreateFixture(&fixture_def);
 

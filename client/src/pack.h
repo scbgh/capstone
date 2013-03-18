@@ -13,23 +13,35 @@
 namespace pg {
 
 //
-// A representation of a single file in a Pack.
+//! A representation of a single file in a Pack
 struct PackEntry {
+    //! The length in bytes of this entry
     int length;
+    //! The raw bytes of the data contained in this entry
     char *data;
 
+    //! Returns a string representation of this entry
     std::string ToString() { return std::string(data, length); }
 };
 
 //
-// A representation of an archive file in memory.
+//! A representation of an archive file in memory
 class Pack {
 public:
-    Pack(const std::string& filename);
+    //! Create and load a pack file from disk
+    //! \param filename The filename of the pack file to load
+    explicit Pack(const std::string& filename);
 
+    //! Access an entry in this pack
+    //! \param key The name of the entry to access
     PackEntry operator[](const std::string& key);
+    //! Access an entry in this pack
+    //! \param key The name of the entry to access
     PackEntry get(const std::string& key);
+    //! Returns true if the specified entry exists in the pack
+    //! \param key The name of the entry to look up
     bool contains(const std::string& key) const;
+    //! The number of entries in the pack
     int count() const;
 
 private:

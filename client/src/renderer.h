@@ -16,12 +16,18 @@ class App;
 class Sprite;
 
 //
-// Holds all the rendering state information
+//! Holds rendering state information and handles all application-level rendering tasks
 class Renderer {
 public:
+    //! Create a new renderer
+    //! \param app The App to which this renderer belongs
     explicit Renderer(App *app);
 
+    //! Initialize the SDL window and rendering surface
+    //! \param width The desired window width
+    //! \param height The desired window height
     void Init(int width, int height);
+    //! Render the current application state
     void Render();
 private:
 	App *app_; // the global app

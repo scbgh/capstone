@@ -10,6 +10,7 @@
 
 namespace pg {
 
+//! Character-specific implementation information for the Ranger character
 class RangerCharacter : public Character {
 public:
     RangerCharacter(App *app);

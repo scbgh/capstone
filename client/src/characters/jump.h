@@ -10,6 +10,7 @@
 
 namespace pg {
 
+//! Character-specific implementation information for the Agile character
 class JumpCharacter : public Character {
 public:
     JumpCharacter(App *app);

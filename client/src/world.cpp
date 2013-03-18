@@ -135,7 +135,7 @@ void ContactListener::PostSolve(b2Contact *contact, const b2ContactImpulse *impu
     b2Vec2 impact_velocity = vel1 - vel2;
     if (max_force > 2.0 && impact_velocity.Length() > 0.0 && ((a && a->cause_shake) || (b && b->cause_shake))) { 
         // disable screen shake for now
-        //world_->ShakeScreen(max_force / 5000, 0.5, 0.5, math::Vector(impact_velocity.x, impact_velocity.y));
+        // world_->ShakeScreen(max_force / 5000, 0.5, 0.5, math::Vector(impact_velocity.x, impact_velocity.y));
     }
 }
 
@@ -526,7 +526,9 @@ void World::OnKeyDown(SDL_KeyboardEvent *evt)
 {
     script_->Call<void>("key_down", script_state_.get(),
         std::string(SDL_GetKeyName(evt->keysym.sym)));
-    characters_[active_character_]->OnKeyDown(evt);
+    if (characters_.find(active_character_) != characters_.end()) {
+        characters_[active_character_]->OnKeyDown(evt);
+    }
 
     switch (evt->keysym.sym) {
         case SDLK_1:

@@ -10,6 +10,7 @@
 
 namespace pg {
 
+//! Character-specific implementation information for the Heavy character
 class HeavyCharacter : public Character {
 public:
     HeavyCharacter(App *app);

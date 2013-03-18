@@ -10,6 +10,7 @@
 
 namespace pg {
 
+//! Character-specific implementation information for the Strong character
 class StrongCharacter : public Character {
 public:
     StrongCharacter(App *app);

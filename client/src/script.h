@@ -24,12 +24,25 @@ namespace pg {
 
 struct ScriptState;
 
+//
+//! A wrapper class for interacting with Lua scripts
 class Script {
 public:
+    //! Load a Lua script into a new Script wrapper
+    //! \param source The Lua source code to load
     Script(const std::string& source);
     ~Script();
 
+    //! Call a nullary function in this Lua script
+    //! \param name The name of the function to call
+    //! \tparam R The return type of the function
     template <typename R> R Call(const std::string& name);
+
+    //! Call a function in this Lua script
+    //! \param name The name of the function to call
+    //! \param args The arguments to the function
+    //! \tparam R The return type of the function
+    //! \tparam ...Args The types of the arguments
     template <typename R, typename ...Args> R Call(const std::string& name, Args... args);
     
 private:

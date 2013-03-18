@@ -46,6 +46,7 @@ RangerCharacter::RangerCharacter(App *app) :
     shape->m_radius = 0.4;
     shape->m_p = b2Vec2(0.0, -0.1);
     fixture_def.isSensor = true;
+    fixture_def.density = 0;
     fixture_def.userData = (void *)kBottomFixture;
     body_->CreateFixture(&fixture_def);
 
