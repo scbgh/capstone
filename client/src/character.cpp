@@ -50,7 +50,7 @@ void Character::Step(double time)
     double vel_change = to_speed - vel.x;
     double force = body_->GetMass() * vel_change / time;
 
-    if (to_speed != 0.0) {
+    if (to_speed != 0.0 && grounded_) {
         body_->ApplyForce(b2Vec2(force, 0), body_->GetWorldCenter());
     }
 
