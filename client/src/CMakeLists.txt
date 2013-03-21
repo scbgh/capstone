@@ -51,5 +51,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${THIRDPARTY_DIR})
 
 add_executable(physgame ${PHYSGAME_SRCS})
-target_link_libraries(physgame ${SDL_LIBRARY} ${SDL_IMAGE_LIBRARIES} ${TOLUA++_LIBRARY} ${LUA_LIBRARIES} ${OPENGL_LIBRARIES} ${BOX2D_LIBRARY})
+target_link_libraries(physgame ${SDL_LIBRARY} ${SDL_TTF_LIBRARIES} ${SDL_IMAGE_LIBRARIES} ${TOLUA++_LIBRARY}
+    ${LUA_LIBRARIES} ${OPENGL_LIBRARIES} ${BOX2D_LIBRARY})
 

@@ -13,6 +13,7 @@
 #include "scriptstate.h"
 #include "world.h"
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include <cstdio>
 
 namespace pg {
@@ -39,7 +40,10 @@ App::App(int argc, char *argv[], int width, int height) :
 //
 //
 App::~App()
-{ }
+{
+    SDL_Quit();
+    TTF_Quit();
+}
 
 //
 // Start the SDL main loop

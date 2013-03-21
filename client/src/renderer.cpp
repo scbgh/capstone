@@ -2,6 +2,7 @@
 //  renderer.cpp
 //
 
+#include <SDL_ttf.h>
 #include "app.h"
 #include "common.h"
 #include "mapfile.h"
@@ -17,8 +18,15 @@ namespace pg {
 //
 Renderer::Renderer(App *app) :
     app_(app),
+    font_(nullptr),
     view_upper_left_(0.0, 22.0),
     view_lower_right_(40.0, 0.0)
+{
+}
+
+//
+//
+Renderer::~Renderer()
 {
 }
 
@@ -31,6 +39,8 @@ void Renderer::Init(int width, int height)
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
+    TTF_Init();
 
     surface_ = SDL_SetVideoMode(width, height, 32, SDL_OPENGL);
     if (!surface_) {
@@ -49,6 +59,11 @@ void Renderer::Init(int width, int height)
     if (pack.contains("graphics/goal.png")) {
         PackEntry entry = pack["graphics/goal.png"];
         goal_sprite_.reset(new Sprite(entry.data, entry.length));
+    }
+    if (pack.contains("fonts/VeraBd.ttf")) {
+        PackEntry entry = pack["fonts/VeraBd.ttf"];
+        SDL_RWops *rwops = SDL_RWFromMem(entry.data, entry.length);
+        font_ = TTF_OpenFontRW(rwops, 1, 16);
     }
 }
 
@@ -118,7 +133,35 @@ void Renderer::Render()
     }
     world.DrawCharacters();
 
+    DrawText("Hello world", 10, 10);
+
     glPopMatrix();
+}
+
+//
+//
+void Renderer::DrawText(const std::string& text, double x, double y)
+{
+    SDL_Surface *surface = TTF_RenderText_Blended(font_, text.c_str(), {0, 0, 0});
+    unique_ptr<Sprite> sprite;
+    
+    sprite.reset(new Sprite(surface));
+
+    // Draw drop shadow
+    glPushMatrix();
+    glTranslated(x+0.02, y-0.02, 0);
+    sprite->Render(surface->w / 32.0, surface->h / 32.0);
+    glPopMatrix();
+    SDL_FreeSurface(surface);
+
+    // Draw text
+    surface = TTF_RenderText_Blended(font_, text.c_str(), {255,255,255});
+    sprite.reset(new Sprite(surface));
+    glPushMatrix();
+    glTranslated(x, y, 0);
+    sprite->Render(surface->w / 32.0, surface->h / 32.0);
+    glPopMatrix();
+    SDL_FreeSurface(surface);
 }
 
 }

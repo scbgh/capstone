@@ -17,6 +17,7 @@ public:
     //! Create a new Sprite from image data
     //! \param data The raw bytes of the image in a format that SDL_image can read
     //! \param size The size in bytes of the image
+    Sprite(SDL_Surface *surface);
     Sprite(void *data, int size);
     ~Sprite();
     
@@ -41,6 +42,8 @@ public:
     //! The height of this sprite in pixels
     int height() const { return height_; }
 private:
+    void InitFromSurface(SDL_Surface *surface);
+
     int valid_;
     GLuint texture_;
     double width_;
