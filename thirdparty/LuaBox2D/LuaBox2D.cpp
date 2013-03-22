@@ -1,6 +1,6 @@
 /*
-** Lua binding: LuaBox2D
-** Generated automatically by tolua++-1.0.92 on 06/10/12 11:03:41.
+** Lua binding: Box2D
+** Generated automatically by tolua++-1.0.92 on Fri Mar 22 18:10:16 2013.
 */
 
 #ifndef __cplusplus
@@ -11,7 +11,7 @@
 #include "tolua++.h"
 
 /* Exported function */
-TOLUA_API int  tolua_LuaBox2D_open (lua_State* tolua_S);
+TOLUA_API int  tolua_Box2D_open (lua_State* tolua_S);
 
 #include "Box2D/Box2D.h"
 #include <Box2D/Dynamics/Contacts/b2Contact.h>
@@ -157,13 +157,6 @@ static int tolua_collect_b2ContactFilter (lua_State* tolua_S)
 	return 0;
 }
 
-static int tolua_collect_b2ClipVertex (lua_State* tolua_S)
-{
- b2ClipVertex* self = (b2ClipVertex*) tolua_tousertype(tolua_S,1,0);
-	Mtolua_delete(self);
-	return 0;
-}
-
 static int tolua_collect_b2RayCastCallback (lua_State* tolua_S)
 {
  b2RayCastCallback* self = (b2RayCastCallback*) tolua_tousertype(tolua_S,1,0);
@@ -171,9 +164,9 @@ static int tolua_collect_b2RayCastCallback (lua_State* tolua_S)
 	return 0;
 }
 
-static int tolua_collect_b2PulleyJointDef (lua_State* tolua_S)
+static int tolua_collect_b2BlockAllocator (lua_State* tolua_S)
 {
- b2PulleyJointDef* self = (b2PulleyJointDef*) tolua_tousertype(tolua_S,1,0);
+ b2BlockAllocator* self = (b2BlockAllocator*) tolua_tousertype(tolua_S,1,0);
 	Mtolua_delete(self);
 	return 0;
 }
@@ -185,9 +178,23 @@ static int tolua_collect_b2QueryCallback (lua_State* tolua_S)
 	return 0;
 }
 
+static int tolua_collect_b2PulleyJointDef (lua_State* tolua_S)
+{
+ b2PulleyJointDef* self = (b2PulleyJointDef*) tolua_tousertype(tolua_S,1,0);
+	Mtolua_delete(self);
+	return 0;
+}
+
 static int tolua_collect_b2DestructionListener (lua_State* tolua_S)
 {
  b2DestructionListener* self = (b2DestructionListener*) tolua_tousertype(tolua_S,1,0);
+	Mtolua_delete(self);
+	return 0;
+}
+
+static int tolua_collect_b2WheelJointDef (lua_State* tolua_S)
+{
+ b2WheelJointDef* self = (b2WheelJointDef*) tolua_tousertype(tolua_S,1,0);
 	Mtolua_delete(self);
 	return 0;
 }
@@ -213,9 +220,9 @@ static int tolua_collect_b2Rot (lua_State* tolua_S)
 	return 0;
 }
 
-static int tolua_collect_b2WheelJointDef (lua_State* tolua_S)
+static int tolua_collect_b2RopeDef (lua_State* tolua_S)
 {
- b2WheelJointDef* self = (b2WheelJointDef*) tolua_tousertype(tolua_S,1,0);
+ b2RopeDef* self = (b2RopeDef*) tolua_tousertype(tolua_S,1,0);
 	Mtolua_delete(self);
 	return 0;
 }
@@ -234,9 +241,9 @@ static int tolua_collect_b2PolygonShape (lua_State* tolua_S)
 	return 0;
 }
 
-static int tolua_collect_b2BlockAllocator (lua_State* tolua_S)
+static int tolua_collect_b2ChainShape (lua_State* tolua_S)
 {
- b2BlockAllocator* self = (b2BlockAllocator*) tolua_tousertype(tolua_S,1,0);
+ b2ChainShape* self = (b2ChainShape*) tolua_tousertype(tolua_S,1,0);
 	Mtolua_delete(self);
 	return 0;
 }
@@ -269,13 +276,6 @@ static int tolua_collect_b2Filter (lua_State* tolua_S)
 	return 0;
 }
 
-static int tolua_collect_b2RopeDef (lua_State* tolua_S)
-{
- b2RopeDef* self = (b2RopeDef*) tolua_tousertype(tolua_S,1,0);
-	Mtolua_delete(self);
-	return 0;
-}
-
 static int tolua_collect_b2PrismaticJointDef (lua_State* tolua_S)
 {
  b2PrismaticJointDef* self = (b2PrismaticJointDef*) tolua_tousertype(tolua_S,1,0);
@@ -297,6 +297,13 @@ static int tolua_collect_b2PolygonAndCircleContact (lua_State* tolua_S)
 	return 0;
 }
 
+static int tolua_collect_b2MouseJointDef (lua_State* tolua_S)
+{
+ b2MouseJointDef* self = (b2MouseJointDef*) tolua_tousertype(tolua_S,1,0);
+	Mtolua_delete(self);
+	return 0;
+}
+
 static int tolua_collect_b2CircleShape (lua_State* tolua_S)
 {
  b2CircleShape* self = (b2CircleShape*) tolua_tousertype(tolua_S,1,0);
@@ -307,13 +314,6 @@ static int tolua_collect_b2CircleShape (lua_State* tolua_S)
 static int tolua_collect_b2World (lua_State* tolua_S)
 {
  b2World* self = (b2World*) tolua_tousertype(tolua_S,1,0);
-	Mtolua_delete(self);
-	return 0;
-}
-
-static int tolua_collect_b2MouseJointDef (lua_State* tolua_S)
-{
- b2MouseJointDef* self = (b2MouseJointDef*) tolua_tousertype(tolua_S,1,0);
 	Mtolua_delete(self);
 	return 0;
 }
@@ -339,6 +339,13 @@ static int tolua_collect_b2Mat22 (lua_State* tolua_S)
 	return 0;
 }
 
+static int tolua_collect_b2Island (lua_State* tolua_S)
+{
+ b2Island* self = (b2Island*) tolua_tousertype(tolua_S,1,0);
+	Mtolua_delete(self);
+	return 0;
+}
+
 static int tolua_collect_b2BodyDef (lua_State* tolua_S)
 {
  b2BodyDef* self = (b2BodyDef*) tolua_tousertype(tolua_S,1,0);
@@ -346,9 +353,16 @@ static int tolua_collect_b2BodyDef (lua_State* tolua_S)
 	return 0;
 }
 
-static int tolua_collect_b2Island (lua_State* tolua_S)
+static int tolua_collect_b2WorldManifold (lua_State* tolua_S)
 {
- b2Island* self = (b2Island*) tolua_tousertype(tolua_S,1,0);
+ b2WorldManifold* self = (b2WorldManifold*) tolua_tousertype(tolua_S,1,0);
+	Mtolua_delete(self);
+	return 0;
+}
+
+static int tolua_collect_b2GearJointDef (lua_State* tolua_S)
+{
+ b2GearJointDef* self = (b2GearJointDef*) tolua_tousertype(tolua_S,1,0);
 	Mtolua_delete(self);
 	return 0;
 }
@@ -363,13 +377,6 @@ static int tolua_collect_b2ChainAndCircleContact (lua_State* tolua_S)
 static int tolua_collect_b2Shape (lua_State* tolua_S)
 {
  b2Shape* self = (b2Shape*) tolua_tousertype(tolua_S,1,0);
-	Mtolua_delete(self);
-	return 0;
-}
-
-static int tolua_collect_b2GearJointDef (lua_State* tolua_S)
-{
- b2GearJointDef* self = (b2GearJointDef*) tolua_tousertype(tolua_S,1,0);
 	Mtolua_delete(self);
 	return 0;
 }
@@ -395,9 +402,9 @@ static int tolua_collect_b2EdgeAndCircleContact (lua_State* tolua_S)
 	return 0;
 }
 
-static int tolua_collect_b2ChainShape (lua_State* tolua_S)
+static int tolua_collect_b2ClipVertex (lua_State* tolua_S)
 {
- b2ChainShape* self = (b2ChainShape*) tolua_tousertype(tolua_S,1,0);
+ b2ClipVertex* self = (b2ClipVertex*) tolua_tousertype(tolua_S,1,0);
 	Mtolua_delete(self);
 	return 0;
 }
@@ -537,8 +544,8 @@ static void tolua_reg_types (lua_State* tolua_S)
 }
 
 /* method: new of class  b2BlockAllocator */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BlockAllocator_new00
-static int tolua_LuaBox2D_b2BlockAllocator_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BlockAllocator_new00
+static int tolua_Box2D_b2BlockAllocator_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -565,8 +572,8 @@ static int tolua_LuaBox2D_b2BlockAllocator_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2BlockAllocator */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BlockAllocator_new00_local
-static int tolua_LuaBox2D_b2BlockAllocator_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BlockAllocator_new00_local
+static int tolua_Box2D_b2BlockAllocator_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -594,8 +601,8 @@ static int tolua_LuaBox2D_b2BlockAllocator_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2BlockAllocator */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BlockAllocator_delete00
-static int tolua_LuaBox2D_b2BlockAllocator_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BlockAllocator_delete00
+static int tolua_Box2D_b2BlockAllocator_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -623,8 +630,8 @@ static int tolua_LuaBox2D_b2BlockAllocator_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Allocate of class  b2BlockAllocator */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BlockAllocator_Allocate00
-static int tolua_LuaBox2D_b2BlockAllocator_Allocate00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BlockAllocator_Allocate00
+static int tolua_Box2D_b2BlockAllocator_Allocate00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -657,8 +664,8 @@ static int tolua_LuaBox2D_b2BlockAllocator_Allocate00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Free of class  b2BlockAllocator */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BlockAllocator_Free00
-static int tolua_LuaBox2D_b2BlockAllocator_Free00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BlockAllocator_Free00
+static int tolua_Box2D_b2BlockAllocator_Free00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -692,8 +699,8 @@ static int tolua_LuaBox2D_b2BlockAllocator_Free00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Clear of class  b2BlockAllocator */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BlockAllocator_Clear00
-static int tolua_LuaBox2D_b2BlockAllocator_Clear00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BlockAllocator_Clear00
+static int tolua_Box2D_b2BlockAllocator_Clear00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -723,8 +730,8 @@ static int tolua_LuaBox2D_b2BlockAllocator_Clear00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetType of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_GetType00
-static int tolua_LuaBox2D_b2Fixture_GetType00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_GetType00
+static int tolua_Box2D_b2Fixture_GetType00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -755,8 +762,8 @@ static int tolua_LuaBox2D_b2Fixture_GetType00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetShape of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_GetShape00
-static int tolua_LuaBox2D_b2Fixture_GetShape00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_GetShape00
+static int tolua_Box2D_b2Fixture_GetShape00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -787,8 +794,8 @@ static int tolua_LuaBox2D_b2Fixture_GetShape00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetShape of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_GetShape01
-static int tolua_LuaBox2D_b2Fixture_GetShape01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_GetShape01
+static int tolua_Box2D_b2Fixture_GetShape01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -809,13 +816,13 @@ static int tolua_LuaBox2D_b2Fixture_GetShape01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Fixture_GetShape00(tolua_S);
+ return tolua_Box2D_b2Fixture_GetShape00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetSensor of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_SetSensor00
-static int tolua_LuaBox2D_b2Fixture_SetSensor00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_SetSensor00
+static int tolua_Box2D_b2Fixture_SetSensor00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -847,8 +854,8 @@ static int tolua_LuaBox2D_b2Fixture_SetSensor00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsSensor of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_IsSensor00
-static int tolua_LuaBox2D_b2Fixture_IsSensor00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_IsSensor00
+static int tolua_Box2D_b2Fixture_IsSensor00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -879,8 +886,8 @@ static int tolua_LuaBox2D_b2Fixture_IsSensor00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetFilterData of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_SetFilterData00
-static int tolua_LuaBox2D_b2Fixture_SetFilterData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_SetFilterData00
+static int tolua_Box2D_b2Fixture_SetFilterData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -912,8 +919,8 @@ static int tolua_LuaBox2D_b2Fixture_SetFilterData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFilterData of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_GetFilterData00
-static int tolua_LuaBox2D_b2Fixture_GetFilterData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_GetFilterData00
+static int tolua_Box2D_b2Fixture_GetFilterData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -944,8 +951,8 @@ static int tolua_LuaBox2D_b2Fixture_GetFilterData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Refilter of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_Refilter00
-static int tolua_LuaBox2D_b2Fixture_Refilter00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_Refilter00
+static int tolua_Box2D_b2Fixture_Refilter00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -975,8 +982,8 @@ static int tolua_LuaBox2D_b2Fixture_Refilter00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetBody of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_GetBody00
-static int tolua_LuaBox2D_b2Fixture_GetBody00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_GetBody00
+static int tolua_Box2D_b2Fixture_GetBody00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1007,8 +1014,8 @@ static int tolua_LuaBox2D_b2Fixture_GetBody00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetBody of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_GetBody01
-static int tolua_LuaBox2D_b2Fixture_GetBody01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_GetBody01
+static int tolua_Box2D_b2Fixture_GetBody01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -1029,13 +1036,13 @@ static int tolua_LuaBox2D_b2Fixture_GetBody01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Fixture_GetBody00(tolua_S);
+ return tolua_Box2D_b2Fixture_GetBody00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetNext of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_GetNext00
-static int tolua_LuaBox2D_b2Fixture_GetNext00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_GetNext00
+static int tolua_Box2D_b2Fixture_GetNext00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1066,8 +1073,8 @@ static int tolua_LuaBox2D_b2Fixture_GetNext00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetNext of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_GetNext01
-static int tolua_LuaBox2D_b2Fixture_GetNext01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_GetNext01
+static int tolua_Box2D_b2Fixture_GetNext01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -1088,13 +1095,13 @@ static int tolua_LuaBox2D_b2Fixture_GetNext01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Fixture_GetNext00(tolua_S);
+ return tolua_Box2D_b2Fixture_GetNext00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetUserData of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_GetUserData00
-static int tolua_LuaBox2D_b2Fixture_GetUserData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_GetUserData00
+static int tolua_Box2D_b2Fixture_GetUserData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1125,8 +1132,8 @@ static int tolua_LuaBox2D_b2Fixture_GetUserData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetUserData of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_SetUserData00
-static int tolua_LuaBox2D_b2Fixture_SetUserData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_SetUserData00
+static int tolua_Box2D_b2Fixture_SetUserData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1158,8 +1165,8 @@ static int tolua_LuaBox2D_b2Fixture_SetUserData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: TestPoint of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_TestPoint00
-static int tolua_LuaBox2D_b2Fixture_TestPoint00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_TestPoint00
+static int tolua_Box2D_b2Fixture_TestPoint00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1192,8 +1199,8 @@ static int tolua_LuaBox2D_b2Fixture_TestPoint00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: RayCast of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_RayCast00
-static int tolua_LuaBox2D_b2Fixture_RayCast00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_RayCast00
+static int tolua_Box2D_b2Fixture_RayCast00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1230,8 +1237,8 @@ static int tolua_LuaBox2D_b2Fixture_RayCast00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMassData of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_GetMassData00
-static int tolua_LuaBox2D_b2Fixture_GetMassData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_GetMassData00
+static int tolua_Box2D_b2Fixture_GetMassData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1263,8 +1270,8 @@ static int tolua_LuaBox2D_b2Fixture_GetMassData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetDensity of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_SetDensity00
-static int tolua_LuaBox2D_b2Fixture_SetDensity00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_SetDensity00
+static int tolua_Box2D_b2Fixture_SetDensity00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1296,8 +1303,8 @@ static int tolua_LuaBox2D_b2Fixture_SetDensity00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetDensity of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_GetDensity00
-static int tolua_LuaBox2D_b2Fixture_GetDensity00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_GetDensity00
+static int tolua_Box2D_b2Fixture_GetDensity00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1328,8 +1335,8 @@ static int tolua_LuaBox2D_b2Fixture_GetDensity00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFriction of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_GetFriction00
-static int tolua_LuaBox2D_b2Fixture_GetFriction00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_GetFriction00
+static int tolua_Box2D_b2Fixture_GetFriction00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1360,8 +1367,8 @@ static int tolua_LuaBox2D_b2Fixture_GetFriction00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetFriction of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_SetFriction00
-static int tolua_LuaBox2D_b2Fixture_SetFriction00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_SetFriction00
+static int tolua_Box2D_b2Fixture_SetFriction00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1393,8 +1400,8 @@ static int tolua_LuaBox2D_b2Fixture_SetFriction00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetRestitution of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_GetRestitution00
-static int tolua_LuaBox2D_b2Fixture_GetRestitution00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_GetRestitution00
+static int tolua_Box2D_b2Fixture_GetRestitution00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1425,8 +1432,8 @@ static int tolua_LuaBox2D_b2Fixture_GetRestitution00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetRestitution of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_SetRestitution00
-static int tolua_LuaBox2D_b2Fixture_SetRestitution00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_SetRestitution00
+static int tolua_Box2D_b2Fixture_SetRestitution00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1458,8 +1465,8 @@ static int tolua_LuaBox2D_b2Fixture_SetRestitution00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAABB of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_GetAABB00
-static int tolua_LuaBox2D_b2Fixture_GetAABB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_GetAABB00
+static int tolua_Box2D_b2Fixture_GetAABB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1492,8 +1499,8 @@ static int tolua_LuaBox2D_b2Fixture_GetAABB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Dump of class  b2Fixture */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Fixture_Dump00
-static int tolua_LuaBox2D_b2Fixture_Dump00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Fixture_Dump00
+static int tolua_Box2D_b2Fixture_Dump00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1525,8 +1532,8 @@ static int tolua_LuaBox2D_b2Fixture_Dump00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetType of class  b2Joint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Joint_GetType00
-static int tolua_LuaBox2D_b2Joint_GetType00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Joint_GetType00
+static int tolua_Box2D_b2Joint_GetType00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1557,8 +1564,8 @@ static int tolua_LuaBox2D_b2Joint_GetType00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetBodyA of class  b2Joint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Joint_GetBodyA00
-static int tolua_LuaBox2D_b2Joint_GetBodyA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Joint_GetBodyA00
+static int tolua_Box2D_b2Joint_GetBodyA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1589,8 +1596,8 @@ static int tolua_LuaBox2D_b2Joint_GetBodyA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetBodyB of class  b2Joint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Joint_GetBodyB00
-static int tolua_LuaBox2D_b2Joint_GetBodyB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Joint_GetBodyB00
+static int tolua_Box2D_b2Joint_GetBodyB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1621,8 +1628,8 @@ static int tolua_LuaBox2D_b2Joint_GetBodyB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorA of class  b2Joint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Joint_GetAnchorA00
-static int tolua_LuaBox2D_b2Joint_GetAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Joint_GetAnchorA00
+static int tolua_Box2D_b2Joint_GetAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1663,8 +1670,8 @@ static int tolua_LuaBox2D_b2Joint_GetAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorB of class  b2Joint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Joint_GetAnchorB00
-static int tolua_LuaBox2D_b2Joint_GetAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Joint_GetAnchorB00
+static int tolua_Box2D_b2Joint_GetAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1705,8 +1712,8 @@ static int tolua_LuaBox2D_b2Joint_GetAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionForce of class  b2Joint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Joint_GetReactionForce00
-static int tolua_LuaBox2D_b2Joint_GetReactionForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Joint_GetReactionForce00
+static int tolua_Box2D_b2Joint_GetReactionForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1749,8 +1756,8 @@ static int tolua_LuaBox2D_b2Joint_GetReactionForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionTorque of class  b2Joint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Joint_GetReactionTorque00
-static int tolua_LuaBox2D_b2Joint_GetReactionTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Joint_GetReactionTorque00
+static int tolua_Box2D_b2Joint_GetReactionTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1783,8 +1790,8 @@ static int tolua_LuaBox2D_b2Joint_GetReactionTorque00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetNext of class  b2Joint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Joint_GetNext00
-static int tolua_LuaBox2D_b2Joint_GetNext00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Joint_GetNext00
+static int tolua_Box2D_b2Joint_GetNext00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1815,8 +1822,8 @@ static int tolua_LuaBox2D_b2Joint_GetNext00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetNext of class  b2Joint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Joint_GetNext01
-static int tolua_LuaBox2D_b2Joint_GetNext01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Joint_GetNext01
+static int tolua_Box2D_b2Joint_GetNext01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -1837,13 +1844,13 @@ static int tolua_LuaBox2D_b2Joint_GetNext01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Joint_GetNext00(tolua_S);
+ return tolua_Box2D_b2Joint_GetNext00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetUserData of class  b2Joint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Joint_GetUserData00
-static int tolua_LuaBox2D_b2Joint_GetUserData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Joint_GetUserData00
+static int tolua_Box2D_b2Joint_GetUserData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1874,8 +1881,8 @@ static int tolua_LuaBox2D_b2Joint_GetUserData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetUserData of class  b2Joint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Joint_SetUserData00
-static int tolua_LuaBox2D_b2Joint_SetUserData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Joint_SetUserData00
+static int tolua_Box2D_b2Joint_SetUserData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1907,8 +1914,8 @@ static int tolua_LuaBox2D_b2Joint_SetUserData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsActive of class  b2Joint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Joint_IsActive00
-static int tolua_LuaBox2D_b2Joint_IsActive00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Joint_IsActive00
+static int tolua_Box2D_b2Joint_IsActive00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1939,8 +1946,8 @@ static int tolua_LuaBox2D_b2Joint_IsActive00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetCollideConnected of class  b2Joint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Joint_GetCollideConnected00
-static int tolua_LuaBox2D_b2Joint_GetCollideConnected00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Joint_GetCollideConnected00
+static int tolua_Box2D_b2Joint_GetCollideConnected00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -1971,8 +1978,8 @@ static int tolua_LuaBox2D_b2Joint_GetCollideConnected00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Dump of class  b2Joint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Joint_Dump00
-static int tolua_LuaBox2D_b2Joint_Dump00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Joint_Dump00
+static int tolua_Box2D_b2Joint_Dump00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2002,8 +2009,8 @@ static int tolua_LuaBox2D_b2Joint_Dump00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetManifold of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_GetManifold00
-static int tolua_LuaBox2D_b2Contact_GetManifold00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_GetManifold00
+static int tolua_Box2D_b2Contact_GetManifold00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2034,8 +2041,8 @@ static int tolua_LuaBox2D_b2Contact_GetManifold00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetManifold of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_GetManifold01
-static int tolua_LuaBox2D_b2Contact_GetManifold01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_GetManifold01
+static int tolua_Box2D_b2Contact_GetManifold01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -2056,13 +2063,13 @@ static int tolua_LuaBox2D_b2Contact_GetManifold01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Contact_GetManifold00(tolua_S);
+ return tolua_Box2D_b2Contact_GetManifold00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetWorldManifold of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_GetWorldManifold00
-static int tolua_LuaBox2D_b2Contact_GetWorldManifold00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_GetWorldManifold00
+static int tolua_Box2D_b2Contact_GetWorldManifold00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2094,8 +2101,8 @@ static int tolua_LuaBox2D_b2Contact_GetWorldManifold00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsTouching of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_IsTouching00
-static int tolua_LuaBox2D_b2Contact_IsTouching00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_IsTouching00
+static int tolua_Box2D_b2Contact_IsTouching00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2126,8 +2133,8 @@ static int tolua_LuaBox2D_b2Contact_IsTouching00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetEnabled of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_SetEnabled00
-static int tolua_LuaBox2D_b2Contact_SetEnabled00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_SetEnabled00
+static int tolua_Box2D_b2Contact_SetEnabled00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2159,8 +2166,8 @@ static int tolua_LuaBox2D_b2Contact_SetEnabled00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsEnabled of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_IsEnabled00
-static int tolua_LuaBox2D_b2Contact_IsEnabled00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_IsEnabled00
+static int tolua_Box2D_b2Contact_IsEnabled00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2191,8 +2198,8 @@ static int tolua_LuaBox2D_b2Contact_IsEnabled00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetNext of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_GetNext00
-static int tolua_LuaBox2D_b2Contact_GetNext00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_GetNext00
+static int tolua_Box2D_b2Contact_GetNext00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2223,8 +2230,8 @@ static int tolua_LuaBox2D_b2Contact_GetNext00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetNext of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_GetNext01
-static int tolua_LuaBox2D_b2Contact_GetNext01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_GetNext01
+static int tolua_Box2D_b2Contact_GetNext01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -2245,13 +2252,13 @@ static int tolua_LuaBox2D_b2Contact_GetNext01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Contact_GetNext00(tolua_S);
+ return tolua_Box2D_b2Contact_GetNext00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFixtureA of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_GetFixtureA00
-static int tolua_LuaBox2D_b2Contact_GetFixtureA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_GetFixtureA00
+static int tolua_Box2D_b2Contact_GetFixtureA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2282,8 +2289,8 @@ static int tolua_LuaBox2D_b2Contact_GetFixtureA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFixtureA of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_GetFixtureA01
-static int tolua_LuaBox2D_b2Contact_GetFixtureA01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_GetFixtureA01
+static int tolua_Box2D_b2Contact_GetFixtureA01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -2304,13 +2311,13 @@ static int tolua_LuaBox2D_b2Contact_GetFixtureA01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Contact_GetFixtureA00(tolua_S);
+ return tolua_Box2D_b2Contact_GetFixtureA00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetChildIndexA of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_GetChildIndexA00
-static int tolua_LuaBox2D_b2Contact_GetChildIndexA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_GetChildIndexA00
+static int tolua_Box2D_b2Contact_GetChildIndexA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2341,8 +2348,8 @@ static int tolua_LuaBox2D_b2Contact_GetChildIndexA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFixtureB of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_GetFixtureB00
-static int tolua_LuaBox2D_b2Contact_GetFixtureB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_GetFixtureB00
+static int tolua_Box2D_b2Contact_GetFixtureB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2373,8 +2380,8 @@ static int tolua_LuaBox2D_b2Contact_GetFixtureB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFixtureB of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_GetFixtureB01
-static int tolua_LuaBox2D_b2Contact_GetFixtureB01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_GetFixtureB01
+static int tolua_Box2D_b2Contact_GetFixtureB01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -2395,13 +2402,13 @@ static int tolua_LuaBox2D_b2Contact_GetFixtureB01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Contact_GetFixtureB00(tolua_S);
+ return tolua_Box2D_b2Contact_GetFixtureB00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetChildIndexB of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_GetChildIndexB00
-static int tolua_LuaBox2D_b2Contact_GetChildIndexB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_GetChildIndexB00
+static int tolua_Box2D_b2Contact_GetChildIndexB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2432,8 +2439,8 @@ static int tolua_LuaBox2D_b2Contact_GetChildIndexB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetFriction of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_SetFriction00
-static int tolua_LuaBox2D_b2Contact_SetFriction00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_SetFriction00
+static int tolua_Box2D_b2Contact_SetFriction00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2465,8 +2472,8 @@ static int tolua_LuaBox2D_b2Contact_SetFriction00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFriction of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_GetFriction00
-static int tolua_LuaBox2D_b2Contact_GetFriction00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_GetFriction00
+static int tolua_Box2D_b2Contact_GetFriction00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2497,8 +2504,8 @@ static int tolua_LuaBox2D_b2Contact_GetFriction00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ResetFriction of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_ResetFriction00
-static int tolua_LuaBox2D_b2Contact_ResetFriction00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_ResetFriction00
+static int tolua_Box2D_b2Contact_ResetFriction00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2528,8 +2535,8 @@ static int tolua_LuaBox2D_b2Contact_ResetFriction00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetRestitution of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_SetRestitution00
-static int tolua_LuaBox2D_b2Contact_SetRestitution00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_SetRestitution00
+static int tolua_Box2D_b2Contact_SetRestitution00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2561,8 +2568,8 @@ static int tolua_LuaBox2D_b2Contact_SetRestitution00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetRestitution of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_GetRestitution00
-static int tolua_LuaBox2D_b2Contact_GetRestitution00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_GetRestitution00
+static int tolua_Box2D_b2Contact_GetRestitution00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2593,8 +2600,8 @@ static int tolua_LuaBox2D_b2Contact_GetRestitution00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ResetRestitution of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_ResetRestitution00
-static int tolua_LuaBox2D_b2Contact_ResetRestitution00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_ResetRestitution00
+static int tolua_Box2D_b2Contact_ResetRestitution00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2624,8 +2631,8 @@ static int tolua_LuaBox2D_b2Contact_ResetRestitution00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Evaluate of class  b2Contact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Contact_Evaluate00
-static int tolua_LuaBox2D_b2Contact_Evaluate00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Contact_Evaluate00
+static int tolua_Box2D_b2Contact_Evaluate00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2661,8 +2668,8 @@ static int tolua_LuaBox2D_b2Contact_Evaluate00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_new00
-static int tolua_LuaBox2D_b2World_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_new00
+static int tolua_Box2D_b2World_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2691,8 +2698,8 @@ static int tolua_LuaBox2D_b2World_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_new00_local
-static int tolua_LuaBox2D_b2World_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_new00_local
+static int tolua_Box2D_b2World_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2722,8 +2729,8 @@ static int tolua_LuaBox2D_b2World_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_delete00
-static int tolua_LuaBox2D_b2World_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_delete00
+static int tolua_Box2D_b2World_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2751,8 +2758,8 @@ static int tolua_LuaBox2D_b2World_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetDestructionListener of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_SetDestructionListener00
-static int tolua_LuaBox2D_b2World_SetDestructionListener00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_SetDestructionListener00
+static int tolua_Box2D_b2World_SetDestructionListener00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2784,8 +2791,8 @@ static int tolua_LuaBox2D_b2World_SetDestructionListener00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetContactFilter of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_SetContactFilter00
-static int tolua_LuaBox2D_b2World_SetContactFilter00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_SetContactFilter00
+static int tolua_Box2D_b2World_SetContactFilter00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2817,8 +2824,8 @@ static int tolua_LuaBox2D_b2World_SetContactFilter00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetContactListener of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_SetContactListener00
-static int tolua_LuaBox2D_b2World_SetContactListener00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_SetContactListener00
+static int tolua_Box2D_b2World_SetContactListener00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2850,8 +2857,8 @@ static int tolua_LuaBox2D_b2World_SetContactListener00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetDebugDraw of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_SetDebugDraw00
-static int tolua_LuaBox2D_b2World_SetDebugDraw00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_SetDebugDraw00
+static int tolua_Box2D_b2World_SetDebugDraw00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2883,8 +2890,8 @@ static int tolua_LuaBox2D_b2World_SetDebugDraw00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: CreateBody of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_CreateBody00
-static int tolua_LuaBox2D_b2World_CreateBody00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_CreateBody00
+static int tolua_Box2D_b2World_CreateBody00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2917,8 +2924,8 @@ static int tolua_LuaBox2D_b2World_CreateBody00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: DestroyBody of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_DestroyBody00
-static int tolua_LuaBox2D_b2World_DestroyBody00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_DestroyBody00
+static int tolua_Box2D_b2World_DestroyBody00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2950,8 +2957,8 @@ static int tolua_LuaBox2D_b2World_DestroyBody00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: CreateJoint of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_CreateJoint00
-static int tolua_LuaBox2D_b2World_CreateJoint00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_CreateJoint00
+static int tolua_Box2D_b2World_CreateJoint00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -2984,8 +2991,8 @@ static int tolua_LuaBox2D_b2World_CreateJoint00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: DestroyJoint of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_DestroyJoint00
-static int tolua_LuaBox2D_b2World_DestroyJoint00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_DestroyJoint00
+static int tolua_Box2D_b2World_DestroyJoint00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3017,8 +3024,8 @@ static int tolua_LuaBox2D_b2World_DestroyJoint00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Step of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_Step00
-static int tolua_LuaBox2D_b2World_Step00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_Step00
+static int tolua_Box2D_b2World_Step00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3054,8 +3061,8 @@ static int tolua_LuaBox2D_b2World_Step00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ClearForces of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_ClearForces00
-static int tolua_LuaBox2D_b2World_ClearForces00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_ClearForces00
+static int tolua_Box2D_b2World_ClearForces00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3085,8 +3092,8 @@ static int tolua_LuaBox2D_b2World_ClearForces00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: DrawDebugData of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_DrawDebugData00
-static int tolua_LuaBox2D_b2World_DrawDebugData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_DrawDebugData00
+static int tolua_Box2D_b2World_DrawDebugData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3116,8 +3123,8 @@ static int tolua_LuaBox2D_b2World_DrawDebugData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: QueryAABB of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_QueryAABB00
-static int tolua_LuaBox2D_b2World_QueryAABB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_QueryAABB00
+static int tolua_Box2D_b2World_QueryAABB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3151,8 +3158,8 @@ static int tolua_LuaBox2D_b2World_QueryAABB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: RayCast of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_RayCast00
-static int tolua_LuaBox2D_b2World_RayCast00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_RayCast00
+static int tolua_Box2D_b2World_RayCast00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3188,8 +3195,8 @@ static int tolua_LuaBox2D_b2World_RayCast00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetBodyList of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetBodyList00
-static int tolua_LuaBox2D_b2World_GetBodyList00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetBodyList00
+static int tolua_Box2D_b2World_GetBodyList00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3220,8 +3227,8 @@ static int tolua_LuaBox2D_b2World_GetBodyList00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetBodyList of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetBodyList01
-static int tolua_LuaBox2D_b2World_GetBodyList01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetBodyList01
+static int tolua_Box2D_b2World_GetBodyList01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -3242,13 +3249,13 @@ static int tolua_LuaBox2D_b2World_GetBodyList01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2World_GetBodyList00(tolua_S);
+ return tolua_Box2D_b2World_GetBodyList00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetJointList of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetJointList00
-static int tolua_LuaBox2D_b2World_GetJointList00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetJointList00
+static int tolua_Box2D_b2World_GetJointList00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3279,8 +3286,8 @@ static int tolua_LuaBox2D_b2World_GetJointList00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetJointList of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetJointList01
-static int tolua_LuaBox2D_b2World_GetJointList01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetJointList01
+static int tolua_Box2D_b2World_GetJointList01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -3301,13 +3308,13 @@ static int tolua_LuaBox2D_b2World_GetJointList01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2World_GetJointList00(tolua_S);
+ return tolua_Box2D_b2World_GetJointList00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetContactList of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetContactList00
-static int tolua_LuaBox2D_b2World_GetContactList00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetContactList00
+static int tolua_Box2D_b2World_GetContactList00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3338,8 +3345,8 @@ static int tolua_LuaBox2D_b2World_GetContactList00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetContactList of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetContactList01
-static int tolua_LuaBox2D_b2World_GetContactList01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetContactList01
+static int tolua_Box2D_b2World_GetContactList01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -3360,13 +3367,13 @@ static int tolua_LuaBox2D_b2World_GetContactList01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2World_GetContactList00(tolua_S);
+ return tolua_Box2D_b2World_GetContactList00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetAllowSleeping of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_SetAllowSleeping00
-static int tolua_LuaBox2D_b2World_SetAllowSleeping00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_SetAllowSleeping00
+static int tolua_Box2D_b2World_SetAllowSleeping00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3398,8 +3405,8 @@ static int tolua_LuaBox2D_b2World_SetAllowSleeping00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAllowSleeping of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetAllowSleeping00
-static int tolua_LuaBox2D_b2World_GetAllowSleeping00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetAllowSleeping00
+static int tolua_Box2D_b2World_GetAllowSleeping00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3430,8 +3437,8 @@ static int tolua_LuaBox2D_b2World_GetAllowSleeping00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetWarmStarting of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_SetWarmStarting00
-static int tolua_LuaBox2D_b2World_SetWarmStarting00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_SetWarmStarting00
+static int tolua_Box2D_b2World_SetWarmStarting00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3463,8 +3470,8 @@ static int tolua_LuaBox2D_b2World_SetWarmStarting00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetWarmStarting of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetWarmStarting00
-static int tolua_LuaBox2D_b2World_GetWarmStarting00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetWarmStarting00
+static int tolua_Box2D_b2World_GetWarmStarting00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3495,8 +3502,8 @@ static int tolua_LuaBox2D_b2World_GetWarmStarting00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetContinuousPhysics of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_SetContinuousPhysics00
-static int tolua_LuaBox2D_b2World_SetContinuousPhysics00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_SetContinuousPhysics00
+static int tolua_Box2D_b2World_SetContinuousPhysics00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3528,8 +3535,8 @@ static int tolua_LuaBox2D_b2World_SetContinuousPhysics00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetContinuousPhysics of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetContinuousPhysics00
-static int tolua_LuaBox2D_b2World_GetContinuousPhysics00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetContinuousPhysics00
+static int tolua_Box2D_b2World_GetContinuousPhysics00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3560,8 +3567,8 @@ static int tolua_LuaBox2D_b2World_GetContinuousPhysics00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetSubStepping of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_SetSubStepping00
-static int tolua_LuaBox2D_b2World_SetSubStepping00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_SetSubStepping00
+static int tolua_Box2D_b2World_SetSubStepping00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3593,8 +3600,8 @@ static int tolua_LuaBox2D_b2World_SetSubStepping00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetSubStepping of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetSubStepping00
-static int tolua_LuaBox2D_b2World_GetSubStepping00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetSubStepping00
+static int tolua_Box2D_b2World_GetSubStepping00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3625,8 +3632,8 @@ static int tolua_LuaBox2D_b2World_GetSubStepping00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetProxyCount of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetProxyCount00
-static int tolua_LuaBox2D_b2World_GetProxyCount00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetProxyCount00
+static int tolua_Box2D_b2World_GetProxyCount00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3657,8 +3664,8 @@ static int tolua_LuaBox2D_b2World_GetProxyCount00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetBodyCount of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetBodyCount00
-static int tolua_LuaBox2D_b2World_GetBodyCount00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetBodyCount00
+static int tolua_Box2D_b2World_GetBodyCount00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3689,8 +3696,8 @@ static int tolua_LuaBox2D_b2World_GetBodyCount00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetJointCount of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetJointCount00
-static int tolua_LuaBox2D_b2World_GetJointCount00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetJointCount00
+static int tolua_Box2D_b2World_GetJointCount00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3721,8 +3728,8 @@ static int tolua_LuaBox2D_b2World_GetJointCount00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetContactCount of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetContactCount00
-static int tolua_LuaBox2D_b2World_GetContactCount00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetContactCount00
+static int tolua_Box2D_b2World_GetContactCount00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3753,8 +3760,8 @@ static int tolua_LuaBox2D_b2World_GetContactCount00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetTreeHeight of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetTreeHeight00
-static int tolua_LuaBox2D_b2World_GetTreeHeight00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetTreeHeight00
+static int tolua_Box2D_b2World_GetTreeHeight00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3785,8 +3792,8 @@ static int tolua_LuaBox2D_b2World_GetTreeHeight00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetTreeBalance of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetTreeBalance00
-static int tolua_LuaBox2D_b2World_GetTreeBalance00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetTreeBalance00
+static int tolua_Box2D_b2World_GetTreeBalance00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3817,8 +3824,8 @@ static int tolua_LuaBox2D_b2World_GetTreeBalance00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetTreeQuality of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetTreeQuality00
-static int tolua_LuaBox2D_b2World_GetTreeQuality00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetTreeQuality00
+static int tolua_Box2D_b2World_GetTreeQuality00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3849,8 +3856,8 @@ static int tolua_LuaBox2D_b2World_GetTreeQuality00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetGravity of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_SetGravity00
-static int tolua_LuaBox2D_b2World_SetGravity00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_SetGravity00
+static int tolua_Box2D_b2World_SetGravity00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3882,8 +3889,8 @@ static int tolua_LuaBox2D_b2World_SetGravity00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetGravity of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetGravity00
-static int tolua_LuaBox2D_b2World_GetGravity00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetGravity00
+static int tolua_Box2D_b2World_GetGravity00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3924,8 +3931,8 @@ static int tolua_LuaBox2D_b2World_GetGravity00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsLocked of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_IsLocked00
-static int tolua_LuaBox2D_b2World_IsLocked00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_IsLocked00
+static int tolua_Box2D_b2World_IsLocked00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3956,8 +3963,8 @@ static int tolua_LuaBox2D_b2World_IsLocked00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetAutoClearForces of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_SetAutoClearForces00
-static int tolua_LuaBox2D_b2World_SetAutoClearForces00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_SetAutoClearForces00
+static int tolua_Box2D_b2World_SetAutoClearForces00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -3989,8 +3996,8 @@ static int tolua_LuaBox2D_b2World_SetAutoClearForces00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAutoClearForces of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetAutoClearForces00
-static int tolua_LuaBox2D_b2World_GetAutoClearForces00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetAutoClearForces00
+static int tolua_Box2D_b2World_GetAutoClearForces00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -4021,8 +4028,8 @@ static int tolua_LuaBox2D_b2World_GetAutoClearForces00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetContactManager of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetContactManager00
-static int tolua_LuaBox2D_b2World_GetContactManager00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetContactManager00
+static int tolua_Box2D_b2World_GetContactManager00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -4053,8 +4060,8 @@ static int tolua_LuaBox2D_b2World_GetContactManager00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetProfile of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_GetProfile00
-static int tolua_LuaBox2D_b2World_GetProfile00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_GetProfile00
+static int tolua_Box2D_b2World_GetProfile00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -4085,8 +4092,8 @@ static int tolua_LuaBox2D_b2World_GetProfile00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Dump of class  b2World */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2World_Dump00
-static int tolua_LuaBox2D_b2World_Dump00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2World_Dump00
+static int tolua_Box2D_b2World_Dump00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -4116,8 +4123,8 @@ static int tolua_LuaBox2D_b2World_Dump00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2FixtureDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FixtureDef_new00
-static int tolua_LuaBox2D_b2FixtureDef_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FixtureDef_new00
+static int tolua_Box2D_b2FixtureDef_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -4144,8 +4151,8 @@ static int tolua_LuaBox2D_b2FixtureDef_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2FixtureDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FixtureDef_new00_local
-static int tolua_LuaBox2D_b2FixtureDef_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FixtureDef_new00_local
+static int tolua_Box2D_b2FixtureDef_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -4623,8 +4630,8 @@ static int tolua_set_b2ContactEdge_next_ptr(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2BodyDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BodyDef_new00
-static int tolua_LuaBox2D_b2BodyDef_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BodyDef_new00
+static int tolua_Box2D_b2BodyDef_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -4651,8 +4658,8 @@ static int tolua_LuaBox2D_b2BodyDef_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2BodyDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BodyDef_new00_local
-static int tolua_LuaBox2D_b2BodyDef_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BodyDef_new00_local
+static int tolua_Box2D_b2BodyDef_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5100,8 +5107,8 @@ static int tolua_set_b2BodyDef_gravityScale(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: CreateFixture of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_CreateFixture00
-static int tolua_LuaBox2D_b2Body_CreateFixture00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_CreateFixture00
+static int tolua_Box2D_b2Body_CreateFixture00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5134,8 +5141,8 @@ static int tolua_LuaBox2D_b2Body_CreateFixture00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: CreateFixture of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_CreateFixture01
-static int tolua_LuaBox2D_b2Body_CreateFixture01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_CreateFixture01
+static int tolua_Box2D_b2Body_CreateFixture01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -5160,13 +5167,13 @@ static int tolua_LuaBox2D_b2Body_CreateFixture01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Body_CreateFixture00(tolua_S);
+ return tolua_Box2D_b2Body_CreateFixture00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: DestroyFixture of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_DestroyFixture00
-static int tolua_LuaBox2D_b2Body_DestroyFixture00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_DestroyFixture00
+static int tolua_Box2D_b2Body_DestroyFixture00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5198,8 +5205,8 @@ static int tolua_LuaBox2D_b2Body_DestroyFixture00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetTransform of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_SetTransform00
-static int tolua_LuaBox2D_b2Body_SetTransform00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_SetTransform00
+static int tolua_Box2D_b2Body_SetTransform00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5233,8 +5240,8 @@ static int tolua_LuaBox2D_b2Body_SetTransform00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetTransform of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetTransform00
-static int tolua_LuaBox2D_b2Body_GetTransform00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetTransform00
+static int tolua_Box2D_b2Body_GetTransform00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5265,8 +5272,8 @@ static int tolua_LuaBox2D_b2Body_GetTransform00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetPosition of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetPosition00
-static int tolua_LuaBox2D_b2Body_GetPosition00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetPosition00
+static int tolua_Box2D_b2Body_GetPosition00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5297,8 +5304,8 @@ static int tolua_LuaBox2D_b2Body_GetPosition00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAngle of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetAngle00
-static int tolua_LuaBox2D_b2Body_GetAngle00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetAngle00
+static int tolua_Box2D_b2Body_GetAngle00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5329,8 +5336,8 @@ static int tolua_LuaBox2D_b2Body_GetAngle00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetWorldCenter of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetWorldCenter00
-static int tolua_LuaBox2D_b2Body_GetWorldCenter00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetWorldCenter00
+static int tolua_Box2D_b2Body_GetWorldCenter00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5361,8 +5368,8 @@ static int tolua_LuaBox2D_b2Body_GetWorldCenter00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalCenter of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetLocalCenter00
-static int tolua_LuaBox2D_b2Body_GetLocalCenter00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetLocalCenter00
+static int tolua_Box2D_b2Body_GetLocalCenter00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5393,8 +5400,8 @@ static int tolua_LuaBox2D_b2Body_GetLocalCenter00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetLinearVelocity of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_SetLinearVelocity00
-static int tolua_LuaBox2D_b2Body_SetLinearVelocity00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_SetLinearVelocity00
+static int tolua_Box2D_b2Body_SetLinearVelocity00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5426,8 +5433,8 @@ static int tolua_LuaBox2D_b2Body_SetLinearVelocity00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLinearVelocity of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetLinearVelocity00
-static int tolua_LuaBox2D_b2Body_GetLinearVelocity00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetLinearVelocity00
+static int tolua_Box2D_b2Body_GetLinearVelocity00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5468,8 +5475,8 @@ static int tolua_LuaBox2D_b2Body_GetLinearVelocity00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetAngularVelocity of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_SetAngularVelocity00
-static int tolua_LuaBox2D_b2Body_SetAngularVelocity00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_SetAngularVelocity00
+static int tolua_Box2D_b2Body_SetAngularVelocity00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5501,8 +5508,8 @@ static int tolua_LuaBox2D_b2Body_SetAngularVelocity00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAngularVelocity of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetAngularVelocity00
-static int tolua_LuaBox2D_b2Body_GetAngularVelocity00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetAngularVelocity00
+static int tolua_Box2D_b2Body_GetAngularVelocity00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5533,8 +5540,8 @@ static int tolua_LuaBox2D_b2Body_GetAngularVelocity00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ApplyForce of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_ApplyForce00
-static int tolua_LuaBox2D_b2Body_ApplyForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_ApplyForce00
+static int tolua_Box2D_b2Body_ApplyForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5568,8 +5575,8 @@ static int tolua_LuaBox2D_b2Body_ApplyForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ApplyForceToCenter of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_ApplyForceToCenter00
-static int tolua_LuaBox2D_b2Body_ApplyForceToCenter00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_ApplyForceToCenter00
+static int tolua_Box2D_b2Body_ApplyForceToCenter00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5601,8 +5608,8 @@ static int tolua_LuaBox2D_b2Body_ApplyForceToCenter00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ApplyTorque of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_ApplyTorque00
-static int tolua_LuaBox2D_b2Body_ApplyTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_ApplyTorque00
+static int tolua_Box2D_b2Body_ApplyTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5634,8 +5641,8 @@ static int tolua_LuaBox2D_b2Body_ApplyTorque00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ApplyLinearImpulse of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_ApplyLinearImpulse00
-static int tolua_LuaBox2D_b2Body_ApplyLinearImpulse00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_ApplyLinearImpulse00
+static int tolua_Box2D_b2Body_ApplyLinearImpulse00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5669,8 +5676,8 @@ static int tolua_LuaBox2D_b2Body_ApplyLinearImpulse00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ApplyAngularImpulse of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_ApplyAngularImpulse00
-static int tolua_LuaBox2D_b2Body_ApplyAngularImpulse00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_ApplyAngularImpulse00
+static int tolua_Box2D_b2Body_ApplyAngularImpulse00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5702,8 +5709,8 @@ static int tolua_LuaBox2D_b2Body_ApplyAngularImpulse00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMass of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetMass00
-static int tolua_LuaBox2D_b2Body_GetMass00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetMass00
+static int tolua_Box2D_b2Body_GetMass00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5734,8 +5741,8 @@ static int tolua_LuaBox2D_b2Body_GetMass00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetInertia of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetInertia00
-static int tolua_LuaBox2D_b2Body_GetInertia00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetInertia00
+static int tolua_Box2D_b2Body_GetInertia00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5766,8 +5773,8 @@ static int tolua_LuaBox2D_b2Body_GetInertia00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMassData of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetMassData00
-static int tolua_LuaBox2D_b2Body_GetMassData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetMassData00
+static int tolua_Box2D_b2Body_GetMassData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5799,8 +5806,8 @@ static int tolua_LuaBox2D_b2Body_GetMassData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetMassData of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_SetMassData00
-static int tolua_LuaBox2D_b2Body_SetMassData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_SetMassData00
+static int tolua_Box2D_b2Body_SetMassData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5832,8 +5839,8 @@ static int tolua_LuaBox2D_b2Body_SetMassData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ResetMassData of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_ResetMassData00
-static int tolua_LuaBox2D_b2Body_ResetMassData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_ResetMassData00
+static int tolua_Box2D_b2Body_ResetMassData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5863,8 +5870,8 @@ static int tolua_LuaBox2D_b2Body_ResetMassData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetWorldPoint of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetWorldPoint00
-static int tolua_LuaBox2D_b2Body_GetWorldPoint00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetWorldPoint00
+static int tolua_Box2D_b2Body_GetWorldPoint00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5907,8 +5914,8 @@ static int tolua_LuaBox2D_b2Body_GetWorldPoint00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetWorldVector of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetWorldVector00
-static int tolua_LuaBox2D_b2Body_GetWorldVector00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetWorldVector00
+static int tolua_Box2D_b2Body_GetWorldVector00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5951,8 +5958,8 @@ static int tolua_LuaBox2D_b2Body_GetWorldVector00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalPoint of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetLocalPoint00
-static int tolua_LuaBox2D_b2Body_GetLocalPoint00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetLocalPoint00
+static int tolua_Box2D_b2Body_GetLocalPoint00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -5995,8 +6002,8 @@ static int tolua_LuaBox2D_b2Body_GetLocalPoint00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalVector of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetLocalVector00
-static int tolua_LuaBox2D_b2Body_GetLocalVector00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetLocalVector00
+static int tolua_Box2D_b2Body_GetLocalVector00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6039,8 +6046,8 @@ static int tolua_LuaBox2D_b2Body_GetLocalVector00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLinearVelocityFromWorldPoint of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetLinearVelocityFromWorldPoint00
-static int tolua_LuaBox2D_b2Body_GetLinearVelocityFromWorldPoint00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetLinearVelocityFromWorldPoint00
+static int tolua_Box2D_b2Body_GetLinearVelocityFromWorldPoint00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6083,8 +6090,8 @@ static int tolua_LuaBox2D_b2Body_GetLinearVelocityFromWorldPoint00(lua_State* to
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLinearVelocityFromLocalPoint of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetLinearVelocityFromLocalPoint00
-static int tolua_LuaBox2D_b2Body_GetLinearVelocityFromLocalPoint00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetLinearVelocityFromLocalPoint00
+static int tolua_Box2D_b2Body_GetLinearVelocityFromLocalPoint00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6127,8 +6134,8 @@ static int tolua_LuaBox2D_b2Body_GetLinearVelocityFromLocalPoint00(lua_State* to
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLinearDamping of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetLinearDamping00
-static int tolua_LuaBox2D_b2Body_GetLinearDamping00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetLinearDamping00
+static int tolua_Box2D_b2Body_GetLinearDamping00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6159,8 +6166,8 @@ static int tolua_LuaBox2D_b2Body_GetLinearDamping00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetLinearDamping of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_SetLinearDamping00
-static int tolua_LuaBox2D_b2Body_SetLinearDamping00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_SetLinearDamping00
+static int tolua_Box2D_b2Body_SetLinearDamping00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6192,8 +6199,8 @@ static int tolua_LuaBox2D_b2Body_SetLinearDamping00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAngularDamping of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetAngularDamping00
-static int tolua_LuaBox2D_b2Body_GetAngularDamping00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetAngularDamping00
+static int tolua_Box2D_b2Body_GetAngularDamping00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6224,8 +6231,8 @@ static int tolua_LuaBox2D_b2Body_GetAngularDamping00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetAngularDamping of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_SetAngularDamping00
-static int tolua_LuaBox2D_b2Body_SetAngularDamping00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_SetAngularDamping00
+static int tolua_Box2D_b2Body_SetAngularDamping00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6257,8 +6264,8 @@ static int tolua_LuaBox2D_b2Body_SetAngularDamping00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetGravityScale of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetGravityScale00
-static int tolua_LuaBox2D_b2Body_GetGravityScale00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetGravityScale00
+static int tolua_Box2D_b2Body_GetGravityScale00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6289,8 +6296,8 @@ static int tolua_LuaBox2D_b2Body_GetGravityScale00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetGravityScale of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_SetGravityScale00
-static int tolua_LuaBox2D_b2Body_SetGravityScale00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_SetGravityScale00
+static int tolua_Box2D_b2Body_SetGravityScale00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6322,8 +6329,8 @@ static int tolua_LuaBox2D_b2Body_SetGravityScale00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetType of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_SetType00
-static int tolua_LuaBox2D_b2Body_SetType00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_SetType00
+static int tolua_Box2D_b2Body_SetType00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6355,8 +6362,8 @@ static int tolua_LuaBox2D_b2Body_SetType00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetType of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetType00
-static int tolua_LuaBox2D_b2Body_GetType00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetType00
+static int tolua_Box2D_b2Body_GetType00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6387,8 +6394,8 @@ static int tolua_LuaBox2D_b2Body_GetType00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetBullet of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_SetBullet00
-static int tolua_LuaBox2D_b2Body_SetBullet00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_SetBullet00
+static int tolua_Box2D_b2Body_SetBullet00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6420,8 +6427,8 @@ static int tolua_LuaBox2D_b2Body_SetBullet00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsBullet of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_IsBullet00
-static int tolua_LuaBox2D_b2Body_IsBullet00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_IsBullet00
+static int tolua_Box2D_b2Body_IsBullet00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6452,8 +6459,8 @@ static int tolua_LuaBox2D_b2Body_IsBullet00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetSleepingAllowed of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_SetSleepingAllowed00
-static int tolua_LuaBox2D_b2Body_SetSleepingAllowed00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_SetSleepingAllowed00
+static int tolua_Box2D_b2Body_SetSleepingAllowed00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6485,8 +6492,8 @@ static int tolua_LuaBox2D_b2Body_SetSleepingAllowed00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsSleepingAllowed of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_IsSleepingAllowed00
-static int tolua_LuaBox2D_b2Body_IsSleepingAllowed00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_IsSleepingAllowed00
+static int tolua_Box2D_b2Body_IsSleepingAllowed00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6517,8 +6524,8 @@ static int tolua_LuaBox2D_b2Body_IsSleepingAllowed00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetAwake of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_SetAwake00
-static int tolua_LuaBox2D_b2Body_SetAwake00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_SetAwake00
+static int tolua_Box2D_b2Body_SetAwake00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6550,8 +6557,8 @@ static int tolua_LuaBox2D_b2Body_SetAwake00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsAwake of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_IsAwake00
-static int tolua_LuaBox2D_b2Body_IsAwake00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_IsAwake00
+static int tolua_Box2D_b2Body_IsAwake00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6582,8 +6589,8 @@ static int tolua_LuaBox2D_b2Body_IsAwake00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetActive of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_SetActive00
-static int tolua_LuaBox2D_b2Body_SetActive00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_SetActive00
+static int tolua_Box2D_b2Body_SetActive00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6615,8 +6622,8 @@ static int tolua_LuaBox2D_b2Body_SetActive00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsActive of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_IsActive00
-static int tolua_LuaBox2D_b2Body_IsActive00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_IsActive00
+static int tolua_Box2D_b2Body_IsActive00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6647,8 +6654,8 @@ static int tolua_LuaBox2D_b2Body_IsActive00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetFixedRotation of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_SetFixedRotation00
-static int tolua_LuaBox2D_b2Body_SetFixedRotation00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_SetFixedRotation00
+static int tolua_Box2D_b2Body_SetFixedRotation00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6680,8 +6687,8 @@ static int tolua_LuaBox2D_b2Body_SetFixedRotation00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsFixedRotation of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_IsFixedRotation00
-static int tolua_LuaBox2D_b2Body_IsFixedRotation00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_IsFixedRotation00
+static int tolua_Box2D_b2Body_IsFixedRotation00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6712,8 +6719,8 @@ static int tolua_LuaBox2D_b2Body_IsFixedRotation00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFixtureList of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetFixtureList00
-static int tolua_LuaBox2D_b2Body_GetFixtureList00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetFixtureList00
+static int tolua_Box2D_b2Body_GetFixtureList00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6744,8 +6751,8 @@ static int tolua_LuaBox2D_b2Body_GetFixtureList00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFixtureList of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetFixtureList01
-static int tolua_LuaBox2D_b2Body_GetFixtureList01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetFixtureList01
+static int tolua_Box2D_b2Body_GetFixtureList01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -6766,13 +6773,13 @@ static int tolua_LuaBox2D_b2Body_GetFixtureList01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Body_GetFixtureList00(tolua_S);
+ return tolua_Box2D_b2Body_GetFixtureList00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetJointList of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetJointList00
-static int tolua_LuaBox2D_b2Body_GetJointList00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetJointList00
+static int tolua_Box2D_b2Body_GetJointList00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6803,8 +6810,8 @@ static int tolua_LuaBox2D_b2Body_GetJointList00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetJointList of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetJointList01
-static int tolua_LuaBox2D_b2Body_GetJointList01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetJointList01
+static int tolua_Box2D_b2Body_GetJointList01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -6825,13 +6832,13 @@ static int tolua_LuaBox2D_b2Body_GetJointList01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Body_GetJointList00(tolua_S);
+ return tolua_Box2D_b2Body_GetJointList00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetContactList of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetContactList00
-static int tolua_LuaBox2D_b2Body_GetContactList00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetContactList00
+static int tolua_Box2D_b2Body_GetContactList00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6862,8 +6869,8 @@ static int tolua_LuaBox2D_b2Body_GetContactList00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetContactList of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetContactList01
-static int tolua_LuaBox2D_b2Body_GetContactList01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetContactList01
+static int tolua_Box2D_b2Body_GetContactList01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -6884,13 +6891,13 @@ static int tolua_LuaBox2D_b2Body_GetContactList01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Body_GetContactList00(tolua_S);
+ return tolua_Box2D_b2Body_GetContactList00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetNext of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetNext00
-static int tolua_LuaBox2D_b2Body_GetNext00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetNext00
+static int tolua_Box2D_b2Body_GetNext00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6921,8 +6928,8 @@ static int tolua_LuaBox2D_b2Body_GetNext00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetNext of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetNext01
-static int tolua_LuaBox2D_b2Body_GetNext01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetNext01
+static int tolua_Box2D_b2Body_GetNext01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -6943,13 +6950,13 @@ static int tolua_LuaBox2D_b2Body_GetNext01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Body_GetNext00(tolua_S);
+ return tolua_Box2D_b2Body_GetNext00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetUserData of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetUserData00
-static int tolua_LuaBox2D_b2Body_GetUserData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetUserData00
+static int tolua_Box2D_b2Body_GetUserData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -6980,8 +6987,8 @@ static int tolua_LuaBox2D_b2Body_GetUserData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetUserData of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_SetUserData00
-static int tolua_LuaBox2D_b2Body_SetUserData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_SetUserData00
+static int tolua_Box2D_b2Body_SetUserData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7013,8 +7020,8 @@ static int tolua_LuaBox2D_b2Body_SetUserData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetWorld of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetWorld00
-static int tolua_LuaBox2D_b2Body_GetWorld00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetWorld00
+static int tolua_Box2D_b2Body_GetWorld00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7045,8 +7052,8 @@ static int tolua_LuaBox2D_b2Body_GetWorld00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetWorld of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_GetWorld01
-static int tolua_LuaBox2D_b2Body_GetWorld01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_GetWorld01
+static int tolua_Box2D_b2Body_GetWorld01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -7067,13 +7074,13 @@ static int tolua_LuaBox2D_b2Body_GetWorld01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Body_GetWorld00(tolua_S);
+ return tolua_Box2D_b2Body_GetWorld00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Dump of class  b2Body */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Body_Dump00
-static int tolua_LuaBox2D_b2Body_Dump00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Body_Dump00
+static int tolua_Box2D_b2Body_Dump00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7193,8 +7200,8 @@ static int tolua_set_b2Pair_next(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2BroadPhase */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BroadPhase_new00
-static int tolua_LuaBox2D_b2BroadPhase_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BroadPhase_new00
+static int tolua_Box2D_b2BroadPhase_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7221,8 +7228,8 @@ static int tolua_LuaBox2D_b2BroadPhase_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2BroadPhase */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BroadPhase_new00_local
-static int tolua_LuaBox2D_b2BroadPhase_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BroadPhase_new00_local
+static int tolua_Box2D_b2BroadPhase_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7250,8 +7257,8 @@ static int tolua_LuaBox2D_b2BroadPhase_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2BroadPhase */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BroadPhase_delete00
-static int tolua_LuaBox2D_b2BroadPhase_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BroadPhase_delete00
+static int tolua_Box2D_b2BroadPhase_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7279,8 +7286,8 @@ static int tolua_LuaBox2D_b2BroadPhase_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: CreateProxy of class  b2BroadPhase */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BroadPhase_CreateProxy00
-static int tolua_LuaBox2D_b2BroadPhase_CreateProxy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BroadPhase_CreateProxy00
+static int tolua_Box2D_b2BroadPhase_CreateProxy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7315,8 +7322,8 @@ static int tolua_LuaBox2D_b2BroadPhase_CreateProxy00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: DestroyProxy of class  b2BroadPhase */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BroadPhase_DestroyProxy00
-static int tolua_LuaBox2D_b2BroadPhase_DestroyProxy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BroadPhase_DestroyProxy00
+static int tolua_Box2D_b2BroadPhase_DestroyProxy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7348,8 +7355,8 @@ static int tolua_LuaBox2D_b2BroadPhase_DestroyProxy00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: MoveProxy of class  b2BroadPhase */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BroadPhase_MoveProxy00
-static int tolua_LuaBox2D_b2BroadPhase_MoveProxy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BroadPhase_MoveProxy00
+static int tolua_Box2D_b2BroadPhase_MoveProxy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7385,8 +7392,8 @@ static int tolua_LuaBox2D_b2BroadPhase_MoveProxy00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: TouchProxy of class  b2BroadPhase */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BroadPhase_TouchProxy00
-static int tolua_LuaBox2D_b2BroadPhase_TouchProxy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BroadPhase_TouchProxy00
+static int tolua_Box2D_b2BroadPhase_TouchProxy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7418,8 +7425,8 @@ static int tolua_LuaBox2D_b2BroadPhase_TouchProxy00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFatAABB of class  b2BroadPhase */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BroadPhase_GetFatAABB00
-static int tolua_LuaBox2D_b2BroadPhase_GetFatAABB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BroadPhase_GetFatAABB00
+static int tolua_Box2D_b2BroadPhase_GetFatAABB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7452,8 +7459,8 @@ static int tolua_LuaBox2D_b2BroadPhase_GetFatAABB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetUserData of class  b2BroadPhase */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BroadPhase_GetUserData00
-static int tolua_LuaBox2D_b2BroadPhase_GetUserData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BroadPhase_GetUserData00
+static int tolua_Box2D_b2BroadPhase_GetUserData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7486,8 +7493,8 @@ static int tolua_LuaBox2D_b2BroadPhase_GetUserData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: TestOverlap of class  b2BroadPhase */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BroadPhase_TestOverlap00
-static int tolua_LuaBox2D_b2BroadPhase_TestOverlap00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BroadPhase_TestOverlap00
+static int tolua_Box2D_b2BroadPhase_TestOverlap00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7522,8 +7529,8 @@ static int tolua_LuaBox2D_b2BroadPhase_TestOverlap00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetProxyCount of class  b2BroadPhase */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BroadPhase_GetProxyCount00
-static int tolua_LuaBox2D_b2BroadPhase_GetProxyCount00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BroadPhase_GetProxyCount00
+static int tolua_Box2D_b2BroadPhase_GetProxyCount00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7554,8 +7561,8 @@ static int tolua_LuaBox2D_b2BroadPhase_GetProxyCount00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetTreeHeight of class  b2BroadPhase */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BroadPhase_GetTreeHeight00
-static int tolua_LuaBox2D_b2BroadPhase_GetTreeHeight00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BroadPhase_GetTreeHeight00
+static int tolua_Box2D_b2BroadPhase_GetTreeHeight00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7586,8 +7593,8 @@ static int tolua_LuaBox2D_b2BroadPhase_GetTreeHeight00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetTreeBalance of class  b2BroadPhase */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BroadPhase_GetTreeBalance00
-static int tolua_LuaBox2D_b2BroadPhase_GetTreeBalance00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BroadPhase_GetTreeBalance00
+static int tolua_Box2D_b2BroadPhase_GetTreeBalance00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7618,8 +7625,8 @@ static int tolua_LuaBox2D_b2BroadPhase_GetTreeBalance00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetTreeQuality of class  b2BroadPhase */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2BroadPhase_GetTreeQuality00
-static int tolua_LuaBox2D_b2BroadPhase_GetTreeQuality00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2BroadPhase_GetTreeQuality00
+static int tolua_Box2D_b2BroadPhase_GetTreeQuality00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7650,8 +7657,8 @@ static int tolua_LuaBox2D_b2BroadPhase_GetTreeQuality00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Create of class  b2ChainAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainAndCircleContact_Create00
-static int tolua_LuaBox2D_b2ChainAndCircleContact_Create00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainAndCircleContact_Create00
+static int tolua_Box2D_b2ChainAndCircleContact_Create00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7688,8 +7695,8 @@ static int tolua_LuaBox2D_b2ChainAndCircleContact_Create00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Destroy of class  b2ChainAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainAndCircleContact_Destroy00
-static int tolua_LuaBox2D_b2ChainAndCircleContact_Destroy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainAndCircleContact_Destroy00
+static int tolua_Box2D_b2ChainAndCircleContact_Destroy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7719,8 +7726,8 @@ static int tolua_LuaBox2D_b2ChainAndCircleContact_Destroy00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2ChainAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainAndCircleContact_new00
-static int tolua_LuaBox2D_b2ChainAndCircleContact_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainAndCircleContact_new00
+static int tolua_Box2D_b2ChainAndCircleContact_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7755,8 +7762,8 @@ static int tolua_LuaBox2D_b2ChainAndCircleContact_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2ChainAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainAndCircleContact_new00_local
-static int tolua_LuaBox2D_b2ChainAndCircleContact_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainAndCircleContact_new00_local
+static int tolua_Box2D_b2ChainAndCircleContact_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7792,8 +7799,8 @@ static int tolua_LuaBox2D_b2ChainAndCircleContact_new00_local(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2ChainAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainAndCircleContact_delete00
-static int tolua_LuaBox2D_b2ChainAndCircleContact_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainAndCircleContact_delete00
+static int tolua_Box2D_b2ChainAndCircleContact_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7821,8 +7828,8 @@ static int tolua_LuaBox2D_b2ChainAndCircleContact_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Evaluate of class  b2ChainAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainAndCircleContact_Evaluate00
-static int tolua_LuaBox2D_b2ChainAndCircleContact_Evaluate00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainAndCircleContact_Evaluate00
+static int tolua_Box2D_b2ChainAndCircleContact_Evaluate00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7858,8 +7865,8 @@ static int tolua_LuaBox2D_b2ChainAndCircleContact_Evaluate00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Create of class  b2ChainAndPolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainAndPolygonContact_Create00
-static int tolua_LuaBox2D_b2ChainAndPolygonContact_Create00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainAndPolygonContact_Create00
+static int tolua_Box2D_b2ChainAndPolygonContact_Create00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7896,8 +7903,8 @@ static int tolua_LuaBox2D_b2ChainAndPolygonContact_Create00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Destroy of class  b2ChainAndPolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainAndPolygonContact_Destroy00
-static int tolua_LuaBox2D_b2ChainAndPolygonContact_Destroy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainAndPolygonContact_Destroy00
+static int tolua_Box2D_b2ChainAndPolygonContact_Destroy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7927,8 +7934,8 @@ static int tolua_LuaBox2D_b2ChainAndPolygonContact_Destroy00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2ChainAndPolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainAndPolygonContact_new00
-static int tolua_LuaBox2D_b2ChainAndPolygonContact_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainAndPolygonContact_new00
+static int tolua_Box2D_b2ChainAndPolygonContact_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -7963,8 +7970,8 @@ static int tolua_LuaBox2D_b2ChainAndPolygonContact_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2ChainAndPolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainAndPolygonContact_new00_local
-static int tolua_LuaBox2D_b2ChainAndPolygonContact_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainAndPolygonContact_new00_local
+static int tolua_Box2D_b2ChainAndPolygonContact_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8000,8 +8007,8 @@ static int tolua_LuaBox2D_b2ChainAndPolygonContact_new00_local(lua_State* tolua_
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2ChainAndPolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainAndPolygonContact_delete00
-static int tolua_LuaBox2D_b2ChainAndPolygonContact_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainAndPolygonContact_delete00
+static int tolua_Box2D_b2ChainAndPolygonContact_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8029,8 +8036,8 @@ static int tolua_LuaBox2D_b2ChainAndPolygonContact_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Evaluate of class  b2ChainAndPolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainAndPolygonContact_Evaluate00
-static int tolua_LuaBox2D_b2ChainAndPolygonContact_Evaluate00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainAndPolygonContact_Evaluate00
+static int tolua_Box2D_b2ChainAndPolygonContact_Evaluate00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8066,8 +8073,8 @@ static int tolua_LuaBox2D_b2ChainAndPolygonContact_Evaluate00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2EdgeShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeShape_new00
-static int tolua_LuaBox2D_b2EdgeShape_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeShape_new00
+static int tolua_Box2D_b2EdgeShape_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8094,8 +8101,8 @@ static int tolua_LuaBox2D_b2EdgeShape_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2EdgeShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeShape_new00_local
-static int tolua_LuaBox2D_b2EdgeShape_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeShape_new00_local
+static int tolua_Box2D_b2EdgeShape_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8123,8 +8130,8 @@ static int tolua_LuaBox2D_b2EdgeShape_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Set of class  b2EdgeShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeShape_Set00
-static int tolua_LuaBox2D_b2EdgeShape_Set00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeShape_Set00
+static int tolua_Box2D_b2EdgeShape_Set00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8158,8 +8165,8 @@ static int tolua_LuaBox2D_b2EdgeShape_Set00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Clone of class  b2EdgeShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeShape_Clone00
-static int tolua_LuaBox2D_b2EdgeShape_Clone00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeShape_Clone00
+static int tolua_Box2D_b2EdgeShape_Clone00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8192,8 +8199,8 @@ static int tolua_LuaBox2D_b2EdgeShape_Clone00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetChildCount of class  b2EdgeShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeShape_GetChildCount00
-static int tolua_LuaBox2D_b2EdgeShape_GetChildCount00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeShape_GetChildCount00
+static int tolua_Box2D_b2EdgeShape_GetChildCount00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8224,8 +8231,8 @@ static int tolua_LuaBox2D_b2EdgeShape_GetChildCount00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: TestPoint of class  b2EdgeShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeShape_TestPoint00
-static int tolua_LuaBox2D_b2EdgeShape_TestPoint00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeShape_TestPoint00
+static int tolua_Box2D_b2EdgeShape_TestPoint00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8260,8 +8267,8 @@ static int tolua_LuaBox2D_b2EdgeShape_TestPoint00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: RayCast of class  b2EdgeShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeShape_RayCast00
-static int tolua_LuaBox2D_b2EdgeShape_RayCast00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeShape_RayCast00
+static int tolua_Box2D_b2EdgeShape_RayCast00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8300,8 +8307,8 @@ static int tolua_LuaBox2D_b2EdgeShape_RayCast00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ComputeAABB of class  b2EdgeShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeShape_ComputeAABB00
-static int tolua_LuaBox2D_b2EdgeShape_ComputeAABB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeShape_ComputeAABB00
+static int tolua_Box2D_b2EdgeShape_ComputeAABB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8337,8 +8344,8 @@ static int tolua_LuaBox2D_b2EdgeShape_ComputeAABB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ComputeMass of class  b2EdgeShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeShape_ComputeMass00
-static int tolua_LuaBox2D_b2EdgeShape_ComputeMass00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeShape_ComputeMass00
+static int tolua_Box2D_b2EdgeShape_ComputeMass00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8552,8 +8559,8 @@ static int tolua_set_b2EdgeShape_m_hasVertex3(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2ChainShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainShape_new00
-static int tolua_LuaBox2D_b2ChainShape_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainShape_new00
+static int tolua_Box2D_b2ChainShape_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8580,8 +8587,8 @@ static int tolua_LuaBox2D_b2ChainShape_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2ChainShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainShape_new00_local
-static int tolua_LuaBox2D_b2ChainShape_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainShape_new00_local
+static int tolua_Box2D_b2ChainShape_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8609,8 +8616,8 @@ static int tolua_LuaBox2D_b2ChainShape_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2ChainShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainShape_delete00
-static int tolua_LuaBox2D_b2ChainShape_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainShape_delete00
+static int tolua_Box2D_b2ChainShape_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8638,8 +8645,8 @@ static int tolua_LuaBox2D_b2ChainShape_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: CreateLoop of class  b2ChainShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainShape_CreateLoop00
-static int tolua_LuaBox2D_b2ChainShape_CreateLoop00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainShape_CreateLoop00
+static int tolua_Box2D_b2ChainShape_CreateLoop00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8673,8 +8680,8 @@ static int tolua_LuaBox2D_b2ChainShape_CreateLoop00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: CreateChain of class  b2ChainShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainShape_CreateChain00
-static int tolua_LuaBox2D_b2ChainShape_CreateChain00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainShape_CreateChain00
+static int tolua_Box2D_b2ChainShape_CreateChain00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8708,8 +8715,8 @@ static int tolua_LuaBox2D_b2ChainShape_CreateChain00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetPrevVertex of class  b2ChainShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainShape_SetPrevVertex00
-static int tolua_LuaBox2D_b2ChainShape_SetPrevVertex00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainShape_SetPrevVertex00
+static int tolua_Box2D_b2ChainShape_SetPrevVertex00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8741,8 +8748,8 @@ static int tolua_LuaBox2D_b2ChainShape_SetPrevVertex00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetNextVertex of class  b2ChainShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainShape_SetNextVertex00
-static int tolua_LuaBox2D_b2ChainShape_SetNextVertex00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainShape_SetNextVertex00
+static int tolua_Box2D_b2ChainShape_SetNextVertex00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8774,8 +8781,8 @@ static int tolua_LuaBox2D_b2ChainShape_SetNextVertex00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Clone of class  b2ChainShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainShape_Clone00
-static int tolua_LuaBox2D_b2ChainShape_Clone00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainShape_Clone00
+static int tolua_Box2D_b2ChainShape_Clone00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8808,8 +8815,8 @@ static int tolua_LuaBox2D_b2ChainShape_Clone00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetChildCount of class  b2ChainShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainShape_GetChildCount00
-static int tolua_LuaBox2D_b2ChainShape_GetChildCount00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainShape_GetChildCount00
+static int tolua_Box2D_b2ChainShape_GetChildCount00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8840,8 +8847,8 @@ static int tolua_LuaBox2D_b2ChainShape_GetChildCount00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetChildEdge of class  b2ChainShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainShape_GetChildEdge00
-static int tolua_LuaBox2D_b2ChainShape_GetChildEdge00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainShape_GetChildEdge00
+static int tolua_Box2D_b2ChainShape_GetChildEdge00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8875,8 +8882,8 @@ static int tolua_LuaBox2D_b2ChainShape_GetChildEdge00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: TestPoint of class  b2ChainShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainShape_TestPoint00
-static int tolua_LuaBox2D_b2ChainShape_TestPoint00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainShape_TestPoint00
+static int tolua_Box2D_b2ChainShape_TestPoint00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8911,8 +8918,8 @@ static int tolua_LuaBox2D_b2ChainShape_TestPoint00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: RayCast of class  b2ChainShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainShape_RayCast00
-static int tolua_LuaBox2D_b2ChainShape_RayCast00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainShape_RayCast00
+static int tolua_Box2D_b2ChainShape_RayCast00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8951,8 +8958,8 @@ static int tolua_LuaBox2D_b2ChainShape_RayCast00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ComputeAABB of class  b2ChainShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainShape_ComputeAABB00
-static int tolua_LuaBox2D_b2ChainShape_ComputeAABB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainShape_ComputeAABB00
+static int tolua_Box2D_b2ChainShape_ComputeAABB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -8988,8 +8995,8 @@ static int tolua_LuaBox2D_b2ChainShape_ComputeAABB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ComputeMass of class  b2ChainShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ChainShape_ComputeMass00
-static int tolua_LuaBox2D_b2ChainShape_ComputeMass00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ChainShape_ComputeMass00
+static int tolua_Box2D_b2ChainShape_ComputeMass00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9203,8 +9210,8 @@ static int tolua_set_b2ChainShape_m_hasNextVertex(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Create of class  b2CircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleContact_Create00
-static int tolua_LuaBox2D_b2CircleContact_Create00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleContact_Create00
+static int tolua_Box2D_b2CircleContact_Create00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9241,8 +9248,8 @@ static int tolua_LuaBox2D_b2CircleContact_Create00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Destroy of class  b2CircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleContact_Destroy00
-static int tolua_LuaBox2D_b2CircleContact_Destroy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleContact_Destroy00
+static int tolua_Box2D_b2CircleContact_Destroy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9272,8 +9279,8 @@ static int tolua_LuaBox2D_b2CircleContact_Destroy00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2CircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleContact_new00
-static int tolua_LuaBox2D_b2CircleContact_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleContact_new00
+static int tolua_Box2D_b2CircleContact_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9304,8 +9311,8 @@ static int tolua_LuaBox2D_b2CircleContact_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2CircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleContact_new00_local
-static int tolua_LuaBox2D_b2CircleContact_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleContact_new00_local
+static int tolua_Box2D_b2CircleContact_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9337,8 +9344,8 @@ static int tolua_LuaBox2D_b2CircleContact_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2CircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleContact_delete00
-static int tolua_LuaBox2D_b2CircleContact_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleContact_delete00
+static int tolua_Box2D_b2CircleContact_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9366,8 +9373,8 @@ static int tolua_LuaBox2D_b2CircleContact_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Evaluate of class  b2CircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleContact_Evaluate00
-static int tolua_LuaBox2D_b2CircleContact_Evaluate00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleContact_Evaluate00
+static int tolua_Box2D_b2CircleContact_Evaluate00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9403,8 +9410,8 @@ static int tolua_LuaBox2D_b2CircleContact_Evaluate00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2CircleShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleShape_new00
-static int tolua_LuaBox2D_b2CircleShape_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleShape_new00
+static int tolua_Box2D_b2CircleShape_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9431,8 +9438,8 @@ static int tolua_LuaBox2D_b2CircleShape_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2CircleShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleShape_new00_local
-static int tolua_LuaBox2D_b2CircleShape_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleShape_new00_local
+static int tolua_Box2D_b2CircleShape_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9460,8 +9467,8 @@ static int tolua_LuaBox2D_b2CircleShape_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Clone of class  b2CircleShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleShape_Clone00
-static int tolua_LuaBox2D_b2CircleShape_Clone00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleShape_Clone00
+static int tolua_Box2D_b2CircleShape_Clone00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9494,8 +9501,8 @@ static int tolua_LuaBox2D_b2CircleShape_Clone00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetChildCount of class  b2CircleShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleShape_GetChildCount00
-static int tolua_LuaBox2D_b2CircleShape_GetChildCount00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleShape_GetChildCount00
+static int tolua_Box2D_b2CircleShape_GetChildCount00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9526,8 +9533,8 @@ static int tolua_LuaBox2D_b2CircleShape_GetChildCount00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: TestPoint of class  b2CircleShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleShape_TestPoint00
-static int tolua_LuaBox2D_b2CircleShape_TestPoint00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleShape_TestPoint00
+static int tolua_Box2D_b2CircleShape_TestPoint00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9562,8 +9569,8 @@ static int tolua_LuaBox2D_b2CircleShape_TestPoint00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: RayCast of class  b2CircleShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleShape_RayCast00
-static int tolua_LuaBox2D_b2CircleShape_RayCast00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleShape_RayCast00
+static int tolua_Box2D_b2CircleShape_RayCast00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9602,8 +9609,8 @@ static int tolua_LuaBox2D_b2CircleShape_RayCast00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ComputeAABB of class  b2CircleShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleShape_ComputeAABB00
-static int tolua_LuaBox2D_b2CircleShape_ComputeAABB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleShape_ComputeAABB00
+static int tolua_Box2D_b2CircleShape_ComputeAABB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9639,8 +9646,8 @@ static int tolua_LuaBox2D_b2CircleShape_ComputeAABB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ComputeMass of class  b2CircleShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleShape_ComputeMass00
-static int tolua_LuaBox2D_b2CircleShape_ComputeMass00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleShape_ComputeMass00
+static int tolua_Box2D_b2CircleShape_ComputeMass00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9674,8 +9681,8 @@ static int tolua_LuaBox2D_b2CircleShape_ComputeMass00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetSupport of class  b2CircleShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleShape_GetSupport00
-static int tolua_LuaBox2D_b2CircleShape_GetSupport00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleShape_GetSupport00
+static int tolua_Box2D_b2CircleShape_GetSupport00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9708,8 +9715,8 @@ static int tolua_LuaBox2D_b2CircleShape_GetSupport00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetSupportVertex of class  b2CircleShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleShape_GetSupportVertex00
-static int tolua_LuaBox2D_b2CircleShape_GetSupportVertex00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleShape_GetSupportVertex00
+static int tolua_Box2D_b2CircleShape_GetSupportVertex00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9742,8 +9749,8 @@ static int tolua_LuaBox2D_b2CircleShape_GetSupportVertex00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetVertexCount of class  b2CircleShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleShape_GetVertexCount00
-static int tolua_LuaBox2D_b2CircleShape_GetVertexCount00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleShape_GetVertexCount00
+static int tolua_Box2D_b2CircleShape_GetVertexCount00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9774,8 +9781,8 @@ static int tolua_LuaBox2D_b2CircleShape_GetVertexCount00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetVertex of class  b2CircleShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CircleShape_GetVertex00
-static int tolua_LuaBox2D_b2CircleShape_GetVertex00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CircleShape_GetVertex00
+static int tolua_Box2D_b2CircleShape_GetVertex00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9838,8 +9845,8 @@ static int tolua_set_b2CircleShape_m_p(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2Shape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Shape_delete00
-static int tolua_LuaBox2D_b2Shape_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Shape_delete00
+static int tolua_Box2D_b2Shape_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9867,8 +9874,8 @@ static int tolua_LuaBox2D_b2Shape_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Clone of class  b2Shape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Shape_Clone00
-static int tolua_LuaBox2D_b2Shape_Clone00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Shape_Clone00
+static int tolua_Box2D_b2Shape_Clone00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9901,8 +9908,8 @@ static int tolua_LuaBox2D_b2Shape_Clone00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetType of class  b2Shape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Shape_GetType00
-static int tolua_LuaBox2D_b2Shape_GetType00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Shape_GetType00
+static int tolua_Box2D_b2Shape_GetType00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9933,8 +9940,8 @@ static int tolua_LuaBox2D_b2Shape_GetType00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetChildCount of class  b2Shape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Shape_GetChildCount00
-static int tolua_LuaBox2D_b2Shape_GetChildCount00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Shape_GetChildCount00
+static int tolua_Box2D_b2Shape_GetChildCount00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -9965,8 +9972,8 @@ static int tolua_LuaBox2D_b2Shape_GetChildCount00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: TestPoint of class  b2Shape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Shape_TestPoint00
-static int tolua_LuaBox2D_b2Shape_TestPoint00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Shape_TestPoint00
+static int tolua_Box2D_b2Shape_TestPoint00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10001,8 +10008,8 @@ static int tolua_LuaBox2D_b2Shape_TestPoint00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: RayCast of class  b2Shape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Shape_RayCast00
-static int tolua_LuaBox2D_b2Shape_RayCast00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Shape_RayCast00
+static int tolua_Box2D_b2Shape_RayCast00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10041,8 +10048,8 @@ static int tolua_LuaBox2D_b2Shape_RayCast00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ComputeAABB of class  b2Shape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Shape_ComputeAABB00
-static int tolua_LuaBox2D_b2Shape_ComputeAABB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Shape_ComputeAABB00
+static int tolua_Box2D_b2Shape_ComputeAABB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10078,8 +10085,8 @@ static int tolua_LuaBox2D_b2Shape_ComputeAABB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ComputeMass of class  b2Shape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Shape_ComputeMass00
-static int tolua_LuaBox2D_b2Shape_ComputeMass00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Shape_ComputeMass00
+static int tolua_Box2D_b2Shape_ComputeMass00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10173,8 +10180,8 @@ static int tolua_set_b2Shape_m_radius(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonShape_new00
-static int tolua_LuaBox2D_b2PolygonShape_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonShape_new00
+static int tolua_Box2D_b2PolygonShape_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10201,8 +10208,8 @@ static int tolua_LuaBox2D_b2PolygonShape_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonShape_new00_local
-static int tolua_LuaBox2D_b2PolygonShape_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonShape_new00_local
+static int tolua_Box2D_b2PolygonShape_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10230,8 +10237,8 @@ static int tolua_LuaBox2D_b2PolygonShape_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Clone of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonShape_Clone00
-static int tolua_LuaBox2D_b2PolygonShape_Clone00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonShape_Clone00
+static int tolua_Box2D_b2PolygonShape_Clone00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10264,8 +10271,8 @@ static int tolua_LuaBox2D_b2PolygonShape_Clone00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetChildCount of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonShape_GetChildCount00
-static int tolua_LuaBox2D_b2PolygonShape_GetChildCount00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonShape_GetChildCount00
+static int tolua_Box2D_b2PolygonShape_GetChildCount00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10296,8 +10303,8 @@ static int tolua_LuaBox2D_b2PolygonShape_GetChildCount00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Set of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonShape_Set00
-static int tolua_LuaBox2D_b2PolygonShape_Set00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonShape_Set00
+static int tolua_Box2D_b2PolygonShape_Set00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10331,8 +10338,8 @@ static int tolua_LuaBox2D_b2PolygonShape_Set00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetAsBox of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonShape_SetAsBox00
-static int tolua_LuaBox2D_b2PolygonShape_SetAsBox00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonShape_SetAsBox00
+static int tolua_Box2D_b2PolygonShape_SetAsBox00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10366,8 +10373,8 @@ static int tolua_LuaBox2D_b2PolygonShape_SetAsBox00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetAsBox of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonShape_SetAsBox01
-static int tolua_LuaBox2D_b2PolygonShape_SetAsBox01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonShape_SetAsBox01
+static int tolua_Box2D_b2PolygonShape_SetAsBox01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -10395,13 +10402,13 @@ static int tolua_LuaBox2D_b2PolygonShape_SetAsBox01(lua_State* tolua_S)
  }
  return 0;
 tolua_lerror:
- return tolua_LuaBox2D_b2PolygonShape_SetAsBox00(tolua_S);
+ return tolua_Box2D_b2PolygonShape_SetAsBox00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: TestPoint of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonShape_TestPoint00
-static int tolua_LuaBox2D_b2PolygonShape_TestPoint00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonShape_TestPoint00
+static int tolua_Box2D_b2PolygonShape_TestPoint00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10436,8 +10443,8 @@ static int tolua_LuaBox2D_b2PolygonShape_TestPoint00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: RayCast of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonShape_RayCast00
-static int tolua_LuaBox2D_b2PolygonShape_RayCast00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonShape_RayCast00
+static int tolua_Box2D_b2PolygonShape_RayCast00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10476,8 +10483,8 @@ static int tolua_LuaBox2D_b2PolygonShape_RayCast00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ComputeAABB of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonShape_ComputeAABB00
-static int tolua_LuaBox2D_b2PolygonShape_ComputeAABB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonShape_ComputeAABB00
+static int tolua_Box2D_b2PolygonShape_ComputeAABB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10513,8 +10520,8 @@ static int tolua_LuaBox2D_b2PolygonShape_ComputeAABB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ComputeMass of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonShape_ComputeMass00
-static int tolua_LuaBox2D_b2PolygonShape_ComputeMass00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonShape_ComputeMass00
+static int tolua_Box2D_b2PolygonShape_ComputeMass00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10548,8 +10555,8 @@ static int tolua_LuaBox2D_b2PolygonShape_ComputeMass00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetVertexCount of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonShape_GetVertexCount00
-static int tolua_LuaBox2D_b2PolygonShape_GetVertexCount00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonShape_GetVertexCount00
+static int tolua_Box2D_b2PolygonShape_GetVertexCount00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10580,8 +10587,8 @@ static int tolua_LuaBox2D_b2PolygonShape_GetVertexCount00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetVertex of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonShape_GetVertex00
-static int tolua_LuaBox2D_b2PolygonShape_GetVertex00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonShape_GetVertex00
+static int tolua_Box2D_b2PolygonShape_GetVertex00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10644,8 +10651,8 @@ static int tolua_set_b2PolygonShape_m_centroid(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* get function: m_vertices of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_get_LuaBox2D_b2PolygonShape_m_vertices
-static int tolua_get_LuaBox2D_b2PolygonShape_m_vertices(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_get_Box2D_b2PolygonShape_m_vertices
+static int tolua_get_Box2D_b2PolygonShape_m_vertices(lua_State* tolua_S)
 {
  int tolua_index;
   b2PolygonShape* self;
@@ -10670,8 +10677,8 @@ static int tolua_get_LuaBox2D_b2PolygonShape_m_vertices(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* set function: m_vertices of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_set_LuaBox2D_b2PolygonShape_m_vertices
-static int tolua_set_LuaBox2D_b2PolygonShape_m_vertices(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_set_Box2D_b2PolygonShape_m_vertices
+static int tolua_set_Box2D_b2PolygonShape_m_vertices(lua_State* tolua_S)
 {
  int tolua_index;
   b2PolygonShape* self;
@@ -10696,8 +10703,8 @@ static int tolua_set_LuaBox2D_b2PolygonShape_m_vertices(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* get function: m_normals of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_get_LuaBox2D_b2PolygonShape_m_normals
-static int tolua_get_LuaBox2D_b2PolygonShape_m_normals(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_get_Box2D_b2PolygonShape_m_normals
+static int tolua_get_Box2D_b2PolygonShape_m_normals(lua_State* tolua_S)
 {
  int tolua_index;
   b2PolygonShape* self;
@@ -10722,8 +10729,8 @@ static int tolua_get_LuaBox2D_b2PolygonShape_m_normals(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* set function: m_normals of class  b2PolygonShape */
-#ifndef TOLUA_DISABLE_tolua_set_LuaBox2D_b2PolygonShape_m_normals
-static int tolua_set_LuaBox2D_b2PolygonShape_m_normals(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_set_Box2D_b2PolygonShape_m_normals
+static int tolua_set_Box2D_b2PolygonShape_m_normals(lua_State* tolua_S)
 {
  int tolua_index;
   b2PolygonShape* self;
@@ -11078,8 +11085,8 @@ static int tolua_set_b2ManifoldPoint_id(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* get function: points of class  b2Manifold */
-#ifndef TOLUA_DISABLE_tolua_get_LuaBox2D_b2Manifold_points
-static int tolua_get_LuaBox2D_b2Manifold_points(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_get_Box2D_b2Manifold_points
+static int tolua_get_Box2D_b2Manifold_points(lua_State* tolua_S)
 {
  int tolua_index;
   b2Manifold* self;
@@ -11104,8 +11111,8 @@ static int tolua_get_LuaBox2D_b2Manifold_points(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* set function: points of class  b2Manifold */
-#ifndef TOLUA_DISABLE_tolua_set_LuaBox2D_b2Manifold_points
-static int tolua_set_LuaBox2D_b2Manifold_points(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_set_Box2D_b2Manifold_points
+static int tolua_set_Box2D_b2Manifold_points(lua_State* tolua_S)
 {
  int tolua_index;
   b2Manifold* self;
@@ -11250,8 +11257,8 @@ static int tolua_set_b2Manifold_pointCount(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Initialize of class  b2WorldManifold */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WorldManifold_Initialize00
-static int tolua_LuaBox2D_b2WorldManifold_Initialize00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WorldManifold_Initialize00
+static int tolua_Box2D_b2WorldManifold_Initialize00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -11321,8 +11328,8 @@ static int tolua_set_b2WorldManifold_normal(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* get function: points of class  b2WorldManifold */
-#ifndef TOLUA_DISABLE_tolua_get_LuaBox2D_b2WorldManifold_points
-static int tolua_get_LuaBox2D_b2WorldManifold_points(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_get_Box2D_b2WorldManifold_points
+static int tolua_get_Box2D_b2WorldManifold_points(lua_State* tolua_S)
 {
  int tolua_index;
   b2WorldManifold* self;
@@ -11347,8 +11354,8 @@ static int tolua_get_LuaBox2D_b2WorldManifold_points(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* set function: points of class  b2WorldManifold */
-#ifndef TOLUA_DISABLE_tolua_set_LuaBox2D_b2WorldManifold_points
-static int tolua_set_LuaBox2D_b2WorldManifold_points(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_set_Box2D_b2WorldManifold_points
+static int tolua_set_Box2D_b2WorldManifold_points(lua_State* tolua_S)
 {
  int tolua_index;
   b2WorldManifold* self;
@@ -11369,6 +11376,63 @@ static int tolua_set_LuaBox2D_b2WorldManifold_points(lua_State* tolua_S)
 #endif
   self->points[tolua_index] = *((b2Vec2*)  tolua_tousertype(tolua_S,3,0));
  return 0;
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: new of class  b2WorldManifold */
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WorldManifold_new00
+static int tolua_Box2D_b2WorldManifold_new00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"b2WorldManifold",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   b2WorldManifold* tolua_ret = (b2WorldManifold*)  Mtolua_new((b2WorldManifold)());
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"b2WorldManifold");
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'new'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: new_local of class  b2WorldManifold */
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WorldManifold_new00_local
+static int tolua_Box2D_b2WorldManifold_new00_local(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"b2WorldManifold",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   b2WorldManifold* tolua_ret = (b2WorldManifold*)  Mtolua_new((b2WorldManifold)());
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"b2WorldManifold");
+    tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'new'.",&tolua_err);
+ return 0;
+#endif
 }
 #endif //#ifndef TOLUA_DISABLE
 
@@ -11583,8 +11647,8 @@ static int tolua_set_b2RayCastOutput_fraction(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsValid of class  b2AABB */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2AABB_IsValid00
-static int tolua_LuaBox2D_b2AABB_IsValid00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2AABB_IsValid00
+static int tolua_Box2D_b2AABB_IsValid00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -11615,8 +11679,8 @@ static int tolua_LuaBox2D_b2AABB_IsValid00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetCenter of class  b2AABB */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2AABB_GetCenter00
-static int tolua_LuaBox2D_b2AABB_GetCenter00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2AABB_GetCenter00
+static int tolua_Box2D_b2AABB_GetCenter00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -11657,8 +11721,8 @@ static int tolua_LuaBox2D_b2AABB_GetCenter00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetExtents of class  b2AABB */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2AABB_GetExtents00
-static int tolua_LuaBox2D_b2AABB_GetExtents00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2AABB_GetExtents00
+static int tolua_Box2D_b2AABB_GetExtents00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -11699,8 +11763,8 @@ static int tolua_LuaBox2D_b2AABB_GetExtents00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetPerimeter of class  b2AABB */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2AABB_GetPerimeter00
-static int tolua_LuaBox2D_b2AABB_GetPerimeter00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2AABB_GetPerimeter00
+static int tolua_Box2D_b2AABB_GetPerimeter00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -11731,8 +11795,8 @@ static int tolua_LuaBox2D_b2AABB_GetPerimeter00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Combine of class  b2AABB */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2AABB_Combine00
-static int tolua_LuaBox2D_b2AABB_Combine00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2AABB_Combine00
+static int tolua_Box2D_b2AABB_Combine00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -11764,8 +11828,8 @@ static int tolua_LuaBox2D_b2AABB_Combine00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Combine of class  b2AABB */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2AABB_Combine01
-static int tolua_LuaBox2D_b2AABB_Combine01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2AABB_Combine01
+static int tolua_Box2D_b2AABB_Combine01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -11789,13 +11853,13 @@ static int tolua_LuaBox2D_b2AABB_Combine01(lua_State* tolua_S)
  }
  return 0;
 tolua_lerror:
- return tolua_LuaBox2D_b2AABB_Combine00(tolua_S);
+ return tolua_Box2D_b2AABB_Combine00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Contains of class  b2AABB */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2AABB_Contains00
-static int tolua_LuaBox2D_b2AABB_Contains00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2AABB_Contains00
+static int tolua_Box2D_b2AABB_Contains00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -11828,8 +11892,8 @@ static int tolua_LuaBox2D_b2AABB_Contains00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: RayCast of class  b2AABB */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2AABB_RayCast00
-static int tolua_LuaBox2D_b2AABB_RayCast00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2AABB_RayCast00
+static int tolua_Box2D_b2AABB_RayCast00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -11924,8 +11988,8 @@ static int tolua_set_b2AABB_upperBound(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* function: b2CollideCircles */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CollideCircles00
-static int tolua_LuaBox2D_b2CollideCircles00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CollideCircles00
+static int tolua_Box2D_b2CollideCircles00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -11960,8 +12024,8 @@ static int tolua_LuaBox2D_b2CollideCircles00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* function: b2CollidePolygonAndCircle */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CollidePolygonAndCircle00
-static int tolua_LuaBox2D_b2CollidePolygonAndCircle00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CollidePolygonAndCircle00
+static int tolua_Box2D_b2CollidePolygonAndCircle00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -11996,8 +12060,8 @@ static int tolua_LuaBox2D_b2CollidePolygonAndCircle00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* function: b2CollidePolygons */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CollidePolygons00
-static int tolua_LuaBox2D_b2CollidePolygons00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CollidePolygons00
+static int tolua_Box2D_b2CollidePolygons00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12032,8 +12096,8 @@ static int tolua_LuaBox2D_b2CollidePolygons00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* function: b2CollideEdgeAndCircle */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CollideEdgeAndCircle00
-static int tolua_LuaBox2D_b2CollideEdgeAndCircle00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CollideEdgeAndCircle00
+static int tolua_Box2D_b2CollideEdgeAndCircle00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12068,8 +12132,8 @@ static int tolua_LuaBox2D_b2CollideEdgeAndCircle00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* function: b2CollideEdgeAndPolygon */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2CollideEdgeAndPolygon00
-static int tolua_LuaBox2D_b2CollideEdgeAndPolygon00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2CollideEdgeAndPolygon00
+static int tolua_Box2D_b2CollideEdgeAndPolygon00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12104,8 +12168,8 @@ static int tolua_LuaBox2D_b2CollideEdgeAndPolygon00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* function: b2ClipSegmentToLine */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ClipSegmentToLine00
-static int tolua_LuaBox2D_b2ClipSegmentToLine00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ClipSegmentToLine00
+static int tolua_Box2D_b2ClipSegmentToLine00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12178,8 +12242,8 @@ static int tolua_LuaBox2D_b2ClipSegmentToLine00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* function: b2TestOverlap */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2TestOverlap00
-static int tolua_LuaBox2D_b2TestOverlap00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2TestOverlap00
+static int tolua_Box2D_b2TestOverlap00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12217,8 +12281,8 @@ static int tolua_LuaBox2D_b2TestOverlap00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2StackAllocator */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2StackAllocator_new00
-static int tolua_LuaBox2D_b2StackAllocator_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2StackAllocator_new00
+static int tolua_Box2D_b2StackAllocator_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12245,8 +12309,8 @@ static int tolua_LuaBox2D_b2StackAllocator_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2StackAllocator */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2StackAllocator_new00_local
-static int tolua_LuaBox2D_b2StackAllocator_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2StackAllocator_new00_local
+static int tolua_Box2D_b2StackAllocator_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12274,8 +12338,8 @@ static int tolua_LuaBox2D_b2StackAllocator_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2StackAllocator */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2StackAllocator_delete00
-static int tolua_LuaBox2D_b2StackAllocator_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2StackAllocator_delete00
+static int tolua_Box2D_b2StackAllocator_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12303,8 +12367,8 @@ static int tolua_LuaBox2D_b2StackAllocator_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Allocate of class  b2StackAllocator */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2StackAllocator_Allocate00
-static int tolua_LuaBox2D_b2StackAllocator_Allocate00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2StackAllocator_Allocate00
+static int tolua_Box2D_b2StackAllocator_Allocate00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12337,8 +12401,8 @@ static int tolua_LuaBox2D_b2StackAllocator_Allocate00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Free of class  b2StackAllocator */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2StackAllocator_Free00
-static int tolua_LuaBox2D_b2StackAllocator_Free00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2StackAllocator_Free00
+static int tolua_Box2D_b2StackAllocator_Free00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12370,8 +12434,8 @@ static int tolua_LuaBox2D_b2StackAllocator_Free00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMaxAllocation of class  b2StackAllocator */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2StackAllocator_GetMaxAllocation00
-static int tolua_LuaBox2D_b2StackAllocator_GetMaxAllocation00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2StackAllocator_GetMaxAllocation00
+static int tolua_Box2D_b2StackAllocator_GetMaxAllocation00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12402,8 +12466,8 @@ static int tolua_LuaBox2D_b2StackAllocator_GetMaxAllocation00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2ContactListener */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactListener_delete00
-static int tolua_LuaBox2D_b2ContactListener_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactListener_delete00
+static int tolua_Box2D_b2ContactListener_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12431,8 +12495,8 @@ static int tolua_LuaBox2D_b2ContactListener_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: BeginContact of class  b2ContactListener */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactListener_BeginContact00
-static int tolua_LuaBox2D_b2ContactListener_BeginContact00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactListener_BeginContact00
+static int tolua_Box2D_b2ContactListener_BeginContact00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12464,8 +12528,8 @@ static int tolua_LuaBox2D_b2ContactListener_BeginContact00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: EndContact of class  b2ContactListener */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactListener_EndContact00
-static int tolua_LuaBox2D_b2ContactListener_EndContact00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactListener_EndContact00
+static int tolua_Box2D_b2ContactListener_EndContact00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12497,8 +12561,8 @@ static int tolua_LuaBox2D_b2ContactListener_EndContact00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: PreSolve of class  b2ContactListener */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactListener_PreSolve00
-static int tolua_LuaBox2D_b2ContactListener_PreSolve00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactListener_PreSolve00
+static int tolua_Box2D_b2ContactListener_PreSolve00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12532,8 +12596,8 @@ static int tolua_LuaBox2D_b2ContactListener_PreSolve00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: PostSolve of class  b2ContactListener */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactListener_PostSolve00
-static int tolua_LuaBox2D_b2ContactListener_PostSolve00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactListener_PostSolve00
+static int tolua_Box2D_b2ContactListener_PostSolve00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12657,8 +12721,8 @@ static int tolua_set_b2ContactRegister_primary(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2ContactFilter */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactFilter_delete00
-static int tolua_LuaBox2D_b2ContactFilter_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactFilter_delete00
+static int tolua_Box2D_b2ContactFilter_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12686,8 +12750,8 @@ static int tolua_LuaBox2D_b2ContactFilter_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ShouldCollide of class  b2ContactFilter */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactFilter_ShouldCollide00
-static int tolua_LuaBox2D_b2ContactFilter_ShouldCollide00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactFilter_ShouldCollide00
+static int tolua_Box2D_b2ContactFilter_ShouldCollide00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12722,8 +12786,8 @@ static int tolua_LuaBox2D_b2ContactFilter_ShouldCollide00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2ContactManager */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactManager_new00
-static int tolua_LuaBox2D_b2ContactManager_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactManager_new00
+static int tolua_Box2D_b2ContactManager_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12750,8 +12814,8 @@ static int tolua_LuaBox2D_b2ContactManager_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2ContactManager */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactManager_new00_local
-static int tolua_LuaBox2D_b2ContactManager_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactManager_new00_local
+static int tolua_Box2D_b2ContactManager_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12779,8 +12843,8 @@ static int tolua_LuaBox2D_b2ContactManager_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: AddPair of class  b2ContactManager */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactManager_AddPair00
-static int tolua_LuaBox2D_b2ContactManager_AddPair00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactManager_AddPair00
+static int tolua_Box2D_b2ContactManager_AddPair00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12814,8 +12878,8 @@ static int tolua_LuaBox2D_b2ContactManager_AddPair00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: FindNewContacts of class  b2ContactManager */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactManager_FindNewContacts00
-static int tolua_LuaBox2D_b2ContactManager_FindNewContacts00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactManager_FindNewContacts00
+static int tolua_Box2D_b2ContactManager_FindNewContacts00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12845,8 +12909,8 @@ static int tolua_LuaBox2D_b2ContactManager_FindNewContacts00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Destroy of class  b2ContactManager */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactManager_Destroy00
-static int tolua_LuaBox2D_b2ContactManager_Destroy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactManager_Destroy00
+static int tolua_Box2D_b2ContactManager_Destroy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -12878,8 +12942,8 @@ static int tolua_LuaBox2D_b2ContactManager_Destroy00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Collide of class  b2ContactManager */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactManager_Collide00
-static int tolua_LuaBox2D_b2ContactManager_Collide00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactManager_Collide00
+static int tolua_Box2D_b2ContactManager_Collide00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -13299,8 +13363,8 @@ static int tolua_set_b2VelocityConstraintPoint_velocityBias(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* get function: points of class  b2ContactVelocityConstraint */
-#ifndef TOLUA_DISABLE_tolua_get_LuaBox2D_b2ContactVelocityConstraint_points
-static int tolua_get_LuaBox2D_b2ContactVelocityConstraint_points(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_get_Box2D_b2ContactVelocityConstraint_points
+static int tolua_get_Box2D_b2ContactVelocityConstraint_points(lua_State* tolua_S)
 {
  int tolua_index;
   b2ContactVelocityConstraint* self;
@@ -13325,8 +13389,8 @@ static int tolua_get_LuaBox2D_b2ContactVelocityConstraint_points(lua_State* tolu
 #endif //#ifndef TOLUA_DISABLE
 
 /* set function: points of class  b2ContactVelocityConstraint */
-#ifndef TOLUA_DISABLE_tolua_set_LuaBox2D_b2ContactVelocityConstraint_points
-static int tolua_set_LuaBox2D_b2ContactVelocityConstraint_points(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_set_Box2D_b2ContactVelocityConstraint_points
+static int tolua_set_Box2D_b2ContactVelocityConstraint_points(lua_State* tolua_S)
 {
  int tolua_index;
   b2ContactVelocityConstraint* self;
@@ -13891,8 +13955,8 @@ static int tolua_set_b2ContactSolverDef_allocator_ptr(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2ContactSolver */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactSolver_new00
-static int tolua_LuaBox2D_b2ContactSolver_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactSolver_new00
+static int tolua_Box2D_b2ContactSolver_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -13921,8 +13985,8 @@ static int tolua_LuaBox2D_b2ContactSolver_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2ContactSolver */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactSolver_new00_local
-static int tolua_LuaBox2D_b2ContactSolver_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactSolver_new00_local
+static int tolua_Box2D_b2ContactSolver_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -13952,8 +14016,8 @@ static int tolua_LuaBox2D_b2ContactSolver_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2ContactSolver */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactSolver_delete00
-static int tolua_LuaBox2D_b2ContactSolver_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactSolver_delete00
+static int tolua_Box2D_b2ContactSolver_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -13981,8 +14045,8 @@ static int tolua_LuaBox2D_b2ContactSolver_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: InitializeVelocityConstraints of class  b2ContactSolver */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactSolver_InitializeVelocityConstraints00
-static int tolua_LuaBox2D_b2ContactSolver_InitializeVelocityConstraints00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactSolver_InitializeVelocityConstraints00
+static int tolua_Box2D_b2ContactSolver_InitializeVelocityConstraints00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -14012,8 +14076,8 @@ static int tolua_LuaBox2D_b2ContactSolver_InitializeVelocityConstraints00(lua_St
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: WarmStart of class  b2ContactSolver */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactSolver_WarmStart00
-static int tolua_LuaBox2D_b2ContactSolver_WarmStart00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactSolver_WarmStart00
+static int tolua_Box2D_b2ContactSolver_WarmStart00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -14043,8 +14107,8 @@ static int tolua_LuaBox2D_b2ContactSolver_WarmStart00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SolveVelocityConstraints of class  b2ContactSolver */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactSolver_SolveVelocityConstraints00
-static int tolua_LuaBox2D_b2ContactSolver_SolveVelocityConstraints00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactSolver_SolveVelocityConstraints00
+static int tolua_Box2D_b2ContactSolver_SolveVelocityConstraints00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -14074,8 +14138,8 @@ static int tolua_LuaBox2D_b2ContactSolver_SolveVelocityConstraints00(lua_State* 
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: StoreImpulses of class  b2ContactSolver */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactSolver_StoreImpulses00
-static int tolua_LuaBox2D_b2ContactSolver_StoreImpulses00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactSolver_StoreImpulses00
+static int tolua_Box2D_b2ContactSolver_StoreImpulses00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -14105,8 +14169,8 @@ static int tolua_LuaBox2D_b2ContactSolver_StoreImpulses00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SolvePositionConstraints of class  b2ContactSolver */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactSolver_SolvePositionConstraints00
-static int tolua_LuaBox2D_b2ContactSolver_SolvePositionConstraints00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactSolver_SolvePositionConstraints00
+static int tolua_Box2D_b2ContactSolver_SolvePositionConstraints00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -14137,8 +14201,8 @@ static int tolua_LuaBox2D_b2ContactSolver_SolvePositionConstraints00(lua_State* 
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SolveTOIPositionConstraints of class  b2ContactSolver */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2ContactSolver_SolveTOIPositionConstraints00
-static int tolua_LuaBox2D_b2ContactSolver_SolveTOIPositionConstraints00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2ContactSolver_SolveTOIPositionConstraints00
+static int tolua_Box2D_b2ContactSolver_SolveTOIPositionConstraints00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -14383,8 +14447,8 @@ static int tolua_set_b2ContactSolver_m_count(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2DistanceProxy */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceProxy_new00
-static int tolua_LuaBox2D_b2DistanceProxy_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceProxy_new00
+static int tolua_Box2D_b2DistanceProxy_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -14411,8 +14475,8 @@ static int tolua_LuaBox2D_b2DistanceProxy_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2DistanceProxy */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceProxy_new00_local
-static int tolua_LuaBox2D_b2DistanceProxy_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceProxy_new00_local
+static int tolua_Box2D_b2DistanceProxy_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -14440,8 +14504,8 @@ static int tolua_LuaBox2D_b2DistanceProxy_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Set of class  b2DistanceProxy */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceProxy_Set00
-static int tolua_LuaBox2D_b2DistanceProxy_Set00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceProxy_Set00
+static int tolua_Box2D_b2DistanceProxy_Set00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -14475,8 +14539,8 @@ static int tolua_LuaBox2D_b2DistanceProxy_Set00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetSupport of class  b2DistanceProxy */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceProxy_GetSupport00
-static int tolua_LuaBox2D_b2DistanceProxy_GetSupport00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceProxy_GetSupport00
+static int tolua_Box2D_b2DistanceProxy_GetSupport00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -14509,8 +14573,8 @@ static int tolua_LuaBox2D_b2DistanceProxy_GetSupport00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetSupportVertex of class  b2DistanceProxy */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceProxy_GetSupportVertex00
-static int tolua_LuaBox2D_b2DistanceProxy_GetSupportVertex00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceProxy_GetSupportVertex00
+static int tolua_Box2D_b2DistanceProxy_GetSupportVertex00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -14543,8 +14607,8 @@ static int tolua_LuaBox2D_b2DistanceProxy_GetSupportVertex00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetVertexCount of class  b2DistanceProxy */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceProxy_GetVertexCount00
-static int tolua_LuaBox2D_b2DistanceProxy_GetVertexCount00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceProxy_GetVertexCount00
+static int tolua_Box2D_b2DistanceProxy_GetVertexCount00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -14575,8 +14639,8 @@ static int tolua_LuaBox2D_b2DistanceProxy_GetVertexCount00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetVertex of class  b2DistanceProxy */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceProxy_GetVertex00
-static int tolua_LuaBox2D_b2DistanceProxy_GetVertex00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceProxy_GetVertex00
+static int tolua_Box2D_b2DistanceProxy_GetVertex00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -14609,8 +14673,8 @@ static int tolua_LuaBox2D_b2DistanceProxy_GetVertex00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* get function: m_buffer of class  b2DistanceProxy */
-#ifndef TOLUA_DISABLE_tolua_get_LuaBox2D_b2DistanceProxy_m_buffer
-static int tolua_get_LuaBox2D_b2DistanceProxy_m_buffer(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_get_Box2D_b2DistanceProxy_m_buffer
+static int tolua_get_Box2D_b2DistanceProxy_m_buffer(lua_State* tolua_S)
 {
  int tolua_index;
   b2DistanceProxy* self;
@@ -14635,8 +14699,8 @@ static int tolua_get_LuaBox2D_b2DistanceProxy_m_buffer(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* set function: m_buffer of class  b2DistanceProxy */
-#ifndef TOLUA_DISABLE_tolua_set_LuaBox2D_b2DistanceProxy_m_buffer
-static int tolua_set_LuaBox2D_b2DistanceProxy_m_buffer(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_set_Box2D_b2DistanceProxy_m_buffer
+static int tolua_set_Box2D_b2DistanceProxy_m_buffer(lua_State* tolua_S)
 {
  int tolua_index;
   b2DistanceProxy* self;
@@ -14794,8 +14858,8 @@ static int tolua_set_b2SimplexCache_count(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* get function: indexA of class  b2SimplexCache */
-#ifndef TOLUA_DISABLE_tolua_get_LuaBox2D_b2SimplexCache_indexA
-static int tolua_get_LuaBox2D_b2SimplexCache_indexA(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_get_Box2D_b2SimplexCache_indexA
+static int tolua_get_Box2D_b2SimplexCache_indexA(lua_State* tolua_S)
 {
  int tolua_index;
   b2SimplexCache* self;
@@ -14820,8 +14884,8 @@ static int tolua_get_LuaBox2D_b2SimplexCache_indexA(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* set function: indexA of class  b2SimplexCache */
-#ifndef TOLUA_DISABLE_tolua_set_LuaBox2D_b2SimplexCache_indexA
-static int tolua_set_LuaBox2D_b2SimplexCache_indexA(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_set_Box2D_b2SimplexCache_indexA
+static int tolua_set_Box2D_b2SimplexCache_indexA(lua_State* tolua_S)
 {
  int tolua_index;
   b2SimplexCache* self;
@@ -14846,8 +14910,8 @@ static int tolua_set_LuaBox2D_b2SimplexCache_indexA(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* get function: indexB of class  b2SimplexCache */
-#ifndef TOLUA_DISABLE_tolua_get_LuaBox2D_b2SimplexCache_indexB
-static int tolua_get_LuaBox2D_b2SimplexCache_indexB(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_get_Box2D_b2SimplexCache_indexB
+static int tolua_get_Box2D_b2SimplexCache_indexB(lua_State* tolua_S)
 {
  int tolua_index;
   b2SimplexCache* self;
@@ -14872,8 +14936,8 @@ static int tolua_get_LuaBox2D_b2SimplexCache_indexB(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* set function: indexB of class  b2SimplexCache */
-#ifndef TOLUA_DISABLE_tolua_set_LuaBox2D_b2SimplexCache_indexB
-static int tolua_set_LuaBox2D_b2SimplexCache_indexB(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_set_Box2D_b2SimplexCache_indexB
+static int tolua_set_Box2D_b2SimplexCache_indexB(lua_State* tolua_S)
 {
  int tolua_index;
   b2SimplexCache* self;
@@ -15168,8 +15232,8 @@ static int tolua_set_b2DistanceOutput_iterations(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* function: b2Distance */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Distance00
-static int tolua_LuaBox2D_b2Distance00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Distance00
+static int tolua_Box2D_b2Distance00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15200,8 +15264,8 @@ static int tolua_LuaBox2D_b2Distance00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2DistanceJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJointDef_new00
-static int tolua_LuaBox2D_b2DistanceJointDef_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJointDef_new00
+static int tolua_Box2D_b2DistanceJointDef_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15228,8 +15292,8 @@ static int tolua_LuaBox2D_b2DistanceJointDef_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2DistanceJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJointDef_new00_local
-static int tolua_LuaBox2D_b2DistanceJointDef_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJointDef_new00_local
+static int tolua_Box2D_b2DistanceJointDef_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15257,8 +15321,8 @@ static int tolua_LuaBox2D_b2DistanceJointDef_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Initialize of class  b2DistanceJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJointDef_Initialize00
-static int tolua_LuaBox2D_b2DistanceJointDef_Initialize00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJointDef_Initialize00
+static int tolua_Box2D_b2DistanceJointDef_Initialize00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15446,8 +15510,8 @@ static int tolua_set_b2DistanceJointDef_dampingRatio(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorA of class  b2DistanceJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJoint_GetAnchorA00
-static int tolua_LuaBox2D_b2DistanceJoint_GetAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJoint_GetAnchorA00
+static int tolua_Box2D_b2DistanceJoint_GetAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15488,8 +15552,8 @@ static int tolua_LuaBox2D_b2DistanceJoint_GetAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorB of class  b2DistanceJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJoint_GetAnchorB00
-static int tolua_LuaBox2D_b2DistanceJoint_GetAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJoint_GetAnchorB00
+static int tolua_Box2D_b2DistanceJoint_GetAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15530,8 +15594,8 @@ static int tolua_LuaBox2D_b2DistanceJoint_GetAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionForce of class  b2DistanceJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJoint_GetReactionForce00
-static int tolua_LuaBox2D_b2DistanceJoint_GetReactionForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJoint_GetReactionForce00
+static int tolua_Box2D_b2DistanceJoint_GetReactionForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15574,8 +15638,8 @@ static int tolua_LuaBox2D_b2DistanceJoint_GetReactionForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionTorque of class  b2DistanceJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJoint_GetReactionTorque00
-static int tolua_LuaBox2D_b2DistanceJoint_GetReactionTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJoint_GetReactionTorque00
+static int tolua_Box2D_b2DistanceJoint_GetReactionTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15608,8 +15672,8 @@ static int tolua_LuaBox2D_b2DistanceJoint_GetReactionTorque00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAnchorA of class  b2DistanceJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJoint_GetLocalAnchorA00
-static int tolua_LuaBox2D_b2DistanceJoint_GetLocalAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJoint_GetLocalAnchorA00
+static int tolua_Box2D_b2DistanceJoint_GetLocalAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15640,8 +15704,8 @@ static int tolua_LuaBox2D_b2DistanceJoint_GetLocalAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAnchorB of class  b2DistanceJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJoint_GetLocalAnchorB00
-static int tolua_LuaBox2D_b2DistanceJoint_GetLocalAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJoint_GetLocalAnchorB00
+static int tolua_Box2D_b2DistanceJoint_GetLocalAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15672,8 +15736,8 @@ static int tolua_LuaBox2D_b2DistanceJoint_GetLocalAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetLength of class  b2DistanceJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJoint_SetLength00
-static int tolua_LuaBox2D_b2DistanceJoint_SetLength00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJoint_SetLength00
+static int tolua_Box2D_b2DistanceJoint_SetLength00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15705,8 +15769,8 @@ static int tolua_LuaBox2D_b2DistanceJoint_SetLength00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLength of class  b2DistanceJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJoint_GetLength00
-static int tolua_LuaBox2D_b2DistanceJoint_GetLength00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJoint_GetLength00
+static int tolua_Box2D_b2DistanceJoint_GetLength00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15737,8 +15801,8 @@ static int tolua_LuaBox2D_b2DistanceJoint_GetLength00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetFrequency of class  b2DistanceJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJoint_SetFrequency00
-static int tolua_LuaBox2D_b2DistanceJoint_SetFrequency00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJoint_SetFrequency00
+static int tolua_Box2D_b2DistanceJoint_SetFrequency00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15770,8 +15834,8 @@ static int tolua_LuaBox2D_b2DistanceJoint_SetFrequency00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFrequency of class  b2DistanceJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJoint_GetFrequency00
-static int tolua_LuaBox2D_b2DistanceJoint_GetFrequency00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJoint_GetFrequency00
+static int tolua_Box2D_b2DistanceJoint_GetFrequency00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15802,8 +15866,8 @@ static int tolua_LuaBox2D_b2DistanceJoint_GetFrequency00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetDampingRatio of class  b2DistanceJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJoint_SetDampingRatio00
-static int tolua_LuaBox2D_b2DistanceJoint_SetDampingRatio00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJoint_SetDampingRatio00
+static int tolua_Box2D_b2DistanceJoint_SetDampingRatio00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15835,8 +15899,8 @@ static int tolua_LuaBox2D_b2DistanceJoint_SetDampingRatio00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetDampingRatio of class  b2DistanceJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJoint_GetDampingRatio00
-static int tolua_LuaBox2D_b2DistanceJoint_GetDampingRatio00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJoint_GetDampingRatio00
+static int tolua_Box2D_b2DistanceJoint_GetDampingRatio00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15867,8 +15931,8 @@ static int tolua_LuaBox2D_b2DistanceJoint_GetDampingRatio00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Dump of class  b2DistanceJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DistanceJoint_Dump00
-static int tolua_LuaBox2D_b2DistanceJoint_Dump00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DistanceJoint_Dump00
+static int tolua_Box2D_b2DistanceJoint_Dump00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15898,8 +15962,8 @@ static int tolua_LuaBox2D_b2DistanceJoint_Dump00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Color */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Color_new00
-static int tolua_LuaBox2D_b2Color_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Color_new00
+static int tolua_Box2D_b2Color_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15926,8 +15990,8 @@ static int tolua_LuaBox2D_b2Color_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Color */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Color_new00_local
-static int tolua_LuaBox2D_b2Color_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Color_new00_local
+static int tolua_Box2D_b2Color_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -15955,8 +16019,8 @@ static int tolua_LuaBox2D_b2Color_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Color */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Color_new01
-static int tolua_LuaBox2D_b2Color_new01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Color_new01
+static int tolua_Box2D_b2Color_new01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -15979,13 +16043,13 @@ static int tolua_LuaBox2D_b2Color_new01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Color_new00(tolua_S);
+ return tolua_Box2D_b2Color_new00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Color */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Color_new01_local
-static int tolua_LuaBox2D_b2Color_new01_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Color_new01_local
+static int tolua_Box2D_b2Color_new01_local(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -16009,13 +16073,13 @@ static int tolua_LuaBox2D_b2Color_new01_local(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Color_new00_local(tolua_S);
+ return tolua_Box2D_b2Color_new00_local(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Set of class  b2Color */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Color_Set00
-static int tolua_LuaBox2D_b2Color_Set00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Color_Set00
+static int tolua_Box2D_b2Color_Set00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16141,8 +16205,8 @@ static int tolua_set_b2Color_b(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2Draw */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Draw_delete00
-static int tolua_LuaBox2D_b2Draw_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Draw_delete00
+static int tolua_Box2D_b2Draw_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16170,8 +16234,8 @@ static int tolua_LuaBox2D_b2Draw_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetFlags of class  b2Draw */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Draw_SetFlags00
-static int tolua_LuaBox2D_b2Draw_SetFlags00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Draw_SetFlags00
+static int tolua_Box2D_b2Draw_SetFlags00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16203,8 +16267,8 @@ static int tolua_LuaBox2D_b2Draw_SetFlags00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFlags of class  b2Draw */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Draw_GetFlags00
-static int tolua_LuaBox2D_b2Draw_GetFlags00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Draw_GetFlags00
+static int tolua_Box2D_b2Draw_GetFlags00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16235,8 +16299,8 @@ static int tolua_LuaBox2D_b2Draw_GetFlags00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: AppendFlags of class  b2Draw */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Draw_AppendFlags00
-static int tolua_LuaBox2D_b2Draw_AppendFlags00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Draw_AppendFlags00
+static int tolua_Box2D_b2Draw_AppendFlags00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16268,8 +16332,8 @@ static int tolua_LuaBox2D_b2Draw_AppendFlags00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ClearFlags of class  b2Draw */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Draw_ClearFlags00
-static int tolua_LuaBox2D_b2Draw_ClearFlags00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Draw_ClearFlags00
+static int tolua_Box2D_b2Draw_ClearFlags00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16301,8 +16365,8 @@ static int tolua_LuaBox2D_b2Draw_ClearFlags00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: DrawPolygon of class  b2Draw */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Draw_DrawPolygon00
-static int tolua_LuaBox2D_b2Draw_DrawPolygon00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Draw_DrawPolygon00
+static int tolua_Box2D_b2Draw_DrawPolygon00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16338,8 +16402,8 @@ static int tolua_LuaBox2D_b2Draw_DrawPolygon00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: DrawSolidPolygon of class  b2Draw */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Draw_DrawSolidPolygon00
-static int tolua_LuaBox2D_b2Draw_DrawSolidPolygon00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Draw_DrawSolidPolygon00
+static int tolua_Box2D_b2Draw_DrawSolidPolygon00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16375,8 +16439,8 @@ static int tolua_LuaBox2D_b2Draw_DrawSolidPolygon00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: DrawCircle of class  b2Draw */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Draw_DrawCircle00
-static int tolua_LuaBox2D_b2Draw_DrawCircle00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Draw_DrawCircle00
+static int tolua_Box2D_b2Draw_DrawCircle00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16412,8 +16476,8 @@ static int tolua_LuaBox2D_b2Draw_DrawCircle00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: DrawSolidCircle of class  b2Draw */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Draw_DrawSolidCircle00
-static int tolua_LuaBox2D_b2Draw_DrawSolidCircle00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Draw_DrawSolidCircle00
+static int tolua_Box2D_b2Draw_DrawSolidCircle00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16451,8 +16515,8 @@ static int tolua_LuaBox2D_b2Draw_DrawSolidCircle00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: DrawSegment of class  b2Draw */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Draw_DrawSegment00
-static int tolua_LuaBox2D_b2Draw_DrawSegment00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Draw_DrawSegment00
+static int tolua_Box2D_b2Draw_DrawSegment00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16488,8 +16552,8 @@ static int tolua_LuaBox2D_b2Draw_DrawSegment00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: DrawTransform of class  b2Draw */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Draw_DrawTransform00
-static int tolua_LuaBox2D_b2Draw_DrawTransform00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Draw_DrawTransform00
+static int tolua_Box2D_b2Draw_DrawTransform00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16521,8 +16585,8 @@ static int tolua_LuaBox2D_b2Draw_DrawTransform00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsLeaf of class  b2TreeNode */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2TreeNode_IsLeaf00
-static int tolua_LuaBox2D_b2TreeNode_IsLeaf00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2TreeNode_IsLeaf00
+static int tolua_Box2D_b2TreeNode_IsLeaf00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16703,8 +16767,8 @@ static int tolua_set_b2TreeNode_height(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2DynamicTree */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DynamicTree_new00
-static int tolua_LuaBox2D_b2DynamicTree_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DynamicTree_new00
+static int tolua_Box2D_b2DynamicTree_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16731,8 +16795,8 @@ static int tolua_LuaBox2D_b2DynamicTree_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2DynamicTree */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DynamicTree_new00_local
-static int tolua_LuaBox2D_b2DynamicTree_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DynamicTree_new00_local
+static int tolua_Box2D_b2DynamicTree_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16760,8 +16824,8 @@ static int tolua_LuaBox2D_b2DynamicTree_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2DynamicTree */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DynamicTree_delete00
-static int tolua_LuaBox2D_b2DynamicTree_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DynamicTree_delete00
+static int tolua_Box2D_b2DynamicTree_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16789,8 +16853,8 @@ static int tolua_LuaBox2D_b2DynamicTree_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: CreateProxy of class  b2DynamicTree */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DynamicTree_CreateProxy00
-static int tolua_LuaBox2D_b2DynamicTree_CreateProxy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DynamicTree_CreateProxy00
+static int tolua_Box2D_b2DynamicTree_CreateProxy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16825,8 +16889,8 @@ static int tolua_LuaBox2D_b2DynamicTree_CreateProxy00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: DestroyProxy of class  b2DynamicTree */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DynamicTree_DestroyProxy00
-static int tolua_LuaBox2D_b2DynamicTree_DestroyProxy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DynamicTree_DestroyProxy00
+static int tolua_Box2D_b2DynamicTree_DestroyProxy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16858,8 +16922,8 @@ static int tolua_LuaBox2D_b2DynamicTree_DestroyProxy00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: MoveProxy of class  b2DynamicTree */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DynamicTree_MoveProxy00
-static int tolua_LuaBox2D_b2DynamicTree_MoveProxy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DynamicTree_MoveProxy00
+static int tolua_Box2D_b2DynamicTree_MoveProxy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16896,8 +16960,8 @@ static int tolua_LuaBox2D_b2DynamicTree_MoveProxy00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetUserData of class  b2DynamicTree */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DynamicTree_GetUserData00
-static int tolua_LuaBox2D_b2DynamicTree_GetUserData00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DynamicTree_GetUserData00
+static int tolua_Box2D_b2DynamicTree_GetUserData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16930,8 +16994,8 @@ static int tolua_LuaBox2D_b2DynamicTree_GetUserData00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFatAABB of class  b2DynamicTree */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DynamicTree_GetFatAABB00
-static int tolua_LuaBox2D_b2DynamicTree_GetFatAABB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DynamicTree_GetFatAABB00
+static int tolua_Box2D_b2DynamicTree_GetFatAABB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16964,8 +17028,8 @@ static int tolua_LuaBox2D_b2DynamicTree_GetFatAABB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Validate of class  b2DynamicTree */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DynamicTree_Validate00
-static int tolua_LuaBox2D_b2DynamicTree_Validate00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DynamicTree_Validate00
+static int tolua_Box2D_b2DynamicTree_Validate00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -16995,8 +17059,8 @@ static int tolua_LuaBox2D_b2DynamicTree_Validate00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetHeight of class  b2DynamicTree */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DynamicTree_GetHeight00
-static int tolua_LuaBox2D_b2DynamicTree_GetHeight00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DynamicTree_GetHeight00
+static int tolua_Box2D_b2DynamicTree_GetHeight00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17027,8 +17091,8 @@ static int tolua_LuaBox2D_b2DynamicTree_GetHeight00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMaxBalance of class  b2DynamicTree */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DynamicTree_GetMaxBalance00
-static int tolua_LuaBox2D_b2DynamicTree_GetMaxBalance00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DynamicTree_GetMaxBalance00
+static int tolua_Box2D_b2DynamicTree_GetMaxBalance00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17059,8 +17123,8 @@ static int tolua_LuaBox2D_b2DynamicTree_GetMaxBalance00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAreaRatio of class  b2DynamicTree */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DynamicTree_GetAreaRatio00
-static int tolua_LuaBox2D_b2DynamicTree_GetAreaRatio00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DynamicTree_GetAreaRatio00
+static int tolua_Box2D_b2DynamicTree_GetAreaRatio00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17091,8 +17155,8 @@ static int tolua_LuaBox2D_b2DynamicTree_GetAreaRatio00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: RebuildBottomUp of class  b2DynamicTree */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DynamicTree_RebuildBottomUp00
-static int tolua_LuaBox2D_b2DynamicTree_RebuildBottomUp00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DynamicTree_RebuildBottomUp00
+static int tolua_Box2D_b2DynamicTree_RebuildBottomUp00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17122,8 +17186,8 @@ static int tolua_LuaBox2D_b2DynamicTree_RebuildBottomUp00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Create of class  b2EdgeAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeAndCircleContact_Create00
-static int tolua_LuaBox2D_b2EdgeAndCircleContact_Create00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeAndCircleContact_Create00
+static int tolua_Box2D_b2EdgeAndCircleContact_Create00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17160,8 +17224,8 @@ static int tolua_LuaBox2D_b2EdgeAndCircleContact_Create00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Destroy of class  b2EdgeAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeAndCircleContact_Destroy00
-static int tolua_LuaBox2D_b2EdgeAndCircleContact_Destroy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeAndCircleContact_Destroy00
+static int tolua_Box2D_b2EdgeAndCircleContact_Destroy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17191,8 +17255,8 @@ static int tolua_LuaBox2D_b2EdgeAndCircleContact_Destroy00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2EdgeAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeAndCircleContact_new00
-static int tolua_LuaBox2D_b2EdgeAndCircleContact_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeAndCircleContact_new00
+static int tolua_Box2D_b2EdgeAndCircleContact_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17223,8 +17287,8 @@ static int tolua_LuaBox2D_b2EdgeAndCircleContact_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2EdgeAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeAndCircleContact_new00_local
-static int tolua_LuaBox2D_b2EdgeAndCircleContact_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeAndCircleContact_new00_local
+static int tolua_Box2D_b2EdgeAndCircleContact_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17256,8 +17320,8 @@ static int tolua_LuaBox2D_b2EdgeAndCircleContact_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2EdgeAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeAndCircleContact_delete00
-static int tolua_LuaBox2D_b2EdgeAndCircleContact_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeAndCircleContact_delete00
+static int tolua_Box2D_b2EdgeAndCircleContact_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17285,8 +17349,8 @@ static int tolua_LuaBox2D_b2EdgeAndCircleContact_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Evaluate of class  b2EdgeAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeAndCircleContact_Evaluate00
-static int tolua_LuaBox2D_b2EdgeAndCircleContact_Evaluate00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeAndCircleContact_Evaluate00
+static int tolua_Box2D_b2EdgeAndCircleContact_Evaluate00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17322,8 +17386,8 @@ static int tolua_LuaBox2D_b2EdgeAndCircleContact_Evaluate00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Create of class  b2EdgeAndPolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeAndPolygonContact_Create00
-static int tolua_LuaBox2D_b2EdgeAndPolygonContact_Create00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeAndPolygonContact_Create00
+static int tolua_Box2D_b2EdgeAndPolygonContact_Create00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17360,8 +17424,8 @@ static int tolua_LuaBox2D_b2EdgeAndPolygonContact_Create00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Destroy of class  b2EdgeAndPolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeAndPolygonContact_Destroy00
-static int tolua_LuaBox2D_b2EdgeAndPolygonContact_Destroy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeAndPolygonContact_Destroy00
+static int tolua_Box2D_b2EdgeAndPolygonContact_Destroy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17391,8 +17455,8 @@ static int tolua_LuaBox2D_b2EdgeAndPolygonContact_Destroy00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2EdgeAndPolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeAndPolygonContact_new00
-static int tolua_LuaBox2D_b2EdgeAndPolygonContact_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeAndPolygonContact_new00
+static int tolua_Box2D_b2EdgeAndPolygonContact_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17423,8 +17487,8 @@ static int tolua_LuaBox2D_b2EdgeAndPolygonContact_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2EdgeAndPolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeAndPolygonContact_new00_local
-static int tolua_LuaBox2D_b2EdgeAndPolygonContact_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeAndPolygonContact_new00_local
+static int tolua_Box2D_b2EdgeAndPolygonContact_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17456,8 +17520,8 @@ static int tolua_LuaBox2D_b2EdgeAndPolygonContact_new00_local(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2EdgeAndPolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeAndPolygonContact_delete00
-static int tolua_LuaBox2D_b2EdgeAndPolygonContact_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeAndPolygonContact_delete00
+static int tolua_Box2D_b2EdgeAndPolygonContact_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17485,8 +17549,8 @@ static int tolua_LuaBox2D_b2EdgeAndPolygonContact_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Evaluate of class  b2EdgeAndPolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2EdgeAndPolygonContact_Evaluate00
-static int tolua_LuaBox2D_b2EdgeAndPolygonContact_Evaluate00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2EdgeAndPolygonContact_Evaluate00
+static int tolua_Box2D_b2EdgeAndPolygonContact_Evaluate00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17522,8 +17586,8 @@ static int tolua_LuaBox2D_b2EdgeAndPolygonContact_Evaluate00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Filter */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Filter_new00
-static int tolua_LuaBox2D_b2Filter_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Filter_new00
+static int tolua_Box2D_b2Filter_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17550,8 +17614,8 @@ static int tolua_LuaBox2D_b2Filter_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Filter */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Filter_new00_local
-static int tolua_LuaBox2D_b2Filter_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Filter_new00_local
+static int tolua_Box2D_b2Filter_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17789,8 +17853,8 @@ static int tolua_set_b2FixtureProxy_proxyId(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2FrictionJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FrictionJointDef_new00
-static int tolua_LuaBox2D_b2FrictionJointDef_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FrictionJointDef_new00
+static int tolua_Box2D_b2FrictionJointDef_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17817,8 +17881,8 @@ static int tolua_LuaBox2D_b2FrictionJointDef_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2FrictionJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FrictionJointDef_new00_local
-static int tolua_LuaBox2D_b2FrictionJointDef_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FrictionJointDef_new00_local
+static int tolua_Box2D_b2FrictionJointDef_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -17846,8 +17910,8 @@ static int tolua_LuaBox2D_b2FrictionJointDef_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Initialize of class  b2FrictionJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FrictionJointDef_Initialize00
-static int tolua_LuaBox2D_b2FrictionJointDef_Initialize00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FrictionJointDef_Initialize00
+static int tolua_Box2D_b2FrictionJointDef_Initialize00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18003,8 +18067,8 @@ static int tolua_set_b2FrictionJointDef_maxTorque(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorA of class  b2FrictionJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FrictionJoint_GetAnchorA00
-static int tolua_LuaBox2D_b2FrictionJoint_GetAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FrictionJoint_GetAnchorA00
+static int tolua_Box2D_b2FrictionJoint_GetAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18045,8 +18109,8 @@ static int tolua_LuaBox2D_b2FrictionJoint_GetAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorB of class  b2FrictionJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FrictionJoint_GetAnchorB00
-static int tolua_LuaBox2D_b2FrictionJoint_GetAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FrictionJoint_GetAnchorB00
+static int tolua_Box2D_b2FrictionJoint_GetAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18087,8 +18151,8 @@ static int tolua_LuaBox2D_b2FrictionJoint_GetAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionForce of class  b2FrictionJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FrictionJoint_GetReactionForce00
-static int tolua_LuaBox2D_b2FrictionJoint_GetReactionForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FrictionJoint_GetReactionForce00
+static int tolua_Box2D_b2FrictionJoint_GetReactionForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18131,8 +18195,8 @@ static int tolua_LuaBox2D_b2FrictionJoint_GetReactionForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionTorque of class  b2FrictionJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FrictionJoint_GetReactionTorque00
-static int tolua_LuaBox2D_b2FrictionJoint_GetReactionTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FrictionJoint_GetReactionTorque00
+static int tolua_Box2D_b2FrictionJoint_GetReactionTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18165,8 +18229,8 @@ static int tolua_LuaBox2D_b2FrictionJoint_GetReactionTorque00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAnchorA of class  b2FrictionJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FrictionJoint_GetLocalAnchorA00
-static int tolua_LuaBox2D_b2FrictionJoint_GetLocalAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FrictionJoint_GetLocalAnchorA00
+static int tolua_Box2D_b2FrictionJoint_GetLocalAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18197,8 +18261,8 @@ static int tolua_LuaBox2D_b2FrictionJoint_GetLocalAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAnchorB of class  b2FrictionJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FrictionJoint_GetLocalAnchorB00
-static int tolua_LuaBox2D_b2FrictionJoint_GetLocalAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FrictionJoint_GetLocalAnchorB00
+static int tolua_Box2D_b2FrictionJoint_GetLocalAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18229,8 +18293,8 @@ static int tolua_LuaBox2D_b2FrictionJoint_GetLocalAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetMaxForce of class  b2FrictionJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FrictionJoint_SetMaxForce00
-static int tolua_LuaBox2D_b2FrictionJoint_SetMaxForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FrictionJoint_SetMaxForce00
+static int tolua_Box2D_b2FrictionJoint_SetMaxForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18262,8 +18326,8 @@ static int tolua_LuaBox2D_b2FrictionJoint_SetMaxForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMaxForce of class  b2FrictionJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FrictionJoint_GetMaxForce00
-static int tolua_LuaBox2D_b2FrictionJoint_GetMaxForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FrictionJoint_GetMaxForce00
+static int tolua_Box2D_b2FrictionJoint_GetMaxForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18294,8 +18358,8 @@ static int tolua_LuaBox2D_b2FrictionJoint_GetMaxForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetMaxTorque of class  b2FrictionJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FrictionJoint_SetMaxTorque00
-static int tolua_LuaBox2D_b2FrictionJoint_SetMaxTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FrictionJoint_SetMaxTorque00
+static int tolua_Box2D_b2FrictionJoint_SetMaxTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18327,8 +18391,8 @@ static int tolua_LuaBox2D_b2FrictionJoint_SetMaxTorque00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMaxTorque of class  b2FrictionJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FrictionJoint_GetMaxTorque00
-static int tolua_LuaBox2D_b2FrictionJoint_GetMaxTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FrictionJoint_GetMaxTorque00
+static int tolua_Box2D_b2FrictionJoint_GetMaxTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18359,8 +18423,8 @@ static int tolua_LuaBox2D_b2FrictionJoint_GetMaxTorque00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Dump of class  b2FrictionJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2FrictionJoint_Dump00
-static int tolua_LuaBox2D_b2FrictionJoint_Dump00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2FrictionJoint_Dump00
+static int tolua_Box2D_b2FrictionJoint_Dump00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18390,8 +18454,8 @@ static int tolua_LuaBox2D_b2FrictionJoint_Dump00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2GearJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2GearJointDef_new00
-static int tolua_LuaBox2D_b2GearJointDef_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2GearJointDef_new00
+static int tolua_Box2D_b2GearJointDef_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18418,8 +18482,8 @@ static int tolua_LuaBox2D_b2GearJointDef_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2GearJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2GearJointDef_new00_local
-static int tolua_LuaBox2D_b2GearJointDef_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2GearJointDef_new00_local
+static int tolua_Box2D_b2GearJointDef_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18537,8 +18601,8 @@ static int tolua_set_b2GearJointDef_ratio(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorA of class  b2GearJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2GearJoint_GetAnchorA00
-static int tolua_LuaBox2D_b2GearJoint_GetAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2GearJoint_GetAnchorA00
+static int tolua_Box2D_b2GearJoint_GetAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18579,8 +18643,8 @@ static int tolua_LuaBox2D_b2GearJoint_GetAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorB of class  b2GearJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2GearJoint_GetAnchorB00
-static int tolua_LuaBox2D_b2GearJoint_GetAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2GearJoint_GetAnchorB00
+static int tolua_Box2D_b2GearJoint_GetAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18621,8 +18685,8 @@ static int tolua_LuaBox2D_b2GearJoint_GetAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionForce of class  b2GearJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2GearJoint_GetReactionForce00
-static int tolua_LuaBox2D_b2GearJoint_GetReactionForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2GearJoint_GetReactionForce00
+static int tolua_Box2D_b2GearJoint_GetReactionForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18665,8 +18729,8 @@ static int tolua_LuaBox2D_b2GearJoint_GetReactionForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionTorque of class  b2GearJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2GearJoint_GetReactionTorque00
-static int tolua_LuaBox2D_b2GearJoint_GetReactionTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2GearJoint_GetReactionTorque00
+static int tolua_Box2D_b2GearJoint_GetReactionTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18699,8 +18763,8 @@ static int tolua_LuaBox2D_b2GearJoint_GetReactionTorque00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetJoint1 of class  b2GearJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2GearJoint_GetJoint100
-static int tolua_LuaBox2D_b2GearJoint_GetJoint100(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2GearJoint_GetJoint100
+static int tolua_Box2D_b2GearJoint_GetJoint100(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18731,8 +18795,8 @@ static int tolua_LuaBox2D_b2GearJoint_GetJoint100(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetJoint2 of class  b2GearJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2GearJoint_GetJoint200
-static int tolua_LuaBox2D_b2GearJoint_GetJoint200(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2GearJoint_GetJoint200
+static int tolua_Box2D_b2GearJoint_GetJoint200(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18763,8 +18827,8 @@ static int tolua_LuaBox2D_b2GearJoint_GetJoint200(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetRatio of class  b2GearJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2GearJoint_SetRatio00
-static int tolua_LuaBox2D_b2GearJoint_SetRatio00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2GearJoint_SetRatio00
+static int tolua_Box2D_b2GearJoint_SetRatio00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18796,8 +18860,8 @@ static int tolua_LuaBox2D_b2GearJoint_SetRatio00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetRatio of class  b2GearJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2GearJoint_GetRatio00
-static int tolua_LuaBox2D_b2GearJoint_GetRatio00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2GearJoint_GetRatio00
+static int tolua_Box2D_b2GearJoint_GetRatio00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -18828,8 +18892,8 @@ static int tolua_LuaBox2D_b2GearJoint_GetRatio00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Dump of class  b2GearJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2GearJoint_Dump00
-static int tolua_LuaBox2D_b2GearJoint_Dump00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2GearJoint_Dump00
+static int tolua_Box2D_b2GearJoint_Dump00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -19099,8 +19163,8 @@ static int tolua_set_b2Profile_solveTOI(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Island */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Island_new00
-static int tolua_LuaBox2D_b2Island_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Island_new00
+static int tolua_Box2D_b2Island_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -19137,8 +19201,8 @@ static int tolua_LuaBox2D_b2Island_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Island */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Island_new00_local
-static int tolua_LuaBox2D_b2Island_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Island_new00_local
+static int tolua_Box2D_b2Island_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -19176,8 +19240,8 @@ static int tolua_LuaBox2D_b2Island_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2Island */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Island_delete00
-static int tolua_LuaBox2D_b2Island_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Island_delete00
+static int tolua_Box2D_b2Island_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -19205,8 +19269,8 @@ static int tolua_LuaBox2D_b2Island_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Clear of class  b2Island */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Island_Clear00
-static int tolua_LuaBox2D_b2Island_Clear00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Island_Clear00
+static int tolua_Box2D_b2Island_Clear00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -19236,8 +19300,8 @@ static int tolua_LuaBox2D_b2Island_Clear00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Solve of class  b2Island */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Island_Solve00
-static int tolua_LuaBox2D_b2Island_Solve00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Island_Solve00
+static int tolua_Box2D_b2Island_Solve00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -19275,8 +19339,8 @@ static int tolua_LuaBox2D_b2Island_Solve00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SolveTOI of class  b2Island */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Island_SolveTOI00
-static int tolua_LuaBox2D_b2Island_SolveTOI00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Island_SolveTOI00
+static int tolua_Box2D_b2Island_SolveTOI00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -19312,8 +19376,8 @@ static int tolua_LuaBox2D_b2Island_SolveTOI00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Add of class  b2Island */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Island_Add00
-static int tolua_LuaBox2D_b2Island_Add00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Island_Add00
+static int tolua_Box2D_b2Island_Add00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -19345,8 +19409,8 @@ static int tolua_LuaBox2D_b2Island_Add00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Add of class  b2Island */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Island_Add01
-static int tolua_LuaBox2D_b2Island_Add01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Island_Add01
+static int tolua_Box2D_b2Island_Add01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -19368,13 +19432,13 @@ static int tolua_LuaBox2D_b2Island_Add01(lua_State* tolua_S)
  }
  return 0;
 tolua_lerror:
- return tolua_LuaBox2D_b2Island_Add00(tolua_S);
+ return tolua_Box2D_b2Island_Add00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Add of class  b2Island */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Island_Add02
-static int tolua_LuaBox2D_b2Island_Add02(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Island_Add02
+static int tolua_Box2D_b2Island_Add02(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -19396,13 +19460,13 @@ static int tolua_LuaBox2D_b2Island_Add02(lua_State* tolua_S)
  }
  return 0;
 tolua_lerror:
- return tolua_LuaBox2D_b2Island_Add01(tolua_S);
+ return tolua_Box2D_b2Island_Add01(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Report of class  b2Island */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Island_Report00
-static int tolua_LuaBox2D_b2Island_Report00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Island_Report00
+static int tolua_Box2D_b2Island_Report00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -19914,8 +19978,8 @@ static int tolua_set_b2Jacobian_angularB(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2JointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2JointDef_new00
-static int tolua_LuaBox2D_b2JointDef_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2JointDef_new00
+static int tolua_Box2D_b2JointDef_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -19942,8 +20006,8 @@ static int tolua_LuaBox2D_b2JointDef_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2JointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2JointDef_new00_local
-static int tolua_LuaBox2D_b2JointDef_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2JointDef_new00_local
+static int tolua_Box2D_b2JointDef_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20121,8 +20185,8 @@ static int tolua_set_b2JointDef_collideConnected(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Vec2 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec2_new00
-static int tolua_LuaBox2D_b2Vec2_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec2_new00
+static int tolua_Box2D_b2Vec2_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20149,8 +20213,8 @@ static int tolua_LuaBox2D_b2Vec2_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Vec2 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec2_new00_local
-static int tolua_LuaBox2D_b2Vec2_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec2_new00_local
+static int tolua_Box2D_b2Vec2_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20178,8 +20242,8 @@ static int tolua_LuaBox2D_b2Vec2_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Vec2 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec2_new01
-static int tolua_LuaBox2D_b2Vec2_new01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec2_new01
+static int tolua_Box2D_b2Vec2_new01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -20200,13 +20264,13 @@ static int tolua_LuaBox2D_b2Vec2_new01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Vec2_new00(tolua_S);
+ return tolua_Box2D_b2Vec2_new00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Vec2 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec2_new01_local
-static int tolua_LuaBox2D_b2Vec2_new01_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec2_new01_local
+static int tolua_Box2D_b2Vec2_new01_local(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -20228,13 +20292,13 @@ static int tolua_LuaBox2D_b2Vec2_new01_local(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Vec2_new00_local(tolua_S);
+ return tolua_Box2D_b2Vec2_new00_local(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetZero of class  b2Vec2 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec2_SetZero00
-static int tolua_LuaBox2D_b2Vec2_SetZero00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec2_SetZero00
+static int tolua_Box2D_b2Vec2_SetZero00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20264,8 +20328,8 @@ static int tolua_LuaBox2D_b2Vec2_SetZero00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Set of class  b2Vec2 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec2_Set00
-static int tolua_LuaBox2D_b2Vec2_Set00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec2_Set00
+static int tolua_Box2D_b2Vec2_Set00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20299,8 +20363,8 @@ static int tolua_LuaBox2D_b2Vec2_Set00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Length of class  b2Vec2 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec2_Length00
-static int tolua_LuaBox2D_b2Vec2_Length00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec2_Length00
+static int tolua_Box2D_b2Vec2_Length00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20331,8 +20395,8 @@ static int tolua_LuaBox2D_b2Vec2_Length00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: LengthSquared of class  b2Vec2 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec2_LengthSquared00
-static int tolua_LuaBox2D_b2Vec2_LengthSquared00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec2_LengthSquared00
+static int tolua_Box2D_b2Vec2_LengthSquared00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20363,8 +20427,8 @@ static int tolua_LuaBox2D_b2Vec2_LengthSquared00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Normalize of class  b2Vec2 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec2_Normalize00
-static int tolua_LuaBox2D_b2Vec2_Normalize00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec2_Normalize00
+static int tolua_Box2D_b2Vec2_Normalize00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20395,8 +20459,8 @@ static int tolua_LuaBox2D_b2Vec2_Normalize00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsValid of class  b2Vec2 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec2_IsValid00
-static int tolua_LuaBox2D_b2Vec2_IsValid00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec2_IsValid00
+static int tolua_Box2D_b2Vec2_IsValid00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20427,8 +20491,8 @@ static int tolua_LuaBox2D_b2Vec2_IsValid00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Skew of class  b2Vec2 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec2_Skew00
-static int tolua_LuaBox2D_b2Vec2_Skew00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec2_Skew00
+static int tolua_Box2D_b2Vec2_Skew00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20529,8 +20593,8 @@ static int tolua_set_b2Vec2_y(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Vec3 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec3_new00
-static int tolua_LuaBox2D_b2Vec3_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec3_new00
+static int tolua_Box2D_b2Vec3_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20557,8 +20621,8 @@ static int tolua_LuaBox2D_b2Vec3_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Vec3 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec3_new00_local
-static int tolua_LuaBox2D_b2Vec3_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec3_new00_local
+static int tolua_Box2D_b2Vec3_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20586,8 +20650,8 @@ static int tolua_LuaBox2D_b2Vec3_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Vec3 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec3_new01
-static int tolua_LuaBox2D_b2Vec3_new01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec3_new01
+static int tolua_Box2D_b2Vec3_new01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -20610,13 +20674,13 @@ static int tolua_LuaBox2D_b2Vec3_new01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Vec3_new00(tolua_S);
+ return tolua_Box2D_b2Vec3_new00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Vec3 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec3_new01_local
-static int tolua_LuaBox2D_b2Vec3_new01_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec3_new01_local
+static int tolua_Box2D_b2Vec3_new01_local(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -20640,13 +20704,13 @@ static int tolua_LuaBox2D_b2Vec3_new01_local(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Vec3_new00_local(tolua_S);
+ return tolua_Box2D_b2Vec3_new00_local(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetZero of class  b2Vec3 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec3_SetZero00
-static int tolua_LuaBox2D_b2Vec3_SetZero00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec3_SetZero00
+static int tolua_Box2D_b2Vec3_SetZero00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20676,8 +20740,8 @@ static int tolua_LuaBox2D_b2Vec3_SetZero00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Set of class  b2Vec3 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Vec3_Set00
-static int tolua_LuaBox2D_b2Vec3_Set00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Vec3_Set00
+static int tolua_Box2D_b2Vec3_Set00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20803,8 +20867,8 @@ static int tolua_set_b2Vec3_z(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Mat22 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat22_new00
-static int tolua_LuaBox2D_b2Mat22_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat22_new00
+static int tolua_Box2D_b2Mat22_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20831,8 +20895,8 @@ static int tolua_LuaBox2D_b2Mat22_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Mat22 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat22_new00_local
-static int tolua_LuaBox2D_b2Mat22_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat22_new00_local
+static int tolua_Box2D_b2Mat22_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -20860,8 +20924,8 @@ static int tolua_LuaBox2D_b2Mat22_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Mat22 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat22_new01
-static int tolua_LuaBox2D_b2Mat22_new01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat22_new01
+static int tolua_Box2D_b2Mat22_new01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -20882,13 +20946,13 @@ static int tolua_LuaBox2D_b2Mat22_new01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Mat22_new00(tolua_S);
+ return tolua_Box2D_b2Mat22_new00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Mat22 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat22_new01_local
-static int tolua_LuaBox2D_b2Mat22_new01_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat22_new01_local
+static int tolua_Box2D_b2Mat22_new01_local(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -20910,13 +20974,13 @@ static int tolua_LuaBox2D_b2Mat22_new01_local(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Mat22_new00_local(tolua_S);
+ return tolua_Box2D_b2Mat22_new00_local(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Mat22 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat22_new02
-static int tolua_LuaBox2D_b2Mat22_new02(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat22_new02
+static int tolua_Box2D_b2Mat22_new02(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -20941,13 +21005,13 @@ static int tolua_LuaBox2D_b2Mat22_new02(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Mat22_new01(tolua_S);
+ return tolua_Box2D_b2Mat22_new01(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Mat22 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat22_new02_local
-static int tolua_LuaBox2D_b2Mat22_new02_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat22_new02_local
+static int tolua_Box2D_b2Mat22_new02_local(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -20973,13 +21037,13 @@ static int tolua_LuaBox2D_b2Mat22_new02_local(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Mat22_new01_local(tolua_S);
+ return tolua_Box2D_b2Mat22_new01_local(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Set of class  b2Mat22 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat22_Set00
-static int tolua_LuaBox2D_b2Mat22_Set00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat22_Set00
+static int tolua_Box2D_b2Mat22_Set00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21013,8 +21077,8 @@ static int tolua_LuaBox2D_b2Mat22_Set00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetIdentity of class  b2Mat22 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat22_SetIdentity00
-static int tolua_LuaBox2D_b2Mat22_SetIdentity00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat22_SetIdentity00
+static int tolua_Box2D_b2Mat22_SetIdentity00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21044,8 +21108,8 @@ static int tolua_LuaBox2D_b2Mat22_SetIdentity00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetZero of class  b2Mat22 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat22_SetZero00
-static int tolua_LuaBox2D_b2Mat22_SetZero00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat22_SetZero00
+static int tolua_Box2D_b2Mat22_SetZero00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21075,8 +21139,8 @@ static int tolua_LuaBox2D_b2Mat22_SetZero00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetInverse of class  b2Mat22 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat22_GetInverse00
-static int tolua_LuaBox2D_b2Mat22_GetInverse00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat22_GetInverse00
+static int tolua_Box2D_b2Mat22_GetInverse00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21117,8 +21181,8 @@ static int tolua_LuaBox2D_b2Mat22_GetInverse00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Solve of class  b2Mat22 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat22_Solve00
-static int tolua_LuaBox2D_b2Mat22_Solve00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat22_Solve00
+static int tolua_Box2D_b2Mat22_Solve00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21221,8 +21285,8 @@ static int tolua_set_b2Mat22_ey(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Mat33 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat33_new00
-static int tolua_LuaBox2D_b2Mat33_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat33_new00
+static int tolua_Box2D_b2Mat33_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21249,8 +21313,8 @@ static int tolua_LuaBox2D_b2Mat33_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Mat33 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat33_new00_local
-static int tolua_LuaBox2D_b2Mat33_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat33_new00_local
+static int tolua_Box2D_b2Mat33_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21278,8 +21342,8 @@ static int tolua_LuaBox2D_b2Mat33_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Mat33 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat33_new01
-static int tolua_LuaBox2D_b2Mat33_new01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat33_new01
+static int tolua_Box2D_b2Mat33_new01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -21302,13 +21366,13 @@ static int tolua_LuaBox2D_b2Mat33_new01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Mat33_new00(tolua_S);
+ return tolua_Box2D_b2Mat33_new00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Mat33 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat33_new01_local
-static int tolua_LuaBox2D_b2Mat33_new01_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat33_new01_local
+static int tolua_Box2D_b2Mat33_new01_local(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -21332,13 +21396,13 @@ static int tolua_LuaBox2D_b2Mat33_new01_local(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Mat33_new00_local(tolua_S);
+ return tolua_Box2D_b2Mat33_new00_local(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetZero of class  b2Mat33 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat33_SetZero00
-static int tolua_LuaBox2D_b2Mat33_SetZero00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat33_SetZero00
+static int tolua_Box2D_b2Mat33_SetZero00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21368,8 +21432,8 @@ static int tolua_LuaBox2D_b2Mat33_SetZero00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Solve33 of class  b2Mat33 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat33_Solve3300
-static int tolua_LuaBox2D_b2Mat33_Solve3300(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat33_Solve3300
+static int tolua_Box2D_b2Mat33_Solve3300(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21412,8 +21476,8 @@ static int tolua_LuaBox2D_b2Mat33_Solve3300(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Solve22 of class  b2Mat33 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat33_Solve2200
-static int tolua_LuaBox2D_b2Mat33_Solve2200(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat33_Solve2200
+static int tolua_Box2D_b2Mat33_Solve2200(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21456,8 +21520,8 @@ static int tolua_LuaBox2D_b2Mat33_Solve2200(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetInverse22 of class  b2Mat33 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat33_GetInverse2200
-static int tolua_LuaBox2D_b2Mat33_GetInverse2200(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat33_GetInverse2200
+static int tolua_Box2D_b2Mat33_GetInverse2200(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21489,8 +21553,8 @@ static int tolua_LuaBox2D_b2Mat33_GetInverse2200(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetSymInverse33 of class  b2Mat33 */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Mat33_GetSymInverse3300
-static int tolua_LuaBox2D_b2Mat33_GetSymInverse3300(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Mat33_GetSymInverse3300
+static int tolua_Box2D_b2Mat33_GetSymInverse3300(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21612,8 +21676,8 @@ static int tolua_set_b2Mat33_ez(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetTransform of class  b2Sweep */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Sweep_GetTransform00
-static int tolua_LuaBox2D_b2Sweep_GetTransform00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Sweep_GetTransform00
+static int tolua_Box2D_b2Sweep_GetTransform00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21647,8 +21711,8 @@ static int tolua_LuaBox2D_b2Sweep_GetTransform00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Advance of class  b2Sweep */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Sweep_Advance00
-static int tolua_LuaBox2D_b2Sweep_Advance00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Sweep_Advance00
+static int tolua_Box2D_b2Sweep_Advance00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21680,8 +21744,8 @@ static int tolua_LuaBox2D_b2Sweep_Advance00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Normalize of class  b2Sweep */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Sweep_Normalize00
-static int tolua_LuaBox2D_b2Sweep_Normalize00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Sweep_Normalize00
+static int tolua_Box2D_b2Sweep_Normalize00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21891,8 +21955,8 @@ static int tolua_set_b2Sweep_alpha0(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Transform */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Transform_new00
-static int tolua_LuaBox2D_b2Transform_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Transform_new00
+static int tolua_Box2D_b2Transform_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21919,8 +21983,8 @@ static int tolua_LuaBox2D_b2Transform_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Transform */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Transform_new00_local
-static int tolua_LuaBox2D_b2Transform_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Transform_new00_local
+static int tolua_Box2D_b2Transform_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -21948,8 +22012,8 @@ static int tolua_LuaBox2D_b2Transform_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Transform */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Transform_new01
-static int tolua_LuaBox2D_b2Transform_new01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Transform_new01
+static int tolua_Box2D_b2Transform_new01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -21970,13 +22034,13 @@ static int tolua_LuaBox2D_b2Transform_new01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Transform_new00(tolua_S);
+ return tolua_Box2D_b2Transform_new00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Transform */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Transform_new01_local
-static int tolua_LuaBox2D_b2Transform_new01_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Transform_new01_local
+static int tolua_Box2D_b2Transform_new01_local(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -21998,13 +22062,13 @@ static int tolua_LuaBox2D_b2Transform_new01_local(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Transform_new00_local(tolua_S);
+ return tolua_Box2D_b2Transform_new00_local(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetIdentity of class  b2Transform */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Transform_SetIdentity00
-static int tolua_LuaBox2D_b2Transform_SetIdentity00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Transform_SetIdentity00
+static int tolua_Box2D_b2Transform_SetIdentity00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22034,8 +22098,8 @@ static int tolua_LuaBox2D_b2Transform_SetIdentity00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Set of class  b2Transform */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Transform_Set00
-static int tolua_LuaBox2D_b2Transform_Set00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Transform_Set00
+static int tolua_Box2D_b2Transform_Set00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22129,8 +22193,8 @@ static int tolua_set_b2Transform_q(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Rot */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rot_new00
-static int tolua_LuaBox2D_b2Rot_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rot_new00
+static int tolua_Box2D_b2Rot_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22157,8 +22221,8 @@ static int tolua_LuaBox2D_b2Rot_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Rot */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rot_new00_local
-static int tolua_LuaBox2D_b2Rot_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rot_new00_local
+static int tolua_Box2D_b2Rot_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22186,8 +22250,8 @@ static int tolua_LuaBox2D_b2Rot_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Rot */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rot_new01
-static int tolua_LuaBox2D_b2Rot_new01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rot_new01
+static int tolua_Box2D_b2Rot_new01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -22206,13 +22270,13 @@ static int tolua_LuaBox2D_b2Rot_new01(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Rot_new00(tolua_S);
+ return tolua_Box2D_b2Rot_new00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Rot */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rot_new01_local
-static int tolua_LuaBox2D_b2Rot_new01_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rot_new01_local
+static int tolua_Box2D_b2Rot_new01_local(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -22232,13 +22296,13 @@ static int tolua_LuaBox2D_b2Rot_new01_local(lua_State* tolua_S)
  }
  return 1;
 tolua_lerror:
- return tolua_LuaBox2D_b2Rot_new00_local(tolua_S);
+ return tolua_Box2D_b2Rot_new00_local(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Set of class  b2Rot */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rot_Set00
-static int tolua_LuaBox2D_b2Rot_Set00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rot_Set00
+static int tolua_Box2D_b2Rot_Set00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22270,8 +22334,8 @@ static int tolua_LuaBox2D_b2Rot_Set00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetIdentity of class  b2Rot */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rot_SetIdentity00
-static int tolua_LuaBox2D_b2Rot_SetIdentity00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rot_SetIdentity00
+static int tolua_Box2D_b2Rot_SetIdentity00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22301,8 +22365,8 @@ static int tolua_LuaBox2D_b2Rot_SetIdentity00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAngle of class  b2Rot */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rot_GetAngle00
-static int tolua_LuaBox2D_b2Rot_GetAngle00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rot_GetAngle00
+static int tolua_Box2D_b2Rot_GetAngle00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22333,8 +22397,8 @@ static int tolua_LuaBox2D_b2Rot_GetAngle00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetXAxis of class  b2Rot */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rot_GetXAxis00
-static int tolua_LuaBox2D_b2Rot_GetXAxis00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rot_GetXAxis00
+static int tolua_Box2D_b2Rot_GetXAxis00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22375,8 +22439,8 @@ static int tolua_LuaBox2D_b2Rot_GetXAxis00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetYAxis of class  b2Rot */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rot_GetYAxis00
-static int tolua_LuaBox2D_b2Rot_GetYAxis00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rot_GetYAxis00
+static int tolua_Box2D_b2Rot_GetYAxis00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22477,8 +22541,8 @@ static int tolua_set_b2Rot_c(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2MouseJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJointDef_new00
-static int tolua_LuaBox2D_b2MouseJointDef_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJointDef_new00
+static int tolua_Box2D_b2MouseJointDef_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22505,8 +22569,8 @@ static int tolua_LuaBox2D_b2MouseJointDef_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2MouseJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJointDef_new00_local
-static int tolua_LuaBox2D_b2MouseJointDef_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJointDef_new00_local
+static int tolua_Box2D_b2MouseJointDef_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22654,8 +22718,8 @@ static int tolua_set_b2MouseJointDef_dampingRatio(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorA of class  b2MouseJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJoint_GetAnchorA00
-static int tolua_LuaBox2D_b2MouseJoint_GetAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJoint_GetAnchorA00
+static int tolua_Box2D_b2MouseJoint_GetAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22696,8 +22760,8 @@ static int tolua_LuaBox2D_b2MouseJoint_GetAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorB of class  b2MouseJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJoint_GetAnchorB00
-static int tolua_LuaBox2D_b2MouseJoint_GetAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJoint_GetAnchorB00
+static int tolua_Box2D_b2MouseJoint_GetAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22738,8 +22802,8 @@ static int tolua_LuaBox2D_b2MouseJoint_GetAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionForce of class  b2MouseJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJoint_GetReactionForce00
-static int tolua_LuaBox2D_b2MouseJoint_GetReactionForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJoint_GetReactionForce00
+static int tolua_Box2D_b2MouseJoint_GetReactionForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22782,8 +22846,8 @@ static int tolua_LuaBox2D_b2MouseJoint_GetReactionForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionTorque of class  b2MouseJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJoint_GetReactionTorque00
-static int tolua_LuaBox2D_b2MouseJoint_GetReactionTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJoint_GetReactionTorque00
+static int tolua_Box2D_b2MouseJoint_GetReactionTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22816,8 +22880,8 @@ static int tolua_LuaBox2D_b2MouseJoint_GetReactionTorque00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetTarget of class  b2MouseJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJoint_SetTarget00
-static int tolua_LuaBox2D_b2MouseJoint_SetTarget00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJoint_SetTarget00
+static int tolua_Box2D_b2MouseJoint_SetTarget00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22849,8 +22913,8 @@ static int tolua_LuaBox2D_b2MouseJoint_SetTarget00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetTarget of class  b2MouseJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJoint_GetTarget00
-static int tolua_LuaBox2D_b2MouseJoint_GetTarget00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJoint_GetTarget00
+static int tolua_Box2D_b2MouseJoint_GetTarget00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22881,8 +22945,8 @@ static int tolua_LuaBox2D_b2MouseJoint_GetTarget00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetMaxForce of class  b2MouseJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJoint_SetMaxForce00
-static int tolua_LuaBox2D_b2MouseJoint_SetMaxForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJoint_SetMaxForce00
+static int tolua_Box2D_b2MouseJoint_SetMaxForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22914,8 +22978,8 @@ static int tolua_LuaBox2D_b2MouseJoint_SetMaxForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMaxForce of class  b2MouseJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJoint_GetMaxForce00
-static int tolua_LuaBox2D_b2MouseJoint_GetMaxForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJoint_GetMaxForce00
+static int tolua_Box2D_b2MouseJoint_GetMaxForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22946,8 +23010,8 @@ static int tolua_LuaBox2D_b2MouseJoint_GetMaxForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetFrequency of class  b2MouseJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJoint_SetFrequency00
-static int tolua_LuaBox2D_b2MouseJoint_SetFrequency00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJoint_SetFrequency00
+static int tolua_Box2D_b2MouseJoint_SetFrequency00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -22979,8 +23043,8 @@ static int tolua_LuaBox2D_b2MouseJoint_SetFrequency00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFrequency of class  b2MouseJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJoint_GetFrequency00
-static int tolua_LuaBox2D_b2MouseJoint_GetFrequency00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJoint_GetFrequency00
+static int tolua_Box2D_b2MouseJoint_GetFrequency00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23011,8 +23075,8 @@ static int tolua_LuaBox2D_b2MouseJoint_GetFrequency00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetDampingRatio of class  b2MouseJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJoint_SetDampingRatio00
-static int tolua_LuaBox2D_b2MouseJoint_SetDampingRatio00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJoint_SetDampingRatio00
+static int tolua_Box2D_b2MouseJoint_SetDampingRatio00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23044,8 +23108,8 @@ static int tolua_LuaBox2D_b2MouseJoint_SetDampingRatio00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetDampingRatio of class  b2MouseJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJoint_GetDampingRatio00
-static int tolua_LuaBox2D_b2MouseJoint_GetDampingRatio00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJoint_GetDampingRatio00
+static int tolua_Box2D_b2MouseJoint_GetDampingRatio00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23076,8 +23140,8 @@ static int tolua_LuaBox2D_b2MouseJoint_GetDampingRatio00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Dump of class  b2MouseJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2MouseJoint_Dump00
-static int tolua_LuaBox2D_b2MouseJoint_Dump00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2MouseJoint_Dump00
+static int tolua_Box2D_b2MouseJoint_Dump00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23107,8 +23171,8 @@ static int tolua_LuaBox2D_b2MouseJoint_Dump00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Create of class  b2PolygonAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonAndCircleContact_Create00
-static int tolua_LuaBox2D_b2PolygonAndCircleContact_Create00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonAndCircleContact_Create00
+static int tolua_Box2D_b2PolygonAndCircleContact_Create00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23145,8 +23209,8 @@ static int tolua_LuaBox2D_b2PolygonAndCircleContact_Create00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Destroy of class  b2PolygonAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonAndCircleContact_Destroy00
-static int tolua_LuaBox2D_b2PolygonAndCircleContact_Destroy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonAndCircleContact_Destroy00
+static int tolua_Box2D_b2PolygonAndCircleContact_Destroy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23176,8 +23240,8 @@ static int tolua_LuaBox2D_b2PolygonAndCircleContact_Destroy00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2PolygonAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonAndCircleContact_new00
-static int tolua_LuaBox2D_b2PolygonAndCircleContact_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonAndCircleContact_new00
+static int tolua_Box2D_b2PolygonAndCircleContact_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23208,8 +23272,8 @@ static int tolua_LuaBox2D_b2PolygonAndCircleContact_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2PolygonAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonAndCircleContact_new00_local
-static int tolua_LuaBox2D_b2PolygonAndCircleContact_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonAndCircleContact_new00_local
+static int tolua_Box2D_b2PolygonAndCircleContact_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23241,8 +23305,8 @@ static int tolua_LuaBox2D_b2PolygonAndCircleContact_new00_local(lua_State* tolua
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2PolygonAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonAndCircleContact_delete00
-static int tolua_LuaBox2D_b2PolygonAndCircleContact_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonAndCircleContact_delete00
+static int tolua_Box2D_b2PolygonAndCircleContact_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23270,8 +23334,8 @@ static int tolua_LuaBox2D_b2PolygonAndCircleContact_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Evaluate of class  b2PolygonAndCircleContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonAndCircleContact_Evaluate00
-static int tolua_LuaBox2D_b2PolygonAndCircleContact_Evaluate00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonAndCircleContact_Evaluate00
+static int tolua_Box2D_b2PolygonAndCircleContact_Evaluate00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23307,8 +23371,8 @@ static int tolua_LuaBox2D_b2PolygonAndCircleContact_Evaluate00(lua_State* tolua_
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Create of class  b2PolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonContact_Create00
-static int tolua_LuaBox2D_b2PolygonContact_Create00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonContact_Create00
+static int tolua_Box2D_b2PolygonContact_Create00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23345,8 +23409,8 @@ static int tolua_LuaBox2D_b2PolygonContact_Create00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Destroy of class  b2PolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonContact_Destroy00
-static int tolua_LuaBox2D_b2PolygonContact_Destroy00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonContact_Destroy00
+static int tolua_Box2D_b2PolygonContact_Destroy00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23376,8 +23440,8 @@ static int tolua_LuaBox2D_b2PolygonContact_Destroy00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2PolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonContact_new00
-static int tolua_LuaBox2D_b2PolygonContact_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonContact_new00
+static int tolua_Box2D_b2PolygonContact_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23408,8 +23472,8 @@ static int tolua_LuaBox2D_b2PolygonContact_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2PolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonContact_new00_local
-static int tolua_LuaBox2D_b2PolygonContact_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonContact_new00_local
+static int tolua_Box2D_b2PolygonContact_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23441,8 +23505,8 @@ static int tolua_LuaBox2D_b2PolygonContact_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2PolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonContact_delete00
-static int tolua_LuaBox2D_b2PolygonContact_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonContact_delete00
+static int tolua_Box2D_b2PolygonContact_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23470,8 +23534,8 @@ static int tolua_LuaBox2D_b2PolygonContact_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Evaluate of class  b2PolygonContact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PolygonContact_Evaluate00
-static int tolua_LuaBox2D_b2PolygonContact_Evaluate00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PolygonContact_Evaluate00
+static int tolua_Box2D_b2PolygonContact_Evaluate00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23507,8 +23571,8 @@ static int tolua_LuaBox2D_b2PolygonContact_Evaluate00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2PrismaticJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJointDef_new00
-static int tolua_LuaBox2D_b2PrismaticJointDef_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJointDef_new00
+static int tolua_Box2D_b2PrismaticJointDef_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23535,8 +23599,8 @@ static int tolua_LuaBox2D_b2PrismaticJointDef_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2PrismaticJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJointDef_new00_local
-static int tolua_LuaBox2D_b2PrismaticJointDef_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJointDef_new00_local
+static int tolua_Box2D_b2PrismaticJointDef_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23564,8 +23628,8 @@ static int tolua_LuaBox2D_b2PrismaticJointDef_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Initialize of class  b2PrismaticJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJointDef_Initialize00
-static int tolua_LuaBox2D_b2PrismaticJointDef_Initialize00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJointDef_Initialize00
+static int tolua_Box2D_b2PrismaticJointDef_Initialize00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23903,8 +23967,8 @@ static int tolua_set_b2PrismaticJointDef_motorSpeed(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorA of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetAnchorA00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetAnchorA00
+static int tolua_Box2D_b2PrismaticJoint_GetAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23945,8 +24009,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorB of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetAnchorB00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetAnchorB00
+static int tolua_Box2D_b2PrismaticJoint_GetAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -23987,8 +24051,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionForce of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetReactionForce00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetReactionForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetReactionForce00
+static int tolua_Box2D_b2PrismaticJoint_GetReactionForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24031,8 +24095,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetReactionForce00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionTorque of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetReactionTorque00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetReactionTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetReactionTorque00
+static int tolua_Box2D_b2PrismaticJoint_GetReactionTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24065,8 +24129,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetReactionTorque00(lua_State* tolua_
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAnchorA of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetLocalAnchorA00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetLocalAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetLocalAnchorA00
+static int tolua_Box2D_b2PrismaticJoint_GetLocalAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24097,8 +24161,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetLocalAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAnchorB of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetLocalAnchorB00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetLocalAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetLocalAnchorB00
+static int tolua_Box2D_b2PrismaticJoint_GetLocalAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24129,8 +24193,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetLocalAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAxisA of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetLocalAxisA00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetLocalAxisA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetLocalAxisA00
+static int tolua_Box2D_b2PrismaticJoint_GetLocalAxisA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24161,8 +24225,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetLocalAxisA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReferenceAngle of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetReferenceAngle00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetReferenceAngle00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetReferenceAngle00
+static int tolua_Box2D_b2PrismaticJoint_GetReferenceAngle00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24193,8 +24257,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetReferenceAngle00(lua_State* tolua_
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetJointTranslation of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetJointTranslation00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetJointTranslation00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetJointTranslation00
+static int tolua_Box2D_b2PrismaticJoint_GetJointTranslation00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24225,8 +24289,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetJointTranslation00(lua_State* tolu
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetJointSpeed of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetJointSpeed00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetJointSpeed00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetJointSpeed00
+static int tolua_Box2D_b2PrismaticJoint_GetJointSpeed00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24257,8 +24321,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetJointSpeed00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsLimitEnabled of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_IsLimitEnabled00
-static int tolua_LuaBox2D_b2PrismaticJoint_IsLimitEnabled00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_IsLimitEnabled00
+static int tolua_Box2D_b2PrismaticJoint_IsLimitEnabled00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24289,8 +24353,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_IsLimitEnabled00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: EnableLimit of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_EnableLimit00
-static int tolua_LuaBox2D_b2PrismaticJoint_EnableLimit00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_EnableLimit00
+static int tolua_Box2D_b2PrismaticJoint_EnableLimit00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24322,8 +24386,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_EnableLimit00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLowerLimit of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetLowerLimit00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetLowerLimit00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetLowerLimit00
+static int tolua_Box2D_b2PrismaticJoint_GetLowerLimit00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24354,8 +24418,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetLowerLimit00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetUpperLimit of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetUpperLimit00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetUpperLimit00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetUpperLimit00
+static int tolua_Box2D_b2PrismaticJoint_GetUpperLimit00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24386,8 +24450,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetUpperLimit00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetLimits of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_SetLimits00
-static int tolua_LuaBox2D_b2PrismaticJoint_SetLimits00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_SetLimits00
+static int tolua_Box2D_b2PrismaticJoint_SetLimits00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24421,8 +24485,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_SetLimits00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsMotorEnabled of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_IsMotorEnabled00
-static int tolua_LuaBox2D_b2PrismaticJoint_IsMotorEnabled00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_IsMotorEnabled00
+static int tolua_Box2D_b2PrismaticJoint_IsMotorEnabled00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24453,8 +24517,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_IsMotorEnabled00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: EnableMotor of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_EnableMotor00
-static int tolua_LuaBox2D_b2PrismaticJoint_EnableMotor00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_EnableMotor00
+static int tolua_Box2D_b2PrismaticJoint_EnableMotor00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24486,8 +24550,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_EnableMotor00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetMotorSpeed of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_SetMotorSpeed00
-static int tolua_LuaBox2D_b2PrismaticJoint_SetMotorSpeed00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_SetMotorSpeed00
+static int tolua_Box2D_b2PrismaticJoint_SetMotorSpeed00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24519,8 +24583,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_SetMotorSpeed00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMotorSpeed of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetMotorSpeed00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetMotorSpeed00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetMotorSpeed00
+static int tolua_Box2D_b2PrismaticJoint_GetMotorSpeed00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24551,8 +24615,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetMotorSpeed00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetMaxMotorForce of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_SetMaxMotorForce00
-static int tolua_LuaBox2D_b2PrismaticJoint_SetMaxMotorForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_SetMaxMotorForce00
+static int tolua_Box2D_b2PrismaticJoint_SetMaxMotorForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24584,8 +24648,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_SetMaxMotorForce00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMaxMotorForce of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetMaxMotorForce00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetMaxMotorForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetMaxMotorForce00
+static int tolua_Box2D_b2PrismaticJoint_GetMaxMotorForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24616,8 +24680,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetMaxMotorForce00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMotorForce of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_GetMotorForce00
-static int tolua_LuaBox2D_b2PrismaticJoint_GetMotorForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_GetMotorForce00
+static int tolua_Box2D_b2PrismaticJoint_GetMotorForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24650,8 +24714,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_GetMotorForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Dump of class  b2PrismaticJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PrismaticJoint_Dump00
-static int tolua_LuaBox2D_b2PrismaticJoint_Dump00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PrismaticJoint_Dump00
+static int tolua_Box2D_b2PrismaticJoint_Dump00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24681,8 +24745,8 @@ static int tolua_LuaBox2D_b2PrismaticJoint_Dump00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2PulleyJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PulleyJointDef_new00
-static int tolua_LuaBox2D_b2PulleyJointDef_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PulleyJointDef_new00
+static int tolua_Box2D_b2PulleyJointDef_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24709,8 +24773,8 @@ static int tolua_LuaBox2D_b2PulleyJointDef_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2PulleyJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PulleyJointDef_new00_local
-static int tolua_LuaBox2D_b2PulleyJointDef_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PulleyJointDef_new00_local
+static int tolua_Box2D_b2PulleyJointDef_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24738,8 +24802,8 @@ static int tolua_LuaBox2D_b2PulleyJointDef_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Initialize of class  b2PulleyJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PulleyJointDef_Initialize00
-static int tolua_LuaBox2D_b2PulleyJointDef_Initialize00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PulleyJointDef_Initialize00
+static int tolua_Box2D_b2PulleyJointDef_Initialize00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -24993,8 +25057,8 @@ static int tolua_set_b2PulleyJointDef_ratio(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorA of class  b2PulleyJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PulleyJoint_GetAnchorA00
-static int tolua_LuaBox2D_b2PulleyJoint_GetAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PulleyJoint_GetAnchorA00
+static int tolua_Box2D_b2PulleyJoint_GetAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25035,8 +25099,8 @@ static int tolua_LuaBox2D_b2PulleyJoint_GetAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorB of class  b2PulleyJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PulleyJoint_GetAnchorB00
-static int tolua_LuaBox2D_b2PulleyJoint_GetAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PulleyJoint_GetAnchorB00
+static int tolua_Box2D_b2PulleyJoint_GetAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25077,8 +25141,8 @@ static int tolua_LuaBox2D_b2PulleyJoint_GetAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionForce of class  b2PulleyJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PulleyJoint_GetReactionForce00
-static int tolua_LuaBox2D_b2PulleyJoint_GetReactionForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PulleyJoint_GetReactionForce00
+static int tolua_Box2D_b2PulleyJoint_GetReactionForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25121,8 +25185,8 @@ static int tolua_LuaBox2D_b2PulleyJoint_GetReactionForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionTorque of class  b2PulleyJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PulleyJoint_GetReactionTorque00
-static int tolua_LuaBox2D_b2PulleyJoint_GetReactionTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PulleyJoint_GetReactionTorque00
+static int tolua_Box2D_b2PulleyJoint_GetReactionTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25155,8 +25219,8 @@ static int tolua_LuaBox2D_b2PulleyJoint_GetReactionTorque00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetGroundAnchorA of class  b2PulleyJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PulleyJoint_GetGroundAnchorA00
-static int tolua_LuaBox2D_b2PulleyJoint_GetGroundAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PulleyJoint_GetGroundAnchorA00
+static int tolua_Box2D_b2PulleyJoint_GetGroundAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25197,8 +25261,8 @@ static int tolua_LuaBox2D_b2PulleyJoint_GetGroundAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetGroundAnchorB of class  b2PulleyJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PulleyJoint_GetGroundAnchorB00
-static int tolua_LuaBox2D_b2PulleyJoint_GetGroundAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PulleyJoint_GetGroundAnchorB00
+static int tolua_Box2D_b2PulleyJoint_GetGroundAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25239,8 +25303,8 @@ static int tolua_LuaBox2D_b2PulleyJoint_GetGroundAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLengthA of class  b2PulleyJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PulleyJoint_GetLengthA00
-static int tolua_LuaBox2D_b2PulleyJoint_GetLengthA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PulleyJoint_GetLengthA00
+static int tolua_Box2D_b2PulleyJoint_GetLengthA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25271,8 +25335,8 @@ static int tolua_LuaBox2D_b2PulleyJoint_GetLengthA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLengthB of class  b2PulleyJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PulleyJoint_GetLengthB00
-static int tolua_LuaBox2D_b2PulleyJoint_GetLengthB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PulleyJoint_GetLengthB00
+static int tolua_Box2D_b2PulleyJoint_GetLengthB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25303,8 +25367,8 @@ static int tolua_LuaBox2D_b2PulleyJoint_GetLengthB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetRatio of class  b2PulleyJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PulleyJoint_GetRatio00
-static int tolua_LuaBox2D_b2PulleyJoint_GetRatio00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PulleyJoint_GetRatio00
+static int tolua_Box2D_b2PulleyJoint_GetRatio00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25335,8 +25399,8 @@ static int tolua_LuaBox2D_b2PulleyJoint_GetRatio00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Dump of class  b2PulleyJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2PulleyJoint_Dump00
-static int tolua_LuaBox2D_b2PulleyJoint_Dump00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2PulleyJoint_Dump00
+static int tolua_Box2D_b2PulleyJoint_Dump00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25366,8 +25430,8 @@ static int tolua_LuaBox2D_b2PulleyJoint_Dump00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2RevoluteJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJointDef_new00
-static int tolua_LuaBox2D_b2RevoluteJointDef_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJointDef_new00
+static int tolua_Box2D_b2RevoluteJointDef_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25394,8 +25458,8 @@ static int tolua_LuaBox2D_b2RevoluteJointDef_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2RevoluteJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJointDef_new00_local
-static int tolua_LuaBox2D_b2RevoluteJointDef_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJointDef_new00_local
+static int tolua_Box2D_b2RevoluteJointDef_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25423,8 +25487,8 @@ static int tolua_LuaBox2D_b2RevoluteJointDef_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Initialize of class  b2RevoluteJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJointDef_Initialize00
-static int tolua_LuaBox2D_b2RevoluteJointDef_Initialize00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJointDef_Initialize00
+static int tolua_Box2D_b2RevoluteJointDef_Initialize00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25730,8 +25794,8 @@ static int tolua_set_b2RevoluteJointDef_maxMotorTorque(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorA of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_GetAnchorA00
-static int tolua_LuaBox2D_b2RevoluteJoint_GetAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_GetAnchorA00
+static int tolua_Box2D_b2RevoluteJoint_GetAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25772,8 +25836,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_GetAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorB of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_GetAnchorB00
-static int tolua_LuaBox2D_b2RevoluteJoint_GetAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_GetAnchorB00
+static int tolua_Box2D_b2RevoluteJoint_GetAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25814,8 +25878,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_GetAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAnchorA of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_GetLocalAnchorA00
-static int tolua_LuaBox2D_b2RevoluteJoint_GetLocalAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_GetLocalAnchorA00
+static int tolua_Box2D_b2RevoluteJoint_GetLocalAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25846,8 +25910,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_GetLocalAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAnchorB of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_GetLocalAnchorB00
-static int tolua_LuaBox2D_b2RevoluteJoint_GetLocalAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_GetLocalAnchorB00
+static int tolua_Box2D_b2RevoluteJoint_GetLocalAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25878,8 +25942,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_GetLocalAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReferenceAngle of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_GetReferenceAngle00
-static int tolua_LuaBox2D_b2RevoluteJoint_GetReferenceAngle00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_GetReferenceAngle00
+static int tolua_Box2D_b2RevoluteJoint_GetReferenceAngle00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25910,8 +25974,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_GetReferenceAngle00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetJointAngle of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_GetJointAngle00
-static int tolua_LuaBox2D_b2RevoluteJoint_GetJointAngle00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_GetJointAngle00
+static int tolua_Box2D_b2RevoluteJoint_GetJointAngle00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25942,8 +26006,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_GetJointAngle00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetJointSpeed of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_GetJointSpeed00
-static int tolua_LuaBox2D_b2RevoluteJoint_GetJointSpeed00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_GetJointSpeed00
+static int tolua_Box2D_b2RevoluteJoint_GetJointSpeed00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -25974,8 +26038,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_GetJointSpeed00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsLimitEnabled of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_IsLimitEnabled00
-static int tolua_LuaBox2D_b2RevoluteJoint_IsLimitEnabled00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_IsLimitEnabled00
+static int tolua_Box2D_b2RevoluteJoint_IsLimitEnabled00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26006,8 +26070,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_IsLimitEnabled00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: EnableLimit of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_EnableLimit00
-static int tolua_LuaBox2D_b2RevoluteJoint_EnableLimit00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_EnableLimit00
+static int tolua_Box2D_b2RevoluteJoint_EnableLimit00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26039,8 +26103,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_EnableLimit00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLowerLimit of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_GetLowerLimit00
-static int tolua_LuaBox2D_b2RevoluteJoint_GetLowerLimit00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_GetLowerLimit00
+static int tolua_Box2D_b2RevoluteJoint_GetLowerLimit00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26071,8 +26135,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_GetLowerLimit00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetUpperLimit of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_GetUpperLimit00
-static int tolua_LuaBox2D_b2RevoluteJoint_GetUpperLimit00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_GetUpperLimit00
+static int tolua_Box2D_b2RevoluteJoint_GetUpperLimit00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26103,8 +26167,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_GetUpperLimit00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetLimits of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_SetLimits00
-static int tolua_LuaBox2D_b2RevoluteJoint_SetLimits00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_SetLimits00
+static int tolua_Box2D_b2RevoluteJoint_SetLimits00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26138,8 +26202,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_SetLimits00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsMotorEnabled of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_IsMotorEnabled00
-static int tolua_LuaBox2D_b2RevoluteJoint_IsMotorEnabled00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_IsMotorEnabled00
+static int tolua_Box2D_b2RevoluteJoint_IsMotorEnabled00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26170,8 +26234,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_IsMotorEnabled00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: EnableMotor of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_EnableMotor00
-static int tolua_LuaBox2D_b2RevoluteJoint_EnableMotor00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_EnableMotor00
+static int tolua_Box2D_b2RevoluteJoint_EnableMotor00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26203,8 +26267,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_EnableMotor00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetMotorSpeed of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_SetMotorSpeed00
-static int tolua_LuaBox2D_b2RevoluteJoint_SetMotorSpeed00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_SetMotorSpeed00
+static int tolua_Box2D_b2RevoluteJoint_SetMotorSpeed00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26236,8 +26300,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_SetMotorSpeed00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMotorSpeed of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_GetMotorSpeed00
-static int tolua_LuaBox2D_b2RevoluteJoint_GetMotorSpeed00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_GetMotorSpeed00
+static int tolua_Box2D_b2RevoluteJoint_GetMotorSpeed00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26268,8 +26332,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_GetMotorSpeed00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetMaxMotorTorque of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_SetMaxMotorTorque00
-static int tolua_LuaBox2D_b2RevoluteJoint_SetMaxMotorTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_SetMaxMotorTorque00
+static int tolua_Box2D_b2RevoluteJoint_SetMaxMotorTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26301,8 +26365,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_SetMaxMotorTorque00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMaxMotorTorque of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_GetMaxMotorTorque00
-static int tolua_LuaBox2D_b2RevoluteJoint_GetMaxMotorTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_GetMaxMotorTorque00
+static int tolua_Box2D_b2RevoluteJoint_GetMaxMotorTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26333,8 +26397,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_GetMaxMotorTorque00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionForce of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_GetReactionForce00
-static int tolua_LuaBox2D_b2RevoluteJoint_GetReactionForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_GetReactionForce00
+static int tolua_Box2D_b2RevoluteJoint_GetReactionForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26377,8 +26441,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_GetReactionForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionTorque of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_GetReactionTorque00
-static int tolua_LuaBox2D_b2RevoluteJoint_GetReactionTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_GetReactionTorque00
+static int tolua_Box2D_b2RevoluteJoint_GetReactionTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26411,8 +26475,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_GetReactionTorque00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMotorTorque of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_GetMotorTorque00
-static int tolua_LuaBox2D_b2RevoluteJoint_GetMotorTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_GetMotorTorque00
+static int tolua_Box2D_b2RevoluteJoint_GetMotorTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26445,8 +26509,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_GetMotorTorque00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Dump of class  b2RevoluteJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RevoluteJoint_Dump00
-static int tolua_LuaBox2D_b2RevoluteJoint_Dump00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RevoluteJoint_Dump00
+static int tolua_Box2D_b2RevoluteJoint_Dump00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26476,8 +26540,8 @@ static int tolua_LuaBox2D_b2RevoluteJoint_Dump00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2RopeDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RopeDef_new00
-static int tolua_LuaBox2D_b2RopeDef_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RopeDef_new00
+static int tolua_Box2D_b2RopeDef_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26504,8 +26568,8 @@ static int tolua_LuaBox2D_b2RopeDef_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2RopeDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RopeDef_new00_local
-static int tolua_LuaBox2D_b2RopeDef_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RopeDef_new00_local
+static int tolua_Box2D_b2RopeDef_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26713,8 +26777,8 @@ static int tolua_set_b2RopeDef_k3(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Rope */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rope_new00
-static int tolua_LuaBox2D_b2Rope_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rope_new00
+static int tolua_Box2D_b2Rope_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26741,8 +26805,8 @@ static int tolua_LuaBox2D_b2Rope_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Rope */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rope_new00_local
-static int tolua_LuaBox2D_b2Rope_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rope_new00_local
+static int tolua_Box2D_b2Rope_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26770,8 +26834,8 @@ static int tolua_LuaBox2D_b2Rope_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2Rope */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rope_delete00
-static int tolua_LuaBox2D_b2Rope_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rope_delete00
+static int tolua_Box2D_b2Rope_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26799,8 +26863,8 @@ static int tolua_LuaBox2D_b2Rope_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Initialize of class  b2Rope */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rope_Initialize00
-static int tolua_LuaBox2D_b2Rope_Initialize00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rope_Initialize00
+static int tolua_Box2D_b2Rope_Initialize00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26832,8 +26896,8 @@ static int tolua_LuaBox2D_b2Rope_Initialize00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Step of class  b2Rope */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rope_Step00
-static int tolua_LuaBox2D_b2Rope_Step00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rope_Step00
+static int tolua_Box2D_b2Rope_Step00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26867,8 +26931,8 @@ static int tolua_LuaBox2D_b2Rope_Step00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetVertexCount of class  b2Rope */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rope_GetVertexCount00
-static int tolua_LuaBox2D_b2Rope_GetVertexCount00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rope_GetVertexCount00
+static int tolua_Box2D_b2Rope_GetVertexCount00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26899,8 +26963,8 @@ static int tolua_LuaBox2D_b2Rope_GetVertexCount00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetVertices of class  b2Rope */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rope_GetVertices00
-static int tolua_LuaBox2D_b2Rope_GetVertices00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rope_GetVertices00
+static int tolua_Box2D_b2Rope_GetVertices00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26931,8 +26995,8 @@ static int tolua_LuaBox2D_b2Rope_GetVertices00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Draw of class  b2Rope */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rope_Draw00
-static int tolua_LuaBox2D_b2Rope_Draw00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rope_Draw00
+static int tolua_Box2D_b2Rope_Draw00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26964,8 +27028,8 @@ static int tolua_LuaBox2D_b2Rope_Draw00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetAngle of class  b2Rope */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Rope_SetAngle00
-static int tolua_LuaBox2D_b2Rope_SetAngle00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Rope_SetAngle00
+static int tolua_Box2D_b2Rope_SetAngle00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -26997,8 +27061,8 @@ static int tolua_LuaBox2D_b2Rope_SetAngle00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2RopeJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RopeJointDef_new00
-static int tolua_LuaBox2D_b2RopeJointDef_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RopeJointDef_new00
+static int tolua_Box2D_b2RopeJointDef_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -27025,8 +27089,8 @@ static int tolua_LuaBox2D_b2RopeJointDef_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2RopeJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RopeJointDef_new00_local
-static int tolua_LuaBox2D_b2RopeJointDef_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RopeJointDef_new00_local
+static int tolua_Box2D_b2RopeJointDef_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -27144,8 +27208,8 @@ static int tolua_set_b2RopeJointDef_maxLength(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorA of class  b2RopeJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RopeJoint_GetAnchorA00
-static int tolua_LuaBox2D_b2RopeJoint_GetAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RopeJoint_GetAnchorA00
+static int tolua_Box2D_b2RopeJoint_GetAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -27186,8 +27250,8 @@ static int tolua_LuaBox2D_b2RopeJoint_GetAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorB of class  b2RopeJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RopeJoint_GetAnchorB00
-static int tolua_LuaBox2D_b2RopeJoint_GetAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RopeJoint_GetAnchorB00
+static int tolua_Box2D_b2RopeJoint_GetAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -27228,8 +27292,8 @@ static int tolua_LuaBox2D_b2RopeJoint_GetAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionForce of class  b2RopeJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RopeJoint_GetReactionForce00
-static int tolua_LuaBox2D_b2RopeJoint_GetReactionForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RopeJoint_GetReactionForce00
+static int tolua_Box2D_b2RopeJoint_GetReactionForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -27272,8 +27336,8 @@ static int tolua_LuaBox2D_b2RopeJoint_GetReactionForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionTorque of class  b2RopeJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RopeJoint_GetReactionTorque00
-static int tolua_LuaBox2D_b2RopeJoint_GetReactionTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RopeJoint_GetReactionTorque00
+static int tolua_Box2D_b2RopeJoint_GetReactionTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -27306,8 +27370,8 @@ static int tolua_LuaBox2D_b2RopeJoint_GetReactionTorque00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAnchorA of class  b2RopeJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RopeJoint_GetLocalAnchorA00
-static int tolua_LuaBox2D_b2RopeJoint_GetLocalAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RopeJoint_GetLocalAnchorA00
+static int tolua_Box2D_b2RopeJoint_GetLocalAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -27338,8 +27402,8 @@ static int tolua_LuaBox2D_b2RopeJoint_GetLocalAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAnchorB of class  b2RopeJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RopeJoint_GetLocalAnchorB00
-static int tolua_LuaBox2D_b2RopeJoint_GetLocalAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RopeJoint_GetLocalAnchorB00
+static int tolua_Box2D_b2RopeJoint_GetLocalAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -27370,8 +27434,8 @@ static int tolua_LuaBox2D_b2RopeJoint_GetLocalAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetMaxLength of class  b2RopeJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RopeJoint_SetMaxLength00
-static int tolua_LuaBox2D_b2RopeJoint_SetMaxLength00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RopeJoint_SetMaxLength00
+static int tolua_Box2D_b2RopeJoint_SetMaxLength00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -27403,8 +27467,8 @@ static int tolua_LuaBox2D_b2RopeJoint_SetMaxLength00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMaxLength of class  b2RopeJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RopeJoint_GetMaxLength00
-static int tolua_LuaBox2D_b2RopeJoint_GetMaxLength00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RopeJoint_GetMaxLength00
+static int tolua_Box2D_b2RopeJoint_GetMaxLength00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -27435,8 +27499,8 @@ static int tolua_LuaBox2D_b2RopeJoint_GetMaxLength00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLimitState of class  b2RopeJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RopeJoint_GetLimitState00
-static int tolua_LuaBox2D_b2RopeJoint_GetLimitState00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RopeJoint_GetLimitState00
+static int tolua_Box2D_b2RopeJoint_GetLimitState00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -27467,8 +27531,8 @@ static int tolua_LuaBox2D_b2RopeJoint_GetLimitState00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Dump of class  b2RopeJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RopeJoint_Dump00
-static int tolua_LuaBox2D_b2RopeJoint_Dump00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RopeJoint_Dump00
+static int tolua_Box2D_b2RopeJoint_Dump00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -27498,8 +27562,8 @@ static int tolua_LuaBox2D_b2RopeJoint_Dump00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* function: b2Alloc */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Alloc00
-static int tolua_LuaBox2D_b2Alloc00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Alloc00
+static int tolua_Box2D_b2Alloc00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -27527,8 +27591,8 @@ static int tolua_LuaBox2D_b2Alloc00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* function: b2Free */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Free00
-static int tolua_LuaBox2D_b2Free00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Free00
+static int tolua_Box2D_b2Free00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28059,8 +28123,8 @@ static int tolua_set_b2TOIOutput_t(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* function: b2TimeOfImpact */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2TimeOfImpact00
-static int tolua_LuaBox2D_b2TimeOfImpact00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2TimeOfImpact00
+static int tolua_Box2D_b2TimeOfImpact00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28089,8 +28153,8 @@ static int tolua_LuaBox2D_b2TimeOfImpact00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2Timer */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Timer_new00
-static int tolua_LuaBox2D_b2Timer_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Timer_new00
+static int tolua_Box2D_b2Timer_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28117,8 +28181,8 @@ static int tolua_LuaBox2D_b2Timer_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2Timer */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Timer_new00_local
-static int tolua_LuaBox2D_b2Timer_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Timer_new00_local
+static int tolua_Box2D_b2Timer_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28146,8 +28210,8 @@ static int tolua_LuaBox2D_b2Timer_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Reset of class  b2Timer */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Timer_Reset00
-static int tolua_LuaBox2D_b2Timer_Reset00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Timer_Reset00
+static int tolua_Box2D_b2Timer_Reset00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28177,8 +28241,8 @@ static int tolua_LuaBox2D_b2Timer_Reset00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMilliseconds of class  b2Timer */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2Timer_GetMilliseconds00
-static int tolua_LuaBox2D_b2Timer_GetMilliseconds00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2Timer_GetMilliseconds00
+static int tolua_Box2D_b2Timer_GetMilliseconds00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28509,8 +28573,8 @@ static int tolua_set_b2Velocity_w(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2WeldJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJointDef_new00
-static int tolua_LuaBox2D_b2WeldJointDef_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJointDef_new00
+static int tolua_Box2D_b2WeldJointDef_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28537,8 +28601,8 @@ static int tolua_LuaBox2D_b2WeldJointDef_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2WeldJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJointDef_new00_local
-static int tolua_LuaBox2D_b2WeldJointDef_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJointDef_new00_local
+static int tolua_Box2D_b2WeldJointDef_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28566,8 +28630,8 @@ static int tolua_LuaBox2D_b2WeldJointDef_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Initialize of class  b2WeldJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJointDef_Initialize00
-static int tolua_LuaBox2D_b2WeldJointDef_Initialize00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJointDef_Initialize00
+static int tolua_Box2D_b2WeldJointDef_Initialize00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28753,8 +28817,8 @@ static int tolua_set_b2WeldJointDef_dampingRatio(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorA of class  b2WeldJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJoint_GetAnchorA00
-static int tolua_LuaBox2D_b2WeldJoint_GetAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJoint_GetAnchorA00
+static int tolua_Box2D_b2WeldJoint_GetAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28795,8 +28859,8 @@ static int tolua_LuaBox2D_b2WeldJoint_GetAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorB of class  b2WeldJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJoint_GetAnchorB00
-static int tolua_LuaBox2D_b2WeldJoint_GetAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJoint_GetAnchorB00
+static int tolua_Box2D_b2WeldJoint_GetAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28837,8 +28901,8 @@ static int tolua_LuaBox2D_b2WeldJoint_GetAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionForce of class  b2WeldJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJoint_GetReactionForce00
-static int tolua_LuaBox2D_b2WeldJoint_GetReactionForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJoint_GetReactionForce00
+static int tolua_Box2D_b2WeldJoint_GetReactionForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28881,8 +28945,8 @@ static int tolua_LuaBox2D_b2WeldJoint_GetReactionForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionTorque of class  b2WeldJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJoint_GetReactionTorque00
-static int tolua_LuaBox2D_b2WeldJoint_GetReactionTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJoint_GetReactionTorque00
+static int tolua_Box2D_b2WeldJoint_GetReactionTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28915,8 +28979,8 @@ static int tolua_LuaBox2D_b2WeldJoint_GetReactionTorque00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAnchorA of class  b2WeldJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJoint_GetLocalAnchorA00
-static int tolua_LuaBox2D_b2WeldJoint_GetLocalAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJoint_GetLocalAnchorA00
+static int tolua_Box2D_b2WeldJoint_GetLocalAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28947,8 +29011,8 @@ static int tolua_LuaBox2D_b2WeldJoint_GetLocalAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAnchorB of class  b2WeldJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJoint_GetLocalAnchorB00
-static int tolua_LuaBox2D_b2WeldJoint_GetLocalAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJoint_GetLocalAnchorB00
+static int tolua_Box2D_b2WeldJoint_GetLocalAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -28979,8 +29043,8 @@ static int tolua_LuaBox2D_b2WeldJoint_GetLocalAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReferenceAngle of class  b2WeldJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJoint_GetReferenceAngle00
-static int tolua_LuaBox2D_b2WeldJoint_GetReferenceAngle00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJoint_GetReferenceAngle00
+static int tolua_Box2D_b2WeldJoint_GetReferenceAngle00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29011,8 +29075,8 @@ static int tolua_LuaBox2D_b2WeldJoint_GetReferenceAngle00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetFrequency of class  b2WeldJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJoint_SetFrequency00
-static int tolua_LuaBox2D_b2WeldJoint_SetFrequency00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJoint_SetFrequency00
+static int tolua_Box2D_b2WeldJoint_SetFrequency00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29044,8 +29108,8 @@ static int tolua_LuaBox2D_b2WeldJoint_SetFrequency00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetFrequency of class  b2WeldJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJoint_GetFrequency00
-static int tolua_LuaBox2D_b2WeldJoint_GetFrequency00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJoint_GetFrequency00
+static int tolua_Box2D_b2WeldJoint_GetFrequency00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29076,8 +29140,8 @@ static int tolua_LuaBox2D_b2WeldJoint_GetFrequency00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetDampingRatio of class  b2WeldJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJoint_SetDampingRatio00
-static int tolua_LuaBox2D_b2WeldJoint_SetDampingRatio00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJoint_SetDampingRatio00
+static int tolua_Box2D_b2WeldJoint_SetDampingRatio00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29109,8 +29173,8 @@ static int tolua_LuaBox2D_b2WeldJoint_SetDampingRatio00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetDampingRatio of class  b2WeldJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJoint_GetDampingRatio00
-static int tolua_LuaBox2D_b2WeldJoint_GetDampingRatio00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJoint_GetDampingRatio00
+static int tolua_Box2D_b2WeldJoint_GetDampingRatio00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29141,8 +29205,8 @@ static int tolua_LuaBox2D_b2WeldJoint_GetDampingRatio00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Dump of class  b2WeldJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WeldJoint_Dump00
-static int tolua_LuaBox2D_b2WeldJoint_Dump00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WeldJoint_Dump00
+static int tolua_Box2D_b2WeldJoint_Dump00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29172,8 +29236,8 @@ static int tolua_LuaBox2D_b2WeldJoint_Dump00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new of class  b2WheelJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJointDef_new00
-static int tolua_LuaBox2D_b2WheelJointDef_new00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJointDef_new00
+static int tolua_Box2D_b2WheelJointDef_new00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29200,8 +29264,8 @@ static int tolua_LuaBox2D_b2WheelJointDef_new00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: new_local of class  b2WheelJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJointDef_new00_local
-static int tolua_LuaBox2D_b2WheelJointDef_new00_local(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJointDef_new00_local
+static int tolua_Box2D_b2WheelJointDef_new00_local(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29229,8 +29293,8 @@ static int tolua_LuaBox2D_b2WheelJointDef_new00_local(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Initialize of class  b2WheelJointDef */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJointDef_Initialize00
-static int tolua_LuaBox2D_b2WheelJointDef_Initialize00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJointDef_Initialize00
+static int tolua_Box2D_b2WheelJointDef_Initialize00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29508,8 +29572,8 @@ static int tolua_set_b2WheelJointDef_dampingRatio(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorA of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_GetAnchorA00
-static int tolua_LuaBox2D_b2WheelJoint_GetAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_GetAnchorA00
+static int tolua_Box2D_b2WheelJoint_GetAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29550,8 +29614,8 @@ static int tolua_LuaBox2D_b2WheelJoint_GetAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetAnchorB of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_GetAnchorB00
-static int tolua_LuaBox2D_b2WheelJoint_GetAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_GetAnchorB00
+static int tolua_Box2D_b2WheelJoint_GetAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29592,8 +29656,8 @@ static int tolua_LuaBox2D_b2WheelJoint_GetAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionForce of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_GetReactionForce00
-static int tolua_LuaBox2D_b2WheelJoint_GetReactionForce00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_GetReactionForce00
+static int tolua_Box2D_b2WheelJoint_GetReactionForce00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29636,8 +29700,8 @@ static int tolua_LuaBox2D_b2WheelJoint_GetReactionForce00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetReactionTorque of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_GetReactionTorque00
-static int tolua_LuaBox2D_b2WheelJoint_GetReactionTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_GetReactionTorque00
+static int tolua_Box2D_b2WheelJoint_GetReactionTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29670,8 +29734,8 @@ static int tolua_LuaBox2D_b2WheelJoint_GetReactionTorque00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAnchorA of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_GetLocalAnchorA00
-static int tolua_LuaBox2D_b2WheelJoint_GetLocalAnchorA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_GetLocalAnchorA00
+static int tolua_Box2D_b2WheelJoint_GetLocalAnchorA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29702,8 +29766,8 @@ static int tolua_LuaBox2D_b2WheelJoint_GetLocalAnchorA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAnchorB of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_GetLocalAnchorB00
-static int tolua_LuaBox2D_b2WheelJoint_GetLocalAnchorB00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_GetLocalAnchorB00
+static int tolua_Box2D_b2WheelJoint_GetLocalAnchorB00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29734,8 +29798,8 @@ static int tolua_LuaBox2D_b2WheelJoint_GetLocalAnchorB00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetLocalAxisA of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_GetLocalAxisA00
-static int tolua_LuaBox2D_b2WheelJoint_GetLocalAxisA00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_GetLocalAxisA00
+static int tolua_Box2D_b2WheelJoint_GetLocalAxisA00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29766,8 +29830,8 @@ static int tolua_LuaBox2D_b2WheelJoint_GetLocalAxisA00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetJointTranslation of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_GetJointTranslation00
-static int tolua_LuaBox2D_b2WheelJoint_GetJointTranslation00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_GetJointTranslation00
+static int tolua_Box2D_b2WheelJoint_GetJointTranslation00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29798,8 +29862,8 @@ static int tolua_LuaBox2D_b2WheelJoint_GetJointTranslation00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetJointSpeed of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_GetJointSpeed00
-static int tolua_LuaBox2D_b2WheelJoint_GetJointSpeed00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_GetJointSpeed00
+static int tolua_Box2D_b2WheelJoint_GetJointSpeed00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29830,8 +29894,8 @@ static int tolua_LuaBox2D_b2WheelJoint_GetJointSpeed00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: IsMotorEnabled of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_IsMotorEnabled00
-static int tolua_LuaBox2D_b2WheelJoint_IsMotorEnabled00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_IsMotorEnabled00
+static int tolua_Box2D_b2WheelJoint_IsMotorEnabled00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29862,8 +29926,8 @@ static int tolua_LuaBox2D_b2WheelJoint_IsMotorEnabled00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: EnableMotor of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_EnableMotor00
-static int tolua_LuaBox2D_b2WheelJoint_EnableMotor00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_EnableMotor00
+static int tolua_Box2D_b2WheelJoint_EnableMotor00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29895,8 +29959,8 @@ static int tolua_LuaBox2D_b2WheelJoint_EnableMotor00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetMotorSpeed of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_SetMotorSpeed00
-static int tolua_LuaBox2D_b2WheelJoint_SetMotorSpeed00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_SetMotorSpeed00
+static int tolua_Box2D_b2WheelJoint_SetMotorSpeed00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29928,8 +29992,8 @@ static int tolua_LuaBox2D_b2WheelJoint_SetMotorSpeed00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMotorSpeed of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_GetMotorSpeed00
-static int tolua_LuaBox2D_b2WheelJoint_GetMotorSpeed00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_GetMotorSpeed00
+static int tolua_Box2D_b2WheelJoint_GetMotorSpeed00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29960,8 +30024,8 @@ static int tolua_LuaBox2D_b2WheelJoint_GetMotorSpeed00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetMaxMotorTorque of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_SetMaxMotorTorque00
-static int tolua_LuaBox2D_b2WheelJoint_SetMaxMotorTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_SetMaxMotorTorque00
+static int tolua_Box2D_b2WheelJoint_SetMaxMotorTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -29993,8 +30057,8 @@ static int tolua_LuaBox2D_b2WheelJoint_SetMaxMotorTorque00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMaxMotorTorque of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_GetMaxMotorTorque00
-static int tolua_LuaBox2D_b2WheelJoint_GetMaxMotorTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_GetMaxMotorTorque00
+static int tolua_Box2D_b2WheelJoint_GetMaxMotorTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -30025,8 +30089,8 @@ static int tolua_LuaBox2D_b2WheelJoint_GetMaxMotorTorque00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetMotorTorque of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_GetMotorTorque00
-static int tolua_LuaBox2D_b2WheelJoint_GetMotorTorque00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_GetMotorTorque00
+static int tolua_Box2D_b2WheelJoint_GetMotorTorque00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -30059,8 +30123,8 @@ static int tolua_LuaBox2D_b2WheelJoint_GetMotorTorque00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetSpringFrequencyHz of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_SetSpringFrequencyHz00
-static int tolua_LuaBox2D_b2WheelJoint_SetSpringFrequencyHz00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_SetSpringFrequencyHz00
+static int tolua_Box2D_b2WheelJoint_SetSpringFrequencyHz00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -30092,8 +30156,8 @@ static int tolua_LuaBox2D_b2WheelJoint_SetSpringFrequencyHz00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetSpringFrequencyHz of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_GetSpringFrequencyHz00
-static int tolua_LuaBox2D_b2WheelJoint_GetSpringFrequencyHz00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_GetSpringFrequencyHz00
+static int tolua_Box2D_b2WheelJoint_GetSpringFrequencyHz00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -30124,8 +30188,8 @@ static int tolua_LuaBox2D_b2WheelJoint_GetSpringFrequencyHz00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SetSpringDampingRatio of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_SetSpringDampingRatio00
-static int tolua_LuaBox2D_b2WheelJoint_SetSpringDampingRatio00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_SetSpringDampingRatio00
+static int tolua_Box2D_b2WheelJoint_SetSpringDampingRatio00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -30157,8 +30221,8 @@ static int tolua_LuaBox2D_b2WheelJoint_SetSpringDampingRatio00(lua_State* tolua_
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: GetSpringDampingRatio of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_GetSpringDampingRatio00
-static int tolua_LuaBox2D_b2WheelJoint_GetSpringDampingRatio00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_GetSpringDampingRatio00
+static int tolua_Box2D_b2WheelJoint_GetSpringDampingRatio00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -30189,8 +30253,8 @@ static int tolua_LuaBox2D_b2WheelJoint_GetSpringDampingRatio00(lua_State* tolua_
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: Dump of class  b2WheelJoint */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2WheelJoint_Dump00
-static int tolua_LuaBox2D_b2WheelJoint_Dump00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2WheelJoint_Dump00
+static int tolua_Box2D_b2WheelJoint_Dump00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -30220,8 +30284,8 @@ static int tolua_LuaBox2D_b2WheelJoint_Dump00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2DestructionListener */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DestructionListener_delete00
-static int tolua_LuaBox2D_b2DestructionListener_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DestructionListener_delete00
+static int tolua_Box2D_b2DestructionListener_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -30249,8 +30313,8 @@ static int tolua_LuaBox2D_b2DestructionListener_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SayGoodbye of class  b2DestructionListener */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DestructionListener_SayGoodbye00
-static int tolua_LuaBox2D_b2DestructionListener_SayGoodbye00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DestructionListener_SayGoodbye00
+static int tolua_Box2D_b2DestructionListener_SayGoodbye00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -30282,8 +30346,8 @@ static int tolua_LuaBox2D_b2DestructionListener_SayGoodbye00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: SayGoodbye of class  b2DestructionListener */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2DestructionListener_SayGoodbye01
-static int tolua_LuaBox2D_b2DestructionListener_SayGoodbye01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2DestructionListener_SayGoodbye01
+static int tolua_Box2D_b2DestructionListener_SayGoodbye01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -30305,13 +30369,13 @@ static int tolua_LuaBox2D_b2DestructionListener_SayGoodbye01(lua_State* tolua_S)
  }
  return 0;
 tolua_lerror:
- return tolua_LuaBox2D_b2DestructionListener_SayGoodbye00(tolua_S);
+ return tolua_Box2D_b2DestructionListener_SayGoodbye00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* get function: normalImpulses of class  b2ContactImpulse */
-#ifndef TOLUA_DISABLE_tolua_get_LuaBox2D_b2ContactImpulse_normalImpulses
-static int tolua_get_LuaBox2D_b2ContactImpulse_normalImpulses(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_get_Box2D_b2ContactImpulse_normalImpulses
+static int tolua_get_Box2D_b2ContactImpulse_normalImpulses(lua_State* tolua_S)
 {
  int tolua_index;
   b2ContactImpulse* self;
@@ -30336,8 +30400,8 @@ static int tolua_get_LuaBox2D_b2ContactImpulse_normalImpulses(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* set function: normalImpulses of class  b2ContactImpulse */
-#ifndef TOLUA_DISABLE_tolua_set_LuaBox2D_b2ContactImpulse_normalImpulses
-static int tolua_set_LuaBox2D_b2ContactImpulse_normalImpulses(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_set_Box2D_b2ContactImpulse_normalImpulses
+static int tolua_set_Box2D_b2ContactImpulse_normalImpulses(lua_State* tolua_S)
 {
  int tolua_index;
   b2ContactImpulse* self;
@@ -30362,8 +30426,8 @@ static int tolua_set_LuaBox2D_b2ContactImpulse_normalImpulses(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* get function: tangentImpulses of class  b2ContactImpulse */
-#ifndef TOLUA_DISABLE_tolua_get_LuaBox2D_b2ContactImpulse_tangentImpulses
-static int tolua_get_LuaBox2D_b2ContactImpulse_tangentImpulses(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_get_Box2D_b2ContactImpulse_tangentImpulses
+static int tolua_get_Box2D_b2ContactImpulse_tangentImpulses(lua_State* tolua_S)
 {
  int tolua_index;
   b2ContactImpulse* self;
@@ -30388,8 +30452,8 @@ static int tolua_get_LuaBox2D_b2ContactImpulse_tangentImpulses(lua_State* tolua_
 #endif //#ifndef TOLUA_DISABLE
 
 /* set function: tangentImpulses of class  b2ContactImpulse */
-#ifndef TOLUA_DISABLE_tolua_set_LuaBox2D_b2ContactImpulse_tangentImpulses
-static int tolua_set_LuaBox2D_b2ContactImpulse_tangentImpulses(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_set_Box2D_b2ContactImpulse_tangentImpulses
+static int tolua_set_Box2D_b2ContactImpulse_tangentImpulses(lua_State* tolua_S)
 {
  int tolua_index;
   b2ContactImpulse* self;
@@ -30444,8 +30508,8 @@ static int tolua_set_b2ContactImpulse_count(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2QueryCallback */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2QueryCallback_delete00
-static int tolua_LuaBox2D_b2QueryCallback_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2QueryCallback_delete00
+static int tolua_Box2D_b2QueryCallback_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -30473,8 +30537,8 @@ static int tolua_LuaBox2D_b2QueryCallback_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ReportFixture of class  b2QueryCallback */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2QueryCallback_ReportFixture00
-static int tolua_LuaBox2D_b2QueryCallback_ReportFixture00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2QueryCallback_ReportFixture00
+static int tolua_Box2D_b2QueryCallback_ReportFixture00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -30507,8 +30571,8 @@ static int tolua_LuaBox2D_b2QueryCallback_ReportFixture00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: delete of class  b2RayCastCallback */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RayCastCallback_delete00
-static int tolua_LuaBox2D_b2RayCastCallback_delete00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RayCastCallback_delete00
+static int tolua_Box2D_b2RayCastCallback_delete00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -30536,8 +30600,8 @@ static int tolua_LuaBox2D_b2RayCastCallback_delete00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: ReportFixture of class  b2RayCastCallback */
-#ifndef TOLUA_DISABLE_tolua_LuaBox2D_b2RayCastCallback_ReportFixture00
-static int tolua_LuaBox2D_b2RayCastCallback_ReportFixture00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_Box2D_b2RayCastCallback_ReportFixture00
+static int tolua_Box2D_b2RayCastCallback_ReportFixture00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -30576,7 +30640,7 @@ static int tolua_LuaBox2D_b2RayCastCallback_ReportFixture00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* Open function */
-TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
+TOLUA_API int tolua_Box2D_open (lua_State* tolua_S)
 {
  tolua_open(tolua_S);
  tolua_reg_types(tolua_S);
@@ -30594,82 +30658,82 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2BlockAllocator","b2BlockAllocator","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2BlockAllocator");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2BlockAllocator_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2BlockAllocator_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2BlockAllocator_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2BlockAllocator_delete00);
-   tolua_function(tolua_S,"Allocate",tolua_LuaBox2D_b2BlockAllocator_Allocate00);
-   tolua_function(tolua_S,"Free",tolua_LuaBox2D_b2BlockAllocator_Free00);
-   tolua_function(tolua_S,"Clear",tolua_LuaBox2D_b2BlockAllocator_Clear00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2BlockAllocator_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2BlockAllocator_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2BlockAllocator_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2BlockAllocator_delete00);
+   tolua_function(tolua_S,"Allocate",tolua_Box2D_b2BlockAllocator_Allocate00);
+   tolua_function(tolua_S,"Free",tolua_Box2D_b2BlockAllocator_Free00);
+   tolua_function(tolua_S,"Clear",tolua_Box2D_b2BlockAllocator_Clear00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2Fixture","b2Fixture","",NULL);
   tolua_beginmodule(tolua_S,"b2Fixture");
-   tolua_function(tolua_S,"GetType",tolua_LuaBox2D_b2Fixture_GetType00);
-   tolua_function(tolua_S,"GetShape",tolua_LuaBox2D_b2Fixture_GetShape00);
-   tolua_function(tolua_S,"GetShape",tolua_LuaBox2D_b2Fixture_GetShape01);
-   tolua_function(tolua_S,"SetSensor",tolua_LuaBox2D_b2Fixture_SetSensor00);
-   tolua_function(tolua_S,"IsSensor",tolua_LuaBox2D_b2Fixture_IsSensor00);
-   tolua_function(tolua_S,"SetFilterData",tolua_LuaBox2D_b2Fixture_SetFilterData00);
-   tolua_function(tolua_S,"GetFilterData",tolua_LuaBox2D_b2Fixture_GetFilterData00);
-   tolua_function(tolua_S,"Refilter",tolua_LuaBox2D_b2Fixture_Refilter00);
-   tolua_function(tolua_S,"GetBody",tolua_LuaBox2D_b2Fixture_GetBody00);
-   tolua_function(tolua_S,"GetBody",tolua_LuaBox2D_b2Fixture_GetBody01);
-   tolua_function(tolua_S,"GetNext",tolua_LuaBox2D_b2Fixture_GetNext00);
-   tolua_function(tolua_S,"GetNext",tolua_LuaBox2D_b2Fixture_GetNext01);
-   tolua_function(tolua_S,"GetUserData",tolua_LuaBox2D_b2Fixture_GetUserData00);
-   tolua_function(tolua_S,"SetUserData",tolua_LuaBox2D_b2Fixture_SetUserData00);
-   tolua_function(tolua_S,"TestPoint",tolua_LuaBox2D_b2Fixture_TestPoint00);
-   tolua_function(tolua_S,"RayCast",tolua_LuaBox2D_b2Fixture_RayCast00);
-   tolua_function(tolua_S,"GetMassData",tolua_LuaBox2D_b2Fixture_GetMassData00);
-   tolua_function(tolua_S,"SetDensity",tolua_LuaBox2D_b2Fixture_SetDensity00);
-   tolua_function(tolua_S,"GetDensity",tolua_LuaBox2D_b2Fixture_GetDensity00);
-   tolua_function(tolua_S,"GetFriction",tolua_LuaBox2D_b2Fixture_GetFriction00);
-   tolua_function(tolua_S,"SetFriction",tolua_LuaBox2D_b2Fixture_SetFriction00);
-   tolua_function(tolua_S,"GetRestitution",tolua_LuaBox2D_b2Fixture_GetRestitution00);
-   tolua_function(tolua_S,"SetRestitution",tolua_LuaBox2D_b2Fixture_SetRestitution00);
-   tolua_function(tolua_S,"GetAABB",tolua_LuaBox2D_b2Fixture_GetAABB00);
-   tolua_function(tolua_S,"Dump",tolua_LuaBox2D_b2Fixture_Dump00);
+   tolua_function(tolua_S,"GetType",tolua_Box2D_b2Fixture_GetType00);
+   tolua_function(tolua_S,"GetShape",tolua_Box2D_b2Fixture_GetShape00);
+   tolua_function(tolua_S,"GetShape",tolua_Box2D_b2Fixture_GetShape01);
+   tolua_function(tolua_S,"SetSensor",tolua_Box2D_b2Fixture_SetSensor00);
+   tolua_function(tolua_S,"IsSensor",tolua_Box2D_b2Fixture_IsSensor00);
+   tolua_function(tolua_S,"SetFilterData",tolua_Box2D_b2Fixture_SetFilterData00);
+   tolua_function(tolua_S,"GetFilterData",tolua_Box2D_b2Fixture_GetFilterData00);
+   tolua_function(tolua_S,"Refilter",tolua_Box2D_b2Fixture_Refilter00);
+   tolua_function(tolua_S,"GetBody",tolua_Box2D_b2Fixture_GetBody00);
+   tolua_function(tolua_S,"GetBody",tolua_Box2D_b2Fixture_GetBody01);
+   tolua_function(tolua_S,"GetNext",tolua_Box2D_b2Fixture_GetNext00);
+   tolua_function(tolua_S,"GetNext",tolua_Box2D_b2Fixture_GetNext01);
+   tolua_function(tolua_S,"GetUserData",tolua_Box2D_b2Fixture_GetUserData00);
+   tolua_function(tolua_S,"SetUserData",tolua_Box2D_b2Fixture_SetUserData00);
+   tolua_function(tolua_S,"TestPoint",tolua_Box2D_b2Fixture_TestPoint00);
+   tolua_function(tolua_S,"RayCast",tolua_Box2D_b2Fixture_RayCast00);
+   tolua_function(tolua_S,"GetMassData",tolua_Box2D_b2Fixture_GetMassData00);
+   tolua_function(tolua_S,"SetDensity",tolua_Box2D_b2Fixture_SetDensity00);
+   tolua_function(tolua_S,"GetDensity",tolua_Box2D_b2Fixture_GetDensity00);
+   tolua_function(tolua_S,"GetFriction",tolua_Box2D_b2Fixture_GetFriction00);
+   tolua_function(tolua_S,"SetFriction",tolua_Box2D_b2Fixture_SetFriction00);
+   tolua_function(tolua_S,"GetRestitution",tolua_Box2D_b2Fixture_GetRestitution00);
+   tolua_function(tolua_S,"SetRestitution",tolua_Box2D_b2Fixture_SetRestitution00);
+   tolua_function(tolua_S,"GetAABB",tolua_Box2D_b2Fixture_GetAABB00);
+   tolua_function(tolua_S,"Dump",tolua_Box2D_b2Fixture_Dump00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2Joint","b2Joint","",NULL);
   tolua_beginmodule(tolua_S,"b2Joint");
-   tolua_function(tolua_S,"GetType",tolua_LuaBox2D_b2Joint_GetType00);
-   tolua_function(tolua_S,"GetBodyA",tolua_LuaBox2D_b2Joint_GetBodyA00);
-   tolua_function(tolua_S,"GetBodyB",tolua_LuaBox2D_b2Joint_GetBodyB00);
-   tolua_function(tolua_S,"GetAnchorA",tolua_LuaBox2D_b2Joint_GetAnchorA00);
-   tolua_function(tolua_S,"GetAnchorB",tolua_LuaBox2D_b2Joint_GetAnchorB00);
-   tolua_function(tolua_S,"GetReactionForce",tolua_LuaBox2D_b2Joint_GetReactionForce00);
-   tolua_function(tolua_S,"GetReactionTorque",tolua_LuaBox2D_b2Joint_GetReactionTorque00);
-   tolua_function(tolua_S,"GetNext",tolua_LuaBox2D_b2Joint_GetNext00);
-   tolua_function(tolua_S,"GetNext",tolua_LuaBox2D_b2Joint_GetNext01);
-   tolua_function(tolua_S,"GetUserData",tolua_LuaBox2D_b2Joint_GetUserData00);
-   tolua_function(tolua_S,"SetUserData",tolua_LuaBox2D_b2Joint_SetUserData00);
-   tolua_function(tolua_S,"IsActive",tolua_LuaBox2D_b2Joint_IsActive00);
-   tolua_function(tolua_S,"GetCollideConnected",tolua_LuaBox2D_b2Joint_GetCollideConnected00);
-   tolua_function(tolua_S,"Dump",tolua_LuaBox2D_b2Joint_Dump00);
+   tolua_function(tolua_S,"GetType",tolua_Box2D_b2Joint_GetType00);
+   tolua_function(tolua_S,"GetBodyA",tolua_Box2D_b2Joint_GetBodyA00);
+   tolua_function(tolua_S,"GetBodyB",tolua_Box2D_b2Joint_GetBodyB00);
+   tolua_function(tolua_S,"GetAnchorA",tolua_Box2D_b2Joint_GetAnchorA00);
+   tolua_function(tolua_S,"GetAnchorB",tolua_Box2D_b2Joint_GetAnchorB00);
+   tolua_function(tolua_S,"GetReactionForce",tolua_Box2D_b2Joint_GetReactionForce00);
+   tolua_function(tolua_S,"GetReactionTorque",tolua_Box2D_b2Joint_GetReactionTorque00);
+   tolua_function(tolua_S,"GetNext",tolua_Box2D_b2Joint_GetNext00);
+   tolua_function(tolua_S,"GetNext",tolua_Box2D_b2Joint_GetNext01);
+   tolua_function(tolua_S,"GetUserData",tolua_Box2D_b2Joint_GetUserData00);
+   tolua_function(tolua_S,"SetUserData",tolua_Box2D_b2Joint_SetUserData00);
+   tolua_function(tolua_S,"IsActive",tolua_Box2D_b2Joint_IsActive00);
+   tolua_function(tolua_S,"GetCollideConnected",tolua_Box2D_b2Joint_GetCollideConnected00);
+   tolua_function(tolua_S,"Dump",tolua_Box2D_b2Joint_Dump00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2Contact","b2Contact","",NULL);
   tolua_beginmodule(tolua_S,"b2Contact");
-   tolua_function(tolua_S,"GetManifold",tolua_LuaBox2D_b2Contact_GetManifold00);
-   tolua_function(tolua_S,"GetManifold",tolua_LuaBox2D_b2Contact_GetManifold01);
-   tolua_function(tolua_S,"GetWorldManifold",tolua_LuaBox2D_b2Contact_GetWorldManifold00);
-   tolua_function(tolua_S,"IsTouching",tolua_LuaBox2D_b2Contact_IsTouching00);
-   tolua_function(tolua_S,"SetEnabled",tolua_LuaBox2D_b2Contact_SetEnabled00);
-   tolua_function(tolua_S,"IsEnabled",tolua_LuaBox2D_b2Contact_IsEnabled00);
-   tolua_function(tolua_S,"GetNext",tolua_LuaBox2D_b2Contact_GetNext00);
-   tolua_function(tolua_S,"GetNext",tolua_LuaBox2D_b2Contact_GetNext01);
-   tolua_function(tolua_S,"GetFixtureA",tolua_LuaBox2D_b2Contact_GetFixtureA00);
-   tolua_function(tolua_S,"GetFixtureA",tolua_LuaBox2D_b2Contact_GetFixtureA01);
-   tolua_function(tolua_S,"GetChildIndexA",tolua_LuaBox2D_b2Contact_GetChildIndexA00);
-   tolua_function(tolua_S,"GetFixtureB",tolua_LuaBox2D_b2Contact_GetFixtureB00);
-   tolua_function(tolua_S,"GetFixtureB",tolua_LuaBox2D_b2Contact_GetFixtureB01);
-   tolua_function(tolua_S,"GetChildIndexB",tolua_LuaBox2D_b2Contact_GetChildIndexB00);
-   tolua_function(tolua_S,"SetFriction",tolua_LuaBox2D_b2Contact_SetFriction00);
-   tolua_function(tolua_S,"GetFriction",tolua_LuaBox2D_b2Contact_GetFriction00);
-   tolua_function(tolua_S,"ResetFriction",tolua_LuaBox2D_b2Contact_ResetFriction00);
-   tolua_function(tolua_S,"SetRestitution",tolua_LuaBox2D_b2Contact_SetRestitution00);
-   tolua_function(tolua_S,"GetRestitution",tolua_LuaBox2D_b2Contact_GetRestitution00);
-   tolua_function(tolua_S,"ResetRestitution",tolua_LuaBox2D_b2Contact_ResetRestitution00);
-   tolua_function(tolua_S,"Evaluate",tolua_LuaBox2D_b2Contact_Evaluate00);
+   tolua_function(tolua_S,"GetManifold",tolua_Box2D_b2Contact_GetManifold00);
+   tolua_function(tolua_S,"GetManifold",tolua_Box2D_b2Contact_GetManifold01);
+   tolua_function(tolua_S,"GetWorldManifold",tolua_Box2D_b2Contact_GetWorldManifold00);
+   tolua_function(tolua_S,"IsTouching",tolua_Box2D_b2Contact_IsTouching00);
+   tolua_function(tolua_S,"SetEnabled",tolua_Box2D_b2Contact_SetEnabled00);
+   tolua_function(tolua_S,"IsEnabled",tolua_Box2D_b2Contact_IsEnabled00);
+   tolua_function(tolua_S,"GetNext",tolua_Box2D_b2Contact_GetNext00);
+   tolua_function(tolua_S,"GetNext",tolua_Box2D_b2Contact_GetNext01);
+   tolua_function(tolua_S,"GetFixtureA",tolua_Box2D_b2Contact_GetFixtureA00);
+   tolua_function(tolua_S,"GetFixtureA",tolua_Box2D_b2Contact_GetFixtureA01);
+   tolua_function(tolua_S,"GetChildIndexA",tolua_Box2D_b2Contact_GetChildIndexA00);
+   tolua_function(tolua_S,"GetFixtureB",tolua_Box2D_b2Contact_GetFixtureB00);
+   tolua_function(tolua_S,"GetFixtureB",tolua_Box2D_b2Contact_GetFixtureB01);
+   tolua_function(tolua_S,"GetChildIndexB",tolua_Box2D_b2Contact_GetChildIndexB00);
+   tolua_function(tolua_S,"SetFriction",tolua_Box2D_b2Contact_SetFriction00);
+   tolua_function(tolua_S,"GetFriction",tolua_Box2D_b2Contact_GetFriction00);
+   tolua_function(tolua_S,"ResetFriction",tolua_Box2D_b2Contact_ResetFriction00);
+   tolua_function(tolua_S,"SetRestitution",tolua_Box2D_b2Contact_SetRestitution00);
+   tolua_function(tolua_S,"GetRestitution",tolua_Box2D_b2Contact_GetRestitution00);
+   tolua_function(tolua_S,"ResetRestitution",tolua_Box2D_b2Contact_ResetRestitution00);
+   tolua_function(tolua_S,"Evaluate",tolua_Box2D_b2Contact_Evaluate00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2Controller","b2Controller","",NULL);
   tolua_beginmodule(tolua_S,"b2Controller");
@@ -30680,52 +30744,52 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2World","b2World","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2World");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2World_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2World_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2World_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2World_delete00);
-   tolua_function(tolua_S,"SetDestructionListener",tolua_LuaBox2D_b2World_SetDestructionListener00);
-   tolua_function(tolua_S,"SetContactFilter",tolua_LuaBox2D_b2World_SetContactFilter00);
-   tolua_function(tolua_S,"SetContactListener",tolua_LuaBox2D_b2World_SetContactListener00);
-   tolua_function(tolua_S,"SetDebugDraw",tolua_LuaBox2D_b2World_SetDebugDraw00);
-   tolua_function(tolua_S,"CreateBody",tolua_LuaBox2D_b2World_CreateBody00);
-   tolua_function(tolua_S,"DestroyBody",tolua_LuaBox2D_b2World_DestroyBody00);
-   tolua_function(tolua_S,"CreateJoint",tolua_LuaBox2D_b2World_CreateJoint00);
-   tolua_function(tolua_S,"DestroyJoint",tolua_LuaBox2D_b2World_DestroyJoint00);
-   tolua_function(tolua_S,"Step",tolua_LuaBox2D_b2World_Step00);
-   tolua_function(tolua_S,"ClearForces",tolua_LuaBox2D_b2World_ClearForces00);
-   tolua_function(tolua_S,"DrawDebugData",tolua_LuaBox2D_b2World_DrawDebugData00);
-   tolua_function(tolua_S,"QueryAABB",tolua_LuaBox2D_b2World_QueryAABB00);
-   tolua_function(tolua_S,"RayCast",tolua_LuaBox2D_b2World_RayCast00);
-   tolua_function(tolua_S,"GetBodyList",tolua_LuaBox2D_b2World_GetBodyList00);
-   tolua_function(tolua_S,"GetBodyList",tolua_LuaBox2D_b2World_GetBodyList01);
-   tolua_function(tolua_S,"GetJointList",tolua_LuaBox2D_b2World_GetJointList00);
-   tolua_function(tolua_S,"GetJointList",tolua_LuaBox2D_b2World_GetJointList01);
-   tolua_function(tolua_S,"GetContactList",tolua_LuaBox2D_b2World_GetContactList00);
-   tolua_function(tolua_S,"GetContactList",tolua_LuaBox2D_b2World_GetContactList01);
-   tolua_function(tolua_S,"SetAllowSleeping",tolua_LuaBox2D_b2World_SetAllowSleeping00);
-   tolua_function(tolua_S,"GetAllowSleeping",tolua_LuaBox2D_b2World_GetAllowSleeping00);
-   tolua_function(tolua_S,"SetWarmStarting",tolua_LuaBox2D_b2World_SetWarmStarting00);
-   tolua_function(tolua_S,"GetWarmStarting",tolua_LuaBox2D_b2World_GetWarmStarting00);
-   tolua_function(tolua_S,"SetContinuousPhysics",tolua_LuaBox2D_b2World_SetContinuousPhysics00);
-   tolua_function(tolua_S,"GetContinuousPhysics",tolua_LuaBox2D_b2World_GetContinuousPhysics00);
-   tolua_function(tolua_S,"SetSubStepping",tolua_LuaBox2D_b2World_SetSubStepping00);
-   tolua_function(tolua_S,"GetSubStepping",tolua_LuaBox2D_b2World_GetSubStepping00);
-   tolua_function(tolua_S,"GetProxyCount",tolua_LuaBox2D_b2World_GetProxyCount00);
-   tolua_function(tolua_S,"GetBodyCount",tolua_LuaBox2D_b2World_GetBodyCount00);
-   tolua_function(tolua_S,"GetJointCount",tolua_LuaBox2D_b2World_GetJointCount00);
-   tolua_function(tolua_S,"GetContactCount",tolua_LuaBox2D_b2World_GetContactCount00);
-   tolua_function(tolua_S,"GetTreeHeight",tolua_LuaBox2D_b2World_GetTreeHeight00);
-   tolua_function(tolua_S,"GetTreeBalance",tolua_LuaBox2D_b2World_GetTreeBalance00);
-   tolua_function(tolua_S,"GetTreeQuality",tolua_LuaBox2D_b2World_GetTreeQuality00);
-   tolua_function(tolua_S,"SetGravity",tolua_LuaBox2D_b2World_SetGravity00);
-   tolua_function(tolua_S,"GetGravity",tolua_LuaBox2D_b2World_GetGravity00);
-   tolua_function(tolua_S,"IsLocked",tolua_LuaBox2D_b2World_IsLocked00);
-   tolua_function(tolua_S,"SetAutoClearForces",tolua_LuaBox2D_b2World_SetAutoClearForces00);
-   tolua_function(tolua_S,"GetAutoClearForces",tolua_LuaBox2D_b2World_GetAutoClearForces00);
-   tolua_function(tolua_S,"GetContactManager",tolua_LuaBox2D_b2World_GetContactManager00);
-   tolua_function(tolua_S,"GetProfile",tolua_LuaBox2D_b2World_GetProfile00);
-   tolua_function(tolua_S,"Dump",tolua_LuaBox2D_b2World_Dump00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2World_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2World_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2World_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2World_delete00);
+   tolua_function(tolua_S,"SetDestructionListener",tolua_Box2D_b2World_SetDestructionListener00);
+   tolua_function(tolua_S,"SetContactFilter",tolua_Box2D_b2World_SetContactFilter00);
+   tolua_function(tolua_S,"SetContactListener",tolua_Box2D_b2World_SetContactListener00);
+   tolua_function(tolua_S,"SetDebugDraw",tolua_Box2D_b2World_SetDebugDraw00);
+   tolua_function(tolua_S,"CreateBody",tolua_Box2D_b2World_CreateBody00);
+   tolua_function(tolua_S,"DestroyBody",tolua_Box2D_b2World_DestroyBody00);
+   tolua_function(tolua_S,"CreateJoint",tolua_Box2D_b2World_CreateJoint00);
+   tolua_function(tolua_S,"DestroyJoint",tolua_Box2D_b2World_DestroyJoint00);
+   tolua_function(tolua_S,"Step",tolua_Box2D_b2World_Step00);
+   tolua_function(tolua_S,"ClearForces",tolua_Box2D_b2World_ClearForces00);
+   tolua_function(tolua_S,"DrawDebugData",tolua_Box2D_b2World_DrawDebugData00);
+   tolua_function(tolua_S,"QueryAABB",tolua_Box2D_b2World_QueryAABB00);
+   tolua_function(tolua_S,"RayCast",tolua_Box2D_b2World_RayCast00);
+   tolua_function(tolua_S,"GetBodyList",tolua_Box2D_b2World_GetBodyList00);
+   tolua_function(tolua_S,"GetBodyList",tolua_Box2D_b2World_GetBodyList01);
+   tolua_function(tolua_S,"GetJointList",tolua_Box2D_b2World_GetJointList00);
+   tolua_function(tolua_S,"GetJointList",tolua_Box2D_b2World_GetJointList01);
+   tolua_function(tolua_S,"GetContactList",tolua_Box2D_b2World_GetContactList00);
+   tolua_function(tolua_S,"GetContactList",tolua_Box2D_b2World_GetContactList01);
+   tolua_function(tolua_S,"SetAllowSleeping",tolua_Box2D_b2World_SetAllowSleeping00);
+   tolua_function(tolua_S,"GetAllowSleeping",tolua_Box2D_b2World_GetAllowSleeping00);
+   tolua_function(tolua_S,"SetWarmStarting",tolua_Box2D_b2World_SetWarmStarting00);
+   tolua_function(tolua_S,"GetWarmStarting",tolua_Box2D_b2World_GetWarmStarting00);
+   tolua_function(tolua_S,"SetContinuousPhysics",tolua_Box2D_b2World_SetContinuousPhysics00);
+   tolua_function(tolua_S,"GetContinuousPhysics",tolua_Box2D_b2World_GetContinuousPhysics00);
+   tolua_function(tolua_S,"SetSubStepping",tolua_Box2D_b2World_SetSubStepping00);
+   tolua_function(tolua_S,"GetSubStepping",tolua_Box2D_b2World_GetSubStepping00);
+   tolua_function(tolua_S,"GetProxyCount",tolua_Box2D_b2World_GetProxyCount00);
+   tolua_function(tolua_S,"GetBodyCount",tolua_Box2D_b2World_GetBodyCount00);
+   tolua_function(tolua_S,"GetJointCount",tolua_Box2D_b2World_GetJointCount00);
+   tolua_function(tolua_S,"GetContactCount",tolua_Box2D_b2World_GetContactCount00);
+   tolua_function(tolua_S,"GetTreeHeight",tolua_Box2D_b2World_GetTreeHeight00);
+   tolua_function(tolua_S,"GetTreeBalance",tolua_Box2D_b2World_GetTreeBalance00);
+   tolua_function(tolua_S,"GetTreeQuality",tolua_Box2D_b2World_GetTreeQuality00);
+   tolua_function(tolua_S,"SetGravity",tolua_Box2D_b2World_SetGravity00);
+   tolua_function(tolua_S,"GetGravity",tolua_Box2D_b2World_GetGravity00);
+   tolua_function(tolua_S,"IsLocked",tolua_Box2D_b2World_IsLocked00);
+   tolua_function(tolua_S,"SetAutoClearForces",tolua_Box2D_b2World_SetAutoClearForces00);
+   tolua_function(tolua_S,"GetAutoClearForces",tolua_Box2D_b2World_GetAutoClearForces00);
+   tolua_function(tolua_S,"GetContactManager",tolua_Box2D_b2World_GetContactManager00);
+   tolua_function(tolua_S,"GetProfile",tolua_Box2D_b2World_GetProfile00);
+   tolua_function(tolua_S,"Dump",tolua_Box2D_b2World_Dump00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2FixtureDef","b2FixtureDef","",tolua_collect_b2FixtureDef);
@@ -30733,9 +30797,9 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2FixtureDef","b2FixtureDef","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2FixtureDef");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2FixtureDef_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2FixtureDef_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2FixtureDef_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2FixtureDef_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2FixtureDef_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2FixtureDef_new00_local);
    tolua_variable(tolua_S,"shape",tolua_get_b2FixtureDef_shape_ptr,tolua_set_b2FixtureDef_shape_ptr);
    tolua_variable(tolua_S,"userData",tolua_get_b2FixtureDef_userData,tolua_set_b2FixtureDef_userData);
    tolua_variable(tolua_S,"friction",tolua_get_b2FixtureDef_friction,tolua_set_b2FixtureDef_friction);
@@ -30767,9 +30831,9 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2BodyDef","b2BodyDef","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2BodyDef");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2BodyDef_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2BodyDef_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2BodyDef_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2BodyDef_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2BodyDef_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2BodyDef_new00_local);
    tolua_variable(tolua_S,"type",tolua_get_b2BodyDef_type,tolua_set_b2BodyDef_type);
    tolua_variable(tolua_S,"position",tolua_get_b2BodyDef_position,tolua_set_b2BodyDef_position);
    tolua_variable(tolua_S,"angle",tolua_get_b2BodyDef_angle,tolua_set_b2BodyDef_angle);
@@ -30787,66 +30851,66 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2Body","b2Body","",NULL);
   tolua_beginmodule(tolua_S,"b2Body");
-   tolua_function(tolua_S,"CreateFixture",tolua_LuaBox2D_b2Body_CreateFixture00);
-   tolua_function(tolua_S,"CreateFixture",tolua_LuaBox2D_b2Body_CreateFixture01);
-   tolua_function(tolua_S,"DestroyFixture",tolua_LuaBox2D_b2Body_DestroyFixture00);
-   tolua_function(tolua_S,"SetTransform",tolua_LuaBox2D_b2Body_SetTransform00);
-   tolua_function(tolua_S,"GetTransform",tolua_LuaBox2D_b2Body_GetTransform00);
-   tolua_function(tolua_S,"GetPosition",tolua_LuaBox2D_b2Body_GetPosition00);
-   tolua_function(tolua_S,"GetAngle",tolua_LuaBox2D_b2Body_GetAngle00);
-   tolua_function(tolua_S,"GetWorldCenter",tolua_LuaBox2D_b2Body_GetWorldCenter00);
-   tolua_function(tolua_S,"GetLocalCenter",tolua_LuaBox2D_b2Body_GetLocalCenter00);
-   tolua_function(tolua_S,"SetLinearVelocity",tolua_LuaBox2D_b2Body_SetLinearVelocity00);
-   tolua_function(tolua_S,"GetLinearVelocity",tolua_LuaBox2D_b2Body_GetLinearVelocity00);
-   tolua_function(tolua_S,"SetAngularVelocity",tolua_LuaBox2D_b2Body_SetAngularVelocity00);
-   tolua_function(tolua_S,"GetAngularVelocity",tolua_LuaBox2D_b2Body_GetAngularVelocity00);
-   tolua_function(tolua_S,"ApplyForce",tolua_LuaBox2D_b2Body_ApplyForce00);
-   tolua_function(tolua_S,"ApplyForceToCenter",tolua_LuaBox2D_b2Body_ApplyForceToCenter00);
-   tolua_function(tolua_S,"ApplyTorque",tolua_LuaBox2D_b2Body_ApplyTorque00);
-   tolua_function(tolua_S,"ApplyLinearImpulse",tolua_LuaBox2D_b2Body_ApplyLinearImpulse00);
-   tolua_function(tolua_S,"ApplyAngularImpulse",tolua_LuaBox2D_b2Body_ApplyAngularImpulse00);
-   tolua_function(tolua_S,"GetMass",tolua_LuaBox2D_b2Body_GetMass00);
-   tolua_function(tolua_S,"GetInertia",tolua_LuaBox2D_b2Body_GetInertia00);
-   tolua_function(tolua_S,"GetMassData",tolua_LuaBox2D_b2Body_GetMassData00);
-   tolua_function(tolua_S,"SetMassData",tolua_LuaBox2D_b2Body_SetMassData00);
-   tolua_function(tolua_S,"ResetMassData",tolua_LuaBox2D_b2Body_ResetMassData00);
-   tolua_function(tolua_S,"GetWorldPoint",tolua_LuaBox2D_b2Body_GetWorldPoint00);
-   tolua_function(tolua_S,"GetWorldVector",tolua_LuaBox2D_b2Body_GetWorldVector00);
-   tolua_function(tolua_S,"GetLocalPoint",tolua_LuaBox2D_b2Body_GetLocalPoint00);
-   tolua_function(tolua_S,"GetLocalVector",tolua_LuaBox2D_b2Body_GetLocalVector00);
-   tolua_function(tolua_S,"GetLinearVelocityFromWorldPoint",tolua_LuaBox2D_b2Body_GetLinearVelocityFromWorldPoint00);
-   tolua_function(tolua_S,"GetLinearVelocityFromLocalPoint",tolua_LuaBox2D_b2Body_GetLinearVelocityFromLocalPoint00);
-   tolua_function(tolua_S,"GetLinearDamping",tolua_LuaBox2D_b2Body_GetLinearDamping00);
-   tolua_function(tolua_S,"SetLinearDamping",tolua_LuaBox2D_b2Body_SetLinearDamping00);
-   tolua_function(tolua_S,"GetAngularDamping",tolua_LuaBox2D_b2Body_GetAngularDamping00);
-   tolua_function(tolua_S,"SetAngularDamping",tolua_LuaBox2D_b2Body_SetAngularDamping00);
-   tolua_function(tolua_S,"GetGravityScale",tolua_LuaBox2D_b2Body_GetGravityScale00);
-   tolua_function(tolua_S,"SetGravityScale",tolua_LuaBox2D_b2Body_SetGravityScale00);
-   tolua_function(tolua_S,"SetType",tolua_LuaBox2D_b2Body_SetType00);
-   tolua_function(tolua_S,"GetType",tolua_LuaBox2D_b2Body_GetType00);
-   tolua_function(tolua_S,"SetBullet",tolua_LuaBox2D_b2Body_SetBullet00);
-   tolua_function(tolua_S,"IsBullet",tolua_LuaBox2D_b2Body_IsBullet00);
-   tolua_function(tolua_S,"SetSleepingAllowed",tolua_LuaBox2D_b2Body_SetSleepingAllowed00);
-   tolua_function(tolua_S,"IsSleepingAllowed",tolua_LuaBox2D_b2Body_IsSleepingAllowed00);
-   tolua_function(tolua_S,"SetAwake",tolua_LuaBox2D_b2Body_SetAwake00);
-   tolua_function(tolua_S,"IsAwake",tolua_LuaBox2D_b2Body_IsAwake00);
-   tolua_function(tolua_S,"SetActive",tolua_LuaBox2D_b2Body_SetActive00);
-   tolua_function(tolua_S,"IsActive",tolua_LuaBox2D_b2Body_IsActive00);
-   tolua_function(tolua_S,"SetFixedRotation",tolua_LuaBox2D_b2Body_SetFixedRotation00);
-   tolua_function(tolua_S,"IsFixedRotation",tolua_LuaBox2D_b2Body_IsFixedRotation00);
-   tolua_function(tolua_S,"GetFixtureList",tolua_LuaBox2D_b2Body_GetFixtureList00);
-   tolua_function(tolua_S,"GetFixtureList",tolua_LuaBox2D_b2Body_GetFixtureList01);
-   tolua_function(tolua_S,"GetJointList",tolua_LuaBox2D_b2Body_GetJointList00);
-   tolua_function(tolua_S,"GetJointList",tolua_LuaBox2D_b2Body_GetJointList01);
-   tolua_function(tolua_S,"GetContactList",tolua_LuaBox2D_b2Body_GetContactList00);
-   tolua_function(tolua_S,"GetContactList",tolua_LuaBox2D_b2Body_GetContactList01);
-   tolua_function(tolua_S,"GetNext",tolua_LuaBox2D_b2Body_GetNext00);
-   tolua_function(tolua_S,"GetNext",tolua_LuaBox2D_b2Body_GetNext01);
-   tolua_function(tolua_S,"GetUserData",tolua_LuaBox2D_b2Body_GetUserData00);
-   tolua_function(tolua_S,"SetUserData",tolua_LuaBox2D_b2Body_SetUserData00);
-   tolua_function(tolua_S,"GetWorld",tolua_LuaBox2D_b2Body_GetWorld00);
-   tolua_function(tolua_S,"GetWorld",tolua_LuaBox2D_b2Body_GetWorld01);
-   tolua_function(tolua_S,"Dump",tolua_LuaBox2D_b2Body_Dump00);
+   tolua_function(tolua_S,"CreateFixture",tolua_Box2D_b2Body_CreateFixture00);
+   tolua_function(tolua_S,"CreateFixture",tolua_Box2D_b2Body_CreateFixture01);
+   tolua_function(tolua_S,"DestroyFixture",tolua_Box2D_b2Body_DestroyFixture00);
+   tolua_function(tolua_S,"SetTransform",tolua_Box2D_b2Body_SetTransform00);
+   tolua_function(tolua_S,"GetTransform",tolua_Box2D_b2Body_GetTransform00);
+   tolua_function(tolua_S,"GetPosition",tolua_Box2D_b2Body_GetPosition00);
+   tolua_function(tolua_S,"GetAngle",tolua_Box2D_b2Body_GetAngle00);
+   tolua_function(tolua_S,"GetWorldCenter",tolua_Box2D_b2Body_GetWorldCenter00);
+   tolua_function(tolua_S,"GetLocalCenter",tolua_Box2D_b2Body_GetLocalCenter00);
+   tolua_function(tolua_S,"SetLinearVelocity",tolua_Box2D_b2Body_SetLinearVelocity00);
+   tolua_function(tolua_S,"GetLinearVelocity",tolua_Box2D_b2Body_GetLinearVelocity00);
+   tolua_function(tolua_S,"SetAngularVelocity",tolua_Box2D_b2Body_SetAngularVelocity00);
+   tolua_function(tolua_S,"GetAngularVelocity",tolua_Box2D_b2Body_GetAngularVelocity00);
+   tolua_function(tolua_S,"ApplyForce",tolua_Box2D_b2Body_ApplyForce00);
+   tolua_function(tolua_S,"ApplyForceToCenter",tolua_Box2D_b2Body_ApplyForceToCenter00);
+   tolua_function(tolua_S,"ApplyTorque",tolua_Box2D_b2Body_ApplyTorque00);
+   tolua_function(tolua_S,"ApplyLinearImpulse",tolua_Box2D_b2Body_ApplyLinearImpulse00);
+   tolua_function(tolua_S,"ApplyAngularImpulse",tolua_Box2D_b2Body_ApplyAngularImpulse00);
+   tolua_function(tolua_S,"GetMass",tolua_Box2D_b2Body_GetMass00);
+   tolua_function(tolua_S,"GetInertia",tolua_Box2D_b2Body_GetInertia00);
+   tolua_function(tolua_S,"GetMassData",tolua_Box2D_b2Body_GetMassData00);
+   tolua_function(tolua_S,"SetMassData",tolua_Box2D_b2Body_SetMassData00);
+   tolua_function(tolua_S,"ResetMassData",tolua_Box2D_b2Body_ResetMassData00);
+   tolua_function(tolua_S,"GetWorldPoint",tolua_Box2D_b2Body_GetWorldPoint00);
+   tolua_function(tolua_S,"GetWorldVector",tolua_Box2D_b2Body_GetWorldVector00);
+   tolua_function(tolua_S,"GetLocalPoint",tolua_Box2D_b2Body_GetLocalPoint00);
+   tolua_function(tolua_S,"GetLocalVector",tolua_Box2D_b2Body_GetLocalVector00);
+   tolua_function(tolua_S,"GetLinearVelocityFromWorldPoint",tolua_Box2D_b2Body_GetLinearVelocityFromWorldPoint00);
+   tolua_function(tolua_S,"GetLinearVelocityFromLocalPoint",tolua_Box2D_b2Body_GetLinearVelocityFromLocalPoint00);
+   tolua_function(tolua_S,"GetLinearDamping",tolua_Box2D_b2Body_GetLinearDamping00);
+   tolua_function(tolua_S,"SetLinearDamping",tolua_Box2D_b2Body_SetLinearDamping00);
+   tolua_function(tolua_S,"GetAngularDamping",tolua_Box2D_b2Body_GetAngularDamping00);
+   tolua_function(tolua_S,"SetAngularDamping",tolua_Box2D_b2Body_SetAngularDamping00);
+   tolua_function(tolua_S,"GetGravityScale",tolua_Box2D_b2Body_GetGravityScale00);
+   tolua_function(tolua_S,"SetGravityScale",tolua_Box2D_b2Body_SetGravityScale00);
+   tolua_function(tolua_S,"SetType",tolua_Box2D_b2Body_SetType00);
+   tolua_function(tolua_S,"GetType",tolua_Box2D_b2Body_GetType00);
+   tolua_function(tolua_S,"SetBullet",tolua_Box2D_b2Body_SetBullet00);
+   tolua_function(tolua_S,"IsBullet",tolua_Box2D_b2Body_IsBullet00);
+   tolua_function(tolua_S,"SetSleepingAllowed",tolua_Box2D_b2Body_SetSleepingAllowed00);
+   tolua_function(tolua_S,"IsSleepingAllowed",tolua_Box2D_b2Body_IsSleepingAllowed00);
+   tolua_function(tolua_S,"SetAwake",tolua_Box2D_b2Body_SetAwake00);
+   tolua_function(tolua_S,"IsAwake",tolua_Box2D_b2Body_IsAwake00);
+   tolua_function(tolua_S,"SetActive",tolua_Box2D_b2Body_SetActive00);
+   tolua_function(tolua_S,"IsActive",tolua_Box2D_b2Body_IsActive00);
+   tolua_function(tolua_S,"SetFixedRotation",tolua_Box2D_b2Body_SetFixedRotation00);
+   tolua_function(tolua_S,"IsFixedRotation",tolua_Box2D_b2Body_IsFixedRotation00);
+   tolua_function(tolua_S,"GetFixtureList",tolua_Box2D_b2Body_GetFixtureList00);
+   tolua_function(tolua_S,"GetFixtureList",tolua_Box2D_b2Body_GetFixtureList01);
+   tolua_function(tolua_S,"GetJointList",tolua_Box2D_b2Body_GetJointList00);
+   tolua_function(tolua_S,"GetJointList",tolua_Box2D_b2Body_GetJointList01);
+   tolua_function(tolua_S,"GetContactList",tolua_Box2D_b2Body_GetContactList00);
+   tolua_function(tolua_S,"GetContactList",tolua_Box2D_b2Body_GetContactList01);
+   tolua_function(tolua_S,"GetNext",tolua_Box2D_b2Body_GetNext00);
+   tolua_function(tolua_S,"GetNext",tolua_Box2D_b2Body_GetNext01);
+   tolua_function(tolua_S,"GetUserData",tolua_Box2D_b2Body_GetUserData00);
+   tolua_function(tolua_S,"SetUserData",tolua_Box2D_b2Body_SetUserData00);
+   tolua_function(tolua_S,"GetWorld",tolua_Box2D_b2Body_GetWorld00);
+   tolua_function(tolua_S,"GetWorld",tolua_Box2D_b2Body_GetWorld01);
+   tolua_function(tolua_S,"Dump",tolua_Box2D_b2Body_Dump00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2Pair","b2Pair","",NULL);
   tolua_beginmodule(tolua_S,"b2Pair");
@@ -30861,21 +30925,21 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   #endif
   tolua_beginmodule(tolua_S,"b2BroadPhase");
    tolua_constant(tolua_S,"e_nullProxy",b2BroadPhase::e_nullProxy);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2BroadPhase_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2BroadPhase_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2BroadPhase_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2BroadPhase_delete00);
-   tolua_function(tolua_S,"CreateProxy",tolua_LuaBox2D_b2BroadPhase_CreateProxy00);
-   tolua_function(tolua_S,"DestroyProxy",tolua_LuaBox2D_b2BroadPhase_DestroyProxy00);
-   tolua_function(tolua_S,"MoveProxy",tolua_LuaBox2D_b2BroadPhase_MoveProxy00);
-   tolua_function(tolua_S,"TouchProxy",tolua_LuaBox2D_b2BroadPhase_TouchProxy00);
-   tolua_function(tolua_S,"GetFatAABB",tolua_LuaBox2D_b2BroadPhase_GetFatAABB00);
-   tolua_function(tolua_S,"GetUserData",tolua_LuaBox2D_b2BroadPhase_GetUserData00);
-   tolua_function(tolua_S,"TestOverlap",tolua_LuaBox2D_b2BroadPhase_TestOverlap00);
-   tolua_function(tolua_S,"GetProxyCount",tolua_LuaBox2D_b2BroadPhase_GetProxyCount00);
-   tolua_function(tolua_S,"GetTreeHeight",tolua_LuaBox2D_b2BroadPhase_GetTreeHeight00);
-   tolua_function(tolua_S,"GetTreeBalance",tolua_LuaBox2D_b2BroadPhase_GetTreeBalance00);
-   tolua_function(tolua_S,"GetTreeQuality",tolua_LuaBox2D_b2BroadPhase_GetTreeQuality00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2BroadPhase_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2BroadPhase_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2BroadPhase_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2BroadPhase_delete00);
+   tolua_function(tolua_S,"CreateProxy",tolua_Box2D_b2BroadPhase_CreateProxy00);
+   tolua_function(tolua_S,"DestroyProxy",tolua_Box2D_b2BroadPhase_DestroyProxy00);
+   tolua_function(tolua_S,"MoveProxy",tolua_Box2D_b2BroadPhase_MoveProxy00);
+   tolua_function(tolua_S,"TouchProxy",tolua_Box2D_b2BroadPhase_TouchProxy00);
+   tolua_function(tolua_S,"GetFatAABB",tolua_Box2D_b2BroadPhase_GetFatAABB00);
+   tolua_function(tolua_S,"GetUserData",tolua_Box2D_b2BroadPhase_GetUserData00);
+   tolua_function(tolua_S,"TestOverlap",tolua_Box2D_b2BroadPhase_TestOverlap00);
+   tolua_function(tolua_S,"GetProxyCount",tolua_Box2D_b2BroadPhase_GetProxyCount00);
+   tolua_function(tolua_S,"GetTreeHeight",tolua_Box2D_b2BroadPhase_GetTreeHeight00);
+   tolua_function(tolua_S,"GetTreeBalance",tolua_Box2D_b2BroadPhase_GetTreeBalance00);
+   tolua_function(tolua_S,"GetTreeQuality",tolua_Box2D_b2BroadPhase_GetTreeQuality00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2ChainAndCircleContact","b2ChainAndCircleContact","b2Contact",tolua_collect_b2ChainAndCircleContact);
@@ -30883,13 +30947,13 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2ChainAndCircleContact","b2ChainAndCircleContact","b2Contact",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2ChainAndCircleContact");
-   tolua_function(tolua_S,"Create",tolua_LuaBox2D_b2ChainAndCircleContact_Create00);
-   tolua_function(tolua_S,"Destroy",tolua_LuaBox2D_b2ChainAndCircleContact_Destroy00);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2ChainAndCircleContact_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2ChainAndCircleContact_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2ChainAndCircleContact_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2ChainAndCircleContact_delete00);
-   tolua_function(tolua_S,"Evaluate",tolua_LuaBox2D_b2ChainAndCircleContact_Evaluate00);
+   tolua_function(tolua_S,"Create",tolua_Box2D_b2ChainAndCircleContact_Create00);
+   tolua_function(tolua_S,"Destroy",tolua_Box2D_b2ChainAndCircleContact_Destroy00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2ChainAndCircleContact_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2ChainAndCircleContact_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2ChainAndCircleContact_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2ChainAndCircleContact_delete00);
+   tolua_function(tolua_S,"Evaluate",tolua_Box2D_b2ChainAndCircleContact_Evaluate00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2ChainAndPolygonContact","b2ChainAndPolygonContact","b2Contact",tolua_collect_b2ChainAndPolygonContact);
@@ -30897,13 +30961,13 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2ChainAndPolygonContact","b2ChainAndPolygonContact","b2Contact",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2ChainAndPolygonContact");
-   tolua_function(tolua_S,"Create",tolua_LuaBox2D_b2ChainAndPolygonContact_Create00);
-   tolua_function(tolua_S,"Destroy",tolua_LuaBox2D_b2ChainAndPolygonContact_Destroy00);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2ChainAndPolygonContact_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2ChainAndPolygonContact_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2ChainAndPolygonContact_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2ChainAndPolygonContact_delete00);
-   tolua_function(tolua_S,"Evaluate",tolua_LuaBox2D_b2ChainAndPolygonContact_Evaluate00);
+   tolua_function(tolua_S,"Create",tolua_Box2D_b2ChainAndPolygonContact_Create00);
+   tolua_function(tolua_S,"Destroy",tolua_Box2D_b2ChainAndPolygonContact_Destroy00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2ChainAndPolygonContact_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2ChainAndPolygonContact_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2ChainAndPolygonContact_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2ChainAndPolygonContact_delete00);
+   tolua_function(tolua_S,"Evaluate",tolua_Box2D_b2ChainAndPolygonContact_Evaluate00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2EdgeShape","b2EdgeShape","b2Shape",tolua_collect_b2EdgeShape);
@@ -30911,16 +30975,16 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2EdgeShape","b2EdgeShape","b2Shape",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2EdgeShape");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2EdgeShape_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2EdgeShape_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2EdgeShape_new00_local);
-   tolua_function(tolua_S,"Set",tolua_LuaBox2D_b2EdgeShape_Set00);
-   tolua_function(tolua_S,"Clone",tolua_LuaBox2D_b2EdgeShape_Clone00);
-   tolua_function(tolua_S,"GetChildCount",tolua_LuaBox2D_b2EdgeShape_GetChildCount00);
-   tolua_function(tolua_S,"TestPoint",tolua_LuaBox2D_b2EdgeShape_TestPoint00);
-   tolua_function(tolua_S,"RayCast",tolua_LuaBox2D_b2EdgeShape_RayCast00);
-   tolua_function(tolua_S,"ComputeAABB",tolua_LuaBox2D_b2EdgeShape_ComputeAABB00);
-   tolua_function(tolua_S,"ComputeMass",tolua_LuaBox2D_b2EdgeShape_ComputeMass00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2EdgeShape_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2EdgeShape_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2EdgeShape_new00_local);
+   tolua_function(tolua_S,"Set",tolua_Box2D_b2EdgeShape_Set00);
+   tolua_function(tolua_S,"Clone",tolua_Box2D_b2EdgeShape_Clone00);
+   tolua_function(tolua_S,"GetChildCount",tolua_Box2D_b2EdgeShape_GetChildCount00);
+   tolua_function(tolua_S,"TestPoint",tolua_Box2D_b2EdgeShape_TestPoint00);
+   tolua_function(tolua_S,"RayCast",tolua_Box2D_b2EdgeShape_RayCast00);
+   tolua_function(tolua_S,"ComputeAABB",tolua_Box2D_b2EdgeShape_ComputeAABB00);
+   tolua_function(tolua_S,"ComputeMass",tolua_Box2D_b2EdgeShape_ComputeMass00);
    tolua_variable(tolua_S,"m_vertex1",tolua_get_b2EdgeShape_m_vertex1,tolua_set_b2EdgeShape_m_vertex1);
    tolua_variable(tolua_S,"m_vertex2",tolua_get_b2EdgeShape_m_vertex2,tolua_set_b2EdgeShape_m_vertex2);
    tolua_variable(tolua_S,"m_vertex0",tolua_get_b2EdgeShape_m_vertex0,tolua_set_b2EdgeShape_m_vertex0);
@@ -30934,21 +30998,21 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2ChainShape","b2ChainShape","b2Shape",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2ChainShape");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2ChainShape_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2ChainShape_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2ChainShape_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2ChainShape_delete00);
-   tolua_function(tolua_S,"CreateLoop",tolua_LuaBox2D_b2ChainShape_CreateLoop00);
-   tolua_function(tolua_S,"CreateChain",tolua_LuaBox2D_b2ChainShape_CreateChain00);
-   tolua_function(tolua_S,"SetPrevVertex",tolua_LuaBox2D_b2ChainShape_SetPrevVertex00);
-   tolua_function(tolua_S,"SetNextVertex",tolua_LuaBox2D_b2ChainShape_SetNextVertex00);
-   tolua_function(tolua_S,"Clone",tolua_LuaBox2D_b2ChainShape_Clone00);
-   tolua_function(tolua_S,"GetChildCount",tolua_LuaBox2D_b2ChainShape_GetChildCount00);
-   tolua_function(tolua_S,"GetChildEdge",tolua_LuaBox2D_b2ChainShape_GetChildEdge00);
-   tolua_function(tolua_S,"TestPoint",tolua_LuaBox2D_b2ChainShape_TestPoint00);
-   tolua_function(tolua_S,"RayCast",tolua_LuaBox2D_b2ChainShape_RayCast00);
-   tolua_function(tolua_S,"ComputeAABB",tolua_LuaBox2D_b2ChainShape_ComputeAABB00);
-   tolua_function(tolua_S,"ComputeMass",tolua_LuaBox2D_b2ChainShape_ComputeMass00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2ChainShape_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2ChainShape_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2ChainShape_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2ChainShape_delete00);
+   tolua_function(tolua_S,"CreateLoop",tolua_Box2D_b2ChainShape_CreateLoop00);
+   tolua_function(tolua_S,"CreateChain",tolua_Box2D_b2ChainShape_CreateChain00);
+   tolua_function(tolua_S,"SetPrevVertex",tolua_Box2D_b2ChainShape_SetPrevVertex00);
+   tolua_function(tolua_S,"SetNextVertex",tolua_Box2D_b2ChainShape_SetNextVertex00);
+   tolua_function(tolua_S,"Clone",tolua_Box2D_b2ChainShape_Clone00);
+   tolua_function(tolua_S,"GetChildCount",tolua_Box2D_b2ChainShape_GetChildCount00);
+   tolua_function(tolua_S,"GetChildEdge",tolua_Box2D_b2ChainShape_GetChildEdge00);
+   tolua_function(tolua_S,"TestPoint",tolua_Box2D_b2ChainShape_TestPoint00);
+   tolua_function(tolua_S,"RayCast",tolua_Box2D_b2ChainShape_RayCast00);
+   tolua_function(tolua_S,"ComputeAABB",tolua_Box2D_b2ChainShape_ComputeAABB00);
+   tolua_function(tolua_S,"ComputeMass",tolua_Box2D_b2ChainShape_ComputeMass00);
    tolua_variable(tolua_S,"m_vertices",tolua_get_b2ChainShape_m_vertices_ptr,tolua_set_b2ChainShape_m_vertices_ptr);
    tolua_variable(tolua_S,"m_count",tolua_get_b2ChainShape_m_count,tolua_set_b2ChainShape_m_count);
    tolua_variable(tolua_S,"m_prevVertex",tolua_get_b2ChainShape_m_prevVertex,tolua_set_b2ChainShape_m_prevVertex);
@@ -30962,13 +31026,13 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2CircleContact","b2CircleContact","b2Contact",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2CircleContact");
-   tolua_function(tolua_S,"Create",tolua_LuaBox2D_b2CircleContact_Create00);
-   tolua_function(tolua_S,"Destroy",tolua_LuaBox2D_b2CircleContact_Destroy00);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2CircleContact_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2CircleContact_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2CircleContact_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2CircleContact_delete00);
-   tolua_function(tolua_S,"Evaluate",tolua_LuaBox2D_b2CircleContact_Evaluate00);
+   tolua_function(tolua_S,"Create",tolua_Box2D_b2CircleContact_Create00);
+   tolua_function(tolua_S,"Destroy",tolua_Box2D_b2CircleContact_Destroy00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2CircleContact_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2CircleContact_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2CircleContact_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2CircleContact_delete00);
+   tolua_function(tolua_S,"Evaluate",tolua_Box2D_b2CircleContact_Evaluate00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2CircleShape","b2CircleShape","b2Shape",tolua_collect_b2CircleShape);
@@ -30976,19 +31040,19 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2CircleShape","b2CircleShape","b2Shape",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2CircleShape");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2CircleShape_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2CircleShape_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2CircleShape_new00_local);
-   tolua_function(tolua_S,"Clone",tolua_LuaBox2D_b2CircleShape_Clone00);
-   tolua_function(tolua_S,"GetChildCount",tolua_LuaBox2D_b2CircleShape_GetChildCount00);
-   tolua_function(tolua_S,"TestPoint",tolua_LuaBox2D_b2CircleShape_TestPoint00);
-   tolua_function(tolua_S,"RayCast",tolua_LuaBox2D_b2CircleShape_RayCast00);
-   tolua_function(tolua_S,"ComputeAABB",tolua_LuaBox2D_b2CircleShape_ComputeAABB00);
-   tolua_function(tolua_S,"ComputeMass",tolua_LuaBox2D_b2CircleShape_ComputeMass00);
-   tolua_function(tolua_S,"GetSupport",tolua_LuaBox2D_b2CircleShape_GetSupport00);
-   tolua_function(tolua_S,"GetSupportVertex",tolua_LuaBox2D_b2CircleShape_GetSupportVertex00);
-   tolua_function(tolua_S,"GetVertexCount",tolua_LuaBox2D_b2CircleShape_GetVertexCount00);
-   tolua_function(tolua_S,"GetVertex",tolua_LuaBox2D_b2CircleShape_GetVertex00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2CircleShape_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2CircleShape_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2CircleShape_new00_local);
+   tolua_function(tolua_S,"Clone",tolua_Box2D_b2CircleShape_Clone00);
+   tolua_function(tolua_S,"GetChildCount",tolua_Box2D_b2CircleShape_GetChildCount00);
+   tolua_function(tolua_S,"TestPoint",tolua_Box2D_b2CircleShape_TestPoint00);
+   tolua_function(tolua_S,"RayCast",tolua_Box2D_b2CircleShape_RayCast00);
+   tolua_function(tolua_S,"ComputeAABB",tolua_Box2D_b2CircleShape_ComputeAABB00);
+   tolua_function(tolua_S,"ComputeMass",tolua_Box2D_b2CircleShape_ComputeMass00);
+   tolua_function(tolua_S,"GetSupport",tolua_Box2D_b2CircleShape_GetSupport00);
+   tolua_function(tolua_S,"GetSupportVertex",tolua_Box2D_b2CircleShape_GetSupportVertex00);
+   tolua_function(tolua_S,"GetVertexCount",tolua_Box2D_b2CircleShape_GetVertexCount00);
+   tolua_function(tolua_S,"GetVertex",tolua_Box2D_b2CircleShape_GetVertex00);
    tolua_variable(tolua_S,"m_p",tolua_get_b2CircleShape_m_p,tolua_set_b2CircleShape_m_p);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
@@ -31002,14 +31066,14 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
    tolua_constant(tolua_S,"e_polygon",b2Shape::e_polygon);
    tolua_constant(tolua_S,"e_chain",b2Shape::e_chain);
    tolua_constant(tolua_S,"e_typeCount",b2Shape::e_typeCount);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2Shape_delete00);
-   tolua_function(tolua_S,"Clone",tolua_LuaBox2D_b2Shape_Clone00);
-   tolua_function(tolua_S,"GetType",tolua_LuaBox2D_b2Shape_GetType00);
-   tolua_function(tolua_S,"GetChildCount",tolua_LuaBox2D_b2Shape_GetChildCount00);
-   tolua_function(tolua_S,"TestPoint",tolua_LuaBox2D_b2Shape_TestPoint00);
-   tolua_function(tolua_S,"RayCast",tolua_LuaBox2D_b2Shape_RayCast00);
-   tolua_function(tolua_S,"ComputeAABB",tolua_LuaBox2D_b2Shape_ComputeAABB00);
-   tolua_function(tolua_S,"ComputeMass",tolua_LuaBox2D_b2Shape_ComputeMass00);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2Shape_delete00);
+   tolua_function(tolua_S,"Clone",tolua_Box2D_b2Shape_Clone00);
+   tolua_function(tolua_S,"GetType",tolua_Box2D_b2Shape_GetType00);
+   tolua_function(tolua_S,"GetChildCount",tolua_Box2D_b2Shape_GetChildCount00);
+   tolua_function(tolua_S,"TestPoint",tolua_Box2D_b2Shape_TestPoint00);
+   tolua_function(tolua_S,"RayCast",tolua_Box2D_b2Shape_RayCast00);
+   tolua_function(tolua_S,"ComputeAABB",tolua_Box2D_b2Shape_ComputeAABB00);
+   tolua_function(tolua_S,"ComputeMass",tolua_Box2D_b2Shape_ComputeMass00);
    tolua_variable(tolua_S,"m_type",tolua_get_b2Shape_m_type,tolua_set_b2Shape_m_type);
    tolua_variable(tolua_S,"m_radius",tolua_get_b2Shape_m_radius,tolua_set_b2Shape_m_radius);
   tolua_endmodule(tolua_S);
@@ -31019,23 +31083,23 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2PolygonShape","b2PolygonShape","b2Shape",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2PolygonShape");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2PolygonShape_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2PolygonShape_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2PolygonShape_new00_local);
-   tolua_function(tolua_S,"Clone",tolua_LuaBox2D_b2PolygonShape_Clone00);
-   tolua_function(tolua_S,"GetChildCount",tolua_LuaBox2D_b2PolygonShape_GetChildCount00);
-   tolua_function(tolua_S,"Set",tolua_LuaBox2D_b2PolygonShape_Set00);
-   tolua_function(tolua_S,"SetAsBox",tolua_LuaBox2D_b2PolygonShape_SetAsBox00);
-   tolua_function(tolua_S,"SetAsBox",tolua_LuaBox2D_b2PolygonShape_SetAsBox01);
-   tolua_function(tolua_S,"TestPoint",tolua_LuaBox2D_b2PolygonShape_TestPoint00);
-   tolua_function(tolua_S,"RayCast",tolua_LuaBox2D_b2PolygonShape_RayCast00);
-   tolua_function(tolua_S,"ComputeAABB",tolua_LuaBox2D_b2PolygonShape_ComputeAABB00);
-   tolua_function(tolua_S,"ComputeMass",tolua_LuaBox2D_b2PolygonShape_ComputeMass00);
-   tolua_function(tolua_S,"GetVertexCount",tolua_LuaBox2D_b2PolygonShape_GetVertexCount00);
-   tolua_function(tolua_S,"GetVertex",tolua_LuaBox2D_b2PolygonShape_GetVertex00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2PolygonShape_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2PolygonShape_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2PolygonShape_new00_local);
+   tolua_function(tolua_S,"Clone",tolua_Box2D_b2PolygonShape_Clone00);
+   tolua_function(tolua_S,"GetChildCount",tolua_Box2D_b2PolygonShape_GetChildCount00);
+   tolua_function(tolua_S,"Set",tolua_Box2D_b2PolygonShape_Set00);
+   tolua_function(tolua_S,"SetAsBox",tolua_Box2D_b2PolygonShape_SetAsBox00);
+   tolua_function(tolua_S,"SetAsBox",tolua_Box2D_b2PolygonShape_SetAsBox01);
+   tolua_function(tolua_S,"TestPoint",tolua_Box2D_b2PolygonShape_TestPoint00);
+   tolua_function(tolua_S,"RayCast",tolua_Box2D_b2PolygonShape_RayCast00);
+   tolua_function(tolua_S,"ComputeAABB",tolua_Box2D_b2PolygonShape_ComputeAABB00);
+   tolua_function(tolua_S,"ComputeMass",tolua_Box2D_b2PolygonShape_ComputeMass00);
+   tolua_function(tolua_S,"GetVertexCount",tolua_Box2D_b2PolygonShape_GetVertexCount00);
+   tolua_function(tolua_S,"GetVertex",tolua_Box2D_b2PolygonShape_GetVertex00);
    tolua_variable(tolua_S,"m_centroid",tolua_get_b2PolygonShape_m_centroid,tolua_set_b2PolygonShape_m_centroid);
-   tolua_array(tolua_S,"m_vertices",tolua_get_LuaBox2D_b2PolygonShape_m_vertices,tolua_set_LuaBox2D_b2PolygonShape_m_vertices);
-   tolua_array(tolua_S,"m_normals",tolua_get_LuaBox2D_b2PolygonShape_m_normals,tolua_set_LuaBox2D_b2PolygonShape_m_normals);
+   tolua_array(tolua_S,"m_vertices",tolua_get_Box2D_b2PolygonShape_m_vertices,tolua_set_Box2D_b2PolygonShape_m_vertices);
+   tolua_array(tolua_S,"m_normals",tolua_get_Box2D_b2PolygonShape_m_normals,tolua_set_Box2D_b2PolygonShape_m_normals);
    tolua_variable(tolua_S,"m_vertexCount",tolua_get_b2PolygonShape_m_vertexCount,tolua_set_b2PolygonShape_m_vertexCount);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2ContactFeature","b2ContactFeature","",NULL);
@@ -31068,17 +31132,24 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
    tolua_constant(tolua_S,"e_circles",b2Manifold::e_circles);
    tolua_constant(tolua_S,"e_faceA",b2Manifold::e_faceA);
    tolua_constant(tolua_S,"e_faceB",b2Manifold::e_faceB);
-   tolua_array(tolua_S,"points",tolua_get_LuaBox2D_b2Manifold_points,tolua_set_LuaBox2D_b2Manifold_points);
+   tolua_array(tolua_S,"points",tolua_get_Box2D_b2Manifold_points,tolua_set_Box2D_b2Manifold_points);
    tolua_variable(tolua_S,"localNormal",tolua_get_b2Manifold_localNormal,tolua_set_b2Manifold_localNormal);
    tolua_variable(tolua_S,"localPoint",tolua_get_b2Manifold_localPoint,tolua_set_b2Manifold_localPoint);
    tolua_variable(tolua_S,"type",tolua_get_b2Manifold_type,tolua_set_b2Manifold_type);
    tolua_variable(tolua_S,"pointCount",tolua_get_b2Manifold_pointCount,tolua_set_b2Manifold_pointCount);
   tolua_endmodule(tolua_S);
+  #ifdef __cplusplus
+  tolua_cclass(tolua_S,"b2WorldManifold","b2WorldManifold","",tolua_collect_b2WorldManifold);
+  #else
   tolua_cclass(tolua_S,"b2WorldManifold","b2WorldManifold","",NULL);
+  #endif
   tolua_beginmodule(tolua_S,"b2WorldManifold");
-   tolua_function(tolua_S,"Initialize",tolua_LuaBox2D_b2WorldManifold_Initialize00);
+   tolua_function(tolua_S,"Initialize",tolua_Box2D_b2WorldManifold_Initialize00);
    tolua_variable(tolua_S,"normal",tolua_get_b2WorldManifold_normal,tolua_set_b2WorldManifold_normal);
-   tolua_array(tolua_S,"points",tolua_get_LuaBox2D_b2WorldManifold_points,tolua_set_LuaBox2D_b2WorldManifold_points);
+   tolua_array(tolua_S,"points",tolua_get_Box2D_b2WorldManifold_points,tolua_set_Box2D_b2WorldManifold_points);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2WorldManifold_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2WorldManifold_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2WorldManifold_new00_local);
   tolua_endmodule(tolua_S);
   tolua_constant(tolua_S,"b2_nullState",b2_nullState);
   tolua_constant(tolua_S,"b2_addState",b2_addState);
@@ -31106,37 +31177,37 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2AABB","b2AABB","",NULL);
   tolua_beginmodule(tolua_S,"b2AABB");
-   tolua_function(tolua_S,"IsValid",tolua_LuaBox2D_b2AABB_IsValid00);
-   tolua_function(tolua_S,"GetCenter",tolua_LuaBox2D_b2AABB_GetCenter00);
-   tolua_function(tolua_S,"GetExtents",tolua_LuaBox2D_b2AABB_GetExtents00);
-   tolua_function(tolua_S,"GetPerimeter",tolua_LuaBox2D_b2AABB_GetPerimeter00);
-   tolua_function(tolua_S,"Combine",tolua_LuaBox2D_b2AABB_Combine00);
-   tolua_function(tolua_S,"Combine",tolua_LuaBox2D_b2AABB_Combine01);
-   tolua_function(tolua_S,"Contains",tolua_LuaBox2D_b2AABB_Contains00);
-   tolua_function(tolua_S,"RayCast",tolua_LuaBox2D_b2AABB_RayCast00);
+   tolua_function(tolua_S,"IsValid",tolua_Box2D_b2AABB_IsValid00);
+   tolua_function(tolua_S,"GetCenter",tolua_Box2D_b2AABB_GetCenter00);
+   tolua_function(tolua_S,"GetExtents",tolua_Box2D_b2AABB_GetExtents00);
+   tolua_function(tolua_S,"GetPerimeter",tolua_Box2D_b2AABB_GetPerimeter00);
+   tolua_function(tolua_S,"Combine",tolua_Box2D_b2AABB_Combine00);
+   tolua_function(tolua_S,"Combine",tolua_Box2D_b2AABB_Combine01);
+   tolua_function(tolua_S,"Contains",tolua_Box2D_b2AABB_Contains00);
+   tolua_function(tolua_S,"RayCast",tolua_Box2D_b2AABB_RayCast00);
    tolua_variable(tolua_S,"lowerBound",tolua_get_b2AABB_lowerBound,tolua_set_b2AABB_lowerBound);
    tolua_variable(tolua_S,"upperBound",tolua_get_b2AABB_upperBound,tolua_set_b2AABB_upperBound);
   tolua_endmodule(tolua_S);
-  tolua_function(tolua_S,"b2CollideCircles",tolua_LuaBox2D_b2CollideCircles00);
-  tolua_function(tolua_S,"b2CollidePolygonAndCircle",tolua_LuaBox2D_b2CollidePolygonAndCircle00);
-  tolua_function(tolua_S,"b2CollidePolygons",tolua_LuaBox2D_b2CollidePolygons00);
-  tolua_function(tolua_S,"b2CollideEdgeAndCircle",tolua_LuaBox2D_b2CollideEdgeAndCircle00);
-  tolua_function(tolua_S,"b2CollideEdgeAndPolygon",tolua_LuaBox2D_b2CollideEdgeAndPolygon00);
-  tolua_function(tolua_S,"b2ClipSegmentToLine",tolua_LuaBox2D_b2ClipSegmentToLine00);
-  tolua_function(tolua_S,"b2TestOverlap",tolua_LuaBox2D_b2TestOverlap00);
+  tolua_function(tolua_S,"b2CollideCircles",tolua_Box2D_b2CollideCircles00);
+  tolua_function(tolua_S,"b2CollidePolygonAndCircle",tolua_Box2D_b2CollidePolygonAndCircle00);
+  tolua_function(tolua_S,"b2CollidePolygons",tolua_Box2D_b2CollidePolygons00);
+  tolua_function(tolua_S,"b2CollideEdgeAndCircle",tolua_Box2D_b2CollideEdgeAndCircle00);
+  tolua_function(tolua_S,"b2CollideEdgeAndPolygon",tolua_Box2D_b2CollideEdgeAndPolygon00);
+  tolua_function(tolua_S,"b2ClipSegmentToLine",tolua_Box2D_b2ClipSegmentToLine00);
+  tolua_function(tolua_S,"b2TestOverlap",tolua_Box2D_b2TestOverlap00);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2StackAllocator","b2StackAllocator","",tolua_collect_b2StackAllocator);
   #else
   tolua_cclass(tolua_S,"b2StackAllocator","b2StackAllocator","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2StackAllocator");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2StackAllocator_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2StackAllocator_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2StackAllocator_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2StackAllocator_delete00);
-   tolua_function(tolua_S,"Allocate",tolua_LuaBox2D_b2StackAllocator_Allocate00);
-   tolua_function(tolua_S,"Free",tolua_LuaBox2D_b2StackAllocator_Free00);
-   tolua_function(tolua_S,"GetMaxAllocation",tolua_LuaBox2D_b2StackAllocator_GetMaxAllocation00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2StackAllocator_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2StackAllocator_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2StackAllocator_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2StackAllocator_delete00);
+   tolua_function(tolua_S,"Allocate",tolua_Box2D_b2StackAllocator_Allocate00);
+   tolua_function(tolua_S,"Free",tolua_Box2D_b2StackAllocator_Free00);
+   tolua_function(tolua_S,"GetMaxAllocation",tolua_Box2D_b2StackAllocator_GetMaxAllocation00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2ContactListener","b2ContactListener","",tolua_collect_b2ContactListener);
@@ -31144,11 +31215,11 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2ContactListener","b2ContactListener","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2ContactListener");
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2ContactListener_delete00);
-   tolua_function(tolua_S,"BeginContact",tolua_LuaBox2D_b2ContactListener_BeginContact00);
-   tolua_function(tolua_S,"EndContact",tolua_LuaBox2D_b2ContactListener_EndContact00);
-   tolua_function(tolua_S,"PreSolve",tolua_LuaBox2D_b2ContactListener_PreSolve00);
-   tolua_function(tolua_S,"PostSolve",tolua_LuaBox2D_b2ContactListener_PostSolve00);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2ContactListener_delete00);
+   tolua_function(tolua_S,"BeginContact",tolua_Box2D_b2ContactListener_BeginContact00);
+   tolua_function(tolua_S,"EndContact",tolua_Box2D_b2ContactListener_EndContact00);
+   tolua_function(tolua_S,"PreSolve",tolua_Box2D_b2ContactListener_PreSolve00);
+   tolua_function(tolua_S,"PostSolve",tolua_Box2D_b2ContactListener_PostSolve00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2ContactRegister","b2ContactRegister","",NULL);
   tolua_beginmodule(tolua_S,"b2ContactRegister");
@@ -31162,8 +31233,8 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2ContactFilter","b2ContactFilter","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2ContactFilter");
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2ContactFilter_delete00);
-   tolua_function(tolua_S,"ShouldCollide",tolua_LuaBox2D_b2ContactFilter_ShouldCollide00);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2ContactFilter_delete00);
+   tolua_function(tolua_S,"ShouldCollide",tolua_Box2D_b2ContactFilter_ShouldCollide00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2ContactManager","b2ContactManager","",tolua_collect_b2ContactManager);
@@ -31171,13 +31242,13 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2ContactManager","b2ContactManager","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2ContactManager");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2ContactManager_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2ContactManager_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2ContactManager_new00_local);
-   tolua_function(tolua_S,"AddPair",tolua_LuaBox2D_b2ContactManager_AddPair00);
-   tolua_function(tolua_S,"FindNewContacts",tolua_LuaBox2D_b2ContactManager_FindNewContacts00);
-   tolua_function(tolua_S,"Destroy",tolua_LuaBox2D_b2ContactManager_Destroy00);
-   tolua_function(tolua_S,"Collide",tolua_LuaBox2D_b2ContactManager_Collide00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2ContactManager_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2ContactManager_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2ContactManager_new00_local);
+   tolua_function(tolua_S,"AddPair",tolua_Box2D_b2ContactManager_AddPair00);
+   tolua_function(tolua_S,"FindNewContacts",tolua_Box2D_b2ContactManager_FindNewContacts00);
+   tolua_function(tolua_S,"Destroy",tolua_Box2D_b2ContactManager_Destroy00);
+   tolua_function(tolua_S,"Collide",tolua_Box2D_b2ContactManager_Collide00);
    tolua_variable(tolua_S,"m_broadPhase",tolua_get_b2ContactManager_m_broadPhase,tolua_set_b2ContactManager_m_broadPhase);
    tolua_variable(tolua_S,"m_contactList",tolua_get_b2ContactManager_m_contactList_ptr,tolua_set_b2ContactManager_m_contactList_ptr);
    tolua_variable(tolua_S,"m_contactCount",tolua_get_b2ContactManager_m_contactCount,tolua_set_b2ContactManager_m_contactCount);
@@ -31204,7 +31275,7 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2ContactVelocityConstraint","b2ContactVelocityConstraint","",NULL);
   tolua_beginmodule(tolua_S,"b2ContactVelocityConstraint");
-   tolua_array(tolua_S,"points",tolua_get_LuaBox2D_b2ContactVelocityConstraint_points,tolua_set_LuaBox2D_b2ContactVelocityConstraint_points);
+   tolua_array(tolua_S,"points",tolua_get_Box2D_b2ContactVelocityConstraint_points,tolua_set_Box2D_b2ContactVelocityConstraint_points);
    tolua_variable(tolua_S,"normal",tolua_get_b2ContactVelocityConstraint_normal,tolua_set_b2ContactVelocityConstraint_normal);
    tolua_variable(tolua_S,"normalMass",tolua_get_b2ContactVelocityConstraint_normalMass,tolua_set_b2ContactVelocityConstraint_normalMass);
    tolua_variable(tolua_S,"K",tolua_get_b2ContactVelocityConstraint_K,tolua_set_b2ContactVelocityConstraint_K);
@@ -31233,16 +31304,16 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2ContactSolver","b2ContactSolver","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2ContactSolver");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2ContactSolver_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2ContactSolver_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2ContactSolver_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2ContactSolver_delete00);
-   tolua_function(tolua_S,"InitializeVelocityConstraints",tolua_LuaBox2D_b2ContactSolver_InitializeVelocityConstraints00);
-   tolua_function(tolua_S,"WarmStart",tolua_LuaBox2D_b2ContactSolver_WarmStart00);
-   tolua_function(tolua_S,"SolveVelocityConstraints",tolua_LuaBox2D_b2ContactSolver_SolveVelocityConstraints00);
-   tolua_function(tolua_S,"StoreImpulses",tolua_LuaBox2D_b2ContactSolver_StoreImpulses00);
-   tolua_function(tolua_S,"SolvePositionConstraints",tolua_LuaBox2D_b2ContactSolver_SolvePositionConstraints00);
-   tolua_function(tolua_S,"SolveTOIPositionConstraints",tolua_LuaBox2D_b2ContactSolver_SolveTOIPositionConstraints00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2ContactSolver_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2ContactSolver_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2ContactSolver_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2ContactSolver_delete00);
+   tolua_function(tolua_S,"InitializeVelocityConstraints",tolua_Box2D_b2ContactSolver_InitializeVelocityConstraints00);
+   tolua_function(tolua_S,"WarmStart",tolua_Box2D_b2ContactSolver_WarmStart00);
+   tolua_function(tolua_S,"SolveVelocityConstraints",tolua_Box2D_b2ContactSolver_SolveVelocityConstraints00);
+   tolua_function(tolua_S,"StoreImpulses",tolua_Box2D_b2ContactSolver_StoreImpulses00);
+   tolua_function(tolua_S,"SolvePositionConstraints",tolua_Box2D_b2ContactSolver_SolvePositionConstraints00);
+   tolua_function(tolua_S,"SolveTOIPositionConstraints",tolua_Box2D_b2ContactSolver_SolveTOIPositionConstraints00);
    tolua_variable(tolua_S,"m_step",tolua_get_b2ContactSolver_m_step,tolua_set_b2ContactSolver_m_step);
    tolua_variable(tolua_S,"m_positions",tolua_get_b2ContactSolver_m_positions_ptr,tolua_set_b2ContactSolver_m_positions_ptr);
    tolua_variable(tolua_S,"m_velocities",tolua_get_b2ContactSolver_m_velocities_ptr,tolua_set_b2ContactSolver_m_velocities_ptr);
@@ -31257,15 +31328,15 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2DistanceProxy","b2DistanceProxy","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2DistanceProxy");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2DistanceProxy_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2DistanceProxy_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2DistanceProxy_new00_local);
-   tolua_function(tolua_S,"Set",tolua_LuaBox2D_b2DistanceProxy_Set00);
-   tolua_function(tolua_S,"GetSupport",tolua_LuaBox2D_b2DistanceProxy_GetSupport00);
-   tolua_function(tolua_S,"GetSupportVertex",tolua_LuaBox2D_b2DistanceProxy_GetSupportVertex00);
-   tolua_function(tolua_S,"GetVertexCount",tolua_LuaBox2D_b2DistanceProxy_GetVertexCount00);
-   tolua_function(tolua_S,"GetVertex",tolua_LuaBox2D_b2DistanceProxy_GetVertex00);
-   tolua_array(tolua_S,"m_buffer",tolua_get_LuaBox2D_b2DistanceProxy_m_buffer,tolua_set_LuaBox2D_b2DistanceProxy_m_buffer);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2DistanceProxy_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2DistanceProxy_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2DistanceProxy_new00_local);
+   tolua_function(tolua_S,"Set",tolua_Box2D_b2DistanceProxy_Set00);
+   tolua_function(tolua_S,"GetSupport",tolua_Box2D_b2DistanceProxy_GetSupport00);
+   tolua_function(tolua_S,"GetSupportVertex",tolua_Box2D_b2DistanceProxy_GetSupportVertex00);
+   tolua_function(tolua_S,"GetVertexCount",tolua_Box2D_b2DistanceProxy_GetVertexCount00);
+   tolua_function(tolua_S,"GetVertex",tolua_Box2D_b2DistanceProxy_GetVertex00);
+   tolua_array(tolua_S,"m_buffer",tolua_get_Box2D_b2DistanceProxy_m_buffer,tolua_set_Box2D_b2DistanceProxy_m_buffer);
    tolua_variable(tolua_S,"m_vertices",tolua_get_b2DistanceProxy_m_vertices_ptr,NULL);
    tolua_variable(tolua_S,"m_count",tolua_get_b2DistanceProxy_m_count,tolua_set_b2DistanceProxy_m_count);
    tolua_variable(tolua_S,"m_radius",tolua_get_b2DistanceProxy_m_radius,tolua_set_b2DistanceProxy_m_radius);
@@ -31274,8 +31345,8 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_beginmodule(tolua_S,"b2SimplexCache");
    tolua_variable(tolua_S,"metric",tolua_get_b2SimplexCache_metric,tolua_set_b2SimplexCache_metric);
    tolua_variable(tolua_S,"count",tolua_get_b2SimplexCache_count,tolua_set_b2SimplexCache_count);
-   tolua_array(tolua_S,"indexA",tolua_get_LuaBox2D_b2SimplexCache_indexA,tolua_set_LuaBox2D_b2SimplexCache_indexA);
-   tolua_array(tolua_S,"indexB",tolua_get_LuaBox2D_b2SimplexCache_indexB,tolua_set_LuaBox2D_b2SimplexCache_indexB);
+   tolua_array(tolua_S,"indexA",tolua_get_Box2D_b2SimplexCache_indexA,tolua_set_Box2D_b2SimplexCache_indexA);
+   tolua_array(tolua_S,"indexB",tolua_get_Box2D_b2SimplexCache_indexB,tolua_set_Box2D_b2SimplexCache_indexB);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2DistanceInput","b2DistanceInput","",NULL);
   tolua_beginmodule(tolua_S,"b2DistanceInput");
@@ -31292,17 +31363,17 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
    tolua_variable(tolua_S,"distance",tolua_get_b2DistanceOutput_distance,tolua_set_b2DistanceOutput_distance);
    tolua_variable(tolua_S,"iterations",tolua_get_b2DistanceOutput_iterations,tolua_set_b2DistanceOutput_iterations);
   tolua_endmodule(tolua_S);
-  tolua_function(tolua_S,"b2Distance",tolua_LuaBox2D_b2Distance00);
+  tolua_function(tolua_S,"b2Distance",tolua_Box2D_b2Distance00);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2DistanceJointDef","b2DistanceJointDef","b2JointDef",tolua_collect_b2DistanceJointDef);
   #else
   tolua_cclass(tolua_S,"b2DistanceJointDef","b2DistanceJointDef","b2JointDef",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2DistanceJointDef");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2DistanceJointDef_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2DistanceJointDef_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2DistanceJointDef_new00_local);
-   tolua_function(tolua_S,"Initialize",tolua_LuaBox2D_b2DistanceJointDef_Initialize00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2DistanceJointDef_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2DistanceJointDef_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2DistanceJointDef_new00_local);
+   tolua_function(tolua_S,"Initialize",tolua_Box2D_b2DistanceJointDef_Initialize00);
    tolua_variable(tolua_S,"localAnchorA",tolua_get_b2DistanceJointDef_localAnchorA,tolua_set_b2DistanceJointDef_localAnchorA);
    tolua_variable(tolua_S,"localAnchorB",tolua_get_b2DistanceJointDef_localAnchorB,tolua_set_b2DistanceJointDef_localAnchorB);
    tolua_variable(tolua_S,"length",tolua_get_b2DistanceJointDef_length,tolua_set_b2DistanceJointDef_length);
@@ -31311,19 +31382,19 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2DistanceJoint","b2DistanceJoint","b2Joint",NULL);
   tolua_beginmodule(tolua_S,"b2DistanceJoint");
-   tolua_function(tolua_S,"GetAnchorA",tolua_LuaBox2D_b2DistanceJoint_GetAnchorA00);
-   tolua_function(tolua_S,"GetAnchorB",tolua_LuaBox2D_b2DistanceJoint_GetAnchorB00);
-   tolua_function(tolua_S,"GetReactionForce",tolua_LuaBox2D_b2DistanceJoint_GetReactionForce00);
-   tolua_function(tolua_S,"GetReactionTorque",tolua_LuaBox2D_b2DistanceJoint_GetReactionTorque00);
-   tolua_function(tolua_S,"GetLocalAnchorA",tolua_LuaBox2D_b2DistanceJoint_GetLocalAnchorA00);
-   tolua_function(tolua_S,"GetLocalAnchorB",tolua_LuaBox2D_b2DistanceJoint_GetLocalAnchorB00);
-   tolua_function(tolua_S,"SetLength",tolua_LuaBox2D_b2DistanceJoint_SetLength00);
-   tolua_function(tolua_S,"GetLength",tolua_LuaBox2D_b2DistanceJoint_GetLength00);
-   tolua_function(tolua_S,"SetFrequency",tolua_LuaBox2D_b2DistanceJoint_SetFrequency00);
-   tolua_function(tolua_S,"GetFrequency",tolua_LuaBox2D_b2DistanceJoint_GetFrequency00);
-   tolua_function(tolua_S,"SetDampingRatio",tolua_LuaBox2D_b2DistanceJoint_SetDampingRatio00);
-   tolua_function(tolua_S,"GetDampingRatio",tolua_LuaBox2D_b2DistanceJoint_GetDampingRatio00);
-   tolua_function(tolua_S,"Dump",tolua_LuaBox2D_b2DistanceJoint_Dump00);
+   tolua_function(tolua_S,"GetAnchorA",tolua_Box2D_b2DistanceJoint_GetAnchorA00);
+   tolua_function(tolua_S,"GetAnchorB",tolua_Box2D_b2DistanceJoint_GetAnchorB00);
+   tolua_function(tolua_S,"GetReactionForce",tolua_Box2D_b2DistanceJoint_GetReactionForce00);
+   tolua_function(tolua_S,"GetReactionTorque",tolua_Box2D_b2DistanceJoint_GetReactionTorque00);
+   tolua_function(tolua_S,"GetLocalAnchorA",tolua_Box2D_b2DistanceJoint_GetLocalAnchorA00);
+   tolua_function(tolua_S,"GetLocalAnchorB",tolua_Box2D_b2DistanceJoint_GetLocalAnchorB00);
+   tolua_function(tolua_S,"SetLength",tolua_Box2D_b2DistanceJoint_SetLength00);
+   tolua_function(tolua_S,"GetLength",tolua_Box2D_b2DistanceJoint_GetLength00);
+   tolua_function(tolua_S,"SetFrequency",tolua_Box2D_b2DistanceJoint_SetFrequency00);
+   tolua_function(tolua_S,"GetFrequency",tolua_Box2D_b2DistanceJoint_GetFrequency00);
+   tolua_function(tolua_S,"SetDampingRatio",tolua_Box2D_b2DistanceJoint_SetDampingRatio00);
+   tolua_function(tolua_S,"GetDampingRatio",tolua_Box2D_b2DistanceJoint_GetDampingRatio00);
+   tolua_function(tolua_S,"Dump",tolua_Box2D_b2DistanceJoint_Dump00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2Color","b2Color","",tolua_collect_b2Color);
@@ -31331,13 +31402,13 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2Color","b2Color","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2Color");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Color_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Color_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Color_new00_local);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Color_new01);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Color_new01_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Color_new01_local);
-   tolua_function(tolua_S,"Set",tolua_LuaBox2D_b2Color_Set00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Color_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Color_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Color_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Color_new01);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Color_new01_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Color_new01_local);
+   tolua_function(tolua_S,"Set",tolua_Box2D_b2Color_Set00);
    tolua_variable(tolua_S,"r",tolua_get_b2Color_r,tolua_set_b2Color_r);
    tolua_variable(tolua_S,"g",tolua_get_b2Color_g,tolua_set_b2Color_g);
    tolua_variable(tolua_S,"b",tolua_get_b2Color_b,tolua_set_b2Color_b);
@@ -31348,27 +31419,27 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2Draw","b2Draw","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2Draw");
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2Draw_delete00);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2Draw_delete00);
    tolua_constant(tolua_S,"e_shapeBit",b2Draw::e_shapeBit);
    tolua_constant(tolua_S,"e_jointBit",b2Draw::e_jointBit);
    tolua_constant(tolua_S,"e_aabbBit",b2Draw::e_aabbBit);
    tolua_constant(tolua_S,"e_pairBit",b2Draw::e_pairBit);
    tolua_constant(tolua_S,"e_centerOfMassBit",b2Draw::e_centerOfMassBit);
-   tolua_function(tolua_S,"SetFlags",tolua_LuaBox2D_b2Draw_SetFlags00);
-   tolua_function(tolua_S,"GetFlags",tolua_LuaBox2D_b2Draw_GetFlags00);
-   tolua_function(tolua_S,"AppendFlags",tolua_LuaBox2D_b2Draw_AppendFlags00);
-   tolua_function(tolua_S,"ClearFlags",tolua_LuaBox2D_b2Draw_ClearFlags00);
-   tolua_function(tolua_S,"DrawPolygon",tolua_LuaBox2D_b2Draw_DrawPolygon00);
-   tolua_function(tolua_S,"DrawSolidPolygon",tolua_LuaBox2D_b2Draw_DrawSolidPolygon00);
-   tolua_function(tolua_S,"DrawCircle",tolua_LuaBox2D_b2Draw_DrawCircle00);
-   tolua_function(tolua_S,"DrawSolidCircle",tolua_LuaBox2D_b2Draw_DrawSolidCircle00);
-   tolua_function(tolua_S,"DrawSegment",tolua_LuaBox2D_b2Draw_DrawSegment00);
-   tolua_function(tolua_S,"DrawTransform",tolua_LuaBox2D_b2Draw_DrawTransform00);
+   tolua_function(tolua_S,"SetFlags",tolua_Box2D_b2Draw_SetFlags00);
+   tolua_function(tolua_S,"GetFlags",tolua_Box2D_b2Draw_GetFlags00);
+   tolua_function(tolua_S,"AppendFlags",tolua_Box2D_b2Draw_AppendFlags00);
+   tolua_function(tolua_S,"ClearFlags",tolua_Box2D_b2Draw_ClearFlags00);
+   tolua_function(tolua_S,"DrawPolygon",tolua_Box2D_b2Draw_DrawPolygon00);
+   tolua_function(tolua_S,"DrawSolidPolygon",tolua_Box2D_b2Draw_DrawSolidPolygon00);
+   tolua_function(tolua_S,"DrawCircle",tolua_Box2D_b2Draw_DrawCircle00);
+   tolua_function(tolua_S,"DrawSolidCircle",tolua_Box2D_b2Draw_DrawSolidCircle00);
+   tolua_function(tolua_S,"DrawSegment",tolua_Box2D_b2Draw_DrawSegment00);
+   tolua_function(tolua_S,"DrawTransform",tolua_Box2D_b2Draw_DrawTransform00);
   tolua_endmodule(tolua_S);
   tolua_constant(tolua_S,"b2_nullNode",b2_nullNode);
   tolua_cclass(tolua_S,"b2TreeNode","b2TreeNode","",NULL);
   tolua_beginmodule(tolua_S,"b2TreeNode");
-   tolua_function(tolua_S,"IsLeaf",tolua_LuaBox2D_b2TreeNode_IsLeaf00);
+   tolua_function(tolua_S,"IsLeaf",tolua_Box2D_b2TreeNode_IsLeaf00);
    tolua_variable(tolua_S,"aabb",tolua_get_b2TreeNode_aabb,tolua_set_b2TreeNode_aabb);
    tolua_variable(tolua_S,"userData",tolua_get_b2TreeNode_userData,tolua_set_b2TreeNode_userData);
    tolua_variable(tolua_S,"child1",tolua_get_b2TreeNode_child1,tolua_set_b2TreeNode_child1);
@@ -31381,20 +31452,20 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2DynamicTree","b2DynamicTree","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2DynamicTree");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2DynamicTree_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2DynamicTree_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2DynamicTree_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2DynamicTree_delete00);
-   tolua_function(tolua_S,"CreateProxy",tolua_LuaBox2D_b2DynamicTree_CreateProxy00);
-   tolua_function(tolua_S,"DestroyProxy",tolua_LuaBox2D_b2DynamicTree_DestroyProxy00);
-   tolua_function(tolua_S,"MoveProxy",tolua_LuaBox2D_b2DynamicTree_MoveProxy00);
-   tolua_function(tolua_S,"GetUserData",tolua_LuaBox2D_b2DynamicTree_GetUserData00);
-   tolua_function(tolua_S,"GetFatAABB",tolua_LuaBox2D_b2DynamicTree_GetFatAABB00);
-   tolua_function(tolua_S,"Validate",tolua_LuaBox2D_b2DynamicTree_Validate00);
-   tolua_function(tolua_S,"GetHeight",tolua_LuaBox2D_b2DynamicTree_GetHeight00);
-   tolua_function(tolua_S,"GetMaxBalance",tolua_LuaBox2D_b2DynamicTree_GetMaxBalance00);
-   tolua_function(tolua_S,"GetAreaRatio",tolua_LuaBox2D_b2DynamicTree_GetAreaRatio00);
-   tolua_function(tolua_S,"RebuildBottomUp",tolua_LuaBox2D_b2DynamicTree_RebuildBottomUp00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2DynamicTree_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2DynamicTree_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2DynamicTree_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2DynamicTree_delete00);
+   tolua_function(tolua_S,"CreateProxy",tolua_Box2D_b2DynamicTree_CreateProxy00);
+   tolua_function(tolua_S,"DestroyProxy",tolua_Box2D_b2DynamicTree_DestroyProxy00);
+   tolua_function(tolua_S,"MoveProxy",tolua_Box2D_b2DynamicTree_MoveProxy00);
+   tolua_function(tolua_S,"GetUserData",tolua_Box2D_b2DynamicTree_GetUserData00);
+   tolua_function(tolua_S,"GetFatAABB",tolua_Box2D_b2DynamicTree_GetFatAABB00);
+   tolua_function(tolua_S,"Validate",tolua_Box2D_b2DynamicTree_Validate00);
+   tolua_function(tolua_S,"GetHeight",tolua_Box2D_b2DynamicTree_GetHeight00);
+   tolua_function(tolua_S,"GetMaxBalance",tolua_Box2D_b2DynamicTree_GetMaxBalance00);
+   tolua_function(tolua_S,"GetAreaRatio",tolua_Box2D_b2DynamicTree_GetAreaRatio00);
+   tolua_function(tolua_S,"RebuildBottomUp",tolua_Box2D_b2DynamicTree_RebuildBottomUp00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2EdgeAndCircleContact","b2EdgeAndCircleContact","b2Contact",tolua_collect_b2EdgeAndCircleContact);
@@ -31402,13 +31473,13 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2EdgeAndCircleContact","b2EdgeAndCircleContact","b2Contact",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2EdgeAndCircleContact");
-   tolua_function(tolua_S,"Create",tolua_LuaBox2D_b2EdgeAndCircleContact_Create00);
-   tolua_function(tolua_S,"Destroy",tolua_LuaBox2D_b2EdgeAndCircleContact_Destroy00);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2EdgeAndCircleContact_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2EdgeAndCircleContact_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2EdgeAndCircleContact_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2EdgeAndCircleContact_delete00);
-   tolua_function(tolua_S,"Evaluate",tolua_LuaBox2D_b2EdgeAndCircleContact_Evaluate00);
+   tolua_function(tolua_S,"Create",tolua_Box2D_b2EdgeAndCircleContact_Create00);
+   tolua_function(tolua_S,"Destroy",tolua_Box2D_b2EdgeAndCircleContact_Destroy00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2EdgeAndCircleContact_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2EdgeAndCircleContact_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2EdgeAndCircleContact_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2EdgeAndCircleContact_delete00);
+   tolua_function(tolua_S,"Evaluate",tolua_Box2D_b2EdgeAndCircleContact_Evaluate00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2EdgeAndPolygonContact","b2EdgeAndPolygonContact","b2Contact",tolua_collect_b2EdgeAndPolygonContact);
@@ -31416,13 +31487,13 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2EdgeAndPolygonContact","b2EdgeAndPolygonContact","b2Contact",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2EdgeAndPolygonContact");
-   tolua_function(tolua_S,"Create",tolua_LuaBox2D_b2EdgeAndPolygonContact_Create00);
-   tolua_function(tolua_S,"Destroy",tolua_LuaBox2D_b2EdgeAndPolygonContact_Destroy00);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2EdgeAndPolygonContact_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2EdgeAndPolygonContact_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2EdgeAndPolygonContact_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2EdgeAndPolygonContact_delete00);
-   tolua_function(tolua_S,"Evaluate",tolua_LuaBox2D_b2EdgeAndPolygonContact_Evaluate00);
+   tolua_function(tolua_S,"Create",tolua_Box2D_b2EdgeAndPolygonContact_Create00);
+   tolua_function(tolua_S,"Destroy",tolua_Box2D_b2EdgeAndPolygonContact_Destroy00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2EdgeAndPolygonContact_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2EdgeAndPolygonContact_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2EdgeAndPolygonContact_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2EdgeAndPolygonContact_delete00);
+   tolua_function(tolua_S,"Evaluate",tolua_Box2D_b2EdgeAndPolygonContact_Evaluate00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2Filter","b2Filter","",tolua_collect_b2Filter);
@@ -31430,9 +31501,9 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2Filter","b2Filter","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2Filter");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Filter_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Filter_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Filter_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Filter_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Filter_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Filter_new00_local);
    tolua_variable(tolua_S,"categoryBits",tolua_get_b2Filter_categoryBits,tolua_set_b2Filter_categoryBits);
    tolua_variable(tolua_S,"maskBits",tolua_get_b2Filter_maskBits,tolua_set_b2Filter_maskBits);
    tolua_variable(tolua_S,"groupIndex",tolua_get_b2Filter_groupIndex,tolua_set_b2Filter_groupIndex);
@@ -31450,10 +31521,10 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2FrictionJointDef","b2FrictionJointDef","b2JointDef",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2FrictionJointDef");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2FrictionJointDef_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2FrictionJointDef_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2FrictionJointDef_new00_local);
-   tolua_function(tolua_S,"Initialize",tolua_LuaBox2D_b2FrictionJointDef_Initialize00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2FrictionJointDef_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2FrictionJointDef_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2FrictionJointDef_new00_local);
+   tolua_function(tolua_S,"Initialize",tolua_Box2D_b2FrictionJointDef_Initialize00);
    tolua_variable(tolua_S,"localAnchorA",tolua_get_b2FrictionJointDef_localAnchorA,tolua_set_b2FrictionJointDef_localAnchorA);
    tolua_variable(tolua_S,"localAnchorB",tolua_get_b2FrictionJointDef_localAnchorB,tolua_set_b2FrictionJointDef_localAnchorB);
    tolua_variable(tolua_S,"maxForce",tolua_get_b2FrictionJointDef_maxForce,tolua_set_b2FrictionJointDef_maxForce);
@@ -31461,17 +31532,17 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2FrictionJoint","b2FrictionJoint","b2Joint",NULL);
   tolua_beginmodule(tolua_S,"b2FrictionJoint");
-   tolua_function(tolua_S,"GetAnchorA",tolua_LuaBox2D_b2FrictionJoint_GetAnchorA00);
-   tolua_function(tolua_S,"GetAnchorB",tolua_LuaBox2D_b2FrictionJoint_GetAnchorB00);
-   tolua_function(tolua_S,"GetReactionForce",tolua_LuaBox2D_b2FrictionJoint_GetReactionForce00);
-   tolua_function(tolua_S,"GetReactionTorque",tolua_LuaBox2D_b2FrictionJoint_GetReactionTorque00);
-   tolua_function(tolua_S,"GetLocalAnchorA",tolua_LuaBox2D_b2FrictionJoint_GetLocalAnchorA00);
-   tolua_function(tolua_S,"GetLocalAnchorB",tolua_LuaBox2D_b2FrictionJoint_GetLocalAnchorB00);
-   tolua_function(tolua_S,"SetMaxForce",tolua_LuaBox2D_b2FrictionJoint_SetMaxForce00);
-   tolua_function(tolua_S,"GetMaxForce",tolua_LuaBox2D_b2FrictionJoint_GetMaxForce00);
-   tolua_function(tolua_S,"SetMaxTorque",tolua_LuaBox2D_b2FrictionJoint_SetMaxTorque00);
-   tolua_function(tolua_S,"GetMaxTorque",tolua_LuaBox2D_b2FrictionJoint_GetMaxTorque00);
-   tolua_function(tolua_S,"Dump",tolua_LuaBox2D_b2FrictionJoint_Dump00);
+   tolua_function(tolua_S,"GetAnchorA",tolua_Box2D_b2FrictionJoint_GetAnchorA00);
+   tolua_function(tolua_S,"GetAnchorB",tolua_Box2D_b2FrictionJoint_GetAnchorB00);
+   tolua_function(tolua_S,"GetReactionForce",tolua_Box2D_b2FrictionJoint_GetReactionForce00);
+   tolua_function(tolua_S,"GetReactionTorque",tolua_Box2D_b2FrictionJoint_GetReactionTorque00);
+   tolua_function(tolua_S,"GetLocalAnchorA",tolua_Box2D_b2FrictionJoint_GetLocalAnchorA00);
+   tolua_function(tolua_S,"GetLocalAnchorB",tolua_Box2D_b2FrictionJoint_GetLocalAnchorB00);
+   tolua_function(tolua_S,"SetMaxForce",tolua_Box2D_b2FrictionJoint_SetMaxForce00);
+   tolua_function(tolua_S,"GetMaxForce",tolua_Box2D_b2FrictionJoint_GetMaxForce00);
+   tolua_function(tolua_S,"SetMaxTorque",tolua_Box2D_b2FrictionJoint_SetMaxTorque00);
+   tolua_function(tolua_S,"GetMaxTorque",tolua_Box2D_b2FrictionJoint_GetMaxTorque00);
+   tolua_function(tolua_S,"Dump",tolua_Box2D_b2FrictionJoint_Dump00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2GearJointDef","b2GearJointDef","b2JointDef",tolua_collect_b2GearJointDef);
@@ -31479,24 +31550,24 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2GearJointDef","b2GearJointDef","b2JointDef",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2GearJointDef");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2GearJointDef_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2GearJointDef_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2GearJointDef_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2GearJointDef_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2GearJointDef_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2GearJointDef_new00_local);
    tolua_variable(tolua_S,"joint1",tolua_get_b2GearJointDef_joint1_ptr,tolua_set_b2GearJointDef_joint1_ptr);
    tolua_variable(tolua_S,"joint2",tolua_get_b2GearJointDef_joint2_ptr,tolua_set_b2GearJointDef_joint2_ptr);
    tolua_variable(tolua_S,"ratio",tolua_get_b2GearJointDef_ratio,tolua_set_b2GearJointDef_ratio);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2GearJoint","b2GearJoint","b2Joint",NULL);
   tolua_beginmodule(tolua_S,"b2GearJoint");
-   tolua_function(tolua_S,"GetAnchorA",tolua_LuaBox2D_b2GearJoint_GetAnchorA00);
-   tolua_function(tolua_S,"GetAnchorB",tolua_LuaBox2D_b2GearJoint_GetAnchorB00);
-   tolua_function(tolua_S,"GetReactionForce",tolua_LuaBox2D_b2GearJoint_GetReactionForce00);
-   tolua_function(tolua_S,"GetReactionTorque",tolua_LuaBox2D_b2GearJoint_GetReactionTorque00);
-   tolua_function(tolua_S,"GetJoint1",tolua_LuaBox2D_b2GearJoint_GetJoint100);
-   tolua_function(tolua_S,"GetJoint2",tolua_LuaBox2D_b2GearJoint_GetJoint200);
-   tolua_function(tolua_S,"SetRatio",tolua_LuaBox2D_b2GearJoint_SetRatio00);
-   tolua_function(tolua_S,"GetRatio",tolua_LuaBox2D_b2GearJoint_GetRatio00);
-   tolua_function(tolua_S,"Dump",tolua_LuaBox2D_b2GearJoint_Dump00);
+   tolua_function(tolua_S,"GetAnchorA",tolua_Box2D_b2GearJoint_GetAnchorA00);
+   tolua_function(tolua_S,"GetAnchorB",tolua_Box2D_b2GearJoint_GetAnchorB00);
+   tolua_function(tolua_S,"GetReactionForce",tolua_Box2D_b2GearJoint_GetReactionForce00);
+   tolua_function(tolua_S,"GetReactionTorque",tolua_Box2D_b2GearJoint_GetReactionTorque00);
+   tolua_function(tolua_S,"GetJoint1",tolua_Box2D_b2GearJoint_GetJoint100);
+   tolua_function(tolua_S,"GetJoint2",tolua_Box2D_b2GearJoint_GetJoint200);
+   tolua_function(tolua_S,"SetRatio",tolua_Box2D_b2GearJoint_SetRatio00);
+   tolua_function(tolua_S,"GetRatio",tolua_Box2D_b2GearJoint_GetRatio00);
+   tolua_function(tolua_S,"Dump",tolua_Box2D_b2GearJoint_Dump00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2Profile","b2Profile","",NULL);
   tolua_beginmodule(tolua_S,"b2Profile");
@@ -31515,17 +31586,17 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2Island","b2Island","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2Island");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Island_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Island_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Island_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2Island_delete00);
-   tolua_function(tolua_S,"Clear",tolua_LuaBox2D_b2Island_Clear00);
-   tolua_function(tolua_S,"Solve",tolua_LuaBox2D_b2Island_Solve00);
-   tolua_function(tolua_S,"SolveTOI",tolua_LuaBox2D_b2Island_SolveTOI00);
-   tolua_function(tolua_S,"Add",tolua_LuaBox2D_b2Island_Add00);
-   tolua_function(tolua_S,"Add",tolua_LuaBox2D_b2Island_Add01);
-   tolua_function(tolua_S,"Add",tolua_LuaBox2D_b2Island_Add02);
-   tolua_function(tolua_S,"Report",tolua_LuaBox2D_b2Island_Report00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Island_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Island_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Island_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2Island_delete00);
+   tolua_function(tolua_S,"Clear",tolua_Box2D_b2Island_Clear00);
+   tolua_function(tolua_S,"Solve",tolua_Box2D_b2Island_Solve00);
+   tolua_function(tolua_S,"SolveTOI",tolua_Box2D_b2Island_SolveTOI00);
+   tolua_function(tolua_S,"Add",tolua_Box2D_b2Island_Add00);
+   tolua_function(tolua_S,"Add",tolua_Box2D_b2Island_Add01);
+   tolua_function(tolua_S,"Add",tolua_Box2D_b2Island_Add02);
+   tolua_function(tolua_S,"Report",tolua_Box2D_b2Island_Report00);
    tolua_variable(tolua_S,"m_allocator",tolua_get_b2Island_m_allocator_ptr,tolua_set_b2Island_m_allocator_ptr);
    tolua_variable(tolua_S,"m_listener",tolua_get_b2Island_m_listener_ptr,tolua_set_b2Island_m_listener_ptr);
    tolua_variable(tolua_S,"m_positions",tolua_get_b2Island_m_positions_ptr,tolua_set_b2Island_m_positions_ptr);
@@ -31570,9 +31641,9 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2JointDef","b2JointDef","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2JointDef");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2JointDef_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2JointDef_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2JointDef_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2JointDef_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2JointDef_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2JointDef_new00_local);
    tolua_variable(tolua_S,"type",tolua_get_b2JointDef_type,tolua_set_b2JointDef_type);
    tolua_variable(tolua_S,"userData",tolua_get_b2JointDef_userData,tolua_set_b2JointDef_userData);
    tolua_variable(tolua_S,"bodyA",tolua_get_b2JointDef_bodyA_ptr,tolua_set_b2JointDef_bodyA_ptr);
@@ -31585,19 +31656,19 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2Vec2","b2Vec2","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2Vec2");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Vec2_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Vec2_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Vec2_new00_local);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Vec2_new01);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Vec2_new01_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Vec2_new01_local);
-   tolua_function(tolua_S,"SetZero",tolua_LuaBox2D_b2Vec2_SetZero00);
-   tolua_function(tolua_S,"Set",tolua_LuaBox2D_b2Vec2_Set00);
-   tolua_function(tolua_S,"Length",tolua_LuaBox2D_b2Vec2_Length00);
-   tolua_function(tolua_S,"LengthSquared",tolua_LuaBox2D_b2Vec2_LengthSquared00);
-   tolua_function(tolua_S,"Normalize",tolua_LuaBox2D_b2Vec2_Normalize00);
-   tolua_function(tolua_S,"IsValid",tolua_LuaBox2D_b2Vec2_IsValid00);
-   tolua_function(tolua_S,"Skew",tolua_LuaBox2D_b2Vec2_Skew00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Vec2_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Vec2_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Vec2_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Vec2_new01);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Vec2_new01_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Vec2_new01_local);
+   tolua_function(tolua_S,"SetZero",tolua_Box2D_b2Vec2_SetZero00);
+   tolua_function(tolua_S,"Set",tolua_Box2D_b2Vec2_Set00);
+   tolua_function(tolua_S,"Length",tolua_Box2D_b2Vec2_Length00);
+   tolua_function(tolua_S,"LengthSquared",tolua_Box2D_b2Vec2_LengthSquared00);
+   tolua_function(tolua_S,"Normalize",tolua_Box2D_b2Vec2_Normalize00);
+   tolua_function(tolua_S,"IsValid",tolua_Box2D_b2Vec2_IsValid00);
+   tolua_function(tolua_S,"Skew",tolua_Box2D_b2Vec2_Skew00);
    tolua_variable(tolua_S,"x",tolua_get_b2Vec2_x,tolua_set_b2Vec2_x);
    tolua_variable(tolua_S,"y",tolua_get_b2Vec2_y,tolua_set_b2Vec2_y);
   tolua_endmodule(tolua_S);
@@ -31607,14 +31678,14 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2Vec3","b2Vec3","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2Vec3");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Vec3_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Vec3_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Vec3_new00_local);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Vec3_new01);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Vec3_new01_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Vec3_new01_local);
-   tolua_function(tolua_S,"SetZero",tolua_LuaBox2D_b2Vec3_SetZero00);
-   tolua_function(tolua_S,"Set",tolua_LuaBox2D_b2Vec3_Set00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Vec3_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Vec3_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Vec3_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Vec3_new01);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Vec3_new01_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Vec3_new01_local);
+   tolua_function(tolua_S,"SetZero",tolua_Box2D_b2Vec3_SetZero00);
+   tolua_function(tolua_S,"Set",tolua_Box2D_b2Vec3_Set00);
    tolua_variable(tolua_S,"x",tolua_get_b2Vec3_x,tolua_set_b2Vec3_x);
    tolua_variable(tolua_S,"y",tolua_get_b2Vec3_y,tolua_set_b2Vec3_y);
    tolua_variable(tolua_S,"z",tolua_get_b2Vec3_z,tolua_set_b2Vec3_z);
@@ -31625,20 +31696,20 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2Mat22","b2Mat22","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2Mat22");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Mat22_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Mat22_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Mat22_new00_local);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Mat22_new01);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Mat22_new01_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Mat22_new01_local);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Mat22_new02);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Mat22_new02_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Mat22_new02_local);
-   tolua_function(tolua_S,"Set",tolua_LuaBox2D_b2Mat22_Set00);
-   tolua_function(tolua_S,"SetIdentity",tolua_LuaBox2D_b2Mat22_SetIdentity00);
-   tolua_function(tolua_S,"SetZero",tolua_LuaBox2D_b2Mat22_SetZero00);
-   tolua_function(tolua_S,"GetInverse",tolua_LuaBox2D_b2Mat22_GetInverse00);
-   tolua_function(tolua_S,"Solve",tolua_LuaBox2D_b2Mat22_Solve00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Mat22_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Mat22_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Mat22_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Mat22_new01);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Mat22_new01_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Mat22_new01_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Mat22_new02);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Mat22_new02_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Mat22_new02_local);
+   tolua_function(tolua_S,"Set",tolua_Box2D_b2Mat22_Set00);
+   tolua_function(tolua_S,"SetIdentity",tolua_Box2D_b2Mat22_SetIdentity00);
+   tolua_function(tolua_S,"SetZero",tolua_Box2D_b2Mat22_SetZero00);
+   tolua_function(tolua_S,"GetInverse",tolua_Box2D_b2Mat22_GetInverse00);
+   tolua_function(tolua_S,"Solve",tolua_Box2D_b2Mat22_Solve00);
    tolua_variable(tolua_S,"ex",tolua_get_b2Mat22_ex,tolua_set_b2Mat22_ex);
    tolua_variable(tolua_S,"ey",tolua_get_b2Mat22_ey,tolua_set_b2Mat22_ey);
   tolua_endmodule(tolua_S);
@@ -31648,26 +31719,26 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2Mat33","b2Mat33","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2Mat33");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Mat33_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Mat33_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Mat33_new00_local);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Mat33_new01);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Mat33_new01_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Mat33_new01_local);
-   tolua_function(tolua_S,"SetZero",tolua_LuaBox2D_b2Mat33_SetZero00);
-   tolua_function(tolua_S,"Solve33",tolua_LuaBox2D_b2Mat33_Solve3300);
-   tolua_function(tolua_S,"Solve22",tolua_LuaBox2D_b2Mat33_Solve2200);
-   tolua_function(tolua_S,"GetInverse22",tolua_LuaBox2D_b2Mat33_GetInverse2200);
-   tolua_function(tolua_S,"GetSymInverse33",tolua_LuaBox2D_b2Mat33_GetSymInverse3300);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Mat33_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Mat33_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Mat33_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Mat33_new01);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Mat33_new01_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Mat33_new01_local);
+   tolua_function(tolua_S,"SetZero",tolua_Box2D_b2Mat33_SetZero00);
+   tolua_function(tolua_S,"Solve33",tolua_Box2D_b2Mat33_Solve3300);
+   tolua_function(tolua_S,"Solve22",tolua_Box2D_b2Mat33_Solve2200);
+   tolua_function(tolua_S,"GetInverse22",tolua_Box2D_b2Mat33_GetInverse2200);
+   tolua_function(tolua_S,"GetSymInverse33",tolua_Box2D_b2Mat33_GetSymInverse3300);
    tolua_variable(tolua_S,"ex",tolua_get_b2Mat33_ex,tolua_set_b2Mat33_ex);
    tolua_variable(tolua_S,"ey",tolua_get_b2Mat33_ey,tolua_set_b2Mat33_ey);
    tolua_variable(tolua_S,"ez",tolua_get_b2Mat33_ez,tolua_set_b2Mat33_ez);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2Sweep","b2Sweep","",NULL);
   tolua_beginmodule(tolua_S,"b2Sweep");
-   tolua_function(tolua_S,"GetTransform",tolua_LuaBox2D_b2Sweep_GetTransform00);
-   tolua_function(tolua_S,"Advance",tolua_LuaBox2D_b2Sweep_Advance00);
-   tolua_function(tolua_S,"Normalize",tolua_LuaBox2D_b2Sweep_Normalize00);
+   tolua_function(tolua_S,"GetTransform",tolua_Box2D_b2Sweep_GetTransform00);
+   tolua_function(tolua_S,"Advance",tolua_Box2D_b2Sweep_Advance00);
+   tolua_function(tolua_S,"Normalize",tolua_Box2D_b2Sweep_Normalize00);
    tolua_variable(tolua_S,"localCenter",tolua_get_b2Sweep_localCenter,tolua_set_b2Sweep_localCenter);
    tolua_variable(tolua_S,"c0",tolua_get_b2Sweep_c0,tolua_set_b2Sweep_c0);
    tolua_variable(tolua_S,"c",tolua_get_b2Sweep_c,tolua_set_b2Sweep_c);
@@ -31681,14 +31752,14 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2Transform","b2Transform","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2Transform");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Transform_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Transform_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Transform_new00_local);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Transform_new01);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Transform_new01_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Transform_new01_local);
-   tolua_function(tolua_S,"SetIdentity",tolua_LuaBox2D_b2Transform_SetIdentity00);
-   tolua_function(tolua_S,"Set",tolua_LuaBox2D_b2Transform_Set00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Transform_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Transform_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Transform_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Transform_new01);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Transform_new01_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Transform_new01_local);
+   tolua_function(tolua_S,"SetIdentity",tolua_Box2D_b2Transform_SetIdentity00);
+   tolua_function(tolua_S,"Set",tolua_Box2D_b2Transform_Set00);
    tolua_variable(tolua_S,"p",tolua_get_b2Transform_p,tolua_set_b2Transform_p);
    tolua_variable(tolua_S,"q",tolua_get_b2Transform_q,tolua_set_b2Transform_q);
   tolua_endmodule(tolua_S);
@@ -31698,17 +31769,17 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2Rot","b2Rot","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2Rot");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Rot_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Rot_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Rot_new00_local);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Rot_new01);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Rot_new01_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Rot_new01_local);
-   tolua_function(tolua_S,"Set",tolua_LuaBox2D_b2Rot_Set00);
-   tolua_function(tolua_S,"SetIdentity",tolua_LuaBox2D_b2Rot_SetIdentity00);
-   tolua_function(tolua_S,"GetAngle",tolua_LuaBox2D_b2Rot_GetAngle00);
-   tolua_function(tolua_S,"GetXAxis",tolua_LuaBox2D_b2Rot_GetXAxis00);
-   tolua_function(tolua_S,"GetYAxis",tolua_LuaBox2D_b2Rot_GetYAxis00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Rot_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Rot_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Rot_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Rot_new01);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Rot_new01_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Rot_new01_local);
+   tolua_function(tolua_S,"Set",tolua_Box2D_b2Rot_Set00);
+   tolua_function(tolua_S,"SetIdentity",tolua_Box2D_b2Rot_SetIdentity00);
+   tolua_function(tolua_S,"GetAngle",tolua_Box2D_b2Rot_GetAngle00);
+   tolua_function(tolua_S,"GetXAxis",tolua_Box2D_b2Rot_GetXAxis00);
+   tolua_function(tolua_S,"GetYAxis",tolua_Box2D_b2Rot_GetYAxis00);
    tolua_variable(tolua_S,"s",tolua_get_b2Rot_s,tolua_set_b2Rot_s);
    tolua_variable(tolua_S,"c",tolua_get_b2Rot_c,tolua_set_b2Rot_c);
   tolua_endmodule(tolua_S);
@@ -31718,9 +31789,9 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2MouseJointDef","b2MouseJointDef","b2JointDef",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2MouseJointDef");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2MouseJointDef_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2MouseJointDef_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2MouseJointDef_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2MouseJointDef_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2MouseJointDef_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2MouseJointDef_new00_local);
    tolua_variable(tolua_S,"target",tolua_get_b2MouseJointDef_target,tolua_set_b2MouseJointDef_target);
    tolua_variable(tolua_S,"maxForce",tolua_get_b2MouseJointDef_maxForce,tolua_set_b2MouseJointDef_maxForce);
    tolua_variable(tolua_S,"frequencyHz",tolua_get_b2MouseJointDef_frequencyHz,tolua_set_b2MouseJointDef_frequencyHz);
@@ -31728,19 +31799,19 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2MouseJoint","b2MouseJoint","b2Joint",NULL);
   tolua_beginmodule(tolua_S,"b2MouseJoint");
-   tolua_function(tolua_S,"GetAnchorA",tolua_LuaBox2D_b2MouseJoint_GetAnchorA00);
-   tolua_function(tolua_S,"GetAnchorB",tolua_LuaBox2D_b2MouseJoint_GetAnchorB00);
-   tolua_function(tolua_S,"GetReactionForce",tolua_LuaBox2D_b2MouseJoint_GetReactionForce00);
-   tolua_function(tolua_S,"GetReactionTorque",tolua_LuaBox2D_b2MouseJoint_GetReactionTorque00);
-   tolua_function(tolua_S,"SetTarget",tolua_LuaBox2D_b2MouseJoint_SetTarget00);
-   tolua_function(tolua_S,"GetTarget",tolua_LuaBox2D_b2MouseJoint_GetTarget00);
-   tolua_function(tolua_S,"SetMaxForce",tolua_LuaBox2D_b2MouseJoint_SetMaxForce00);
-   tolua_function(tolua_S,"GetMaxForce",tolua_LuaBox2D_b2MouseJoint_GetMaxForce00);
-   tolua_function(tolua_S,"SetFrequency",tolua_LuaBox2D_b2MouseJoint_SetFrequency00);
-   tolua_function(tolua_S,"GetFrequency",tolua_LuaBox2D_b2MouseJoint_GetFrequency00);
-   tolua_function(tolua_S,"SetDampingRatio",tolua_LuaBox2D_b2MouseJoint_SetDampingRatio00);
-   tolua_function(tolua_S,"GetDampingRatio",tolua_LuaBox2D_b2MouseJoint_GetDampingRatio00);
-   tolua_function(tolua_S,"Dump",tolua_LuaBox2D_b2MouseJoint_Dump00);
+   tolua_function(tolua_S,"GetAnchorA",tolua_Box2D_b2MouseJoint_GetAnchorA00);
+   tolua_function(tolua_S,"GetAnchorB",tolua_Box2D_b2MouseJoint_GetAnchorB00);
+   tolua_function(tolua_S,"GetReactionForce",tolua_Box2D_b2MouseJoint_GetReactionForce00);
+   tolua_function(tolua_S,"GetReactionTorque",tolua_Box2D_b2MouseJoint_GetReactionTorque00);
+   tolua_function(tolua_S,"SetTarget",tolua_Box2D_b2MouseJoint_SetTarget00);
+   tolua_function(tolua_S,"GetTarget",tolua_Box2D_b2MouseJoint_GetTarget00);
+   tolua_function(tolua_S,"SetMaxForce",tolua_Box2D_b2MouseJoint_SetMaxForce00);
+   tolua_function(tolua_S,"GetMaxForce",tolua_Box2D_b2MouseJoint_GetMaxForce00);
+   tolua_function(tolua_S,"SetFrequency",tolua_Box2D_b2MouseJoint_SetFrequency00);
+   tolua_function(tolua_S,"GetFrequency",tolua_Box2D_b2MouseJoint_GetFrequency00);
+   tolua_function(tolua_S,"SetDampingRatio",tolua_Box2D_b2MouseJoint_SetDampingRatio00);
+   tolua_function(tolua_S,"GetDampingRatio",tolua_Box2D_b2MouseJoint_GetDampingRatio00);
+   tolua_function(tolua_S,"Dump",tolua_Box2D_b2MouseJoint_Dump00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2PolygonAndCircleContact","b2PolygonAndCircleContact","b2Contact",tolua_collect_b2PolygonAndCircleContact);
@@ -31748,13 +31819,13 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2PolygonAndCircleContact","b2PolygonAndCircleContact","b2Contact",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2PolygonAndCircleContact");
-   tolua_function(tolua_S,"Create",tolua_LuaBox2D_b2PolygonAndCircleContact_Create00);
-   tolua_function(tolua_S,"Destroy",tolua_LuaBox2D_b2PolygonAndCircleContact_Destroy00);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2PolygonAndCircleContact_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2PolygonAndCircleContact_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2PolygonAndCircleContact_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2PolygonAndCircleContact_delete00);
-   tolua_function(tolua_S,"Evaluate",tolua_LuaBox2D_b2PolygonAndCircleContact_Evaluate00);
+   tolua_function(tolua_S,"Create",tolua_Box2D_b2PolygonAndCircleContact_Create00);
+   tolua_function(tolua_S,"Destroy",tolua_Box2D_b2PolygonAndCircleContact_Destroy00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2PolygonAndCircleContact_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2PolygonAndCircleContact_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2PolygonAndCircleContact_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2PolygonAndCircleContact_delete00);
+   tolua_function(tolua_S,"Evaluate",tolua_Box2D_b2PolygonAndCircleContact_Evaluate00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2PolygonContact","b2PolygonContact","b2Contact",tolua_collect_b2PolygonContact);
@@ -31762,13 +31833,13 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2PolygonContact","b2PolygonContact","b2Contact",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2PolygonContact");
-   tolua_function(tolua_S,"Create",tolua_LuaBox2D_b2PolygonContact_Create00);
-   tolua_function(tolua_S,"Destroy",tolua_LuaBox2D_b2PolygonContact_Destroy00);
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2PolygonContact_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2PolygonContact_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2PolygonContact_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2PolygonContact_delete00);
-   tolua_function(tolua_S,"Evaluate",tolua_LuaBox2D_b2PolygonContact_Evaluate00);
+   tolua_function(tolua_S,"Create",tolua_Box2D_b2PolygonContact_Create00);
+   tolua_function(tolua_S,"Destroy",tolua_Box2D_b2PolygonContact_Destroy00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2PolygonContact_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2PolygonContact_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2PolygonContact_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2PolygonContact_delete00);
+   tolua_function(tolua_S,"Evaluate",tolua_Box2D_b2PolygonContact_Evaluate00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2PrismaticJointDef","b2PrismaticJointDef","b2JointDef",tolua_collect_b2PrismaticJointDef);
@@ -31776,10 +31847,10 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2PrismaticJointDef","b2PrismaticJointDef","b2JointDef",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2PrismaticJointDef");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2PrismaticJointDef_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2PrismaticJointDef_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2PrismaticJointDef_new00_local);
-   tolua_function(tolua_S,"Initialize",tolua_LuaBox2D_b2PrismaticJointDef_Initialize00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2PrismaticJointDef_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2PrismaticJointDef_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2PrismaticJointDef_new00_local);
+   tolua_function(tolua_S,"Initialize",tolua_Box2D_b2PrismaticJointDef_Initialize00);
    tolua_variable(tolua_S,"localAnchorA",tolua_get_b2PrismaticJointDef_localAnchorA,tolua_set_b2PrismaticJointDef_localAnchorA);
    tolua_variable(tolua_S,"localAnchorB",tolua_get_b2PrismaticJointDef_localAnchorB,tolua_set_b2PrismaticJointDef_localAnchorB);
    tolua_variable(tolua_S,"localAxisA",tolua_get_b2PrismaticJointDef_localAxisA,tolua_set_b2PrismaticJointDef_localAxisA);
@@ -31793,29 +31864,29 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2PrismaticJoint","b2PrismaticJoint","b2Joint",NULL);
   tolua_beginmodule(tolua_S,"b2PrismaticJoint");
-   tolua_function(tolua_S,"GetAnchorA",tolua_LuaBox2D_b2PrismaticJoint_GetAnchorA00);
-   tolua_function(tolua_S,"GetAnchorB",tolua_LuaBox2D_b2PrismaticJoint_GetAnchorB00);
-   tolua_function(tolua_S,"GetReactionForce",tolua_LuaBox2D_b2PrismaticJoint_GetReactionForce00);
-   tolua_function(tolua_S,"GetReactionTorque",tolua_LuaBox2D_b2PrismaticJoint_GetReactionTorque00);
-   tolua_function(tolua_S,"GetLocalAnchorA",tolua_LuaBox2D_b2PrismaticJoint_GetLocalAnchorA00);
-   tolua_function(tolua_S,"GetLocalAnchorB",tolua_LuaBox2D_b2PrismaticJoint_GetLocalAnchorB00);
-   tolua_function(tolua_S,"GetLocalAxisA",tolua_LuaBox2D_b2PrismaticJoint_GetLocalAxisA00);
-   tolua_function(tolua_S,"GetReferenceAngle",tolua_LuaBox2D_b2PrismaticJoint_GetReferenceAngle00);
-   tolua_function(tolua_S,"GetJointTranslation",tolua_LuaBox2D_b2PrismaticJoint_GetJointTranslation00);
-   tolua_function(tolua_S,"GetJointSpeed",tolua_LuaBox2D_b2PrismaticJoint_GetJointSpeed00);
-   tolua_function(tolua_S,"IsLimitEnabled",tolua_LuaBox2D_b2PrismaticJoint_IsLimitEnabled00);
-   tolua_function(tolua_S,"EnableLimit",tolua_LuaBox2D_b2PrismaticJoint_EnableLimit00);
-   tolua_function(tolua_S,"GetLowerLimit",tolua_LuaBox2D_b2PrismaticJoint_GetLowerLimit00);
-   tolua_function(tolua_S,"GetUpperLimit",tolua_LuaBox2D_b2PrismaticJoint_GetUpperLimit00);
-   tolua_function(tolua_S,"SetLimits",tolua_LuaBox2D_b2PrismaticJoint_SetLimits00);
-   tolua_function(tolua_S,"IsMotorEnabled",tolua_LuaBox2D_b2PrismaticJoint_IsMotorEnabled00);
-   tolua_function(tolua_S,"EnableMotor",tolua_LuaBox2D_b2PrismaticJoint_EnableMotor00);
-   tolua_function(tolua_S,"SetMotorSpeed",tolua_LuaBox2D_b2PrismaticJoint_SetMotorSpeed00);
-   tolua_function(tolua_S,"GetMotorSpeed",tolua_LuaBox2D_b2PrismaticJoint_GetMotorSpeed00);
-   tolua_function(tolua_S,"SetMaxMotorForce",tolua_LuaBox2D_b2PrismaticJoint_SetMaxMotorForce00);
-   tolua_function(tolua_S,"GetMaxMotorForce",tolua_LuaBox2D_b2PrismaticJoint_GetMaxMotorForce00);
-   tolua_function(tolua_S,"GetMotorForce",tolua_LuaBox2D_b2PrismaticJoint_GetMotorForce00);
-   tolua_function(tolua_S,"Dump",tolua_LuaBox2D_b2PrismaticJoint_Dump00);
+   tolua_function(tolua_S,"GetAnchorA",tolua_Box2D_b2PrismaticJoint_GetAnchorA00);
+   tolua_function(tolua_S,"GetAnchorB",tolua_Box2D_b2PrismaticJoint_GetAnchorB00);
+   tolua_function(tolua_S,"GetReactionForce",tolua_Box2D_b2PrismaticJoint_GetReactionForce00);
+   tolua_function(tolua_S,"GetReactionTorque",tolua_Box2D_b2PrismaticJoint_GetReactionTorque00);
+   tolua_function(tolua_S,"GetLocalAnchorA",tolua_Box2D_b2PrismaticJoint_GetLocalAnchorA00);
+   tolua_function(tolua_S,"GetLocalAnchorB",tolua_Box2D_b2PrismaticJoint_GetLocalAnchorB00);
+   tolua_function(tolua_S,"GetLocalAxisA",tolua_Box2D_b2PrismaticJoint_GetLocalAxisA00);
+   tolua_function(tolua_S,"GetReferenceAngle",tolua_Box2D_b2PrismaticJoint_GetReferenceAngle00);
+   tolua_function(tolua_S,"GetJointTranslation",tolua_Box2D_b2PrismaticJoint_GetJointTranslation00);
+   tolua_function(tolua_S,"GetJointSpeed",tolua_Box2D_b2PrismaticJoint_GetJointSpeed00);
+   tolua_function(tolua_S,"IsLimitEnabled",tolua_Box2D_b2PrismaticJoint_IsLimitEnabled00);
+   tolua_function(tolua_S,"EnableLimit",tolua_Box2D_b2PrismaticJoint_EnableLimit00);
+   tolua_function(tolua_S,"GetLowerLimit",tolua_Box2D_b2PrismaticJoint_GetLowerLimit00);
+   tolua_function(tolua_S,"GetUpperLimit",tolua_Box2D_b2PrismaticJoint_GetUpperLimit00);
+   tolua_function(tolua_S,"SetLimits",tolua_Box2D_b2PrismaticJoint_SetLimits00);
+   tolua_function(tolua_S,"IsMotorEnabled",tolua_Box2D_b2PrismaticJoint_IsMotorEnabled00);
+   tolua_function(tolua_S,"EnableMotor",tolua_Box2D_b2PrismaticJoint_EnableMotor00);
+   tolua_function(tolua_S,"SetMotorSpeed",tolua_Box2D_b2PrismaticJoint_SetMotorSpeed00);
+   tolua_function(tolua_S,"GetMotorSpeed",tolua_Box2D_b2PrismaticJoint_GetMotorSpeed00);
+   tolua_function(tolua_S,"SetMaxMotorForce",tolua_Box2D_b2PrismaticJoint_SetMaxMotorForce00);
+   tolua_function(tolua_S,"GetMaxMotorForce",tolua_Box2D_b2PrismaticJoint_GetMaxMotorForce00);
+   tolua_function(tolua_S,"GetMotorForce",tolua_Box2D_b2PrismaticJoint_GetMotorForce00);
+   tolua_function(tolua_S,"Dump",tolua_Box2D_b2PrismaticJoint_Dump00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2PulleyJointDef","b2PulleyJointDef","b2JointDef",tolua_collect_b2PulleyJointDef);
@@ -31823,10 +31894,10 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2PulleyJointDef","b2PulleyJointDef","b2JointDef",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2PulleyJointDef");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2PulleyJointDef_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2PulleyJointDef_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2PulleyJointDef_new00_local);
-   tolua_function(tolua_S,"Initialize",tolua_LuaBox2D_b2PulleyJointDef_Initialize00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2PulleyJointDef_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2PulleyJointDef_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2PulleyJointDef_new00_local);
+   tolua_function(tolua_S,"Initialize",tolua_Box2D_b2PulleyJointDef_Initialize00);
    tolua_variable(tolua_S,"groundAnchorA",tolua_get_b2PulleyJointDef_groundAnchorA,tolua_set_b2PulleyJointDef_groundAnchorA);
    tolua_variable(tolua_S,"groundAnchorB",tolua_get_b2PulleyJointDef_groundAnchorB,tolua_set_b2PulleyJointDef_groundAnchorB);
    tolua_variable(tolua_S,"localAnchorA",tolua_get_b2PulleyJointDef_localAnchorA,tolua_set_b2PulleyJointDef_localAnchorA);
@@ -31837,16 +31908,16 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2PulleyJoint","b2PulleyJoint","b2Joint",NULL);
   tolua_beginmodule(tolua_S,"b2PulleyJoint");
-   tolua_function(tolua_S,"GetAnchorA",tolua_LuaBox2D_b2PulleyJoint_GetAnchorA00);
-   tolua_function(tolua_S,"GetAnchorB",tolua_LuaBox2D_b2PulleyJoint_GetAnchorB00);
-   tolua_function(tolua_S,"GetReactionForce",tolua_LuaBox2D_b2PulleyJoint_GetReactionForce00);
-   tolua_function(tolua_S,"GetReactionTorque",tolua_LuaBox2D_b2PulleyJoint_GetReactionTorque00);
-   tolua_function(tolua_S,"GetGroundAnchorA",tolua_LuaBox2D_b2PulleyJoint_GetGroundAnchorA00);
-   tolua_function(tolua_S,"GetGroundAnchorB",tolua_LuaBox2D_b2PulleyJoint_GetGroundAnchorB00);
-   tolua_function(tolua_S,"GetLengthA",tolua_LuaBox2D_b2PulleyJoint_GetLengthA00);
-   tolua_function(tolua_S,"GetLengthB",tolua_LuaBox2D_b2PulleyJoint_GetLengthB00);
-   tolua_function(tolua_S,"GetRatio",tolua_LuaBox2D_b2PulleyJoint_GetRatio00);
-   tolua_function(tolua_S,"Dump",tolua_LuaBox2D_b2PulleyJoint_Dump00);
+   tolua_function(tolua_S,"GetAnchorA",tolua_Box2D_b2PulleyJoint_GetAnchorA00);
+   tolua_function(tolua_S,"GetAnchorB",tolua_Box2D_b2PulleyJoint_GetAnchorB00);
+   tolua_function(tolua_S,"GetReactionForce",tolua_Box2D_b2PulleyJoint_GetReactionForce00);
+   tolua_function(tolua_S,"GetReactionTorque",tolua_Box2D_b2PulleyJoint_GetReactionTorque00);
+   tolua_function(tolua_S,"GetGroundAnchorA",tolua_Box2D_b2PulleyJoint_GetGroundAnchorA00);
+   tolua_function(tolua_S,"GetGroundAnchorB",tolua_Box2D_b2PulleyJoint_GetGroundAnchorB00);
+   tolua_function(tolua_S,"GetLengthA",tolua_Box2D_b2PulleyJoint_GetLengthA00);
+   tolua_function(tolua_S,"GetLengthB",tolua_Box2D_b2PulleyJoint_GetLengthB00);
+   tolua_function(tolua_S,"GetRatio",tolua_Box2D_b2PulleyJoint_GetRatio00);
+   tolua_function(tolua_S,"Dump",tolua_Box2D_b2PulleyJoint_Dump00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2RevoluteJointDef","b2RevoluteJointDef","b2JointDef",tolua_collect_b2RevoluteJointDef);
@@ -31854,10 +31925,10 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2RevoluteJointDef","b2RevoluteJointDef","b2JointDef",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2RevoluteJointDef");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2RevoluteJointDef_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2RevoluteJointDef_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2RevoluteJointDef_new00_local);
-   tolua_function(tolua_S,"Initialize",tolua_LuaBox2D_b2RevoluteJointDef_Initialize00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2RevoluteJointDef_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2RevoluteJointDef_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2RevoluteJointDef_new00_local);
+   tolua_function(tolua_S,"Initialize",tolua_Box2D_b2RevoluteJointDef_Initialize00);
    tolua_variable(tolua_S,"localAnchorA",tolua_get_b2RevoluteJointDef_localAnchorA,tolua_set_b2RevoluteJointDef_localAnchorA);
    tolua_variable(tolua_S,"localAnchorB",tolua_get_b2RevoluteJointDef_localAnchorB,tolua_set_b2RevoluteJointDef_localAnchorB);
    tolua_variable(tolua_S,"referenceAngle",tolua_get_b2RevoluteJointDef_referenceAngle,tolua_set_b2RevoluteJointDef_referenceAngle);
@@ -31870,28 +31941,28 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2RevoluteJoint","b2RevoluteJoint","b2Joint",NULL);
   tolua_beginmodule(tolua_S,"b2RevoluteJoint");
-   tolua_function(tolua_S,"GetAnchorA",tolua_LuaBox2D_b2RevoluteJoint_GetAnchorA00);
-   tolua_function(tolua_S,"GetAnchorB",tolua_LuaBox2D_b2RevoluteJoint_GetAnchorB00);
-   tolua_function(tolua_S,"GetLocalAnchorA",tolua_LuaBox2D_b2RevoluteJoint_GetLocalAnchorA00);
-   tolua_function(tolua_S,"GetLocalAnchorB",tolua_LuaBox2D_b2RevoluteJoint_GetLocalAnchorB00);
-   tolua_function(tolua_S,"GetReferenceAngle",tolua_LuaBox2D_b2RevoluteJoint_GetReferenceAngle00);
-   tolua_function(tolua_S,"GetJointAngle",tolua_LuaBox2D_b2RevoluteJoint_GetJointAngle00);
-   tolua_function(tolua_S,"GetJointSpeed",tolua_LuaBox2D_b2RevoluteJoint_GetJointSpeed00);
-   tolua_function(tolua_S,"IsLimitEnabled",tolua_LuaBox2D_b2RevoluteJoint_IsLimitEnabled00);
-   tolua_function(tolua_S,"EnableLimit",tolua_LuaBox2D_b2RevoluteJoint_EnableLimit00);
-   tolua_function(tolua_S,"GetLowerLimit",tolua_LuaBox2D_b2RevoluteJoint_GetLowerLimit00);
-   tolua_function(tolua_S,"GetUpperLimit",tolua_LuaBox2D_b2RevoluteJoint_GetUpperLimit00);
-   tolua_function(tolua_S,"SetLimits",tolua_LuaBox2D_b2RevoluteJoint_SetLimits00);
-   tolua_function(tolua_S,"IsMotorEnabled",tolua_LuaBox2D_b2RevoluteJoint_IsMotorEnabled00);
-   tolua_function(tolua_S,"EnableMotor",tolua_LuaBox2D_b2RevoluteJoint_EnableMotor00);
-   tolua_function(tolua_S,"SetMotorSpeed",tolua_LuaBox2D_b2RevoluteJoint_SetMotorSpeed00);
-   tolua_function(tolua_S,"GetMotorSpeed",tolua_LuaBox2D_b2RevoluteJoint_GetMotorSpeed00);
-   tolua_function(tolua_S,"SetMaxMotorTorque",tolua_LuaBox2D_b2RevoluteJoint_SetMaxMotorTorque00);
-   tolua_function(tolua_S,"GetMaxMotorTorque",tolua_LuaBox2D_b2RevoluteJoint_GetMaxMotorTorque00);
-   tolua_function(tolua_S,"GetReactionForce",tolua_LuaBox2D_b2RevoluteJoint_GetReactionForce00);
-   tolua_function(tolua_S,"GetReactionTorque",tolua_LuaBox2D_b2RevoluteJoint_GetReactionTorque00);
-   tolua_function(tolua_S,"GetMotorTorque",tolua_LuaBox2D_b2RevoluteJoint_GetMotorTorque00);
-   tolua_function(tolua_S,"Dump",tolua_LuaBox2D_b2RevoluteJoint_Dump00);
+   tolua_function(tolua_S,"GetAnchorA",tolua_Box2D_b2RevoluteJoint_GetAnchorA00);
+   tolua_function(tolua_S,"GetAnchorB",tolua_Box2D_b2RevoluteJoint_GetAnchorB00);
+   tolua_function(tolua_S,"GetLocalAnchorA",tolua_Box2D_b2RevoluteJoint_GetLocalAnchorA00);
+   tolua_function(tolua_S,"GetLocalAnchorB",tolua_Box2D_b2RevoluteJoint_GetLocalAnchorB00);
+   tolua_function(tolua_S,"GetReferenceAngle",tolua_Box2D_b2RevoluteJoint_GetReferenceAngle00);
+   tolua_function(tolua_S,"GetJointAngle",tolua_Box2D_b2RevoluteJoint_GetJointAngle00);
+   tolua_function(tolua_S,"GetJointSpeed",tolua_Box2D_b2RevoluteJoint_GetJointSpeed00);
+   tolua_function(tolua_S,"IsLimitEnabled",tolua_Box2D_b2RevoluteJoint_IsLimitEnabled00);
+   tolua_function(tolua_S,"EnableLimit",tolua_Box2D_b2RevoluteJoint_EnableLimit00);
+   tolua_function(tolua_S,"GetLowerLimit",tolua_Box2D_b2RevoluteJoint_GetLowerLimit00);
+   tolua_function(tolua_S,"GetUpperLimit",tolua_Box2D_b2RevoluteJoint_GetUpperLimit00);
+   tolua_function(tolua_S,"SetLimits",tolua_Box2D_b2RevoluteJoint_SetLimits00);
+   tolua_function(tolua_S,"IsMotorEnabled",tolua_Box2D_b2RevoluteJoint_IsMotorEnabled00);
+   tolua_function(tolua_S,"EnableMotor",tolua_Box2D_b2RevoluteJoint_EnableMotor00);
+   tolua_function(tolua_S,"SetMotorSpeed",tolua_Box2D_b2RevoluteJoint_SetMotorSpeed00);
+   tolua_function(tolua_S,"GetMotorSpeed",tolua_Box2D_b2RevoluteJoint_GetMotorSpeed00);
+   tolua_function(tolua_S,"SetMaxMotorTorque",tolua_Box2D_b2RevoluteJoint_SetMaxMotorTorque00);
+   tolua_function(tolua_S,"GetMaxMotorTorque",tolua_Box2D_b2RevoluteJoint_GetMaxMotorTorque00);
+   tolua_function(tolua_S,"GetReactionForce",tolua_Box2D_b2RevoluteJoint_GetReactionForce00);
+   tolua_function(tolua_S,"GetReactionTorque",tolua_Box2D_b2RevoluteJoint_GetReactionTorque00);
+   tolua_function(tolua_S,"GetMotorTorque",tolua_Box2D_b2RevoluteJoint_GetMotorTorque00);
+   tolua_function(tolua_S,"Dump",tolua_Box2D_b2RevoluteJoint_Dump00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2RopeDef","b2RopeDef","",tolua_collect_b2RopeDef);
@@ -31899,9 +31970,9 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2RopeDef","b2RopeDef","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2RopeDef");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2RopeDef_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2RopeDef_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2RopeDef_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2RopeDef_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2RopeDef_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2RopeDef_new00_local);
    tolua_variable(tolua_S,"vertices",tolua_get_b2RopeDef_vertices_ptr,tolua_set_b2RopeDef_vertices_ptr);
    tolua_variable(tolua_S,"count",tolua_get_b2RopeDef_count,tolua_set_b2RopeDef_count);
    tolua_variable(tolua_S,"gravity",tolua_get_b2RopeDef_gravity,tolua_set_b2RopeDef_gravity);
@@ -31915,16 +31986,16 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2Rope","b2Rope","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2Rope");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Rope_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Rope_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Rope_new00_local);
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2Rope_delete00);
-   tolua_function(tolua_S,"Initialize",tolua_LuaBox2D_b2Rope_Initialize00);
-   tolua_function(tolua_S,"Step",tolua_LuaBox2D_b2Rope_Step00);
-   tolua_function(tolua_S,"GetVertexCount",tolua_LuaBox2D_b2Rope_GetVertexCount00);
-   tolua_function(tolua_S,"GetVertices",tolua_LuaBox2D_b2Rope_GetVertices00);
-   tolua_function(tolua_S,"Draw",tolua_LuaBox2D_b2Rope_Draw00);
-   tolua_function(tolua_S,"SetAngle",tolua_LuaBox2D_b2Rope_SetAngle00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Rope_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Rope_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Rope_new00_local);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2Rope_delete00);
+   tolua_function(tolua_S,"Initialize",tolua_Box2D_b2Rope_Initialize00);
+   tolua_function(tolua_S,"Step",tolua_Box2D_b2Rope_Step00);
+   tolua_function(tolua_S,"GetVertexCount",tolua_Box2D_b2Rope_GetVertexCount00);
+   tolua_function(tolua_S,"GetVertices",tolua_Box2D_b2Rope_GetVertices00);
+   tolua_function(tolua_S,"Draw",tolua_Box2D_b2Rope_Draw00);
+   tolua_function(tolua_S,"SetAngle",tolua_Box2D_b2Rope_SetAngle00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2RopeJointDef","b2RopeJointDef","b2JointDef",tolua_collect_b2RopeJointDef);
@@ -31932,28 +32003,28 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2RopeJointDef","b2RopeJointDef","b2JointDef",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2RopeJointDef");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2RopeJointDef_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2RopeJointDef_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2RopeJointDef_new00_local);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2RopeJointDef_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2RopeJointDef_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2RopeJointDef_new00_local);
    tolua_variable(tolua_S,"localAnchorA",tolua_get_b2RopeJointDef_localAnchorA,tolua_set_b2RopeJointDef_localAnchorA);
    tolua_variable(tolua_S,"localAnchorB",tolua_get_b2RopeJointDef_localAnchorB,tolua_set_b2RopeJointDef_localAnchorB);
    tolua_variable(tolua_S,"maxLength",tolua_get_b2RopeJointDef_maxLength,tolua_set_b2RopeJointDef_maxLength);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2RopeJoint","b2RopeJoint","b2Joint",NULL);
   tolua_beginmodule(tolua_S,"b2RopeJoint");
-   tolua_function(tolua_S,"GetAnchorA",tolua_LuaBox2D_b2RopeJoint_GetAnchorA00);
-   tolua_function(tolua_S,"GetAnchorB",tolua_LuaBox2D_b2RopeJoint_GetAnchorB00);
-   tolua_function(tolua_S,"GetReactionForce",tolua_LuaBox2D_b2RopeJoint_GetReactionForce00);
-   tolua_function(tolua_S,"GetReactionTorque",tolua_LuaBox2D_b2RopeJoint_GetReactionTorque00);
-   tolua_function(tolua_S,"GetLocalAnchorA",tolua_LuaBox2D_b2RopeJoint_GetLocalAnchorA00);
-   tolua_function(tolua_S,"GetLocalAnchorB",tolua_LuaBox2D_b2RopeJoint_GetLocalAnchorB00);
-   tolua_function(tolua_S,"SetMaxLength",tolua_LuaBox2D_b2RopeJoint_SetMaxLength00);
-   tolua_function(tolua_S,"GetMaxLength",tolua_LuaBox2D_b2RopeJoint_GetMaxLength00);
-   tolua_function(tolua_S,"GetLimitState",tolua_LuaBox2D_b2RopeJoint_GetLimitState00);
-   tolua_function(tolua_S,"Dump",tolua_LuaBox2D_b2RopeJoint_Dump00);
+   tolua_function(tolua_S,"GetAnchorA",tolua_Box2D_b2RopeJoint_GetAnchorA00);
+   tolua_function(tolua_S,"GetAnchorB",tolua_Box2D_b2RopeJoint_GetAnchorB00);
+   tolua_function(tolua_S,"GetReactionForce",tolua_Box2D_b2RopeJoint_GetReactionForce00);
+   tolua_function(tolua_S,"GetReactionTorque",tolua_Box2D_b2RopeJoint_GetReactionTorque00);
+   tolua_function(tolua_S,"GetLocalAnchorA",tolua_Box2D_b2RopeJoint_GetLocalAnchorA00);
+   tolua_function(tolua_S,"GetLocalAnchorB",tolua_Box2D_b2RopeJoint_GetLocalAnchorB00);
+   tolua_function(tolua_S,"SetMaxLength",tolua_Box2D_b2RopeJoint_SetMaxLength00);
+   tolua_function(tolua_S,"GetMaxLength",tolua_Box2D_b2RopeJoint_GetMaxLength00);
+   tolua_function(tolua_S,"GetLimitState",tolua_Box2D_b2RopeJoint_GetLimitState00);
+   tolua_function(tolua_S,"Dump",tolua_Box2D_b2RopeJoint_Dump00);
   tolua_endmodule(tolua_S);
-  tolua_function(tolua_S,"b2Alloc",tolua_LuaBox2D_b2Alloc00);
-  tolua_function(tolua_S,"b2Free",tolua_LuaBox2D_b2Free00);
+  tolua_function(tolua_S,"b2Alloc",tolua_Box2D_b2Alloc00);
+  tolua_function(tolua_S,"b2Free",tolua_Box2D_b2Free00);
   tolua_cclass(tolua_S,"b2Version","b2Version","",NULL);
   tolua_beginmodule(tolua_S,"b2Version");
    tolua_variable(tolua_S,"major",tolua_get_b2Version_major,tolua_set_b2Version_major);
@@ -31991,18 +32062,18 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
    tolua_variable(tolua_S,"state",tolua_get_b2TOIOutput_state,tolua_set_b2TOIOutput_state);
    tolua_variable(tolua_S,"t",tolua_get_b2TOIOutput_t,tolua_set_b2TOIOutput_t);
   tolua_endmodule(tolua_S);
-  tolua_function(tolua_S,"b2TimeOfImpact",tolua_LuaBox2D_b2TimeOfImpact00);
+  tolua_function(tolua_S,"b2TimeOfImpact",tolua_Box2D_b2TimeOfImpact00);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2Timer","b2Timer","",tolua_collect_b2Timer);
   #else
   tolua_cclass(tolua_S,"b2Timer","b2Timer","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2Timer");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2Timer_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2Timer_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2Timer_new00_local);
-   tolua_function(tolua_S,"Reset",tolua_LuaBox2D_b2Timer_Reset00);
-   tolua_function(tolua_S,"GetMilliseconds",tolua_LuaBox2D_b2Timer_GetMilliseconds00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2Timer_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2Timer_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2Timer_new00_local);
+   tolua_function(tolua_S,"Reset",tolua_Box2D_b2Timer_Reset00);
+   tolua_function(tolua_S,"GetMilliseconds",tolua_Box2D_b2Timer_GetMilliseconds00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2TimeStep","b2TimeStep","",NULL);
   tolua_beginmodule(tolua_S,"b2TimeStep");
@@ -32029,10 +32100,10 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2WeldJointDef","b2WeldJointDef","b2JointDef",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2WeldJointDef");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2WeldJointDef_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2WeldJointDef_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2WeldJointDef_new00_local);
-   tolua_function(tolua_S,"Initialize",tolua_LuaBox2D_b2WeldJointDef_Initialize00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2WeldJointDef_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2WeldJointDef_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2WeldJointDef_new00_local);
+   tolua_function(tolua_S,"Initialize",tolua_Box2D_b2WeldJointDef_Initialize00);
    tolua_variable(tolua_S,"localAnchorA",tolua_get_b2WeldJointDef_localAnchorA,tolua_set_b2WeldJointDef_localAnchorA);
    tolua_variable(tolua_S,"localAnchorB",tolua_get_b2WeldJointDef_localAnchorB,tolua_set_b2WeldJointDef_localAnchorB);
    tolua_variable(tolua_S,"referenceAngle",tolua_get_b2WeldJointDef_referenceAngle,tolua_set_b2WeldJointDef_referenceAngle);
@@ -32041,18 +32112,18 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2WeldJoint","b2WeldJoint","b2Joint",NULL);
   tolua_beginmodule(tolua_S,"b2WeldJoint");
-   tolua_function(tolua_S,"GetAnchorA",tolua_LuaBox2D_b2WeldJoint_GetAnchorA00);
-   tolua_function(tolua_S,"GetAnchorB",tolua_LuaBox2D_b2WeldJoint_GetAnchorB00);
-   tolua_function(tolua_S,"GetReactionForce",tolua_LuaBox2D_b2WeldJoint_GetReactionForce00);
-   tolua_function(tolua_S,"GetReactionTorque",tolua_LuaBox2D_b2WeldJoint_GetReactionTorque00);
-   tolua_function(tolua_S,"GetLocalAnchorA",tolua_LuaBox2D_b2WeldJoint_GetLocalAnchorA00);
-   tolua_function(tolua_S,"GetLocalAnchorB",tolua_LuaBox2D_b2WeldJoint_GetLocalAnchorB00);
-   tolua_function(tolua_S,"GetReferenceAngle",tolua_LuaBox2D_b2WeldJoint_GetReferenceAngle00);
-   tolua_function(tolua_S,"SetFrequency",tolua_LuaBox2D_b2WeldJoint_SetFrequency00);
-   tolua_function(tolua_S,"GetFrequency",tolua_LuaBox2D_b2WeldJoint_GetFrequency00);
-   tolua_function(tolua_S,"SetDampingRatio",tolua_LuaBox2D_b2WeldJoint_SetDampingRatio00);
-   tolua_function(tolua_S,"GetDampingRatio",tolua_LuaBox2D_b2WeldJoint_GetDampingRatio00);
-   tolua_function(tolua_S,"Dump",tolua_LuaBox2D_b2WeldJoint_Dump00);
+   tolua_function(tolua_S,"GetAnchorA",tolua_Box2D_b2WeldJoint_GetAnchorA00);
+   tolua_function(tolua_S,"GetAnchorB",tolua_Box2D_b2WeldJoint_GetAnchorB00);
+   tolua_function(tolua_S,"GetReactionForce",tolua_Box2D_b2WeldJoint_GetReactionForce00);
+   tolua_function(tolua_S,"GetReactionTorque",tolua_Box2D_b2WeldJoint_GetReactionTorque00);
+   tolua_function(tolua_S,"GetLocalAnchorA",tolua_Box2D_b2WeldJoint_GetLocalAnchorA00);
+   tolua_function(tolua_S,"GetLocalAnchorB",tolua_Box2D_b2WeldJoint_GetLocalAnchorB00);
+   tolua_function(tolua_S,"GetReferenceAngle",tolua_Box2D_b2WeldJoint_GetReferenceAngle00);
+   tolua_function(tolua_S,"SetFrequency",tolua_Box2D_b2WeldJoint_SetFrequency00);
+   tolua_function(tolua_S,"GetFrequency",tolua_Box2D_b2WeldJoint_GetFrequency00);
+   tolua_function(tolua_S,"SetDampingRatio",tolua_Box2D_b2WeldJoint_SetDampingRatio00);
+   tolua_function(tolua_S,"GetDampingRatio",tolua_Box2D_b2WeldJoint_GetDampingRatio00);
+   tolua_function(tolua_S,"Dump",tolua_Box2D_b2WeldJoint_Dump00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2WheelJointDef","b2WheelJointDef","b2JointDef",tolua_collect_b2WheelJointDef);
@@ -32060,10 +32131,10 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2WheelJointDef","b2WheelJointDef","b2JointDef",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2WheelJointDef");
-   tolua_function(tolua_S,"new",tolua_LuaBox2D_b2WheelJointDef_new00);
-   tolua_function(tolua_S,"new_local",tolua_LuaBox2D_b2WheelJointDef_new00_local);
-   tolua_function(tolua_S,".call",tolua_LuaBox2D_b2WheelJointDef_new00_local);
-   tolua_function(tolua_S,"Initialize",tolua_LuaBox2D_b2WheelJointDef_Initialize00);
+   tolua_function(tolua_S,"new",tolua_Box2D_b2WheelJointDef_new00);
+   tolua_function(tolua_S,"new_local",tolua_Box2D_b2WheelJointDef_new00_local);
+   tolua_function(tolua_S,".call",tolua_Box2D_b2WheelJointDef_new00_local);
+   tolua_function(tolua_S,"Initialize",tolua_Box2D_b2WheelJointDef_Initialize00);
    tolua_variable(tolua_S,"localAnchorA",tolua_get_b2WheelJointDef_localAnchorA,tolua_set_b2WheelJointDef_localAnchorA);
    tolua_variable(tolua_S,"localAnchorB",tolua_get_b2WheelJointDef_localAnchorB,tolua_set_b2WheelJointDef_localAnchorB);
    tolua_variable(tolua_S,"localAxisA",tolua_get_b2WheelJointDef_localAxisA,tolua_set_b2WheelJointDef_localAxisA);
@@ -32075,27 +32146,27 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2WheelJoint","b2WheelJoint","b2Joint",NULL);
   tolua_beginmodule(tolua_S,"b2WheelJoint");
-   tolua_function(tolua_S,"GetAnchorA",tolua_LuaBox2D_b2WheelJoint_GetAnchorA00);
-   tolua_function(tolua_S,"GetAnchorB",tolua_LuaBox2D_b2WheelJoint_GetAnchorB00);
-   tolua_function(tolua_S,"GetReactionForce",tolua_LuaBox2D_b2WheelJoint_GetReactionForce00);
-   tolua_function(tolua_S,"GetReactionTorque",tolua_LuaBox2D_b2WheelJoint_GetReactionTorque00);
-   tolua_function(tolua_S,"GetLocalAnchorA",tolua_LuaBox2D_b2WheelJoint_GetLocalAnchorA00);
-   tolua_function(tolua_S,"GetLocalAnchorB",tolua_LuaBox2D_b2WheelJoint_GetLocalAnchorB00);
-   tolua_function(tolua_S,"GetLocalAxisA",tolua_LuaBox2D_b2WheelJoint_GetLocalAxisA00);
-   tolua_function(tolua_S,"GetJointTranslation",tolua_LuaBox2D_b2WheelJoint_GetJointTranslation00);
-   tolua_function(tolua_S,"GetJointSpeed",tolua_LuaBox2D_b2WheelJoint_GetJointSpeed00);
-   tolua_function(tolua_S,"IsMotorEnabled",tolua_LuaBox2D_b2WheelJoint_IsMotorEnabled00);
-   tolua_function(tolua_S,"EnableMotor",tolua_LuaBox2D_b2WheelJoint_EnableMotor00);
-   tolua_function(tolua_S,"SetMotorSpeed",tolua_LuaBox2D_b2WheelJoint_SetMotorSpeed00);
-   tolua_function(tolua_S,"GetMotorSpeed",tolua_LuaBox2D_b2WheelJoint_GetMotorSpeed00);
-   tolua_function(tolua_S,"SetMaxMotorTorque",tolua_LuaBox2D_b2WheelJoint_SetMaxMotorTorque00);
-   tolua_function(tolua_S,"GetMaxMotorTorque",tolua_LuaBox2D_b2WheelJoint_GetMaxMotorTorque00);
-   tolua_function(tolua_S,"GetMotorTorque",tolua_LuaBox2D_b2WheelJoint_GetMotorTorque00);
-   tolua_function(tolua_S,"SetSpringFrequencyHz",tolua_LuaBox2D_b2WheelJoint_SetSpringFrequencyHz00);
-   tolua_function(tolua_S,"GetSpringFrequencyHz",tolua_LuaBox2D_b2WheelJoint_GetSpringFrequencyHz00);
-   tolua_function(tolua_S,"SetSpringDampingRatio",tolua_LuaBox2D_b2WheelJoint_SetSpringDampingRatio00);
-   tolua_function(tolua_S,"GetSpringDampingRatio",tolua_LuaBox2D_b2WheelJoint_GetSpringDampingRatio00);
-   tolua_function(tolua_S,"Dump",tolua_LuaBox2D_b2WheelJoint_Dump00);
+   tolua_function(tolua_S,"GetAnchorA",tolua_Box2D_b2WheelJoint_GetAnchorA00);
+   tolua_function(tolua_S,"GetAnchorB",tolua_Box2D_b2WheelJoint_GetAnchorB00);
+   tolua_function(tolua_S,"GetReactionForce",tolua_Box2D_b2WheelJoint_GetReactionForce00);
+   tolua_function(tolua_S,"GetReactionTorque",tolua_Box2D_b2WheelJoint_GetReactionTorque00);
+   tolua_function(tolua_S,"GetLocalAnchorA",tolua_Box2D_b2WheelJoint_GetLocalAnchorA00);
+   tolua_function(tolua_S,"GetLocalAnchorB",tolua_Box2D_b2WheelJoint_GetLocalAnchorB00);
+   tolua_function(tolua_S,"GetLocalAxisA",tolua_Box2D_b2WheelJoint_GetLocalAxisA00);
+   tolua_function(tolua_S,"GetJointTranslation",tolua_Box2D_b2WheelJoint_GetJointTranslation00);
+   tolua_function(tolua_S,"GetJointSpeed",tolua_Box2D_b2WheelJoint_GetJointSpeed00);
+   tolua_function(tolua_S,"IsMotorEnabled",tolua_Box2D_b2WheelJoint_IsMotorEnabled00);
+   tolua_function(tolua_S,"EnableMotor",tolua_Box2D_b2WheelJoint_EnableMotor00);
+   tolua_function(tolua_S,"SetMotorSpeed",tolua_Box2D_b2WheelJoint_SetMotorSpeed00);
+   tolua_function(tolua_S,"GetMotorSpeed",tolua_Box2D_b2WheelJoint_GetMotorSpeed00);
+   tolua_function(tolua_S,"SetMaxMotorTorque",tolua_Box2D_b2WheelJoint_SetMaxMotorTorque00);
+   tolua_function(tolua_S,"GetMaxMotorTorque",tolua_Box2D_b2WheelJoint_GetMaxMotorTorque00);
+   tolua_function(tolua_S,"GetMotorTorque",tolua_Box2D_b2WheelJoint_GetMotorTorque00);
+   tolua_function(tolua_S,"SetSpringFrequencyHz",tolua_Box2D_b2WheelJoint_SetSpringFrequencyHz00);
+   tolua_function(tolua_S,"GetSpringFrequencyHz",tolua_Box2D_b2WheelJoint_GetSpringFrequencyHz00);
+   tolua_function(tolua_S,"SetSpringDampingRatio",tolua_Box2D_b2WheelJoint_SetSpringDampingRatio00);
+   tolua_function(tolua_S,"GetSpringDampingRatio",tolua_Box2D_b2WheelJoint_GetSpringDampingRatio00);
+   tolua_function(tolua_S,"Dump",tolua_Box2D_b2WheelJoint_Dump00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2ContactResult","b2ContactResult","",NULL);
   tolua_beginmodule(tolua_S,"b2ContactResult");
@@ -32106,14 +32177,14 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2DestructionListener","b2DestructionListener","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2DestructionListener");
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2DestructionListener_delete00);
-   tolua_function(tolua_S,"SayGoodbye",tolua_LuaBox2D_b2DestructionListener_SayGoodbye00);
-   tolua_function(tolua_S,"SayGoodbye",tolua_LuaBox2D_b2DestructionListener_SayGoodbye01);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2DestructionListener_delete00);
+   tolua_function(tolua_S,"SayGoodbye",tolua_Box2D_b2DestructionListener_SayGoodbye00);
+   tolua_function(tolua_S,"SayGoodbye",tolua_Box2D_b2DestructionListener_SayGoodbye01);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"b2ContactImpulse","b2ContactImpulse","",NULL);
   tolua_beginmodule(tolua_S,"b2ContactImpulse");
-   tolua_array(tolua_S,"normalImpulses",tolua_get_LuaBox2D_b2ContactImpulse_normalImpulses,tolua_set_LuaBox2D_b2ContactImpulse_normalImpulses);
-   tolua_array(tolua_S,"tangentImpulses",tolua_get_LuaBox2D_b2ContactImpulse_tangentImpulses,tolua_set_LuaBox2D_b2ContactImpulse_tangentImpulses);
+   tolua_array(tolua_S,"normalImpulses",tolua_get_Box2D_b2ContactImpulse_normalImpulses,tolua_set_Box2D_b2ContactImpulse_normalImpulses);
+   tolua_array(tolua_S,"tangentImpulses",tolua_get_Box2D_b2ContactImpulse_tangentImpulses,tolua_set_Box2D_b2ContactImpulse_tangentImpulses);
    tolua_variable(tolua_S,"count",tolua_get_b2ContactImpulse_count,tolua_set_b2ContactImpulse_count);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
@@ -32122,8 +32193,8 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2QueryCallback","b2QueryCallback","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2QueryCallback");
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2QueryCallback_delete00);
-   tolua_function(tolua_S,"ReportFixture",tolua_LuaBox2D_b2QueryCallback_ReportFixture00);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2QueryCallback_delete00);
+   tolua_function(tolua_S,"ReportFixture",tolua_Box2D_b2QueryCallback_ReportFixture00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"b2RayCastCallback","b2RayCastCallback","",tolua_collect_b2RayCastCallback);
@@ -32131,8 +32202,8 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"b2RayCastCallback","b2RayCastCallback","",NULL);
   #endif
   tolua_beginmodule(tolua_S,"b2RayCastCallback");
-   tolua_function(tolua_S,"delete",tolua_LuaBox2D_b2RayCastCallback_delete00);
-   tolua_function(tolua_S,"ReportFixture",tolua_LuaBox2D_b2RayCastCallback_ReportFixture00);
+   tolua_function(tolua_S,"delete",tolua_Box2D_b2RayCastCallback_delete00);
+   tolua_function(tolua_S,"ReportFixture",tolua_Box2D_b2RayCastCallback_ReportFixture00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;
@@ -32140,8 +32211,8 @@ TOLUA_API int tolua_LuaBox2D_open (lua_State* tolua_S)
 
 
 #if defined(LUA_VERSION_NUM) && LUA_VERSION_NUM >= 501
- TOLUA_API int luaopen_LuaBox2D (lua_State* tolua_S) {
- return tolua_LuaBox2D_open(tolua_S);
+ TOLUA_API int luaopen_Box2D (lua_State* tolua_S) {
+ return tolua_Box2D_open(tolua_S);
 };
 #endif
 

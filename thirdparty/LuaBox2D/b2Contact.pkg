@@ -62,7 +62,7 @@ public:
     /// Get the contact manifold. Do not modify the manifold unless you understand the
     /// internals of Box2D.
     b2Manifold* GetManifold();
-    const b2Manifold* GetManifold();
+    const b2Manifold* GetManifold @ GetManifold_c();
 
     /// Get the world manifold.
     void GetWorldManifold(b2WorldManifold* worldManifold);
@@ -84,14 +84,14 @@ public:
 
     /// Get fixture A in this contact.
     b2Fixture* GetFixtureA();
-    const b2Fixture* GetFixtureA();
+    const b2Fixture* GetFixtureA @ GetFixtureA_c();
 
     /// Get the child primitive index for fixture A.
     int32 GetChildIndexA();
 
     /// Get fixture B in this contact.
     b2Fixture* GetFixtureB();
-    const b2Fixture* GetFixtureB();
+    const b2Fixture* GetFixtureB @ GetFixtureB_c();
 
     /// Get the child primitive index for fixture B.
     int32 GetChildIndexB();
