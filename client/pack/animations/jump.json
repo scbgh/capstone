@@ -20,18 +20,23 @@
             "name": "walk",
             "repeat": true,
             "frames": [
-                { "index": 6, "duration": 0.1 },
-                { "index": 7, "duration": 0.1 },
-                { "index": 8, "duration": 0.1 },
-                { "index": 7, "duration": 0.1 }
+                { "index": 16, "duration": 0.1 },
+                { "index": 17, "duration": 0.1 },
+                { "index": 18, "duration": 0.1 },
+                { "index": 19, "duration": 0.1 },
+                { "index": 20, "duration": 0.1 },
+                { "index": 21, "duration": 0.1 },
+                { "index": 22, "duration": 0.1 },
+                { "index": 23, "duration": 0.1 }
             ]
         },
 
         {
             "name": "jump",
-            "repeat": false,
+            "repeat": true,
             "frames": [
-                { "index": 13, "duration": 0.2 }
+                { "index": 4, "duration": 0.1 },
+                { "index": 5, "duration": 0.1 }
             ]
         }
     ]
