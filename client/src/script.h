@@ -20,6 +20,8 @@ extern "C" {
 #include "LuaBox2D/LuaBox2D.h"
 #include "lua_scriptstate.h"
 
+struct b2Contact;
+
 namespace pg {
 
 struct ScriptState;
@@ -29,8 +31,9 @@ struct ScriptState;
 class Script {
 public:
     //! Load a Lua script into a new Script wrapper
+    //! \param stdlib The Lua source code of the standard library
     //! \param source The Lua source code to load
-    Script(const std::string& source);
+    Script(const std::string& stdlib, const std::string& source);
     ~Script();
 
     //! Call a nullary function in this Lua script
@@ -49,6 +52,7 @@ private:
     void PushParameter(double val);
     void PushParameter(ScriptState *val);
     void PushParameter(const std::string& val);
+    void PushParameter(b2Contact *val);
 
     void GetFunction(const std::string& val);
 

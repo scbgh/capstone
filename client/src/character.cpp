@@ -13,14 +13,50 @@ namespace pg {
 //
 Character::Character(App *app) :
     app_(app),
-    direction_(kRight),
-    foot_contacts_(0)
+    direction_(kRight)
 {
     BodyData *data = new BodyData;
     data->type = kCharacterBody;
     data->collide_player = false;
     data->data.character_body = this;
     state_ = kIdle;
+}
+
+//
+//
+bool Character::IsGrounded() const
+{
+    for (b2ContactEdge *edge = body_->GetContactList(); edge; edge = edge->next) {
+        BodyData *data = (BodyData *)edge->other->GetUserData();
+
+        if (!edge->contact->IsTouching()) continue;
+        if (!data || !data->collide_player) continue;
+
+        if (edge->contact->GetFixtureA()->GetUserData() == (void *)kBottomFixture) {
+            return true;
+        } else if (edge->contact->GetFixtureB()->GetUserData() == (void *)kBottomFixture) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+//
+//
+bool Character::AtGoal() const
+{
+    for (b2ContactEdge *edge = body_->GetContactList(); edge; edge = edge->next) {
+        if (!edge->contact->IsTouching()) continue;
+
+        if (edge->contact->GetFixtureA()->GetUserData() == (void *)kGoalFixture) {
+            return true;
+        } else if (edge->contact->GetFixtureB()->GetUserData() == (void *)kGoalFixture) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 //
@@ -43,18 +79,18 @@ void Character::Step(double time)
         to_speed = 0.0;
     }
 
-    if (!grounded_) {
+    if (!IsGrounded()) {
         animation_->SetState("jump");
     }
 
     double vel_change = to_speed - vel.x;
     double force = body_->GetMass() * vel_change / time;
 
-    if (to_speed != 0.0 && grounded_) {
+    if (to_speed != 0.0 && IsGrounded()) {
         body_->ApplyForce(b2Vec2(force, 0), body_->GetWorldCenter());
     }
 
-    if (grounded_ && to_speed == 0.0) {
+    if (IsGrounded() && to_speed == 0.0) {
         animation_->SetState("stand");
     }
 }
@@ -84,7 +120,7 @@ void Character::OnKeyDown(SDL_KeyboardEvent *evt)
             state_ |= kMoveRight;
             break;
         case SDLK_SPACE:
-            if (grounded_) {
+            if (IsGrounded()) {
                 state_ |= kJump;
                 body_->ApplyLinearImpulse(b2Vec2(0, jump_speed_), body_->GetWorldCenter());
             }
@@ -112,23 +148,6 @@ void Character::OnKeyUp(SDL_KeyboardEvent *evt)
 
 }
 
-//
-//
-void Character::BeginFootContact()
-{
-    foot_contacts_++;
-    grounded_ = true;
-}
-
-//
-//
-void Character::EndFootContact()
-{
-    foot_contacts_--;
-    if (!foot_contacts_) {
-        grounded_ = false;
-    }
-}
 
 }
 

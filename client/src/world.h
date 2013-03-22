@@ -22,6 +22,7 @@ class Character;
 class World;
 
 enum BodyDataType {
+    kStaticBody, //!< Level geometry body
     kWorldBody, //!< A body that exists in the level data (e.g., was placed in the editor)
     kCharacterBody //!< A body that is attached to a character
 };
@@ -154,6 +155,8 @@ private:
 
     std::unique_ptr<Sprite> back_sprite_;
     std::unique_ptr<Sprite> fore_sprite_;
+
+    friend class ContactListener;
 };
 
 }

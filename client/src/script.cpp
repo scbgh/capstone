@@ -9,13 +9,17 @@ namespace pg {
 
 //
 //
-Script::Script(const string& source) :
+Script::Script(const string& stdlib, const string& source) :
     params_(0)
 {
     lua_ = luaL_newstate();
     luaL_openlibs(lua_);
-    tolua_LuaBox2D_open(lua_);
+    tolua_Box2D_open(lua_);
     tolua_scriptstate_open(lua_);
+    if (luaL_dostring(lua_, stdlib.c_str())) {
+        Debug("Lua error (stdlib): %s\n", lua_tostring(lua_, -1));
+        lua_remove(lua_, -1);
+    }
     if (luaL_dostring(lua_, source.c_str())) {
         Debug("Lua error: %s\n", lua_tostring(lua_, -1));
         lua_remove(lua_, -1);
@@ -48,6 +52,13 @@ void Script::PushParameter(const string& val)
 void Script::PushParameter(ScriptState *val)
 {
     tolua_pushusertype(lua_, val, "ScriptState");
+}
+
+//
+//
+void Script::PushParameter(b2Contact *val)
+{
+    tolua_pushusertype(lua_, val, "b2Contact");
 }
 
 //

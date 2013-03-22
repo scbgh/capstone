@@ -38,59 +38,14 @@ ContactListener::ContactListener(World *world) :
 //
 void ContactListener::BeginContact(b2Contact *contact)
 {
-    BodyData *a, *b;
-    a = (BodyData *)contact->GetFixtureA()->GetBody()->GetUserData();
-    b = (BodyData *)contact->GetFixtureB()->GetBody()->GetUserData();
-
-    if (contact->GetFixtureA()->GetUserData() == (void *)kBottomFixture) {
-        if (!contact->GetFixtureB()->IsSensor()) {
-            a->data.character_body->BeginFootContact();
-        }
-    } else if (contact->GetFixtureA()->GetUserData() == (void *)kCharacterFixture) {
-        if (contact->GetFixtureB()->GetUserData() == (void *)kGoalFixture) {
-            a->data.character_body->BeginGoalContact();
-        }
-    }
-
-    if (contact->GetFixtureB()->GetUserData() == (void *)kBottomFixture) {
-        if (!contact->GetFixtureA()->IsSensor()) {
-            b->data.character_body->BeginFootContact();
-        }
-    } else if (contact->GetFixtureB()->GetUserData() == (void *)kCharacterFixture) {
-        if (contact->GetFixtureA()->GetUserData() == (void *)kGoalFixture) {
-            b->data.character_body->BeginGoalContact();
-        }
-    }
+    world_->script_->Call<void>("begin_contact", world_->script_state_.get(), contact);
 }
 
 //
 //
 void ContactListener::EndContact(b2Contact *contact)
 {
-    BodyData *a, *b;
-    a = (BodyData *)contact->GetFixtureA()->GetBody()->GetUserData();
-    b = (BodyData *)contact->GetFixtureB()->GetBody()->GetUserData();
-
-    if (contact->GetFixtureA()->GetUserData() == (void *)kBottomFixture) {
-        if (!contact->GetFixtureB()->IsSensor()) {
-            a->data.character_body->EndFootContact();
-        }
-    } else if (contact->GetFixtureA()->GetUserData() == (void *)kCharacterFixture) {
-        if (contact->GetFixtureB()->GetUserData() == (void *)kGoalFixture) {
-            a->data.character_body->EndGoalContact();
-        }
-    }
-
-    if (contact->GetFixtureB()->GetUserData() == (void *)kBottomFixture) {
-        if (!contact->GetFixtureA()->IsSensor()) {
-            b->data.character_body->EndFootContact();
-        }
-    } else if (contact->GetFixtureB()->GetUserData() == (void *)kCharacterFixture) {
-        if (contact->GetFixtureA()->GetUserData() == (void *)kGoalFixture) {
-            b->data.character_body->EndGoalContact();
-        }
-    }
-
+    world_->script_->Call<void>("end_contact", world_->script_state_.get(), contact);
 }
 
 //
@@ -171,11 +126,13 @@ void World::LoadMap(const string& map_name)
     Pack& pack = app_->pack();
     string map_path = "maps/" + map_name + ".json";
     string script_path = "scripts/" + map_name + ".lua";
+    string stdlib_path = "scripts/stdlib.lua";
     if (!pack.contains(map_path)) {
         Die("Could not load map '%s'", map_name.c_str());
     }
     string json = pack[map_path].ToString();
     string src = pack[script_path].ToString();
+    string stdlib = pack[stdlib_path].ToString();
 
     b2Vec2 gravity(0.0f, -10.0f);
     phys_world_ = unique_ptr<b2World>(new b2World(gravity));
@@ -184,6 +141,11 @@ void World::LoadMap(const string& map_name)
 
     // Create a single static body at the origin for the static world geometry
     b2BodyDef static_body_def;
+    BodyData *data = new BodyData;
+    data->type = kStaticBody;
+    data->cause_shake = false;
+    data->collide_player = true;
+    static_body_def.userData = data;
     b2Body *static_body = phys_world_->CreateBody(&static_body_def);
 
     // Load the map from disk and turn it into a Box2D world
@@ -266,6 +228,7 @@ void World::LoadMap(const string& map_name)
                 target_body = body;
             } else {
                 def.friction = 0.5;
+                def.density = 1.0;
                 target_body = static_body;
             }
 
@@ -414,7 +377,7 @@ void World::LoadMap(const string& map_name)
 
     // Load the lua script
     script_state_.reset(new ScriptState(phys_world_.get(), app_));
-    script_.reset(new Script(src));
+    script_.reset(new Script(stdlib, src));
     script_->Call<void>("init", script_state_.get());
 }
 

@@ -67,7 +67,7 @@ void HeavyCharacter::OnKeyDown(SDL_KeyboardEvent *evt)
 
     switch (evt->keysym.sym) {
         case SDLK_a:
-            if (grounded_) {
+            if (IsGrounded()) {
                 rolling_ = true;
                 body_->SetFixedRotation(false);
             }

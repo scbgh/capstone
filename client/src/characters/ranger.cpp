@@ -74,13 +74,13 @@ void RangerCharacter::OnKeyDown(SDL_KeyboardEvent *evt)
             state_ |= kMoveRight;
             break;
         case SDLK_SPACE:
-            if (grounded_) {
+            if (IsGrounded()) {
                 state_ |= kJump;
                 body_->ApplyLinearImpulse(b2Vec2(0, jump_speed_), body_->GetWorldCenter());
             }
             break;
         case SDLK_a:
-            if (grounded_) {
+            if (IsGrounded()) {
                 launch_ = true;
                 launch_time_ = time_;
             }
@@ -168,7 +168,7 @@ void RangerCharacter::Step(double time)
             to_speed = 0.0;
         }
 
-        if (!grounded_) {
+        if (!IsGrounded()) {
             animation_->SetState("jump");
         }
 
@@ -193,7 +193,7 @@ void RangerCharacter::Step(double time)
         }
     }
 
-    if (grounded_ && to_speed == 0.0) {
+    if (IsGrounded() && to_speed == 0.0) {
         animation_->SetState("stand");
     }
 
