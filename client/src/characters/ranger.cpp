@@ -114,15 +114,15 @@ void RangerCharacter::OnKeyUp(SDL_KeyboardEvent *evt)
                 b2FixtureDef fixture_def;
                 double dir = direction_ == kLeft ? -1 : 1; 
                 b2Vec2 offset = b2Vec2(dir * 0.5, 0);
-                b2Vec2 vel = 250 * b2Vec2(dir * cos(DEG_TO_RAD(launch_angle_)), sin(DEG_TO_RAD(launch_angle_)));
+                b2Vec2 vel = 50 * b2Vec2(dir * cos(DEG_TO_RAD(launch_angle_)), sin(DEG_TO_RAD(launch_angle_)));
 
                 body_def.type = b2_dynamicBody;
-                body_def.angularDamping = 0.8;
+                body_def.angularDamping = 1.0;
                 circle.m_radius = 0.125;
                 fixture_def.shape = &circle;
                 fixture_def.friction = 0.5;
-                fixture_def.restitution = 0.5;
-                fixture_def.density = 2700;
+                fixture_def.restitution = 0.4;
+                fixture_def.density = 101;
 
                 b2Body *body = app_->world().phys_world()->CreateBody(&body_def);
                 b2Fixture *fixture = body->CreateFixture(&fixture_def);
