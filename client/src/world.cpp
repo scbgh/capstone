@@ -412,6 +412,16 @@ void World::Step(float seconds)
     time_ += seconds;
     shake_ -= seconds;
     if (shake_ < 0.0) shake_ = 0.0;
+
+    bool at_goal = true;
+    for (auto& ch : characters_) {
+        if (!ch.second->AtGoal()) {
+            at_goal = false;
+        }
+    }
+
+    if (at_goal) {
+    }
 }
 
 //
