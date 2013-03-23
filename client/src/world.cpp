@@ -310,8 +310,8 @@ void World::LoadMap(const string& map_name)
                 inner_def->enableMotor = revolute_joint->enable_motor;
                 inner_def->maxMotorTorque = revolute_joint->max_motor_torque;
                 inner_def->motorSpeed = revolute_joint->motor_speed;
-                inner_def->upperAngle = revolute_joint->upper_angle;
-                inner_def->lowerAngle = revolute_joint->lower_angle;
+                inner_def->upperAngle = DEG_TO_RAD(revolute_joint->upper_angle);
+                inner_def->lowerAngle = DEG_TO_RAD(revolute_joint->lower_angle);
                 inner_def->referenceAngle = revolute_joint->reference_angle;
                 inner_def->enableLimit = revolute_joint->enable_limit;
                 break;
