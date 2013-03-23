@@ -99,6 +99,8 @@ public:
     b2Fixture *goal_fixture() const { return goal_fixture_; }
     //! The root object holding the map data
     MapFile *map_file() { return map_.get(); }
+    //! Is the level complete?
+    bool complete() const { return complete_; }
     
     //! Return the Box2D joint with the specified user tag as specified in the editor
     //! \param tag The tag of the joint to look up
@@ -135,6 +137,7 @@ private:
     ContactListener contact_listener_;
     double time_;
     std::string active_character_;
+    bool complete_; // is the level complete?
 
     // screen shake
     double shake_;

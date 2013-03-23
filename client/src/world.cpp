@@ -380,6 +380,8 @@ void World::Step(float seconds)
     const int pos_iter = 8;
     float accum = 0;
 
+    if (complete_) return;
+
     if (seconds < time_step) {
         phys_world_->Step(seconds, vel_iter, pos_iter);
     } else {
@@ -406,6 +408,7 @@ void World::Step(float seconds)
     }
 
     if (at_goal) {
+        complete_ = true;
     }
 }
 
@@ -481,6 +484,8 @@ void World::DrawCharacters()
 //
 void World::OnKeyDown(SDL_KeyboardEvent *evt)
 {
+    if (complete_) return;
+
     script_->Call<void>("key_down", script_state_.get(),
         std::string(SDL_GetKeyName(evt->keysym.sym)));
     if (characters_.find(active_character_) != characters_.end()) {
@@ -509,6 +514,8 @@ void World::OnKeyDown(SDL_KeyboardEvent *evt)
 //
 void World::OnKeyUp(SDL_KeyboardEvent *evt)
 {
+    if (complete_) return;
+
     script_->Call<void>("key_up", script_state_.get(),
         std::string(SDL_GetKeyName(evt->keysym.sym)));
     //characters_[active_character_]->OnKeyUp(evt);

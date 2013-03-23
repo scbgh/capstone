@@ -129,6 +129,23 @@ void Renderer::Render()
     }
     world.DrawCharacters();
 
+    if (world.complete()) {
+        glColor4d(1.0, 1.0, 1.0, 0.5);
+        glBegin(GL_QUADS);
+            glVertex2d(0, 0);
+            glVertex2d(40, 0);
+            glVertex2d(40, 22);
+            glVertex2d(0, 22);
+        glEnd();
+        glColor4d(1.0, 1.0, 1.0, 1.0);
+
+        Sprite *complete = app_->GetSprite("graphics/complete.png");
+        double w = complete->width() / 32.0;
+        double h = complete->height() / 32.0;
+        glTranslated(20 - w / 2.0, 11 - h / 2.0, 0);
+        complete->Render(complete->width() / 32.0, complete->height() / 32.0);
+    }
+
     glPopMatrix();
 }
 
