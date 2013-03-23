@@ -260,3 +260,5 @@ struct b2Rot
     /// Sine and cosine
     float32 s, c;
 };
+
+

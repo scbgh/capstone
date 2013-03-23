@@ -61,6 +61,8 @@ void ContactListener::PreSolve(b2Contact *contact, const b2Manifold *oldManifold
     if (a && b && ((a->type == kCharacterBody && !b->collide_player) || (b->type == kCharacterBody && !a->collide_player))) {
         contact->SetEnabled(false);
     }
+
+    world_->script_->Call<void>("presolve_contact", world_->script_state_.get(), contact, oldManifold);
 }
 
 //
@@ -76,22 +78,19 @@ void ContactListener::PostSolve(b2Contact *contact, const b2ContactImpulse *impu
     b2WorldManifold manifold;
     contact->GetWorldManifold(&manifold);
     int max_index = 0;
-    double max_force = 0;
+    float max_force = 0;
     
     for (int i = 0; i < contact->GetManifold()->pointCount; i++) {
-        if (impulse->normalImpulses[i] > max_force) {
-            max_force = impulse->normalImpulses[i];
-            max_index = i;
-        }
+        max_force = b2Max(max_force, impulse->normalImpulses[i]);
     }
 
-    b2Vec2 vel1 = ba->GetLinearVelocity();
-    b2Vec2 vel2 = bb->GetLinearVelocity();
-    b2Vec2 impact_velocity = vel1 - vel2;
-    if (max_force > 2.0 && impact_velocity.Length() > 0.0 && ((a && a->cause_shake) || (b && b->cause_shake))) { 
-        // disable screen shake for now
-        // world_->ShakeScreen(max_force / 5000, 0.5, 0.5, math::Vector(impact_velocity.x, impact_velocity.y));
+
+    if (max_force > 100.0 && ((a && a->cause_shake) || (b && b->cause_shake))) { 
+        world_->ShakeScreen(max_force / 100000, 2, 0.3,
+            math::Vector(-manifold.normal.x, -manifold.normal.y));
     }
+    
+    world_->script_->Call<void>("postsolve_contact", world_->script_state_.get(), contact, impulse);
 }
 
 ///////////

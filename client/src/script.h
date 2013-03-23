@@ -21,6 +21,8 @@ extern "C" {
 #include "lua_scriptstate.h"
 
 struct b2Contact;
+struct b2ContactImpulse;
+struct b2Manifold;
 
 namespace pg {
 
@@ -53,6 +55,8 @@ private:
     void PushParameter(ScriptState *val);
     void PushParameter(const std::string& val);
     void PushParameter(b2Contact *val);
+    void PushParameter(const b2Manifold *val);
+    void PushParameter(const b2ContactImpulse *val);
 
     void GetFunction(const std::string& val);
 

@@ -63,6 +63,20 @@ void Script::PushParameter(b2Contact *val)
 
 //
 //
+void Script::PushParameter(const b2Manifold *val)
+{
+    tolua_pushusertype(lua_, (void *)val, "const b2Manifold");
+}
+
+//
+//
+void Script::PushParameter(const b2ContactImpulse *val)
+{
+    tolua_pushusertype(lua_, (void *)val, "const b2ContactImpulse");
+}
+
+//
+//
 void Script::GetFunction(const string& val)
 {
     lua_getfield(lua_, LUA_GLOBALSINDEX, val.c_str());
