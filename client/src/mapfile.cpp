@@ -111,9 +111,14 @@ MapFile *LoadMapFromJSON(const string& json)
             body->tag = shape_object["tag"].get<string>();
             body->image_offset = PointFromArray(shape_object["imageOffset"].get<picojson::array>());
             bool isDynamic = shape_object["isDynamic"].get<bool>();
+            bool isKinematic = shape_object["isKinematic"].get<bool>();
 
             if (!isDynamic) {
-                body->type = kStatic;
+                if (isKinematic) {
+                    body->type = kKinematic;
+                } else { 
+                    body->type = kStatic;
+                }
             } else {
                 body->type = kDynamic;
             }
@@ -167,7 +172,20 @@ MapFile *LoadMapFromJSON(const string& json)
             revolute_joint->upper_angle = joint_object["upperAngle"].get<double>();
             revolute_joint->max_motor_torque = joint_object["maxMotorTorque"].get<double>();
             revolute_joint->motor_speed = joint_object["motorSpeed"].get<double>();
+        } else if (type == "pulley") {
+            PulleyJoint *pulley_joint = new PulleyJoint;
+            joint = pulley_joint;
+            pulley_joint->anchor1 = PointFromArray(joint_object["anchor1"].get<picojson::array>());
+            pulley_joint->anchor2 = PointFromArray(joint_object["anchor2"].get<picojson::array>());
+            pulley_joint->ground_anchor1 = PointFromArray(joint_object["groundAnchor1"].get<picojson::array>());
+            pulley_joint->ground_anchor2 = PointFromArray(joint_object["groundAnchor2"].get<picojson::array>());
+            pulley_joint->ratio = joint_object["ratio"].get<double>();
+        } else if (type == "weld") {
+            WeldJoint *weld_joint = new WeldJoint;
+            joint = weld_joint;
+            weld_joint->anchor = PointFromArray(joint_object["anchor"].get<picojson::array>());
         }
+        
         int body_a_id = joint_object["bodyA"].get<double>();
         int body_b_id = joint_object["bodyB"].get<double>();
         joint->body_a = bodies[body_a_id];

@@ -28,7 +28,8 @@ struct BodyData;
 
 enum BodyType {
     kStatic, //!< Static body (not movable)
-    kDynamic //!< Dynamic body (affected by other bodies)
+    kDynamic, //!< Dynamic body (affected by other bodies)
+    kKinematic, //!< Kinematic body (moves but is not movable by force) 
 };
 enum ShapeType { kPolygon, kCircle };
 enum JointType { kDistance, kGear, kLine, kPrismatic, kPulley, kRevolute, kRope, kWeld, kWheel };
@@ -182,6 +183,26 @@ struct RevoluteJoint : public Joint {
     double upper_angle;
     double reference_angle;
     virtual JointType type() const { return kRevolute; }
+};
+
+//
+//! A joint that keeps two bodies completely fixed relative to each other
+//! (see Box2D documentation)
+struct WeldJoint : public Joint {
+    math::Point anchor;
+    virtual JointType type() const { return kWeld; }
+};
+
+//
+//! A joint that simulates a rope and pulley system
+//! (see Box2D documentation)
+struct PulleyJoint : public Joint {
+    math::Point ground_anchor1;
+    math::Point ground_anchor2;
+    math::Point anchor1;
+    math::Point anchor2;
+    double ratio;
+    virtual JointType type() const { return kPulley; }
 };
 
 //! Load an entire map structure from a JSON representation

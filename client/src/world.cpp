@@ -316,6 +316,24 @@ void World::LoadMap(const string& map_name)
                 inner_def->enableLimit = revolute_joint->enable_limit;
                 break;
             }
+            case kWeld: {
+                WeldJoint *weld_joint = (WeldJoint *)joint.get();
+                b2WeldJointDef *inner_def = new b2WeldJointDef;
+                def = inner_def;
+                inner_def->Initialize(phys_bodies[joint->body_a], phys_bodies[joint->body_b],
+                    PointToVec(weld_joint->anchor));
+                break;
+            }
+            case kPulley: {
+                PulleyJoint *pulley_joint = (PulleyJoint *)joint.get();
+                b2PulleyJointDef *inner_def = new b2PulleyJointDef;
+                def = inner_def;
+                inner_def->Initialize(phys_bodies[joint->body_a], phys_bodies[joint->body_b], 
+                    PointToVec(pulley_joint->ground_anchor1), PointToVec(pulley_joint->ground_anchor2),
+                    PointToVec(pulley_joint->anchor1), PointToVec(pulley_joint->anchor2),
+                    pulley_joint->ratio);
+                break;
+            }
             default:
                 Die("Invalid joint type");
                 break;
