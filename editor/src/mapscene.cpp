@@ -161,6 +161,11 @@ void MapScene::beginJoint(const QPointF& point, QGraphicsItem *item)
         case kRevoluteJoint:
             joint_ = QSharedPointer<Joint>((Joint *)new RevoluteJoint);
             break;
+        case kPulleyJoint:
+            joint_ = QSharedPointer<Joint>((Joint *)new PulleyJoint);
+            break;
+        case kWeldJoint:
+            joint_ = QSharedPointer<Joint>((Joint *)new WeldJoint);
         default:
             qFatal("Bad joint mode");
             break;
@@ -291,6 +296,16 @@ void MapScene::makeVerticesForJoint(ConnectItem *item, QSharedPointer<Joint> joi
         case kRevolute: {
             MAKE_VERTEX(RevoluteJoint, anchor, bodyA->position);
             break;            
+        }
+        case kWeld: {
+            MAKE_VERTEX(WeldJoint, anchor, bodyA->position);
+            break;
+        }
+        case kPulley: {
+            MAKE_VERTEX(PulleyJoint, groundAnchor1, bodyA->position + QPointF(0.5, 0.5));
+            MAKE_VERTEX(PulleyJoint, groundAnchor2, bodyB->position + QPointF(0.5, 0.5));
+            MAKE_VERTEX(PulleyJoint, anchor1, bodyA->position);
+            MAKE_VERTEX(PulleyJoint, anchor2, bodyB->position);
         }
         default:
             break;

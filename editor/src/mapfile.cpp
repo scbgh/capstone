@@ -160,6 +160,26 @@ j::value jointToValue(QSharedPointer<Joint> joint)
             };
             break;
         }
+        case kPulley: {
+            QSharedPointer<PulleyJoint> realJoint = qSharedPointerCast<PulleyJoint>(joint);
+            subObject = {
+                { "type", j::value("pulley") },
+                { "anchor1", pointToValue(realJoint->anchor1) },
+                { "anchor2", pointToValue(realJoint->anchor2) },
+                { "groundAnchor1", pointToValue(realJoint->groundAnchor1) },
+                { "groundAnchor2", pointToValue(realJoint->groundAnchor2) },
+                { "ratio", j::value(realJoint->ratio) }
+            };
+            break;
+        }
+        case kWeld: {
+            QSharedPointer<WeldJoint> realJoint = qSharedPointerCast<WeldJoint>(joint);
+            subObject = {
+                { "type", j::value("weld") },
+                { "anchor", pointToValue(realJoint->anchor) }
+            };
+            break;
+        }
         default:
             qFatal("Unknown joint type");
             break;
@@ -347,6 +367,18 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
             revolute_joint->upperAngle = joint_object["upperAngle"].get<double>();
             revolute_joint->maxMotorTorque = joint_object["maxMotorTorque"].get<double>();
             revolute_joint->motorSpeed = joint_object["motorSpeed"].get<double>();
+        } else if (type == "pulley") {
+            PulleyJoint *pulley_joint = new PulleyJoint;
+            joint = QSharedPointer<Joint>(pulley_joint);
+            pulley_joint->anchor1 = pointFromArray(joint_object["anchor1"].get<picojson::array>());
+            pulley_joint->anchor2 = pointFromArray(joint_object["anchor2"].get<picojson::array>());
+            pulley_joint->groundAnchor1 = pointFromArray(joint_object["groundAnchor1"].get<picojson::array>());
+            pulley_joint->groundAnchor2 = pointFromArray(joint_object["groundAnchor2"].get<picojson::array>());
+            pulley_joint->ratio = joint_object["ratio"].get<double>();
+        } else if (type == "weld") {
+            WeldJoint *weld_joint = new WeldJoint;
+            joint = QSharedPointer<Joint>(weld_joint);
+            weld_joint->anchor = pointFromArray(joint_object["anchor"].get<picojson::array>());
         }
 
         joint->bodyA = bodyA;
