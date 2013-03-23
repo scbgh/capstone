@@ -39,7 +39,9 @@ App::App(int argc, char *argv[], int width, int height) :
     ParseArgs(argc, argv);
 
     LoadMapList();
-    world_->LoadMap(map_list_[current_map_]);
+    if (argc == 1) {
+        world_->LoadMap(map_list_[current_map_]);
+    }
 }
 
 //
