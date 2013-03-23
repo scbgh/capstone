@@ -9,9 +9,13 @@ function key_up(s, key)
 end
 
 function begin_contact(s, contact)
-    print(contact_velocity(contact))
 end
 
 function end_contact(s, contact)
 end
 
+function presolve_contact(s, contact, old_manifold)
+end
+
+function postsolve_contact(s, contact, impulse)
+end
