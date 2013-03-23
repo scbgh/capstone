@@ -77,6 +77,7 @@ j::value shapeToValue(QSharedPointer<Shape> shape)
             QSharedPointer<Body> body = qSharedPointerCast<Body>(shape);
             subObject = {
                 { "isDynamic", j::value(body->bodyType == Body::kDynamic) },
+                { "isKinematic", j::value(body->bodyType == Body::kKinematic) }, // hack
                 { "linearVelocity", pointToValue(body->linearVelocity) },
                 { "angularVelocity", j::value(body->angularVelocity) },
                 { "linearDamping", j::value(body->linearDamping) },
@@ -280,9 +281,14 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
             if (shape_object["tag"].is<std::string>())
                 body->tag = QString::fromStdString(shape_object["tag"].get<std::string>());
             bool isDynamic = shape_object["isDynamic"].get<bool>();
+            bool isKinematic = shape_object["isKinematic"].get<bool>();
 
             if (!isDynamic) {
-                body->bodyType = Body::kStatic;
+                if (isKinematic) {
+                    body->bodyType = Body::kKinematic;
+                } else {
+                    body->bodyType = Body::kStatic;
+                }
             } else {
                 body->bodyType = Body::kDynamic;
             }

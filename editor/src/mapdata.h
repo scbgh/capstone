@@ -115,7 +115,7 @@ private:
     Q_ENUMS(BodyType)
 
 public:
-    enum BodyType { kStatic, kDynamic };
+    enum BodyType { kStatic, kDynamic, kKinematic };
 
     Body() :
         bodyType(kDynamic),
