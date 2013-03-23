@@ -36,7 +36,7 @@
         },
 
         {
-            "name": "punch",
+            "name": "grab",
             "repeat": false,
             "frames": [
                 { "index": 3, "duration": 0.2 }
