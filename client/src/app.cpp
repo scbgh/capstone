@@ -13,6 +13,7 @@
 #include "scriptstate.h"
 #include "sprite.h"
 #include "world.h"
+#include "json/picojson.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <cstdio>
@@ -36,6 +37,9 @@ App::App(int argc, char *argv[], int width, int height) :
     pack_ = unique_ptr<Pack>(new Pack(pack_filename));
     renderer_->Init(width, height);
     ParseArgs(argc, argv);
+
+    LoadMapList();
+    world_->LoadMap(map_list_[current_map_]);
 }
 
 //
@@ -127,6 +131,11 @@ void App::OnKeyDown(SDL_KeyboardEvent *evt)
                 world_->LoadMap(map_name_);
             }
             break;
+        case SDLK_SPACE:
+            if (world_->complete()) {
+                NextMap();
+            }
+            break;
         default:
             break;
     }
@@ -170,5 +179,38 @@ void App::ParseArgs(int argc, char *argv[])
     }
 }
 
+//
+//
+void App::LoadMapList()
+{
+    string list_path = "levels.json";
+    if (!pack_->contains(list_path)) {
+        Die("Could not load level list", map_name_.c_str());
+    }
+    string json = (*pack_)[list_path].ToString();
+
+    // Load the root object of the JSON level list representation
+    picojson::value root_value;
+    string error;
+    picojson::parse(root_value, json.begin(), json.end(), &error);
+    if (!error.empty()) {
+        Die("Failed to parse JSON: %s", error.c_str());
+    }
+
+    auto level_array = root_value.get<picojson::array>();
+    for (auto level_value : level_array) {
+        map_list_.push_back(level_value.get<string>());
+    }
+
+    current_map_ = 0;
+}
+
+//
+//
+void App::NextMap()
+{
+    current_map_ = (current_map_ + 1) % map_list_.size();
+    world_->LoadMap(map_list_[current_map_]);
+}
 
 }

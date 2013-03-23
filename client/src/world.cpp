@@ -369,6 +369,8 @@ void World::LoadMap(const string& map_name)
 // Destroy the current world state to make way for a new state
 void World::Dispose()
 {
+    complete_ = false;
+    characters_.clear();
 }
 
 //
