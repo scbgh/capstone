@@ -27,6 +27,7 @@ HeavyCharacter::HeavyCharacter(App *app) :
     b2BodyDef body_def;
     body_def.fixedRotation = true;
     body_def.type = b2_dynamicBody;
+    body_def.bullet = true;
     body_def.userData = data;
     body_ = phys_world->CreateBody(&body_def);
 
