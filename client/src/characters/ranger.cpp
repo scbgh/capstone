@@ -38,7 +38,7 @@ RangerCharacter::RangerCharacter(App *app) :
     b2FixtureDef fixture_def;
     b2Fixture *fixture;
     fixture_def.friction = 1;
-    fixture_def.density = 20;
+    fixture_def.density = 120;
     fixture_def.shape = shape;
     fixture_def.userData = (void *)kCharacterFixture;
     body_->CreateFixture(&fixture_def);
@@ -53,7 +53,7 @@ RangerCharacter::RangerCharacter(App *app) :
     image_offset_ = { -0.5, -0.5 };
     image_size_ = { 1, 1 };
     walk_speed_ = 1.5;
-    jump_speed_ = 50;
+    jump_speed_ = 120;
 
     animation_.reset(new Animation(app));
     animation_->LoadAnimation("ranger");
@@ -66,6 +66,8 @@ RangerCharacter::RangerCharacter(App *app) :
 //
 void RangerCharacter::OnKeyDown(SDL_KeyboardEvent *evt)
 {
+    if (fixed_) return;
+
     switch (evt->keysym.sym) {
         case SDLK_LEFT:
             state_ |= kMoveLeft;
@@ -81,6 +83,7 @@ void RangerCharacter::OnKeyDown(SDL_KeyboardEvent *evt)
             break;
         case SDLK_a:
             if (IsGrounded()) {
+                state_ |= kAction;
                 launch_ = true;
                 launch_time_ = time_;
             }
@@ -104,20 +107,22 @@ void RangerCharacter::OnKeyUp(SDL_KeyboardEvent *evt)
             state_ &= ~kJump;
             break;
         case SDLK_a:
-            if (launch_) {
+            state_ &= ~kAction;
+            if (launch_ && !fixed_) {
                 b2BodyDef body_def;
                 b2CircleShape circle;
                 b2FixtureDef fixture_def;
                 double dir = direction_ == kLeft ? -1 : 1; 
                 b2Vec2 offset = b2Vec2(dir * 0.5, 0);
-                b2Vec2 vel = 10 * b2Vec2(dir * cos(DEG_TO_RAD(launch_angle_)), sin(DEG_TO_RAD(launch_angle_)));
+                b2Vec2 vel = 250 * b2Vec2(dir * cos(DEG_TO_RAD(launch_angle_)), sin(DEG_TO_RAD(launch_angle_)));
 
                 body_def.type = b2_dynamicBody;
+                body_def.angularDamping = 0.8;
                 circle.m_radius = 0.125;
                 fixture_def.shape = &circle;
                 fixture_def.friction = 0.5;
-                fixture_def.restitution = 0.8;
-                fixture_def.density = 10;
+                fixture_def.restitution = 0.5;
+                fixture_def.density = 2700;
 
                 b2Body *body = app_->world().phys_world()->CreateBody(&body_def);
                 b2Fixture *fixture = body->CreateFixture(&fixture_def);
@@ -132,11 +137,11 @@ void RangerCharacter::OnKeyUp(SDL_KeyboardEvent *evt)
                 data->data.world_body = world_body;
                 body->SetUserData((void *)data);
                 body->SetTransform(body_->GetPosition() + offset, 0);
-                body->SetLinearVelocity(launch_force_ * vel);
+                body->ApplyLinearImpulse(launch_force_ * vel, body->GetPosition());
                 app_->world().map_file()->bodies.push_back(std::unique_ptr<Body>(world_body));
                 
-                launch_ = false;
             }
+            launch_ = false;
             break;
         default:
             break;
@@ -152,32 +157,8 @@ void RangerCharacter::Step(double time)
 
     launch_force_ = (sin(2 * M_PI * (time_ - launch_time_)) + 1.5) / 2.0;
 
-    double to_speed = 0.0;
     if (!launch_) {
-        b2Vec2 vel = body_->GetLinearVelocity();
-
-        if (state_ & kMoveLeft) {
-            to_speed = -walk_speed_;
-            animation_->SetState("walk");
-            direction_ = kLeft;
-        } else if (state_ & kMoveRight) {
-            to_speed = walk_speed_;
-            animation_->SetState("walk");
-            direction_ = kRight;
-        } else {
-            to_speed = 0.0;
-        }
-
-        if (!IsGrounded()) {
-            animation_->SetState("jump");
-        }
-
-        double vel_change = to_speed - vel.x;
-        double force = body_->GetMass() * vel_change / time;
-
-        if (to_speed != 0.0) {
-            body_->ApplyForce(b2Vec2(force, 0), body_->GetWorldCenter());
-        }
+        DoWalk(time);
     } else {
         double dir = direction_ == kLeft ? -1 : 1; 
         if (state_ & kMoveLeft) {
@@ -193,10 +174,9 @@ void RangerCharacter::Step(double time)
         }
     }
 
-    if (IsGrounded() && to_speed == 0.0) {
+    if (IsGrounded() && !(state_ & (kMoveLeft | kMoveRight))) {
         animation_->SetState("stand");
     }
-
 }
 
 //
@@ -206,7 +186,7 @@ void RangerCharacter::Render() const
     Character::Render();
     
     // Draw the launch arrow if necessary
-    if (!launch_) return;
+    if (!launch_ || fixed_) return;
     double dir = direction_ == kLeft ? -1 : 1; 
     b2Vec2 pos = body_->GetPosition();
     glPushMatrix();

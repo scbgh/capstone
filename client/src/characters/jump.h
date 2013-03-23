@@ -14,6 +14,8 @@ namespace pg {
 class JumpCharacter : public Character {
 public:
     JumpCharacter(App *app);
+private:
+    virtual void OnKeyDown(SDL_KeyboardEvent *evt);
 };
 
 }

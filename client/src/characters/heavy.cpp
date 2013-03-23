@@ -33,7 +33,7 @@ HeavyCharacter::HeavyCharacter(App *app) :
     b2FixtureDef fixture_def;
     b2Fixture *fixture;
     fixture_def.friction = 1;
-    fixture_def.density = 20;
+    fixture_def.density = 235;
     fixture_def.shape = shape;
     fixture_def.userData = (void *)kCharacterFixture;
     body_->CreateFixture(&fixture_def);
@@ -48,7 +48,7 @@ HeavyCharacter::HeavyCharacter(App *app) :
     image_offset_ = { -0.5, -0.5 };
     image_size_ = { 1, 1 };
     walk_speed_ = 1.5;
-    jump_speed_ = 50;
+    jump_speed_ = 400;
 
     animation_.reset(new Animation(app));
     animation_->LoadAnimation("heavy");

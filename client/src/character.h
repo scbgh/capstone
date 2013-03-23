@@ -17,7 +17,7 @@ namespace pg {
 class App;
 
 //! A bit flag representing the current movement states that a character is in
-enum CharacterState { kIdle = 0, kMoveLeft = 1, kMoveRight = 2, kJump = 4 };
+enum CharacterState { kIdle = 0, kMoveLeft = 1, kMoveRight = 2, kJump = 4, kAction = 8 };
 
 //! A value representing the direction that a character is facing
 enum CharacterDirection { kLeft, kRight };
@@ -51,15 +51,27 @@ public:
 
     //! Returns true if the character is touching the goal
     bool AtGoal() const;
+
+    //! Prevent the character from moving
+    void Freeze() { fixed_ = true; }
+
+    //! Resume character movement
+    void Unfreeze() { fixed_ = false; }
     
+    //! The Box2D body
+    b2Body *body() const { return body_; }
+
     Character(const Character&) = delete;
     Character& operator=(const Character&) = delete;
 protected:
+    void DoWalk(double time);
+
     App *app_;
     b2Body *body_;
     std::unique_ptr<BodyData> data_;
     std::unique_ptr<Animation> animation_;
     
+    bool fixed_;
     double walk_speed_;
     double jump_speed_;
     math::Point image_offset_;

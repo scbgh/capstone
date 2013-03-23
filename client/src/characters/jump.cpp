@@ -32,7 +32,7 @@ JumpCharacter::JumpCharacter(App *app) :
     b2FixtureDef fixture_def;
     b2Fixture *fixture;
     fixture_def.friction = 1;
-    fixture_def.density = 12;
+    fixture_def.density = 140;
     fixture_def.shape = shape;
     fixture_def.userData = (void *)kCharacterFixture;
     body_->CreateFixture(&fixture_def);
@@ -46,13 +46,30 @@ JumpCharacter::JumpCharacter(App *app) :
     image_offset_ = { -0.5, -0.5 };
     image_size_ = { 1, 1 };
     walk_speed_ = 1.5;
-    jump_speed_ = 50;
+    jump_speed_ = 250;
 
     animation_.reset(new Animation(app));
     animation_->LoadAnimation("jump");
     animation_->SetState("stand");
 
     delete shape;
+}
+
+//
+//
+void JumpCharacter::OnKeyDown(SDL_KeyboardEvent *evt)
+{
+    Character::OnKeyDown(evt);
+
+    switch (evt->keysym.sym) {
+        case SDLK_a:
+            if (IsGrounded()) {
+                state_ |= kJump;
+                body_->ApplyLinearImpulse(b2Vec2(0, 2 * jump_speed_), body_->GetWorldCenter());
+            }
+        default:
+            break;
+    }
 }
 
 }

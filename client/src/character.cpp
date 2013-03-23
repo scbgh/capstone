@@ -13,7 +13,8 @@ namespace pg {
 //
 Character::Character(App *app) :
     app_(app),
-    direction_(kRight)
+    direction_(kRight),
+    fixed_(false)
 {
     BodyData *data = new BodyData;
     data->type = kCharacterBody;
@@ -64,6 +65,17 @@ bool Character::AtGoal() const
 void Character::Step(double time)
 {
     animation_->Step(time);
+    DoWalk(time);
+    
+    if (IsGrounded() && !(state_ & (kMoveLeft | kMoveRight))) {
+        animation_->SetState("stand");
+    }
+}
+
+//
+//
+void Character::DoWalk(double time)
+{
     b2Vec2 vel = body_->GetLinearVelocity();
     double to_speed;
 
@@ -86,13 +98,10 @@ void Character::Step(double time)
     double vel_change = to_speed - vel.x;
     double force = body_->GetMass() * vel_change / time;
 
-    if (to_speed != 0.0 && IsGrounded()) {
+    if (to_speed != 0.0 && IsGrounded() && !fixed_) {
         body_->ApplyForce(b2Vec2(force, 0), body_->GetWorldCenter());
     }
 
-    if (IsGrounded() && to_speed == 0.0) {
-        animation_->SetState("stand");
-    }
 }
 
 //
@@ -112,6 +121,8 @@ void Character::Render() const
 //
 void Character::OnKeyDown(SDL_KeyboardEvent *evt)
 {
+    if (fixed_) return;
+
     switch (evt->keysym.sym) {
         case SDLK_LEFT:
             state_ |= kMoveLeft;
