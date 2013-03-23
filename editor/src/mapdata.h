@@ -61,9 +61,9 @@ struct GameMap : public Entity {
 // Fixture between a body and a shape
 struct Fixture : public Entity {
     Fixture() :
-        friction(0),
+        friction(0.8),
         restitution(0),
-        density(0),
+        density(500),
         isSensor(false),
         Entity()
     { }
@@ -142,6 +142,7 @@ public:
     PROPERTY(Body, bool, active);
     PROPERTY(Body, QString, image);
     PROPERTY(Body, QPointF, imageOffset);
+    PROPERTY(Body, bool, collidePlayer);
     
     virtual ShapeType type() const { return kBody; }
 };
@@ -204,6 +205,35 @@ struct RevoluteJoint : public Joint {
     PROPERTY(RevoluteJoint, qreal, motorSpeed);
 
     virtual JointType type() const { return kRevolute; }
+};
+
+//
+//
+struct WeldJoint : public Joint {
+    WeldJoint() :
+        Joint()
+    { }
+
+    PROPERTY(WeldJoint, QPointF, anchor);
+
+    virtual JointType type() const { return kWeld; }
+};
+
+//
+//
+struct PulleyJoint : public Joint {
+    PulleyJoint() :
+        ratio(1.0),
+        Joint()
+    { }
+
+    PROPERTY(PulleyJoint, QPointF, groundAnchor1);
+    PROPERTY(PulleyJoint, QPointF, groundAnchor2);
+    PROPERTY(PulleyJoint, QPointF, anchor1);
+    PROPERTY(PulleyJoint, QPointF, anchor2);
+    PROPERTY(PulleyJoint, qreal, ratio);
+
+    virtual JointType type() const { return kPulley; }
 };
 
 
