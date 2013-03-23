@@ -56,10 +56,6 @@ void Renderer::Init(int width, int height)
     height_ = height;
 
     Pack& pack = app_->pack();
-    if (pack.contains("graphics/goal.png")) {
-        PackEntry entry = pack["graphics/goal.png"];
-        goal_sprite_.reset(new Sprite(entry.data, entry.length));
-    }
     if (pack.contains("fonts/VeraBd.ttf")) {
         PackEntry entry = pack["fonts/VeraBd.ttf"];
         SDL_RWops *rwops = SDL_RWFromMem(entry.data, entry.length);
@@ -89,9 +85,10 @@ void Renderer::Render()
 
     // Draw the map image
     World& world = app_->world();
-    if (world.back_sprite()) {
-        world.back_sprite()->Render(40, 22);
-    }
+    Sprite *fore_sprite = app_->GetSprite(world.map_file()->fore_image);
+    Sprite *back_sprite = app_->GetSprite(world.map_file()->back_image);
+
+    back_sprite->Render(40, 22);
 
     // Draw the sprites for each fixture
     for (b2Body *phys_body = world.phys_world()->GetBodyList(); phys_body != NULL; phys_body = phys_body->GetNext()) {
@@ -114,26 +111,23 @@ void Renderer::Render()
 
     // Draw the goal
     b2Fixture *goal_fixture = world.goal_fixture();
-    if (goal_fixture && goal_sprite_) {
+    if (goal_fixture) {
         b2Vec2 pos = goal_fixture->GetBody()->GetPosition();
         glPushMatrix();
         glTranslated(pos.x, pos.y, 0);
         glRotated(fmod(world.time(), 5) / 5 * 360, 0, 0, 1);
         glTranslated(-0.5, -0.5, 0);
-        goal_sprite_->Render(1, 1);
+        app_->GetSprite("graphics/goal.png")->Render(1, 1);
         glPopMatrix();
     }
 
-    if (world.fore_sprite()) {
-        world.fore_sprite()->Render(40, 22);
-    }
+
+    fore_sprite->Render(40, 22);
 
     if (app_->ShouldRenderDebug()) {
         world.DrawDebug();
     }
     world.DrawCharacters();
-
-    DrawText("Hello world", 10, 10);
 
     glPopMatrix();
 }

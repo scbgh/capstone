@@ -42,7 +42,6 @@ private:
     int width_, height_; // the width and height of the main window
     math::Point view_upper_left_; // the upper left corner of the camera
     math::Point view_lower_right_; // the lower right corner of the camera
-    std::unique_ptr<Sprite> goal_sprite_;
     TTF_Font *font_; // font
 
     // Non-copyable

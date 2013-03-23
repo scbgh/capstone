@@ -90,10 +90,7 @@ public:
 
     //! Is the world initialized?
     bool initialized() const { return initialized_; }
-    //! The sprite containing the background image
-    Sprite *back_sprite() { return back_sprite_.get(); }
-    //! The sprite containing the foreground image
-    Sprite *fore_sprite() { return fore_sprite_.get(); }
+    
     //! The underlying Box2D world object
     b2World *phys_world() { return phys_world_.get(); }
     //! The number of second elapsed since this World began
@@ -152,9 +149,6 @@ private:
     b2Fixture *goal_fixture_;
 
     std::map<std::string, std::unique_ptr<Character>> characters_;
-
-    std::unique_ptr<Sprite> back_sprite_;
-    std::unique_ptr<Sprite> fore_sprite_;
 
     friend class ContactListener;
 };

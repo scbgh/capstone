@@ -10,6 +10,13 @@ namespace pg {
 
 //
 //
+Sprite::Sprite() :
+    valid_(0)
+{
+}
+
+//
+//
 Sprite::Sprite(SDL_Surface *surface)
 {
     InitFromSurface(surface);

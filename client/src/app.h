@@ -16,6 +16,7 @@ namespace pg {
 class Renderer;
 class World;
 class Pack;
+class Sprite;
 
 //
 //! Contains the main SDL game loop.
@@ -36,6 +37,10 @@ public:
     //! The pack file as loaded from disk
     Pack& pack() { return *pack_; }
 
+    //! Load a Sprite if it's not already cached
+    //! \param name The path to the sprite in the pack file
+    Sprite *GetSprite(const std::string& name);
+
     //! Start the SDL game loop and show the window
     void Run();
 
@@ -48,9 +53,13 @@ private:
     std::unique_ptr<World> world_; // the current state of the game world
     std::unique_ptr<Pack> pack_; // pack file containing the game resources
 
+    std::string map_name_; // loaded map name
+
     int last_tick_; // the last recorded tick count
     bool running_; // is the game running yet?
     bool should_render_debug_; // should render debug?
+
+    std::map<std::string, std::unique_ptr<Sprite>> sprites_; // sprite cache
 
     // Handle command line args
     void ParseArgs(int argc, char *argv[]);

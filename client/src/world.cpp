@@ -328,21 +328,6 @@ void World::LoadMap(const string& map_name)
         delete def;
     }
 
-    // Load the sprites for the background and foreground images
-    if (pack.contains(map_file->back_image)) {
-        PackEntry entry = pack[map_file->back_image];
-        back_sprite_ = unique_ptr<Sprite>(new Sprite(entry.data, entry.length));
-    } else {
-        Debug("Failed to load back image: %s", map_file->back_image.c_str());
-    }
-
-    if (pack.contains(map_file->fore_image)) {
-        PackEntry entry = pack[map_file->fore_image];
-        fore_sprite_ = unique_ptr<Sprite>(new Sprite(entry.data, entry.length));
-    } else {
-        Debug("Failed to load fore image: %s", map_file->fore_image.c_str());
-    }
-
     initialized_ = true;
     map_ = std::move(map_file);
 

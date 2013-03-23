@@ -11,6 +11,7 @@
 #include "renderer.h"
 #include "script.h"
 #include "scriptstate.h"
+#include "sprite.h"
 #include "world.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -99,11 +100,32 @@ void App::Run()
 
 //
 //
+Sprite *App::GetSprite(const string& path)
+{
+    if (sprites_.find(path) == sprites_.end()) {
+        if (pack_->contains(path)) {
+            PackEntry entry = (*pack_)[path];
+            sprites_[path] = unique_ptr<Sprite>(new Sprite(entry.data, entry.length));
+        } else {
+            Debug("Failed to load sprite: %s", path.c_str());
+            sprites_[path] = unique_ptr<Sprite>(new Sprite);
+        }
+    }
+    return sprites_[path].get();
+}
+
+//
+//
 void App::OnKeyDown(SDL_KeyboardEvent *evt)
 {
     switch (evt->keysym.sym) {
         case SDLK_d:
             should_render_debug_ = !should_render_debug_;
+            break;
+        case SDLK_r:
+            if (evt->keysym.mod == KMOD_LSHIFT) {
+                world_->LoadMap(map_name_);
+            }
             break;
         default:
             break;
@@ -144,6 +166,7 @@ void App::ParseArgs(int argc, char *argv[])
     if (argc > 1) {
         Debug("Loading map '%s'...\n", argv[1]);
         world_->LoadMap(argv[1]);
+        map_name_ = argv[1];
     }
 }
 

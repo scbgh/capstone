@@ -19,6 +19,7 @@ public:
     //! \param size The size in bytes of the image
     Sprite(SDL_Surface *surface);
     Sprite(void *data, int size);
+    Sprite();
     ~Sprite();
     
     Sprite(const Sprite&) = delete;
