@@ -58,8 +58,23 @@ void ContactListener::PreSolve(b2Contact *contact, const b2Manifold *oldManifold
     a = (BodyData *)ba->GetUserData();
     b = (BodyData *)bb->GetUserData();
 
-    if (a && b && ((a->type == kCharacterBody && !b->collide_player) || (b->type == kCharacterBody && !a->collide_player))) {
-        contact->SetEnabled(false);
+    if (a && b) { 
+        // If there's a character collision, make sure that body A is a character
+        if (b->type == kCharacterBody) {
+            std::swap(ba, bb);
+            std::swap(a, b);
+        }
+
+        if (a->type == kCharacterBody) {
+            if (b->type == kWorldBody) {
+                if ((b->data.world_body->collide_top && ba->GetLinearVelocity().y >= 0)) {
+                    contact->SetEnabled(false);
+                }                
+            }
+            if (!b->collide_player) {
+                contact->SetEnabled(false);
+            }
+        }
     }
 
     world_->script_->Call<void>("presolve_contact", world_->script_state_.get(), contact, oldManifold);
@@ -178,6 +193,8 @@ void World::LoadMap(const string& map_name)
             def.type = b2_staticBody;
         } else if (body->type == kDynamic) {
             def.type = b2_dynamicBody;
+        } else if (body->type == kKinematic) {
+            def.type = b2_kinematicBody;
         }
 
         // Load the sprite for the body if applicable

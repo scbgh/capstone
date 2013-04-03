@@ -109,6 +109,7 @@ MapFile *LoadMapFromJSON(const string& json)
             body->active = shape_object["active"].get<bool>();
             body->image = shape_object["image"].get<string>();
             body->tag = shape_object["tag"].get<string>();
+            body->collide_top = shape_object["collideTop"].get<bool>();
             body->image_offset = PointFromArray(shape_object["imageOffset"].get<picojson::array>());
             bool isDynamic = shape_object["isDynamic"].get<bool>();
             bool isKinematic = shape_object["isKinematic"].get<bool>();

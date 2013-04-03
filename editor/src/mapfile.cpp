@@ -89,7 +89,8 @@ j::value shapeToValue(QSharedPointer<Shape> shape)
                 { "active", j::value(body->active) },
                 { "type", j::value("body") },
                 { "image", j::value(body->image.toStdString()) },
-                { "imageOffset", pointToValue(body->imageOffset) }
+                { "imageOffset", pointToValue(body->imageOffset) },
+                { "collideTop", j::value(body->collideTop) }
             };
             break;
         }
@@ -298,6 +299,7 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
             body->active = shape_object["active"].get<bool>();
             body->image = QString::fromStdString(shape_object["image"].get<std::string>());
             body->imageOffset = pointFromArray(shape_object["imageOffset"].get<picojson::array>());
+            body->collideTop = shape_object["collideTop"].get<bool>();
             if (shape_object["tag"].is<std::string>())
                 body->tag = QString::fromStdString(shape_object["tag"].get<std::string>());
             bool isDynamic = shape_object["isDynamic"].get<bool>();

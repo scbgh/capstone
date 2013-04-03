@@ -79,6 +79,7 @@ struct Body : public Entity {
     bool awake;
     bool allow_sleep;
     bool active;
+    bool collide_top;
 
     //! Path in pack file of associated image
     std::string image;

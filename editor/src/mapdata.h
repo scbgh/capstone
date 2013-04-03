@@ -127,6 +127,7 @@ public:
         awake(true),
         allowSleep(true),
         active(true),
+        collideTop(false),
         Shape()
     { }
 
@@ -140,6 +141,7 @@ public:
     PROPERTY(Body, bool, awake);
     PROPERTY(Body, bool, allowSleep);
     PROPERTY(Body, bool, active);
+    PROPERTY(Body, bool, collideTop);
     PROPERTY(Body, QString, image);
     PROPERTY(Body, QPointF, imageOffset);
     PROPERTY(Body, bool, collidePlayer);
