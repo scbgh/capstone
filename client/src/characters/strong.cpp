@@ -37,7 +37,7 @@ StrongCharacter::StrongCharacter(App *app) :
     b2FixtureDef fixture_def;
     b2Fixture *fixture;
     fixture_def.friction = 1;
-    fixture_def.density = 145;
+    fixture_def.density = 200;
     fixture_def.shape = shape;
     fixture_def.userData = (void *)kCharacterFixture;
     body_->CreateFixture(&fixture_def);
@@ -52,7 +52,7 @@ StrongCharacter::StrongCharacter(App *app) :
     image_offset_ = { -0.5, -0.5 };
     image_size_ = { 1, 1 };
     walk_speed_ = 1.5;
-    jump_speed_ = 320;
+    jump_speed_ = 450;
 
     animation_.reset(new Animation(app));
     animation_->LoadAnimation("strong");
@@ -119,7 +119,9 @@ void StrongCharacter::OnKeyUp(SDL_KeyboardEvent *evt)
                 }
                 if (grabbed_character_) {
                     float dir = direction_ == kLeft ? -1 : 1;
-                    b2Vec2 vel = 600 * b2Vec2(dir * cos(DEG_TO_RAD(launch_angle_)), sin(DEG_TO_RAD(launch_angle_)));
+                    float throw_vel = 6;
+                    b2Vec2 vel = throw_vel * grabbed_character_->body()->GetMass()
+                        * b2Vec2(dir * cos(DEG_TO_RAD(launch_angle_)), sin(DEG_TO_RAD(launch_angle_)));
 
                     grabbed_character_->Unfreeze();
                     grabbed_character_->body()->ApplyLinearImpulse(launch_force_ * vel,
