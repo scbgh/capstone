@@ -7,11 +7,6 @@
             "name": "stand",
             "repeat": true,
             "frames": [
-                { "index": 0, "duration": 0.1 },
-                { "index": 1, "duration": 0.1 },
-                { "index": 2, "duration": 0.1 },
-                { "index": 3, "duration": 0.1 },
-                { "index": 2, "duration": 0.1 },
                 { "index": 1, "duration": 0.1 }
             ]
         },
@@ -20,12 +15,12 @@
             "name": "walk",
             "repeat": true,
             "frames": [
-                { "index": 6, "duration": 0.1 },
-                { "index": 7, "duration": 0.1 },
-                { "index": 8, "duration": 0.1 },
-                { "index": 7, "duration": 0.1 },
-                { "index": 6, "duration": 0.1 },
-                { "index": 5, "duration": 0.1 }
+                { "index": 9, "duration": 0.1 },
+                { "index": 10, "duration": 0.1 },
+                { "index": 11, "duration": 0.1 },
+                { "index": 12, "duration": 0.1 },
+                { "index": 13, "duration": 0.1 },
+                { "index": 14, "duration": 0.1 }
             ]
         },
 
@@ -33,7 +28,7 @@
             "name": "jump",
             "repeat": false,
             "frames": [
-                { "index": 4, "duration": 0.2 }
+                { "index": 3, "duration": 0.2 }
             ]
         }
     ]
