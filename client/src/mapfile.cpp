@@ -185,6 +185,11 @@ MapFile *LoadMapFromJSON(const string& json)
             WeldJoint *weld_joint = new WeldJoint;
             joint = weld_joint;
             weld_joint->anchor = PointFromArray(joint_object["anchor"].get<picojson::array>());
+        } else if (type == "prismatic") {
+            PrismaticJoint *prismatic_joint = new PrismaticJoint;
+            joint = prismatic_joint;
+            prismatic_joint->anchor = PointFromArray(joint_object["anchor"].get<picojson::array>());
+            prismatic_joint->axis = PointFromArray(joint_object["axis"].get<picojson::array>());
         }
         
         int body_a_id = joint_object["bodyA"].get<double>();

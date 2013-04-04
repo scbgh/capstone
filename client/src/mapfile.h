@@ -206,6 +206,15 @@ struct PulleyJoint : public Joint {
     virtual JointType type() const { return kPulley; }
 };
 
+//
+//! A joint that keeps the relative rotation of objects fixed
+//! (see Box2D documentation)
+struct PrismaticJoint : public Joint {
+    math::Point anchor;
+    math::Point axis;
+    virtual JointType type() const { return kPrismatic; }
+};
+
 //! Load an entire map structure from a JSON representation
 //! \param json The JSON source code of the map definition file
 MapFile *LoadMapFromJSON(const std::string& json);

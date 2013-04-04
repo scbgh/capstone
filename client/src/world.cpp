@@ -290,7 +290,7 @@ void World::LoadMap(const string& map_name)
             case kCircle: {
                 CircleShape *circle = static_cast<CircleShape *>(shape.get());
                 unique_ptr<b2CircleShape> bcircle = unique_ptr<b2CircleShape>(new b2CircleShape);
-                b2Vec2 offset;
+                b2Vec2 offset(0, 0);
                 if (has_fixture) {
                     offset = -b2Vec2(fix_body->position.x, fix_body->position.y);
                 }
@@ -349,6 +349,14 @@ void World::LoadMap(const string& map_name)
                     PointToVec(pulley_joint->ground_anchor1), PointToVec(pulley_joint->ground_anchor2),
                     PointToVec(pulley_joint->anchor1), PointToVec(pulley_joint->anchor2),
                     pulley_joint->ratio);
+                break;
+            }
+            case kPrismatic: {
+                PrismaticJoint *prismatic_joint = (PrismaticJoint *)joint.get();
+                b2PrismaticJointDef *inner_def = new b2PrismaticJointDef;
+                def = inner_def;
+                inner_def->Initialize(phys_bodies[joint->body_a], phys_bodies[joint->body_b],
+                    PointToVec(prismatic_joint->anchor), PointToVec(prismatic_joint->axis));
                 break;
             }
             default:
