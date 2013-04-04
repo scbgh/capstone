@@ -238,5 +238,18 @@ struct PulleyJoint : public Joint {
     virtual JointType type() const { return kPulley; }
 };
 
+//
+//
+struct PrismaticJoint : public Joint {
+    PrismaticJoint() :
+        Joint()
+    { }
+
+    PROPERTY(PrismaticJoint, QPointF, anchor);
+    PROPERTY(PrismaticJoint, QPointF, axisPoint);
+
+    virtual JointType type() const { return kPrismatic; }
+};
+
 
 #endif

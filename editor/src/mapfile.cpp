@@ -181,6 +181,15 @@ j::value jointToValue(QSharedPointer<Joint> joint)
             };
             break;
         }
+        case kPrismatic: {
+            QSharedPointer<PrismaticJoint> realJoint = qSharedPointerCast<PrismaticJoint>(joint);
+            subObject = {
+                { "type", j::value("prismatic") },
+                { "anchor", pointToValue(realJoint->anchor) },
+                { "axis", pointToValue(realJoint->axisPoint - realJoint->anchor) }
+            };
+            break;
+        }
         default:
             qFatal("Unknown joint type");
             break;
@@ -381,6 +390,11 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
             WeldJoint *weld_joint = new WeldJoint;
             joint = QSharedPointer<Joint>(weld_joint);
             weld_joint->anchor = pointFromArray(joint_object["anchor"].get<picojson::array>());
+        } else if (type == "prismatic") {
+            PrismaticJoint *prismatic_joint = new PrismaticJoint;
+            joint = QSharedPointer<Joint>(prismatic_joint);
+            prismatic_joint->anchor = pointFromArray(joint_object["anchor"].get<picojson::array>());
+            prismatic_joint->axisPoint = prismatic_joint->anchor + pointFromArray(joint_object["anchor"].get<picojson::array>());
         }
 
         joint->bodyA = bodyA;

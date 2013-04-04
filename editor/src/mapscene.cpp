@@ -166,6 +166,10 @@ void MapScene::beginJoint(const QPointF& point, QGraphicsItem *item)
             break;
         case kWeldJoint:
             joint_ = QSharedPointer<Joint>((Joint *)new WeldJoint);
+            break;
+        case kPrismaticJoint:
+            joint_ = QSharedPointer<Joint>((Joint *)new PrismaticJoint);
+            break;
         default:
             qFatal("Bad joint mode");
             break;
@@ -306,6 +310,12 @@ void MapScene::makeVerticesForJoint(ConnectItem *item, QSharedPointer<Joint> joi
             MAKE_VERTEX(PulleyJoint, groundAnchor2, bodyB->position + QPointF(0.5, 0.5));
             MAKE_VERTEX(PulleyJoint, anchor1, bodyA->position);
             MAKE_VERTEX(PulleyJoint, anchor2, bodyB->position);
+            break;
+        }
+        case kPrismatic: {
+            MAKE_VERTEX(PrismaticJoint, anchor, bodyA->position);
+            MAKE_VERTEX(PrismaticJoint, axisPoint, bodyA->position + QPointF(0.0, 0.5));
+            break;
         }
         default:
             break;
