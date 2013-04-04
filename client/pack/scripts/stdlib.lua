@@ -14,4 +14,24 @@ function contact_velocity(contact)
     return b2Vec2_sub(vel1, vel2):Length()
 end
 
+function either_is(thing, obj1, obj2)
+    if obj1 == thing then
+        return true, obj1, obj2
+    elseif obj2 == thing then
+        return true, obj2, obj1
+    else
+        return false, nil, nil
+    end
+end
+
+function both_are(thing1, thing2, obj1, obj2)
+    if obj1 == thing1 and obj2 == thing2 then
+        return true, obj1, obj2
+    elseif obj2 == thing1 and obj1 == thing2 then
+        return true, obj2, obj1
+    else
+        return false, nil, nil
+    end
+end
+
 print "Loaded stdlib..."
