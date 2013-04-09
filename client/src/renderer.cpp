@@ -129,6 +129,42 @@ void Renderer::Render()
     }
     world.DrawCharacters();
 
+    // Draw the character portraits
+    glPushMatrix();
+    glTranslated(0.5, 0.5, 0);
+    if (!world.alt_control()) {
+        string chars[] = { "heavy", "jump", "strong", "ranger" };
+        for (auto& ch : chars) {
+            Sprite *portrait = app_->GetSprite(string("graphics/") + ch + "portrait.png");
+            portrait->Render(portrait->width() / 32.0, portrait->height() / 32.0);
+
+            if (world.active_character() == ch) {
+                glPushMatrix();
+                Sprite *border = app_->GetSprite("graphics/portraitborder.png");
+                glTranslated((portrait->width() - border->width()) * 0.5 / 32.0,
+                    (portrait->height() - border->height()) * 0.5 / 32.0, 0);
+                border->Render(border->width() / 32.0, border->height() / 32.0);
+                glPopMatrix();
+            }
+            
+            glTranslated(portrait->width() / 32.0 + 0.5, 0, 0);
+        }
+    } else {
+        int k = 0;
+        string chars[] = { "strong", "ranger", "heavy", "jump" };
+        for (auto& ch : chars) {
+            Sprite *portrait = app_->GetSprite(string("graphics/") + ch + "portrait.png");
+            portrait->Render(portrait->width() / 32.0, portrait->height() / 32.0);
+            k++;
+            if (k % 2 != 0) {
+                glTranslated(portrait->width() / 32.0 + 0.5, 0, 0);
+            } else {
+                glTranslated(-portrait->width() / 32.0 - 0.5, portrait->height() / 32.0 + 0.5, 0);
+            }
+        }
+    }
+    glPopMatrix();
+
     if (world.complete()) {
         glColor4d(1.0, 1.0, 1.0, 0.5);
         glBegin(GL_QUADS);

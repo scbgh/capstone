@@ -101,6 +101,10 @@ public:
     MapFile *map_file() { return map_.get(); }
     //! Is the level complete?
     bool complete() const { return complete_; }
+    //! Are we using the alternate control scheme?
+    bool alt_control() const { return alt_control_; }
+    //! The name of the active character
+    std::string active_character() const { return active_character_; }
     
     //! Return the Box2D joint with the specified user tag as specified in the editor
     //! \param tag The tag of the joint to look up
@@ -138,6 +142,7 @@ private:
     double time_;
     std::string active_character_;
     bool complete_; // is the level complete?
+    bool alt_control_; // alternate control mode?
 
     // screen shake
     double shake_;
