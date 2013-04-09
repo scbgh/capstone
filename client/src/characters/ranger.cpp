@@ -178,6 +178,10 @@ void RangerCharacter::Step(double time)
     if (IsGrounded() && !(state_ & (kMoveLeft | kMoveRight))) {
         animation_->SetState("stand");
     }
+
+    if (launch_) {
+        animation_->SetState("shoot");
+    }
 }
 
 //
@@ -187,7 +191,7 @@ void RangerCharacter::Render() const
     Character::Render();
     
     // Draw the launch arrow if necessary
-    if (!launch_ || fixed_) return;
+    if (hidden_ || !launch_ || fixed_) return;
     double dir = direction_ == kLeft ? -1 : 1; 
     b2Vec2 pos = body_->GetPosition();
     glPushMatrix();

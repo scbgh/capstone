@@ -7,7 +7,10 @@
             "name": "stand",
             "repeat": true,
             "frames": [
-                { "index": 1, "duration": 0.1 }
+                { "index": 1, "duration": 0.3 },
+                { "index": 2, "duration": 0.3 },
+                { "index": 3, "duration": 0.3 },
+                { "index": 2, "duration": 0.3 }
             ]
         },
 
@@ -28,7 +31,15 @@
             "name": "jump",
             "repeat": false,
             "frames": [
-                { "index": 3, "duration": 0.2 }
+                { "index": 9, "duration": 0.2 }
+            ]
+        },
+
+        {
+            "name": "shoot",
+            "repeat": false,
+            "frames": [
+                { "index": 4, "duration": 0.2 }
             ]
         }
     ]
