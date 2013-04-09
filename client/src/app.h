@@ -39,7 +39,8 @@ public:
 
     //! Load a Sprite if it's not already cached
     //! \param name The path to the sprite in the pack file
-    Sprite *GetSprite(const std::string& name);
+    //! \param copy Don't use the cached version, just make a new copy
+    Sprite *GetSprite(const std::string& name, bool copy = false);
 
     //! Start the SDL game loop and show the window
     void Run();

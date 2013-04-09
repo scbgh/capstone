@@ -106,8 +106,13 @@ void App::Run()
 
 //
 //
-Sprite *App::GetSprite(const string& path)
+Sprite *App::GetSprite(const string& path, bool copy)
 {
+    if (copy) {
+        PackEntry entry = (*pack_)[path];
+        return new Sprite(entry.data, entry.length);
+    }
+
     if (sprites_.find(path) == sprites_.end()) {
         if (pack_->contains(path)) {
             PackEntry entry = (*pack_)[path];
