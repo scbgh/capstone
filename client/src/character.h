@@ -57,6 +57,9 @@ public:
 
     //! Resume character movement
     void Unfreeze() { fixed_ = false; }
+
+    //! Explode
+    void Explode();
     
     //! The Box2D body
     b2Body *body() const { return body_; }
@@ -72,6 +75,7 @@ protected:
     std::unique_ptr<Animation> animation_;
     
     bool fixed_;
+    bool hidden_;
     double walk_speed_;
     double jump_speed_;
     math::Point image_offset_;

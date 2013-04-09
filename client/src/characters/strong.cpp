@@ -172,6 +172,8 @@ void StrongCharacter::Step(double time)
 void StrongCharacter::Render() const
 {
     Character::Render();
+
+    if (hidden_) return;
     
     // Draw the launch arrow if necessary
     if (!grab_ || fixed_) return;

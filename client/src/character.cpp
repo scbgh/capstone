@@ -6,6 +6,7 @@
 #include "common.h"
 #include "mapfile.h"
 #include "world.h"
+#include "app.h"
 
 namespace pg {
 
@@ -14,7 +15,8 @@ namespace pg {
 Character::Character(App *app) :
     app_(app),
     direction_(kRight),
-    fixed_(false)
+    fixed_(false),
+    hidden_(false)
 {
     BodyData *data = new BodyData;
     data->type = kCharacterBody;
@@ -108,6 +110,8 @@ void Character::DoWalk(double time)
 //
 void Character::Render() const
 {
+    if (hidden_) return;
+
     b2Vec2 pos = body_->GetPosition();
     glPushMatrix();
     glTranslated(pos.x, pos.y, 0);
@@ -156,7 +160,70 @@ void Character::OnKeyUp(SDL_KeyboardEvent *evt)
         default:
             break;
     }
+}
 
+//
+//
+void Character::Explode()
+{
+    Freeze();
+    hidden_ = true;
+
+    b2World *phys_world = app_->world().phys_world();
+
+    b2BodyDef body_def;
+    b2PolygonShape shape;
+    b2FixtureDef fixture_def;
+
+    body_def.type = b2_dynamicBody;
+    body_def.angularDamping = 1.0;
+    shape.SetAsBox(0.2, 0.02);
+    fixture_def.shape = &shape;
+    fixture_def.friction = 0.5;
+    fixture_def.restitution = 0.4;
+    fixture_def.density = 50;
+
+    for (int i = 0; i < 5; i++) {
+        b2Body *body = app_->world().phys_world()->CreateBody(&body_def);
+        b2Fixture *fixture = body->CreateFixture(&fixture_def);
+
+        Body *body_body = new Body;
+        float angle = ((float)rand() / RAND_MAX) * M_PI * 2;
+        b2Vec2 vec = 5 * b2Vec2(cos(angle), sin(angle));
+        body_body->image_sprite.reset(app_->GetSprite("graphics/bone.png", true));
+        BodyData *data = new BodyData;
+        data->cause_shake = false;
+        data->collide_player = false;
+        data->type = kWorldBody;
+        data->data.world_body = body_body;
+        body->SetUserData((void *)data);
+        body->SetTransform(body_->GetPosition(), 0);
+        body->ApplyLinearImpulse(20 * vec, body->GetPosition());
+        body->ApplyAngularImpulse(10);
+        app_->world().map_file()->bodies.push_back(std::unique_ptr<Body>(body_body));
+    }
+
+    shape.SetAsBox(0.2, 0.2);
+    
+    b2Body *body = app_->world().phys_world()->CreateBody(&body_def);
+    b2Fixture *fixture = body->CreateFixture(&fixture_def);
+
+    Body *body_body = new Body;
+    float angle = ((float)rand() / RAND_MAX) * M_PI * 2;
+    b2Vec2 vec = 5 * b2Vec2(cos(angle), sin(angle));
+    body_body->image_sprite.reset(app_->GetSprite("graphics/skull.png", true));
+    BodyData *data = new BodyData;
+    data->cause_shake = false;
+    data->collide_player = false;
+    data->type = kWorldBody;
+    data->data.world_body = body_body;
+    body->SetUserData((void *)data);
+    body->SetTransform(body_->GetPosition(), 0);
+    body->ApplyLinearImpulse(20 * vec, body->GetPosition());
+    body->ApplyAngularImpulse(10);
+    app_->world().map_file()->bodies.push_back(std::unique_ptr<Body>(body_body));
+
+    phys_world->DestroyBody(body_);
 }
 
 
