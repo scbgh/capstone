@@ -26,6 +26,29 @@ namespace {
 // Convert a world Point into a Box2D Vector
 b2Vec2 PointToVec(math::Point p) { return b2Vec2(p.x, p.y); }
 
+map<SDLKey, std::pair<string, SDLKey>> key_map_ =
+    {
+        { SDLK_q, { "heavy", SDLK_LEFT } },
+        { SDLK_e, { "heavy", SDLK_RIGHT } },
+        { SDLK_w, { "heavy", SDLK_SPACE } },
+        { SDLK_2, { "heavy", SDLK_a } },
+
+        { SDLK_i, { "jump", SDLK_LEFT } },
+        { SDLK_p, { "jump", SDLK_RIGHT } },
+        { SDLK_o, { "jump", SDLK_SPACE } },
+        { SDLK_9, { "jump", SDLK_a } },
+
+        { SDLK_z, { "strong", SDLK_LEFT } },
+        { SDLK_c, { "strong", SDLK_RIGHT } },
+        { SDLK_x, { "strong", SDLK_SPACE } },
+        { SDLK_s, { "strong", SDLK_a } },
+
+        { SDLK_b, { "ranger", SDLK_LEFT } },
+        { SDLK_m, { "ranger", SDLK_RIGHT } },
+        { SDLK_n, { "ranger", SDLK_SPACE } },
+        { SDLK_h, { "ranger", SDLK_a } }
+    };
+
 }
 
 //
@@ -121,7 +144,8 @@ World::World(App *app) :
     contact_listener_(this),
     time_(0),
     goal_fixture_(NULL),
-    active_character_("heavy")
+    active_character_("heavy"),
+    alt_control_(false)
 {
     dbg_draw_.SetFlags(b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_pairBit);
 }
@@ -533,8 +557,19 @@ void World::OnKeyDown(SDL_KeyboardEvent *evt)
 
     script_->Call<void>("key_down", script_state_.get(),
         std::string(SDL_GetKeyName(evt->keysym.sym)));
-    if (characters_.find(active_character_) != characters_.end()) {
-        characters_[active_character_]->OnKeyDown(evt);
+
+    if (!alt_control_) { 
+        if (characters_.find(active_character_) != characters_.end()) {
+            characters_[active_character_]->OnKeyDown(evt);
+        }
+    } else {
+        if (key_map_.find(evt->keysym.sym) != key_map_.end()) {
+            auto p = key_map_[evt->keysym.sym];
+            SDLKey old = evt->keysym.sym;
+            evt->keysym.sym = p.second;
+            characters_[p.first]->OnKeyDown(evt);
+            evt->keysym.sym = old;
+        }
     }
 
     switch (evt->keysym.sym) {
@@ -549,6 +584,17 @@ void World::OnKeyDown(SDL_KeyboardEvent *evt)
             break;
         case SDLK_4:
             active_character_ = "ranger";
+            break;
+        case SDLK_p:
+            if (evt->keysym.mod == KMOD_LSHIFT) {
+                for (auto& ch : characters_) {
+                    ch.second->Explode();
+                }
+                ShakeScreen(0.05, 2, 0.9, math::Vector(0.0, 1.0));
+            }
+            break;
+        case SDLK_F5:
+            alt_control_ = !alt_control_;
             break;
         default:
             break;
@@ -567,6 +613,12 @@ void World::OnKeyUp(SDL_KeyboardEvent *evt)
     // HACK to prevent characters from not getting key up events
     for (auto& it : characters_) {
         it.second->OnKeyUp(evt);
+        
+        if (alt_control_ && key_map_.find(evt->keysym.sym) != key_map_.end()) {
+            auto p = key_map_[evt->keysym.sym];
+            evt->keysym.sym = p.second; // HACK
+            it.second->OnKeyUp(evt);
+        }
     }
 }
 
