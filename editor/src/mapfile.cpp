@@ -394,7 +394,7 @@ QSharedPointer<GameMap> jsonToMap(const QString& json)
             PrismaticJoint *prismatic_joint = new PrismaticJoint;
             joint = QSharedPointer<Joint>(prismatic_joint);
             prismatic_joint->anchor = pointFromArray(joint_object["anchor"].get<picojson::array>());
-            prismatic_joint->axisPoint = prismatic_joint->anchor + pointFromArray(joint_object["anchor"].get<picojson::array>());
+            prismatic_joint->axisPoint = prismatic_joint->anchor + pointFromArray(joint_object["axis"].get<picojson::array>());
         }
 
         joint->bodyA = bodyA;
