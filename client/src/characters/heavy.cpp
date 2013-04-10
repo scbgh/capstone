@@ -49,7 +49,7 @@ HeavyCharacter::HeavyCharacter(App *app) :
     image_offset_ = { -0.5, -0.5 };
     image_size_ = { 1, 1 };
     walk_speed_ = 1.5;
-    jump_speed_ = 600;
+    jump_speed_ = 650;
 
     animation_.reset(new Animation(app));
     animation_->LoadAnimation("heavy");

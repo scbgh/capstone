@@ -37,7 +37,7 @@ StrongCharacter::StrongCharacter(App *app) :
     b2FixtureDef fixture_def;
     b2Fixture *fixture;
     fixture_def.friction = 1;
-    fixture_def.density = 200;
+    fixture_def.density = 150;
     fixture_def.shape = shape;
     fixture_def.userData = (void *)kCharacterFixture;
     body_->CreateFixture(&fixture_def);

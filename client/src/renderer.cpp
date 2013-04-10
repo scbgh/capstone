@@ -143,7 +143,9 @@ void Renderer::Render()
                 Sprite *border = app_->GetSprite("graphics/portraitborder.png");
                 glTranslated((portrait->width() - border->width()) * 0.5 / 32.0,
                     (portrait->height() - border->height()) * 0.5 / 32.0, 0);
-                border->Render(border->width() / 32.0, border->height() / 32.0);
+                if ((int)(world.time() * 10) % 2 == 0) {
+                    border->Render(border->width() / 32.0, border->height() / 32.0);
+                }
                 glPopMatrix();
             }
             
