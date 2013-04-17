@@ -21,7 +21,7 @@ JumpCharacter::JumpCharacter(App *app) :
     data->data.character_body = this;
 
     b2PolygonShape *shape = new b2PolygonShape;
-    shape->SetAsBox(0.3, 0.4);
+    shape->SetAsBox(0.3, 0.45);
 
     b2BodyDef body_def;
     body_def.fixedRotation = true;
@@ -44,7 +44,7 @@ JumpCharacter::JumpCharacter(App *app) :
     fixture_def.userData = (void *)kBottomFixture;
     body_->CreateFixture(&fixture_def);
 
-    image_offset_ = { -0.5, -0.5 };
+    image_offset_ = { -0.5, -0.45 };
     image_size_ = { 1, 1 };
     walk_speed_ = 1.5;
     jump_speed_ = 250;

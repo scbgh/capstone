@@ -46,7 +46,7 @@ HeavyCharacter::HeavyCharacter(App *app) :
     fixture_def.userData = (void *)kBottomFixture;
     body_->CreateFixture(&fixture_def);
 
-    image_offset_ = { -0.5, -0.5 };
+    image_offset_ = { -0.5, -0.45 };
     image_size_ = { 1, 1 };
     walk_speed_ = 1.5;
     jump_speed_ = 650;

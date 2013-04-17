@@ -90,6 +90,30 @@ void Renderer::Render()
 
     back_sprite->Render(40, 22);
 
+    // Draw pulley joins (HACK)
+    for (b2Joint *joint = world.phys_world()->GetJointList(); joint != NULL; joint = joint->GetNext()) {
+        if (joint->GetType() == e_pulleyJoint) {
+            b2PulleyJoint *pulley = (b2PulleyJoint *)joint;
+            b2Body *b1 = pulley->GetBodyA();
+            b2Body *b2 = pulley->GetBodyB();
+            b2Vec2 b1_pos = pulley->GetAnchorA();
+            b2Vec2 b2_pos = pulley->GetAnchorB();
+            b2Vec2 g1_pos = pulley->GetGroundAnchorA();
+            b2Vec2 g2_pos = pulley->GetGroundAnchorB();
+
+            glLineWidth(2.0);
+            glColor4d(0.4, 0.4, 0.4, 1.0);
+            glBegin(GL_LINE_STRIP);
+                glVertex2d(b1_pos.x, b1_pos.y);
+                glVertex2d(g1_pos.x, g1_pos.y);
+                glVertex2d(g2_pos.x, g2_pos.y);
+                glVertex2d(b2_pos.x, b2_pos.y);
+            glEnd();
+            glColor4d(1.0, 1.0, 1.0, 1.0);
+            glLineWidth(1.0);
+        }
+    }
+
     // Draw the sprites for each fixture
     for (b2Body *phys_body = world.phys_world()->GetBodyList(); phys_body != NULL; phys_body = phys_body->GetNext()) {
         BodyData *body_data = (BodyData *)phys_body->GetUserData();
@@ -121,13 +145,12 @@ void Renderer::Render()
         glPopMatrix();
     }
 
-
-    fore_sprite->Render(40, 22);
-
     if (app_->ShouldRenderDebug()) {
         world.DrawDebug();
     }
     world.DrawCharacters();
+
+    fore_sprite->Render(40, 22);
 
     // Draw the character portraits
     glPushMatrix();
