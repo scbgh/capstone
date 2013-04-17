@@ -145,13 +145,13 @@ void Renderer::Render()
         glPopMatrix();
     }
 
-    if (app_->ShouldRenderDebug()) {
-        world.DrawDebug();
-    }
     world.DrawCharacters();
 
     fore_sprite->Render(40, 22);
 
+    if (app_->ShouldRenderDebug()) {
+        world.DrawDebug();
+    }
     // Draw the character portraits
     glPushMatrix();
     glTranslated(0.5, 0.5, 0);
